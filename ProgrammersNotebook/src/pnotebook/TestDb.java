@@ -21,6 +21,8 @@ public class TestDb {
 		//db.store(entry2);
 		// Commented out because they are already in the DB
 		
+		//This is a comment that I am adding
+		
 		// Try to retrieve entry2 by matching its title
 		List<Entry> entries = db.query(new Predicate<Entry>() {
 			public boolean match(Entry e) {
