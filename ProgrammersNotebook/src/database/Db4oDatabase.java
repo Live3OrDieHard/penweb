@@ -1,4 +1,4 @@
-package pnotebook;
+package database;
 
 import java.util.List;
 import com.db4o.*;
