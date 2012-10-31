@@ -2,6 +2,7 @@ package database;
 
 import java.util.List;
 import com.db4o.*;
+import com.db4o.query.*;
 
 import dataStructure.IEntry;
 import dataStructure.IHeader;
@@ -25,9 +26,12 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	@Override
-	public List<IEntry> getByHeader(IHeader head) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<IEntry> getByHeader(final IHeader head) {
+		return db.query(new Predicate<IEntry>() {
+			public boolean match(IEntry e) {
+				return e.getHeader().getTitle().equals(head.getTitle());
+			}
+		});
 	}
 
 	@Override
