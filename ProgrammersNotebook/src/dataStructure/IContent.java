@@ -7,7 +7,9 @@ package dataStructure;
  */
 public interface IContent 
 {
-	
+	//should we?
+	//String getDescription();
+	//void setDescription(String d);
 
 }
 

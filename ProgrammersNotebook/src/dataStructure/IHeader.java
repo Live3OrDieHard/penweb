@@ -17,6 +17,7 @@ public interface IHeader
 	//IName getTitle();
 	
 	String getTitle();
+	void setTitle(String t);
 	
 	/*
 	 * It's better to be an object so we'll be able to associate
@@ -25,4 +26,5 @@ public interface IHeader
 	 * some codes from non-users.
 	 */
 	List<IPerson> getAuthors();
+	void setAuthors(List<IPerson> a);
 }

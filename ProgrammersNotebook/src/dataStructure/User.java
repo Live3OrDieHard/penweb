@@ -21,4 +21,14 @@ public class User implements IPerson
 		return this.userid;
 	}
 	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	
+	public void setUserID(int userid)
+	{
+		this.userid = userid;
+	}
+	
 }

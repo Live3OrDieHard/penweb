@@ -45,7 +45,7 @@ public class BasicExample implements IExample {
 		this.properties = (ExampleProperties) inProperties;
 	}
 	
-	public BasicExample makeBasicExample(IHeader inHeader,IContent inContent,IProperties inProperties)
+	public static BasicExample makeBasicExample(IHeader inHeader,IContent inContent,IProperties inProperties)
 	{
 		BasicExample bx = new BasicExample();
 		bx.setHeader(inHeader);
@@ -53,5 +53,15 @@ public class BasicExample implements IExample {
 		bx.setProperties(inProperties);
 		return bx;
 	}
+
+	/**@overload
+	 * 
+	 * @return
+	 */
+	public static BasicExample makeBasicExample()
+	{
+		return BasicExample.makeBasicExample(new ExampleHeader(),new ExampleContent(),new ExampleProperties());
+	}
+	
 
 }
