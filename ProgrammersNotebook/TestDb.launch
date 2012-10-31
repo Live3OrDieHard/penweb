@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/ProgrammersNotebook/src/pnotebook/TestDb.java"/>
+<listEntry value="/ProgrammersNotebook"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
-<listEntry value="1"/>
+<listEntry value="4"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="pnotebook.TestDb"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="database.TestDb"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="ProgrammersNotebook"/>
 </launchConfiguration>
