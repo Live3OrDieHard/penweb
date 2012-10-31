@@ -4,9 +4,14 @@ public class ExampleContent implements IContent
 {
 	private String code;
 	
-	String getCode()
+	public String getCode()
 	{
 		return this.code;
+	}
+	
+	public void setCode(String code)
+	{
+		this.code = code;
 	}
 
 }
