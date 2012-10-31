@@ -15,14 +15,22 @@ import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.Hashtable;
 
 import javax.swing.JTable;
 
+import dataStructure.BasicExample;
+import dataStructure.ExampleContent;
+import dataStructure.ExampleHeader;
+import dataStructure.ExampleProperties;
+import dataStructure.IExample;
+import database.*;
+
 public class main extends JFrame {
 
 	private JPanel contentPane;
-
+	private static Db4oDatabase db;
 	/**
 	 * Launch the application.
 	 */
@@ -32,6 +40,9 @@ public class main extends JFrame {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+		File f1 = new File("haha");
+		f1.delete();
+		db = new Db4oDatabase("haha");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -48,8 +59,7 @@ public class main extends JFrame {
 	 * Create the frame.
 	 */
 	public main() {
-		final DefaultListModel<String> lm = new DefaultListModel<String>();
-		final Hashtable<String, Example> ht = new Hashtable<String, Example>();
+		final DefaultListModel lm = new DefaultListModel();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -63,27 +73,22 @@ public class main extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String head = ((JTextPane) contentPane.getComponent(2)).getText();
 				String x = ((JTextPane) contentPane.getComponent(3)).getText();
-				int index = ((JList<String>) contentPane.getComponent(1)).getSelectedIndex();
-				ht.put(head, new Example(head,x));
-				if(index==-1)
-				{
-					lm.addElement(head);
+				db.store(BasicExample.makeBasicExample(new ExampleHeader(head,null), new ExampleContent(x), new ExampleProperties()));
+				lm.addElement(head);
 				}
-				else
-				{
-					lm.set(index, head);
-				}
-			}
 		});
 		contentPane.setLayout(null);
 		contentPane.add(btnNewButton);
 		
-		lm.addElement("haha");
-		ht.put("haha", new Example("haha","huhu"));
-		lm.addElement("well");
-		ht.put("well", new Example("well","well"));
+		ExampleHeader h = new ExampleHeader("haha","man1");
+		ExampleContent c = new ExampleContent("Good content");
+		ExampleProperties p = new ExampleProperties();
+		p.addTag("haha");
+		p.addTag("testing");
+		lm.addElement(h.getTitle());
+		db.store(BasicExample.makeBasicExample(h,c,p));
 		
-		JList<String> list = new JList<String>(lm);
+		final JList list = new JList(lm);
 		list.setBounds(25, 48, 52, 144);
 		list.setSelectedIndices(new int[] {1});
 		list.setSelectedIndex(0);
@@ -101,18 +106,18 @@ public class main extends JFrame {
 		btnRetrieve.setBounds(25, 206, 71, 23);
 		btnRetrieve.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int index = ((JList<String>) contentPane.getComponent(1)).getSelectedIndex();
+				int index = list.getSelectedIndex();
 				if(index==-1)
 				{
 					
 				}
 				else
 				{
-					String head = lm.get(index);
-					Example code = ht.get(head);
+					BasicExample be = (BasicExample) db.getAll().get(index);
 		
-					textPaneHeader.setText(head);
-					textPaneContent.setText(code.content);
+					textPaneHeader.setText(be.getHeader().getTitle());
+					
+					textPaneContent.setText(((ExampleContent) be.getContent()).getCode());
 				}
 				
 			}

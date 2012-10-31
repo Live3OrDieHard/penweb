@@ -13,5 +13,9 @@ public class ExampleContent implements IContent
 	{
 		this.code = code;
 	}
-
+	
+	public ExampleContent(String code)
+	{
+		this.code = code;
+	}
 }

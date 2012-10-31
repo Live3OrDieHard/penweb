@@ -54,14 +54,4 @@ public class BasicExample implements IExample {
 		return bx;
 	}
 
-	/**@overload
-	 * 
-	 * @return
-	 */
-	public static BasicExample makeBasicExample()
-	{
-		return BasicExample.makeBasicExample(new ExampleHeader(),new ExampleContent(),new ExampleProperties());
-	}
-	
-
 }

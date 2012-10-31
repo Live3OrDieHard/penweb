@@ -6,7 +6,7 @@ import java.util.List;
 public class ExampleHeader implements IHeader
 {
 	private String title;
-	private List<IPerson> authors;
+	private List<IPerson> authors = new LinkedList<IPerson>();
 	
 	public String getTitle() 
 	{
@@ -31,5 +31,12 @@ public class ExampleHeader implements IHeader
 	public void addAuthor(IPerson author)
 	{
 		this.authors.add(author);
+	}
+	
+	//just ONE NonUser name, please
+	public ExampleHeader(String title, String name)
+	{
+		this.title = title;
+		this.authors.add(new NonUser(name));
 	}
 }
