@@ -51,4 +51,8 @@ public class Db4oDatabase implements IDatabase {
 		return null;
 	}
 
+	@Override
+	public void delete(IEntry e) {
+		// TODO Auto-generated method stub
+	}
 }

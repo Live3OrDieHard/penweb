@@ -16,6 +16,14 @@ public class BasicExample implements IExample {
  * the properties of the example
  */
 	private ExampleProperties properties;
+	
+	public BasicExample(ExampleHeader h, ExampleContent c, ExampleProperties p) 
+	{
+		this.header = h;
+		this.content = c;
+		this.properties = p;
+	}
+
 /**
  * get the header data from the example
  * @return IHeader header information
@@ -70,21 +78,4 @@ public class BasicExample implements IExample {
 		//I know we'll pass the right type so I'll just type cast, for now
 		this.properties = (ExampleProperties) inProperties;
 	}
-/**
- * create an example by using the given header, content and properties
- * 
- * @param IHeader inHeader
- * @param IContent inContent
- * @param IProperites inProperties
- * @return BasicExample
- */
-	public static BasicExample makeBasicExample(IHeader inHeader,IContent inContent,IProperties inProperties)
-	{
-		BasicExample bx = new BasicExample();
-		bx.setHeader(inHeader);
-		bx.setContent(inContent);
-		bx.setProperties(inProperties);
-		return bx;
-	}
-
 }

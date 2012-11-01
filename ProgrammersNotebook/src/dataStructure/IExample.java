@@ -33,8 +33,4 @@ public interface IExample extends IEntry
  * {@link BasicExample#setProperties(IProperties)}
  */
 	void setProperties(IProperties inProperties);
-/**
- * {@link BasicExample#makeBasicExample(IHeader, IContent, IProperties)}
- */
-	IExample makeExample(IHeader h, IContent c, IProperties p);
 }
