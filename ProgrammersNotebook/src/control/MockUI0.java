@@ -94,7 +94,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		lblExamples.setBounds(15, 16, 137, 16);
 		lblExamples.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/icon-book.png")));
 		listModel.addElement("Add New Example...");
-		int counter = controller.db.getAll().size();
+		int counter = controller.getAllinDB().size();
 		for(int i=0;i<counter;i++)
 		{
 			listModel.addElement("Entry number "+i);
@@ -260,7 +260,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		          if (index >= 0) {
 		            //Object o = list.getModel().getElementAt(index);
 		            //System.out.println("Double-clicked on: " + o.toString());
-		        	List<IEntry> l = controller.db.getAll();
+		        	List<IEntry> l = controller.getAllinDB();
 		        	BasicExample bx;
 		            if(index==0){
 		            	internalFrame.setVisible(true);
@@ -299,7 +299,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	public IHeader getHeader() {
 		String title = ttxt.getText();
 		if (title.length() != 0 && ctxt.getText().length() != 0) {
-			listModel.addElement("Entry number "+this.controller.db.getAll().size());
+			listModel.addElement("Entry number "+this.controller.getAllinDB().size());
 			/*
 			ttxt.setText("");
 			ltxt.setText("");
