@@ -87,4 +87,9 @@ public class Db4oDatabase implements IDatabase {
 	public void delete(IEntry e) {
 		// TODO Auto-generated method stub
 	}
+	
+	@Override
+	public void close() {
+		db.close();
+	}
 }
