@@ -69,12 +69,14 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	private DefaultListModel<String> listModel;
 	String t1, t2, t3, a1, a2, a3, l1, l2, l3, s1, s2, s3, tg1, tg2, tg3, c1, c2, c3;
 	int counter;
+	final DesktopGUIController controller;
 
 	/**
 	 * Create the frame.
 	 * @param controller 
 	 */
 	public MockUI0(final DesktopGUIController controller) {
+		this.controller = controller;
 		setAlwaysOnTop(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MockUI0.class.getResource("/javagui/resources/Notebook-icon.png")));
 		setTitle("Programmers Examples Notebook (PEN) 1.0");
@@ -92,6 +94,11 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		lblExamples.setBounds(15, 16, 137, 16);
 		lblExamples.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/icon-book.png")));
 		listModel.addElement("Add New Example...");
+		int counter = controller.db.getAll().size();
+		for(int i=0;i<counter;i++)
+		{
+			listModel.addElement("Entry number "+i);
+		}
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(15, 35, 139, 234);
@@ -255,14 +262,14 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		            //System.out.println("Double-clicked on: " + o.toString());
 		        	List<IEntry> l = controller.db.getAll();
 		        	BasicExample bx;
-		            if(index==((list.getModel().getSize())-1)){
+		            if(index==0){
 		            	internalFrame.setVisible(true);
 			            contentPane.add(internalFrame);
 			            ttxt.requestFocus();
 			            setBounds(100, 100, 782, 341);
 		            }
-		            else if(index==((list.getModel().getSize())-2)) {
-		            	bx = (BasicExample) l.get(0);
+		            else {
+		            	bx = (BasicExample) l.get(index-1);
 		            	t1 = bx.getHeader().getTitle();
 		            	c1 = ((ExampleContent) bx.getContent()).getCode();
 		            	l1 = ((ExampleProperties) bx.getProperties()).getLanguage();
@@ -280,44 +287,6 @@ public class MockUI0 extends JFrame implements IUserInterface {
 							e.printStackTrace();
 						}
 		            }
-		            else if(index==((list.getModel().getSize())-3)) {
-		            	bx = (BasicExample) l.get(1);
-		            	t2 = bx.getHeader().getTitle();
-		            	c2 = ((ExampleContent) bx.getContent()).getCode();
-		            	l2 = ((ExampleProperties) bx.getProperties()).getLanguage();
-		            	s2 = ((ExampleProperties) bx.getProperties()).getSource();
-		            	tg2 = ((ExampleProperties) bx.getProperties()).getTags().get(0);
-		            	lblTitle_1.setText("Title: "+t2);
-		            	textArea.setText("Code:\n"+c2);
-		            	textArea_1.setText("Language: "+l2+"\n\nAuthor: "+a2+"\n\nSource: "+s2+"\n\nTags: "+tg2);
-		            	internalFrame.setVisible(false);
-		            	try {
-							internalFrame.setClosed(true);
-							setBounds(100, 100, 490, 341);
-						} catch (PropertyVetoException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-		            }
-		            else if(index==((list.getModel().getSize())-4)) {
-		            	bx = (BasicExample) l.get(2);
-		            	t3 = bx.getHeader().getTitle();
-		            	c3 = ((ExampleContent) bx.getContent()).getCode();
-		            	l3 = ((ExampleProperties) bx.getProperties()).getLanguage();
-		            	s3 = ((ExampleProperties) bx.getProperties()).getSource();
-		            	tg3 = ((ExampleProperties) bx.getProperties()).getTags().get(0);
-		            	lblTitle_1.setText("Title: "+t3);
-		            	textArea.setText("Code:\n"+c3);
-		            	textArea_1.setText("Language: "+l3+"\n\nAuthor: "+a3+"\n\nSource: "+s3+"\n\nTags: "+tg3);
-		            	internalFrame.setVisible(false);
-		            	try {
-							internalFrame.setClosed(true);
-							setBounds(100, 100, 490, 341);
-						} catch (PropertyVetoException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-		            }
 		          }
 		        }
 		      }
@@ -329,9 +298,8 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	@Override
 	public IHeader getHeader() {
 		String title = ttxt.getText();
-		counter++;
 		if (title.length() != 0 && ctxt.getText().length() != 0) {
-			listModel.add(0, ttxt.getText());
+			listModel.addElement("Entry number "+this.controller.db.getAll().size());
 			/*
 			ttxt.setText("");
 			ltxt.setText("");
