@@ -1,19 +1,21 @@
-package dataStructure;
+package control;
+
+import dataStructure.*;
 
 /**
- * This is what the example should look like
+ * 
+ * @author Thanaporn
+ * random class to help illustrate how controller works
  */
-public class BasicExample implements IExample {
-
+public class MockEntry implements IEntry
+{
 	private ExampleHeader header;
 	private ExampleContent content;
-	private ExampleProperties properties;
 	
-	public BasicExample(ExampleHeader h, ExampleContent c, ExampleProperties p) 
+	public MockEntry(ExampleHeader h, ExampleContent c) 
 	{
 		this.header = h;
 		this.content = c;
-		this.properties = p;
 	}
 
 	public IHeader getHeader() 
@@ -24,11 +26,6 @@ public class BasicExample implements IExample {
 	public IContent getContent() 
 	{
 		return this.content;
-	}
-
-	public IProperties getProperties() 
-	{
-		return this.properties;
 	}
 	
 	public void setHeader(IHeader inHeader)
@@ -43,13 +40,6 @@ public class BasicExample implements IExample {
 		//we should have conversion...maybe
 		//I know we'll pass the right type so I'll just type cast, for now
 		this.content = (ExampleContent) inContent;
-	}
-	
-	public void setProperties(IProperties inProperties)
-	{
-		//we should have conversion...maybe
-		//I know we'll pass the right type so I'll just type cast, for now
-		this.properties = (ExampleProperties) inProperties;
 	}
 	
 

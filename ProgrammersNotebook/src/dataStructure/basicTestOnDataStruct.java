@@ -10,7 +10,7 @@ import java.util.LinkedList;
  * @author Thanaporn
  * some stupid testing for dataStructure
  */
-public class mainy 
+public class basicTestOnDataStruct 
 {
 	public static void main(String args[]) throws IOException
 	{
@@ -23,7 +23,7 @@ public class mainy
 		p.setSource("success");
 		p.addTag("haha");
 		p.addTag("testing");
-		list.add(BasicExample.makeBasicExample(h,c,p));
+		list.add(new BasicExample(h,c,p));
 		IExample e = list.get(0);
 		System.out.println("Code "+((ExampleContent) e.getContent()).getCode());
 		System.out.println("Title "+e.getHeader().getTitle());
