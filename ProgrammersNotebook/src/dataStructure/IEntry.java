@@ -3,7 +3,7 @@ package dataStructure;
 /**
  * 
  * @author Thanaporn
- * IEntry should an entry
+ * IEntry should be an entry
  * covering anything from examples/codes/tests to folders
  * 
  */

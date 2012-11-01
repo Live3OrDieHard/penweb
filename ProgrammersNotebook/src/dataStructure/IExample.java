@@ -9,10 +9,32 @@ package dataStructure;
 
 public interface IExample extends IEntry
 {
+/**
+ *{@link BasicExample#getHeader()}
+ */
 	IHeader getHeader();
+/**
+ * {@link BasicExample#getContent()}
+ */
 	IContent getContent();
+/**
+ * {@link BasicExample#getProperties()}
+ */
 	IProperties getProperties();
+/**
+ * {@link BasicExample#setHeader(IHeader)}
+ */
 	void setHeader(IHeader inHeader);
+/**
+ * {@link BasicExample#setContent(IContent)}
+ */
 	void setContent(IContent inContent);
+/**
+ * {@link BasicExample#setProperties(IProperties)}
+ */
 	void setProperties(IProperties inProperties);
+/**
+ * {@link BasicExample#makeBasicExample(IHeader, IContent, IProperties)}
+ */
+	IExample makeExample(IHeader h, IContent c, IProperties p);
 }
