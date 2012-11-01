@@ -5,9 +5,17 @@ import java.io.IOException;
 import database.*;
 import dataStructure.*;
 
+/**
+ * 
+ * @author Thanaporn
+ * can run (sort of) MockUI0 (anjali) and MockUI1 and MockUI2 (Chrissy)
+ * retrieve function is not included in the controller (yet)
+ * MockUI0 has a prototype of retrieve function
+ * see MockUI0 for more info
+ */
 public class DesktopGUIController 
 {
-	static IDatabase db = new Db4oDatabase("db/localDb.yap");
+	static IDatabase db = new Db4oDatabase("db/MarchTest.yap");
 	static DesktopGUIController controller = new DesktopGUIController();
 	/**@TODO
 	 * there should be an interface for this.............
@@ -21,9 +29,14 @@ public class DesktopGUIController
 	 */
 	public static void main(String args[]) throws IOException
 	{
-		System.out.println("Please type 1 in the console for MockUI1, anything else for MockUI2");
+		System.out.println("Please type a number in the console\n");
+		System.out.println("0 for Anjali's UI\n1 for MockUI1\nanything else for MockUI2");
 		int i = System.in.read();
-		if(i=='1')
+		if(i=='0')
+		{
+			ui =  new MockUI0(controller);
+		}
+		else if(i=='1')
 		{
 			ui =  new MockUI1(controller);
 		}

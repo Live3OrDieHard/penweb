@@ -69,12 +69,6 @@ public class MockUI1 extends JFrame implements IUserInterface {
 		panel.setLayout(null);
 		
 		final JLabel lblExamples = new JLabel("Examples");
-		lblExamples.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				lblExamples.setText("haha");
-			}
-		});
 		lblExamples.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblExamples.setBounds(39, 11, 71, 14);
 		panel.add(lblExamples);
