@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 
+/**
+ * 
+ * @author Thanaporn
+ * some stupid testing for dataStructure
+ */
 public class mainy 
 {
 	public static void main(String args[]) throws IOException

@@ -15,8 +15,4 @@ public interface IExample extends IEntry
 	void setHeader(IHeader inHeader);
 	void setContent(IContent inContent);
 	void setProperties(IProperties inProperties);
-	/**
-	 * @return a new object
-	 */
-	IExample makeExample(IHeader h, IContent c, IProperties p);
 }
