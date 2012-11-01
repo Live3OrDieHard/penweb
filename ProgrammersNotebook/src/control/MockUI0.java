@@ -66,7 +66,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	private JTextField stxt;
 	private JTextField tgtxt;
 	private JEditorPane ctxt;
-	private DefaultListModel<String> listModel;
+	private DefaultListModel listModel;
 	String t1, t2, t3, a1, a2, a3, l1, l2, l3, s1, s2, s3, tg1, tg2, tg3, c1, c2, c3;
 	int counter;
 	final DesktopGUIController controller;
@@ -86,9 +86,9 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 				
-		listModel = new DefaultListModel<String>();
+		listModel = new DefaultListModel();
 
-		final JList<String> list = new JList<String>(listModel);
+		final JList list = new JList(listModel);
 		
 		JLabel lblExamples = new JLabel(" Examples:");
 		lblExamples.setBounds(15, 16, 137, 16);

@@ -78,9 +78,9 @@ public class Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 				
-		final DefaultListModel<String> listModel = new DefaultListModel<String>();
+		final DefaultListModel listModel = new DefaultListModel();
 
-		final JList<String> list = new JList<String>(listModel);
+		final JList list = new JList(listModel);
 		
 		JLabel lblExamples = new JLabel(" Examples:");
 		lblExamples.setBounds(15, 16, 137, 16);
