@@ -48,6 +48,8 @@ public class MockUI1 extends JFrame implements IUserInterface {
 	private JTextField txtAuthor;
 	private JTextField txtTagsKeywords;
 	private JTextField txtDescription;
+	private JTextPane textPane;
+	private JTextPane codePane;
 
 
 	/**
@@ -78,6 +80,7 @@ public class MockUI1 extends JFrame implements IUserInterface {
 		panel.add(lblSortBy);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setEnabled(false);
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Flat", "Category", "Language"}));
 		comboBox.setBounds(59, 35, 71, 17);
 		panel.add(comboBox);
@@ -102,6 +105,7 @@ public class MockUI1 extends JFrame implements IUserInterface {
 		panel.add(btnAddEntry);
 		
 		JList list = new JList();
+		list.setEnabled(false);
 		list.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		list.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Entry 1", "Entry 2"};
@@ -116,6 +120,7 @@ public class MockUI1 extends JFrame implements IUserInterface {
 		panel.add(list);
 		
 		JButton btnAddEssay = new JButton("add essay");
+		btnAddEssay.setEnabled(false);
 		btnAddEssay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.addEssay();
@@ -142,6 +147,7 @@ public class MockUI1 extends JFrame implements IUserInterface {
 		txtName.setColumns(10);
 		
 		JCheckBox chckbxPublic = new JCheckBox("Public");
+		chckbxPublic.setEnabled(false);
 		chckbxPublic.setBounds(9, 234, 97, 23);
 		panel_1.add(chckbxPublic);
 		
@@ -150,6 +156,7 @@ public class MockUI1 extends JFrame implements IUserInterface {
 		panel_1.add(separator_2);
 		
 		JButton btnAddCategory = new JButton("Add Category");
+		btnAddCategory.setEnabled(false);
 		btnAddCategory.setBounds(9, 292, 120, 23);
 		panel_1.add(btnAddCategory);
 		
@@ -187,11 +194,11 @@ public class MockUI1 extends JFrame implements IUserInterface {
 		lblDescription.setBounds(9, 182, 85, 14);
 		panel_1.add(lblDescription);
 		
-		JTextPane txtpnCodeGoesHere = new JTextPane();
-		txtpnCodeGoesHere.setFont(new Font("Courier New", Font.PLAIN, 12));
-		txtpnCodeGoesHere.setText("Code goes here...");
-		txtpnCodeGoesHere.setBounds(139, 0, 410, 354);
-		contentPane.add(txtpnCodeGoesHere);
+		JTextPane codePane = new JTextPane();
+		codePane.setFont(new Font("Courier New", Font.PLAIN, 12));
+		codePane.setText("Code goes here...");
+		codePane.setBounds(139, 0, 410, 354);
+		contentPane.add(codePane);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -203,7 +210,8 @@ public class MockUI1 extends JFrame implements IUserInterface {
 		lblConsole.setBounds(10, 5, 46, 14);
 		panel_2.add(lblConsole);
 		
-		JTextPane textPane = new JTextPane();
+		textPane = new JTextPane();
+		textPane.setEnabled(false);
 		textPane.setBounds(10, 22, 544, 55);
 		panel_2.add(textPane);
 		
@@ -217,7 +225,7 @@ public class MockUI1 extends JFrame implements IUserInterface {
 	@Override
 	public IHeader getHeader() {
 		String personname = ((JTextField) (((JPanel) contentPane.getComponent(1)).getComponent(5))).getText();
-		String entryname = ((JTextField) (((JPanel) contentPane.getComponent(1)).getComponent(1))).getText();
+		String entryname = textPane.getText();
 		return new ExampleHeader(entryname,personname);
 	}
 
