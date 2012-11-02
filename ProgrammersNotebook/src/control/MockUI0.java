@@ -80,7 +80,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	public MockUI0(final DesktopGUIController controller) {
 		addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosed(WindowEvent arg0) {
+			public void windowClosing(WindowEvent arg0) {
 
 				controller.close();
 			}
