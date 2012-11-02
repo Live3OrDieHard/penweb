@@ -308,12 +308,6 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		String title = ttxt.getText();
 		if (title.length() != 0 && ctxt.getText().length() != 0) {
 			listModel.addElement(title);
-			ttxt.setText("");
-			ltxt.setText("");
-			stxt.setText("");
-			atxt.setText("");
-			tgtxt.setText("");
-			ctxt.setText("");
 			}
 		return new ExampleHeader(ttxt.getText(),atxt.getText());
 	}
