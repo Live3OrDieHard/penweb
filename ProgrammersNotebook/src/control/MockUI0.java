@@ -265,6 +265,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		            }
 		            else {
 		            	bx = (BasicExample) l.get(index-1);
+		            	a1 = bx.getHeader().getAuthors().get(0).getName();
 		            	t1 = bx.getHeader().getTitle();
 		            	c1 = ((ExampleContent) bx.getContent()).getCode();
 		            	l1 = ((ExampleProperties) bx.getProperties()).getLanguage();
