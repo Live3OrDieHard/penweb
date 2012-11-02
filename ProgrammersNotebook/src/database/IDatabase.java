@@ -13,4 +13,5 @@ public interface IDatabase {
  	public List<IEntry> getByKeyword(String key); // This could be a cool function to implement (match by keyword in body or title)
 	// More "getBy" functions to come based on metadata choices
 	public void delete(IEntry e);
+	public void close(); // Close the connection
 }
