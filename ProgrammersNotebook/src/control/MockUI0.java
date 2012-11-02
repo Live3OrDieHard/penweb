@@ -121,7 +121,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		contentPane.add(btnNewButton);
 		
 		final JInternalFrame internalFrame = new JInternalFrame("Add New Example");
-		internalFrame.setBounds(480, 0, 284, 290);
+		internalFrame.setBounds(480, 6, 278, 290);
 		contentPane.add(internalFrame);
 		internalFrame.setClosable(true);
 		internalFrame.setFrameIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/add-icon.png")));
@@ -131,7 +131,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		ctxt = new JEditorPane();
 				
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(25, 145, 221, 78);
+		scrollPane_1.setBounds(28, 144, 221, 78);
 		internalFrame.getContentPane().add(scrollPane_1);
 		
 		
@@ -142,24 +142,24 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		internalFrame.getContentPane().add(lblTitle);
 		
 		ttxt = new JTextField();
-		ttxt.setBounds(84, 10, 162, 20);
+		ttxt.setBounds(86, 9, 162, 20);
 		internalFrame.getContentPane().add(ttxt);
 		ttxt.setColumns(10);
 		
 		JLabel lblCode = new JLabel("Code:");
-		lblCode.setBounds(25, 130, 54, 15);
+		lblCode.setBounds(30, 128, 54, 15);
 		internalFrame.getContentPane().add(lblCode);
 		
 		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.setBounds(77, 228, 84, 23);
+		btnSubmit.setBounds(76, 228, 84, 23);
 		internalFrame.getContentPane().add(btnSubmit);
 		
 		JButton btnReset = new JButton("Reset");
-		btnReset.setBounds(162, 228, 84, 23);
+		btnReset.setBounds(159, 228, 84, 23);
 		internalFrame.getContentPane().add(btnReset);
 		
 		JLabel lblLanguage = new JLabel("Language:");
-		lblLanguage.setBounds(22, 33, 54, 18);
+		lblLanguage.setBounds(22, 33, 75, 18);
 		internalFrame.getContentPane().add(lblLanguage);
 		
 		JLabel lblAuthor = new JLabel("Author:");
@@ -175,22 +175,22 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		internalFrame.getContentPane().add(lblTags);
 		
 		ltxt = new JTextField();
-		ltxt.setBounds(84, 33, 162, 20);
+		ltxt.setBounds(86, 32, 162, 20);
 		internalFrame.getContentPane().add(ltxt);
 		ltxt.setColumns(10);
 		
 		atxt = new JTextField();
-		atxt.setBounds(84, 56, 162, 20);
+		atxt.setBounds(86, 55, 162, 20);
 		internalFrame.getContentPane().add(atxt);
 		atxt.setColumns(10);
 		
 		stxt = new JTextField();
-		stxt.setBounds(84, 79, 162, 20);
+		stxt.setBounds(86, 78, 162, 20);
 		internalFrame.getContentPane().add(stxt);
 		stxt.setColumns(10);
 		
 		tgtxt = new JTextField();
-		tgtxt.setBounds(84, 102, 162, 20);
+		tgtxt.setBounds(86, 101, 162, 20);
 		internalFrame.getContentPane().add(tgtxt);
 		tgtxt.setColumns(10);
 		
@@ -217,7 +217,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		
 		final JTextPane textArea = new JTextPane();
 		textArea.setBackground(UIManager.getColor("FormattedTextField.disabledBackground"));
-		textArea.setText("\r\n\r\n\r\n\r\n\r\n         <No Example\r\n            Selected>");
+		textArea.setText("\r\n\r\n\r\n\r\n\r\n\r\n        <No Example\r\n           Selected>");
 		scrollPane_2.setViewportView(textArea);
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
