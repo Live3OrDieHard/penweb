@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import database.*;
@@ -48,5 +49,22 @@ public class DesktopGUIController
 
 	public List<IEntry> getAllinDB() {
 		return db.getAll();
+	}
+
+	public List<IHeader> getHeaderList() 
+	{
+		List<IEntry> listE = db.getAll();
+		List<IHeader> listH = new LinkedList<IHeader>();
+		for(int i=0;i<listE.size();i++)
+		{
+			listH.add(listE.get(i).getHeader());
+		}
+		return listH;
+	}
+
+	public void close() {
+
+		db.close();
+		
 	}
 }

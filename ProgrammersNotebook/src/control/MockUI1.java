@@ -243,4 +243,12 @@ public class MockUI1 extends JFrame implements IUserInterface {
 		p.addTag(tag);
 		return p;
 	}
+
+
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -7,5 +7,6 @@ public interface IUserInterface {
 	IHeader getHeader();
 	IContent getContent();
 	IProperties getProperties();
+	void init();
 
 }

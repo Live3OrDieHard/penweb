@@ -25,11 +25,14 @@ import java.awt.event.MouseListener;
 import java.awt.Font;
 import javax.swing.JInternalFrame;
 import java.beans.PropertyVetoException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JLayeredPane;
 
 import dataStructure.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 /**
@@ -65,12 +68,20 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	String t1, t2, t3, a1, a2, a3, l1, l2, l3, s1, s2, s3, tg1, tg2, tg3, c1, c2, c3;
 	int counter;
 	final DesktopGUIController controller;
+	LinkedList<String> listTitle = new LinkedList<String>();
 
 	/**
 	 * Create the frame.
 	 * @param controller 
 	 */
 	public MockUI0(final DesktopGUIController controller) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+
+				controller.close();
+			}
+		});
 		this.controller = controller;
 		setAlwaysOnTop(true);
 		//setIconImage(Toolkit.getDefaultToolkit().getImage(MockUI0.class.getResource("/javagui/resources/Notebook-icon.png")));
@@ -83,18 +94,13 @@ public class MockUI0 extends JFrame implements IUserInterface {
 				
 		listModel = new DefaultListModel();
 
-		final JList list = new JList(listModel);
+		final JList listEx = new JList(listModel);
 		
 		JLabel lblExamples = new JLabel(" Examples:");
 		lblExamples.setBounds(15, 16, 137, 16);
 		//lblExamples.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/icon-book.png")));
 		listModel.addElement("Add New Example...");
 		int counter = controller.getAllinDB().size();
-		for(int i=0;i<counter;i++)
-		{
-			listModel.addElement("Entry number "+i);
-		}
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(15, 35, 139, 234);
 		
@@ -110,7 +116,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 			}
 		});
 		//btnNewButton.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/search-icon.png")));
-		scrollPane.setViewportView(list);
+		scrollPane.setViewportView(listEx);
 		contentPane.setLayout(null);
 		contentPane.add(lblExamples);
 		contentPane.add(scrollPane);
@@ -251,7 +257,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		MouseListener mouseListener = new MouseAdapter() {
 		      public void mouseClicked(MouseEvent mouseEvent) {
 		        if (mouseEvent.getClickCount() == 2) {
-		          int index = list.locationToIndex(mouseEvent.getPoint());
+		          int index = listEx.locationToIndex(mouseEvent.getPoint());
 		          if (index >= 0) {
 		            //Object o = list.getModel().getElementAt(index);
 		            //System.out.println("Double-clicked on: " + o.toString());
@@ -288,14 +294,17 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		      }
 		    };
 		
-		 list.addMouseListener(mouseListener);
+		 listEx.addMouseListener(mouseListener);
 	}
 
 	@Override
+	/**
+	 * this is hacky
+	 */
 	public IHeader getHeader() {
 		String title = ttxt.getText();
 		if (title.length() != 0 && ctxt.getText().length() != 0) {
-			listModel.addElement("Entry number "+this.controller.getAllinDB().size());
+			listModel.addElement(title);
 			/*
 			ttxt.setText("");
 			ltxt.setText("");
@@ -320,6 +329,16 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		p.setSource(stxt.getText());
 		p.addTag(tgtxt.getText());
 		return p;
+	}
+
+	@Override
+	public void init() 
+	{
+		List<IHeader> listH = controller.getHeaderList();
+		for(int i=0;i<listH.size();i++)
+		{
+			listModel.addElement(listH.get(i).getTitle());
+		}
 	}
 }
 

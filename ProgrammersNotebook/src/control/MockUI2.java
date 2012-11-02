@@ -159,4 +159,11 @@ public class MockUI2 extends JFrame implements IUserInterface {
 	public IProperties getProperties() {
 		return null;
 	}
+
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
 }

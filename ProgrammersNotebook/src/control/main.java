@@ -36,6 +36,7 @@ public class main
 		}
 		*/
 		controller.ui = ui;
+		ui.init();
 		ui.show();
 	}
 	
