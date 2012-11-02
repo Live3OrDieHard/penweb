@@ -63,7 +63,6 @@ public class DesktopGUIController
 	}
 
 	public void close() {
-		System.out.println("hahahhahah");
 		db.close();
 		
 	}
