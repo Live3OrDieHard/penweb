@@ -14,7 +14,7 @@ public class main
 	 */
 	public static void main(String args[]) throws IOException
 	{
-		IDatabase db = new Db4oDatabase("db/MarchTest.yap");
+		IDatabase db = new Db4oDatabase("MarchTest.yap");
 		IUserInterface  ui = null;
 		DesktopGUIController controller = new DesktopGUIController(db,ui);
 		/*

@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.UIManager;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JTextPane;
@@ -23,6 +24,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JInternalFrame;
 import java.beans.PropertyVetoException;
 import java.util.List;
@@ -73,7 +76,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	public MockUI0(final DesktopGUIController controller) {
 		this.controller = controller;
 		setAlwaysOnTop(true);
-		//setIconImage(Toolkit.getDefaultToolkit().getImage(MockUI0.class.getResource("/javagui/resources/Notebook-icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MockUI0.class.getResource("/javagui/resources/Notebook-icon.png")));
 		setTitle("Programmers Examples Notebook (PEN) 1.0");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 782, 341);
@@ -87,7 +90,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		
 		JLabel lblExamples = new JLabel(" Examples:");
 		lblExamples.setBounds(15, 16, 137, 16);
-		//lblExamples.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/icon-book.png")));
+		lblExamples.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/icon-book.png")));
 		listModel.addElement("Add New Example...");
 		int counter = controller.getAllinDB().size();
 		for(int i=0;i<counter;i++)
@@ -109,7 +112,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		//btnNewButton.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/search-icon.png")));
+		btnNewButton.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/search-icon.png")));
 		scrollPane.setViewportView(list);
 		contentPane.setLayout(null);
 		contentPane.add(lblExamples);
@@ -121,7 +124,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		internalFrame.setBounds(480, 0, 284, 290);
 		contentPane.add(internalFrame);
 		internalFrame.setClosable(true);
-		//internalFrame.setFrameIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/add-icon.png")));
+		internalFrame.setFrameIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/add-icon.png")));
 		internalFrame.setVisible(true);
 		internalFrame.getContentPane().setLayout(null);
 		internalFrame.moveToFront();
@@ -148,11 +151,11 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		internalFrame.getContentPane().add(lblCode);
 		
 		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.setBounds(117, 228, 65, 23);
+		btnSubmit.setBounds(77, 228, 84, 23);
 		internalFrame.getContentPane().add(btnSubmit);
 		
 		JButton btnReset = new JButton("Reset");
-		btnReset.setBounds(185, 228, 61, 23);
+		btnReset.setBounds(162, 228, 84, 23);
 		internalFrame.getContentPane().add(btnReset);
 		
 		JLabel lblLanguage = new JLabel("Language:");
@@ -199,13 +202,13 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		final JLabel lblTitle_1 = new JLabel("Title:");
 		lblTitle_1.setBounds(3, 0, 90, 16);
 		layeredPane.add(lblTitle_1);
-		//lblTitle_1.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/page_code.png")));
+		lblTitle_1.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/page_code.png")));
 		lblTitle_1.setFont(new Font("Tahoma", Font.BOLD, 10));
 		
 		JLabel lblProperties = new JLabel("Properties:");
 		lblProperties.setBounds(149, 0, 82, 16);
 		layeredPane.add(lblProperties);
-		//lblProperties.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/document-properties.png")));
+		lblProperties.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/document-properties.png")));
 		lblProperties.setFont(new Font("Tahoma", Font.BOLD, 10));
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
@@ -214,7 +217,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		
 		final JTextPane textArea = new JTextPane();
 		textArea.setBackground(UIManager.getColor("FormattedTextField.disabledBackground"));
-		textArea.setText("\r\n\r\n\r\n\r\n\r\n\r\n   <No Example Selected>");
+		textArea.setText("\r\n\r\n\r\n\r\n\r\n         <No Example\r\n            Selected>");
 		scrollPane_2.setViewportView(textArea);
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
@@ -226,11 +229,11 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		scrollPane_3.setViewportView(textArea_1);
 		
 		JButton btnEdit = new JButton("Edit...");
-		btnEdit.setBounds(393, 271, 69, 23);
+		btnEdit.setBounds(370, 271, 84, 23);
 		contentPane.add(btnEdit);
 		
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.setBounds(322, 271, 69, 23);
+		btnDelete.setBounds(276, 271, 92, 23);
 		contentPane.add(btnDelete);
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
