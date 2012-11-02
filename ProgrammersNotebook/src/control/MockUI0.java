@@ -343,5 +343,16 @@ public class MockUI0 extends JFrame implements IUserInterface {
 			listModel.addElement(listH.get(i).getTitle());
 		}
 	}
+
+	public void clearFields() 
+	{
+		ttxt.setText("");
+		ltxt.setText("");
+		stxt.setText("");
+		atxt.setText("");
+		tgtxt.setText("");
+		ctxt.setText("");
+		
+	}
 }
 
