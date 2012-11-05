@@ -44,11 +44,11 @@ public class Db4oDatabase implements IDatabase {
 		final String title = head.getTitle();
 		final List<IPerson> authors = head.getAuthors();
 		
-		if (title.equals(null)) {
+		if (title == null) {
 			hasTitle = false;
 		}
 		
-		if (authors.equals(null)) {
+		if (authors == null) {
 			hasAuthors = false;
 		}
 		
