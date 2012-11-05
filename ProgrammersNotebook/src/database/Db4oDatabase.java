@@ -39,18 +39,11 @@ public class Db4oDatabase implements IDatabase {
 
 	@Override
 	public List<IEntry> getByHeader(final IHeader head) {
-		boolean hasTitle = true;
-		boolean hasAuthors = true;
 		final String title = head.getTitle();
 		final List<IPerson> authors = head.getAuthors();
-		
-		if (title == null) {
-			hasTitle = false;
-		}
-		
-		if (authors == null) {
-			hasAuthors = false;
-		}
+
+		boolean hasTitle = (title != null);
+		boolean hasAuthors = (authors != null);
 		
 		// All authors searches only work if lists are ordered the same.
 		if (hasTitle && hasAuthors) {
