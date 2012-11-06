@@ -36,6 +36,7 @@ import javax.swing.JLayeredPane;
 import dataStructure.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JDesktopPane;
 
 
 /**
@@ -67,6 +68,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	private JTextField stxt;
 	private JTextField tgtxt;
 	private JEditorPane ctxt;
+	private JButton btnSubmit;
 	private DefaultListModel listModel;
 	String t1, t2, t3, a1, a2, a3, l1, l2, l3, s1, s2, s3, tg1, tg2, tg3, c1, c2, c3;
 	int counter;
@@ -78,6 +80,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	 * @param controller 
 	 */
 	public MockUI0(final DesktopGUIController controller) {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
@@ -295,14 +298,32 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	 */
 	public IHeader getHeader() {
 		String title = ttxt.getText();
-		if (title.length() != 0 && ctxt.getText().length() != 0) {
+		if(title.length()==0)
+		{
+			errorBox box = new errorBox("bad title");
+			box.show();
+			return null;
+		}
+		else if ((title.length() != 0) && (ctxt.getText().length() != 0) && (atxt.getText().length()!=0)) {
 			listModel.addElement(title);
 			}
+		if(atxt.getText().length()==0)
+		{
+			errorBox box = new errorBox("bad author");
+			box.show();
+			return null;
+		}
 		return new ExampleHeader(ttxt.getText(),atxt.getText());
 	}
 
 	@Override
 	public IContent getContent() {
+		if(ctxt.getText().length()==0)
+		{
+			errorBox box = new errorBox("bad code");
+			box.show();
+			return null;
+		}
 		return new ExampleContent(ctxt.getText());
 	}
 

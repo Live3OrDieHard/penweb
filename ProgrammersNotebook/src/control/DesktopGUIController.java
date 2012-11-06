@@ -30,9 +30,12 @@ public class DesktopGUIController
 		ExampleHeader h = (ExampleHeader) ui.getHeader();
 		ExampleContent c = (ExampleContent) ui.getContent();
 		ExampleProperties p = (ExampleProperties) ui.getProperties();
-		BasicExample bx = new BasicExample(h,c,p);
-		this.addToDB(bx);
-		((MockUI0) ui).clearFields();
+		if((h!=null)&&(c!=null)&&(p!=null))
+		{
+			BasicExample bx = new BasicExample(h,c,p);
+			this.addToDB(bx);
+			((MockUI0) ui).clearFields();
+		}
 	}
 	
 	void addEssay()
