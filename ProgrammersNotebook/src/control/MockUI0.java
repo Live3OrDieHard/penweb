@@ -267,10 +267,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		        	List<IEntry> l = controller.getAllinDB();
 		        	BasicExample bx;
 		            if(index==0){
-		            	internalFrame.setVisible(true);
-			            contentPane.add(internalFrame);
 			            ttxt.requestFocus();
-			            setBounds(100, 100, 782, 341);
 		            }
 		            else {
 		            	bx = (BasicExample) l.get(index-1);
@@ -283,15 +280,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		            	lblTitle_1.setText("Title: "+t1);
 		            	textArea.setText("Code:\n"+c1);
 		            	textArea_1.setText("Language: "+l1+"\n\nAuthor: "+a1+"\n\nSource: "+s1+"\n\nTags: "+tg1);
-		            	internalFrame.setVisible(false);
-		            	try {
-		            		internalFrame.setClosed(true);
-							setBounds(100, 100, 490, 341);
-						} catch (PropertyVetoException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-		            }
+		            	}
 		          }
 		        }
 		      }
