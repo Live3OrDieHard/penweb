@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import dataStructure.BasicExample;
 import dataStructure.ExampleHeader;
+import dataStructure.NonUser;
 import database.Db4oDatabase;
 
 public class Db4oDatabaseTest {
@@ -21,29 +22,32 @@ public class Db4oDatabaseTest {
 
 	@Test
 	public void testGetByHeaderWithTitleAndAuthor() {
-		ExampleHeader head = new ExampleHeader("aTitle", "anAuthor");
-		BasicExample entry = new BasicExample(head, null, null, null);
+		BasicExample entry = new BasicExample();
+		NonUser u = new NonUser("anAuthor");
+		entry.setTitle("aTitle");
+		entry.assignOwner(u);
 		testee.store(entry);
 		
-		assertEquals(testee.getByHeader(head).get(0), entry);
+		assertEquals(testee.getByHeader("aTitle",u).get(0).getTitle(), entry.getTitle());
 	}
 	
 	@Test
 	public void testGetByHeaderWithTitleOnly() {
-		ExampleHeader head = new ExampleHeader("aTitle", null);
-		BasicExample entry = new BasicExample(head, null, null, null);
+		BasicExample entry = new BasicExample();
+		entry.setTitle("aTitle");
 		testee.store(entry);
-		
-		assertEquals(testee.getByHeader(head).get(0), entry);
+
+		assertEquals(testee.getByHeader("aTitle",null).get(0).getTitle(), entry.getTitle());
 	}
 	
 	@Test
 	public void testGetByHeaderWithAuthorOnly() {
-		ExampleHeader head = new ExampleHeader(null, "anAuthor");
-		BasicExample entry = new BasicExample(head, null, null, null);
+		BasicExample entry = new BasicExample();
+		NonUser u = new NonUser("anAuthor");
+		entry.assignOwner(u);
 		testee.store(entry);
-		
-		assertEquals(testee.getByHeader(head).get(0), entry);
+		String name = testee.getByHeader(null,u).get(0).getOwner().getName();
+		assertEquals(name, entry.getOwner().getName());
 	}
 
 	@Test

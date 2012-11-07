@@ -6,7 +6,6 @@ import com.db4o.query.*;
 
 import dataStructure.IEntry;
 import dataStructure.IExample;
-import dataStructure.IHeader;
 import dataStructure.IPerson;
 
 /*
@@ -30,6 +29,9 @@ public class Db4oDatabase implements IDatabase {
 	
 	@Override
 	public void store(IEntry e) {
+		long id = this.getNewId();
+		e.assignID(id);
+		e.assignOwner(null);
 		db.store(e);
 	}
 
@@ -39,32 +41,32 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	@Override
-	public List<IExample> getByHeader(final IHeader head) {
-		final String title = head.getTitle();
-		final List<IPerson> authors = head.getAuthors();
+	public List<IExample> getByHeader(final String title, final IPerson owner) {
 
 		boolean hasTitle = (title != null);
-		boolean hasAuthors = (authors != null);
+		boolean hasOwner = (owner != null);
 		
 		// All authors searches only work if lists are ordered the same.
-		if (hasTitle && hasAuthors) {
+		if (hasTitle && hasOwner) {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
-					return (e.getHeader().getTitle().equals(title) && e.getHeader().getAuthors().equals(authors));
+					return (e.getTitle().equals(title) && e.getOwnerId()==owner.getId());
 				}
 			});
 		}
 		else if (hasTitle) {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
-					return e.getHeader().getTitle().equals(head.getTitle());
+					return e.getTitle().equals(title);
 				}
 			});
 		}
-		else if (hasAuthors) {
+		else if (hasOwner) {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
-					return e.getHeader().getAuthors().equals(authors);
+					if(e.getOwner()!=null)
+						return e.getOwner().getName().equals(owner.getName());
+					else return(e.getOwner()==owner);
 				}
 			});
 		}
@@ -87,8 +89,16 @@ public class Db4oDatabase implements IDatabase {
 		db.close();
 	}
 
-	@Override
-	public List<IExample> getAllExamples() {
+	public List<IExample> getAllExample() {
 		return db.query(IExample.class);
+	}
+
+	
+	/**
+	 * TODO: generate it, somehow
+	 */
+	private Long getNewId() 
+	{
+		return (long) (Math.random()*1000000);
 	}
 }

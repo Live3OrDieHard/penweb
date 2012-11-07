@@ -27,7 +27,6 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JInternalFrame;
-import java.beans.PropertyVetoException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,7 +35,6 @@ import javax.swing.JLayeredPane;
 import dataStructure.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JDesktopPane;
 
 
 /**
@@ -55,7 +53,7 @@ import javax.swing.JDesktopPane;
  * at the start of the program
  *
  */
-public class MockUI0 extends JFrame implements IUserInterface {
+public class DesktopUI extends JFrame implements IUserInterface {
 
 	/**
 	 * OMG this is so convenient
@@ -68,9 +66,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	private JTextField stxt;
 	private JTextField tgtxt;
 	private JEditorPane ctxt;
-	private JButton btnSubmit;
 	private DefaultListModel listModel;
-	String t1, t2, t3, a1, a2, a3, l1, l2, l3, s1, s2, s3, tg1, tg2, tg3, c1, c2, c3;
 	int counter;
 	final Controller controller;
 	LinkedList<String> listTitle = new LinkedList<String>();
@@ -79,7 +75,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	 * Create the frame.
 	 * @param controller 
 	 */
-	public MockUI0(final Controller controller) {
+	public DesktopUI(final Controller controller) {
 		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -90,157 +86,157 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		});
 		this.controller = controller;
 		setAlwaysOnTop(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(MockUI0.class.getResource("/javagui/resources/Notebook-icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(DesktopUI.class.getResource("/javagui/resources/Notebook-icon.png")));
 		setTitle("Programmers Examples Notebook (PEN) 1.0");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 782, 341);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-				
+
 		listModel = new DefaultListModel();
 
 		final JList listEx = new JList(listModel);
-		
+
 		JLabel lblExamples = new JLabel(" Examples:");
 		lblExamples.setBounds(15, 16, 137, 16);
-		lblExamples.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/icon-book.png")));
+		lblExamples.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/icon-book.png")));
 		listModel.addElement("Add New Example...");
 		int counter = controller.getAllinDB().size();
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(15, 35, 139, 234);
-		
+
 		textField = new JTextField();
 		textField.setBounds(15, 272, 113, 20);
 		textField.setToolTipText("Search (enter keyword)");
 		textField.setColumns(10);
-		
+
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setBounds(127, 270, 27, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/search-icon.png")));
+		btnNewButton.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/search-icon.png")));
 		scrollPane.setViewportView(listEx);
 		contentPane.setLayout(null);
 		contentPane.add(lblExamples);
 		contentPane.add(scrollPane);
 		contentPane.add(textField);
 		contentPane.add(btnNewButton);
-		
+
 		final JInternalFrame internalFrame = new JInternalFrame("Add New Example");
 		internalFrame.setBounds(480, 6, 278, 290);
 		contentPane.add(internalFrame);
 		internalFrame.setClosable(true);
-		internalFrame.setFrameIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/add-icon.png")));
+		internalFrame.setFrameIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/add-icon.png")));
 		internalFrame.setVisible(true);
 		internalFrame.getContentPane().setLayout(null);
 		internalFrame.moveToFront();
 		ctxt = new JEditorPane();
-				
+
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(28, 144, 221, 78);
 		internalFrame.getContentPane().add(scrollPane_1);
-		
-		
+
+
 		scrollPane_1.setViewportView(ctxt);
-		
+
 		JLabel lblTitle = new JLabel("Title:");
 		lblTitle.setBounds(50, 11, 47, 18);
 		internalFrame.getContentPane().add(lblTitle);
-		
+
 		ttxt = new JTextField();
 		ttxt.setBounds(86, 9, 162, 20);
 		internalFrame.getContentPane().add(ttxt);
 		ttxt.setColumns(10);
-		
+
 		JLabel lblCode = new JLabel("Code:");
 		lblCode.setBounds(30, 128, 54, 15);
 		internalFrame.getContentPane().add(lblCode);
-		
+
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.setBounds(76, 228, 84, 23);
 		internalFrame.getContentPane().add(btnSubmit);
-		
+
 		JButton btnReset = new JButton("Reset");
 		btnReset.setBounds(159, 228, 84, 23);
 		internalFrame.getContentPane().add(btnReset);
-		
+
 		JLabel lblLanguage = new JLabel("Language:");
 		lblLanguage.setBounds(22, 33, 75, 18);
 		internalFrame.getContentPane().add(lblLanguage);
-		
+
 		JLabel lblAuthor = new JLabel("Author:");
 		lblAuthor.setBounds(37, 56, 46, 18);
 		internalFrame.getContentPane().add(lblAuthor);
-		
+
 		JLabel lblSource = new JLabel("Source:");
 		lblSource.setBounds(37, 80, 46, 14);
 		internalFrame.getContentPane().add(lblSource);
-		
+
 		JLabel lblTags = new JLabel("Tags:");
 		lblTags.setBounds(47, 102, 54, 18);
 		internalFrame.getContentPane().add(lblTags);
-		
+
 		ltxt = new JTextField();
 		ltxt.setBounds(86, 32, 162, 20);
 		internalFrame.getContentPane().add(ltxt);
 		ltxt.setColumns(10);
-		
+
 		atxt = new JTextField();
 		atxt.setBounds(86, 55, 162, 20);
 		internalFrame.getContentPane().add(atxt);
 		atxt.setColumns(10);
-		
+
 		stxt = new JTextField();
 		stxt.setBounds(86, 78, 162, 20);
 		internalFrame.getContentPane().add(stxt);
 		stxt.setColumns(10);
-		
+
 		tgtxt = new JTextField();
 		tgtxt.setBounds(86, 101, 162, 20);
 		internalFrame.getContentPane().add(tgtxt);
 		tgtxt.setColumns(10);
-		
+
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(173, 23, 289, 257);
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(null);
-		
+
 		final JLabel lblTitle_1 = new JLabel("Title:");
 		lblTitle_1.setBounds(3, 0, 90, 16);
 		layeredPane.add(lblTitle_1);
-		lblTitle_1.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/page_code.png")));
+		lblTitle_1.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/page_code.png")));
 		lblTitle_1.setFont(new Font("Tahoma", Font.BOLD, 10));
-		
+
 		JLabel lblProperties = new JLabel("Properties:");
 		lblProperties.setBounds(149, 0, 82, 16);
 		layeredPane.add(lblProperties);
-		lblProperties.setIcon(new ImageIcon(MockUI0.class.getResource("/javagui/resources/document-properties.png")));
+		lblProperties.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/document-properties.png")));
 		lblProperties.setFont(new Font("Tahoma", Font.BOLD, 10));
-		
+
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(0, 18, 142, 229);
 		layeredPane.add(scrollPane_2);
-		
+
 		final JTextPane textArea = new JTextPane();
 		textArea.setBackground(UIManager.getColor("FormattedTextField.disabledBackground"));
 		textArea.setText("\r\n\r\n\r\n\r\n\r\n\r\n        <No Example\r\n           Selected>");
 		scrollPane_2.setViewportView(textArea);
-		
+
 		JScrollPane scrollPane_3 = new JScrollPane();
 		scrollPane_3.setBounds(150, 18, 137, 229);
 		layeredPane.add(scrollPane_3);
-		
+
 		final JTextPane textArea_1 = new JTextPane();
 		textArea_1.setBackground(UIManager.getColor("FormattedTextField.disabledBackground"));
 		scrollPane_3.setViewportView(textArea_1);
-		
+
 		JButton btnEdit = new JButton("Edit...");
 		btnEdit.setBounds(370, 271, 84, 23);
 		contentPane.add(btnEdit);
-		
+
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.setBounds(276, 271, 92, 23);
 		contentPane.add(btnDelete);
@@ -254,48 +250,46 @@ public class MockUI0 extends JFrame implements IUserInterface {
 				ctxt.setText("");
 			}
 		});
-		
+
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				controller.addBasicExample();
-		}});
-		
+				BufferEntry e = DesktopUI.this.getBufferEntry();
+				controller.addBasicExample(e);
+				listModel.addElement(ttxt.getText());
+			}});
+
 		MouseListener mouseListener = new MouseAdapter() {
-		      public void mouseClicked(MouseEvent mouseEvent) {
-		        if (mouseEvent.getClickCount() == 2) {
-		          int index = listEx.locationToIndex(mouseEvent.getPoint());
-		          if (index >= 0) {
-		            //Object o = list.getModel().getElementAt(index);
-		            //System.out.println("Double-clicked on: " + o.toString());
-		        	List<IEntry> l = controller.getAllinDB();
-		        	BasicExample bx;
-		            if(index==0){
-			            ttxt.requestFocus();
-		            }
-		            else {
-		            	bx = (BasicExample) l.get(index-1);
-		            	a1 = bx.getHeader().getAuthors().get(0).getName();
-		            	t1 = bx.getHeader().getTitle();
-		            	c1 = ((ExampleContent) bx.getContent()).getCode();
-		            	l1 = ((ExampleProperties) bx.getProperties()).getLanguage();
-		            	s1 = ((ExampleProperties) bx.getProperties()).getSource();
-		            	//tg1 = ((ExampleProperties) bx.getProperties()).getTags().get(0);
-		            	lblTitle_1.setText("Title: "+t1);
-		            	textArea.setText("Code:\n"+c1);
-		            	textArea_1.setText("Language: "+l1+"\n\nAuthor: "+a1+"\n\nSource: "+s1+"\n\nTags: "+tg1);
-		            	}
-		          }
-		        }
-		      }
-		    };
-		
-		 listEx.addMouseListener(mouseListener);
+			public void mouseClicked(MouseEvent mouseEvent) {
+				if (mouseEvent.getClickCount() == 2) {
+					int index = listEx.locationToIndex(mouseEvent.getPoint());
+					if (index >= 0) {
+						//Object o = list.getModel().getElementAt(index);
+						//System.out.println("Double-clicked on: " + o.toString());
+						List<IEntry> l = controller.getAllinDB();
+						BasicExample bx;
+						if(index==0){
+							ttxt.requestFocus();
+						}
+						else {
+							bx = (BasicExample) l.get(index-1);
+							//tg1 = ((ExampleProperties) bx.getProperties()).getTags().get(0);
+							lblTitle_1.setText("Title: "+bx.getTitle());
+							textArea.setText("Code:\n"+bx.getCode());
+							textArea_1.setText("Author: "+bx.getAuthors().get(0).getName()
+									+"\n\nLanguage: "+bx.getProperties().getLanguage()
+									+"\n\nSource: "+bx.getProperties().getSource());
+
+						}
+					}
+				}
+			}
+		};
+
+		listEx.addMouseListener(mouseListener);
 	}
 
+	/*
 	@Override
-	/**
-	 * this is hacky
-	 */
 	public IHeader getHeader() {
 		String title = ttxt.getText();
 		if(title.length()==0)
@@ -326,24 +320,18 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		}
 		return new ExampleContent(ctxt.getText());
 	}
+	 */
 
-	@Override
-	public IProperties getProperties() {
-		ExampleProperties p = new ExampleProperties();
-		p.setLanguage(ltxt.getText());
-		p.setSource(stxt.getText());
-		//TODO: Add tag(s) and category(s) to the new entry 
-		//p.addTag(tgtxt.getText());
-		return p;
-	}
+
 
 	@Override
 	public void init() 
 	{
-		List<IHeader> listH = controller.getHeaderList();
+		List<String> listH = controller.getTitleList();
+
 		for(int i=0;i<listH.size();i++)
 		{
-			listModel.addElement(listH.get(i).getTitle());
+			listModel.addElement(listH.get(i));
 		}
 	}
 
@@ -355,7 +343,38 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		atxt.setText("");
 		tgtxt.setText("");
 		ctxt.setText("");
-		
+	}
+
+	public BufferEntry getBufferEntry()
+	{
+		BufferEntry e = new BufferEntry();
+		String code = ctxt.getText();
+		String title = ttxt.getText();
+		String author = atxt.getText();
+
+		if(code.length()==0)
+		{
+			System.out.println("Invalid code. Please try again");
+			return null;
+		}
+		else e.setCode(code);
+
+		if(title.length()==0)
+		{
+			System.out.println("Invalid title. Please try again");
+			return null;
+		}
+		else e.setCode(code);
+		if(author.length()==0)
+		{
+			System.out.println("Invalid author. Please try again");
+			return null;
+		}
+		else e.addAuthor(new NonUser(author));
+
+		e.setLanguage(ltxt.getText());
+		e.setSource(stxt.getText());
+		return e;
 	}
 }
 

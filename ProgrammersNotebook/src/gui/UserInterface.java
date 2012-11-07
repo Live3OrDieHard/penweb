@@ -1,29 +1,22 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.BoxLayout;
-import javax.swing.JInternalFrame;
-import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.JTextPane;
 import javax.swing.JComboBox;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
-import java.awt.event.ItemEvent;
 import javax.swing.JCheckBox;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;

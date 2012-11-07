@@ -12,12 +12,16 @@ public interface IEntry
 	/**
 	 * @return Returns the ID of an entry in the database. Every entry has an ID.
 	 */
-	Long getEntryId();
+	Long getId();
 	
 	/**
 	 * @return The ID of the owner of an entry.
 	 */
 	Long getOwnerId();
+
+	int assignOwner(IPerson owner);
+
+	int assignID(Long id);
 }
 
 /*
