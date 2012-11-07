@@ -22,7 +22,8 @@ public class ExampleProperties implements IProperties
 	 * Categories the example belongs to
 	 */
 	private ArrayList<Long> categoryIds = new ArrayList<Long>();
-
+	
+	@Override
 	/**
 	 * Gets the language the example was written in
 	 * @return String
@@ -31,7 +32,8 @@ public class ExampleProperties implements IProperties
 	{
 		return this.language;
 	}
-
+	
+	@Override
 	/**
 	 * Gets the source of an example
 	 * @return String
@@ -40,7 +42,8 @@ public class ExampleProperties implements IProperties
 	{
 		return this.source;
 	}
-
+	
+	@Override
 	/**
 	 * Gets the list of categories the example belongs to.
 	 * @return LinkedList<String>
@@ -50,6 +53,7 @@ public class ExampleProperties implements IProperties
 		return this.categoryIds;
 	}
 
+	@Override
 	/**
 	 * A setter function to set the language property of the example
 	 * to the given language
@@ -61,6 +65,7 @@ public class ExampleProperties implements IProperties
 		this.language = language;
 	}
 
+	@Override
 	/**
 	 * A setter fucntion to set the source property of the example
 	 * to the given source
@@ -72,6 +77,7 @@ public class ExampleProperties implements IProperties
 		this.source = source;
 	}
 
+	@Override
 	/**
 	 * A setter function to set the tag property of the example 
 	 * to the given categories.
@@ -83,6 +89,7 @@ public class ExampleProperties implements IProperties
 		this.categoryIds = categories;
 	}
 
+	@Override
 	/**
 	 * Add the given category to the example
 	 * 
