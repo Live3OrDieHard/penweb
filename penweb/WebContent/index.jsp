@@ -54,15 +54,20 @@
 	</div>
 	<div class="right">
 		<ul class="entrylist">
-			<li>entry 1</li>
-			<li>entry 2</li>
-			<li>entry 3</li>			
-			<li>entry 4</li>			
-			<li>entry 5</li>			
-			<li>entry 6</li>			
-			<li>entry 7</li>			
-			<li>entry 8</li>			
-			<li>entry 9</li>			
+			<a href="viewcode.jsp?id=1">
+				<li>
+					<h1>Entry Name 1</h1>
+					<div class="fade"></div>
+					<div class="code">public class MyClass {<br><br>private LoremIpsum loremIpsum;<br><br>public MyClass() {<br><br>this.loremIpsum = new LoremIpsum();</div>
+				</li>
+			</a>
+			<a href="viewcode.jsp?id=2">
+				<li>
+					<h1>Entry Name 2</h1>
+					<div class="fade"></div>
+					<div class="code">public class MyClass {<br><br>private LoremIpsum loremIpsum;<br><br>public MyClass() {<br><br>this.loremIpsum = new LoremIpsum();</div>
+				</li>
+			</a>
 		</ul>
 	</div>
 </div>
