@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="database.*,penweb.*,dataStructure.*,java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +18,10 @@
 	</script>
 </head>
 <body>
+<%
+	// Instantiate the webcon
+	WebController webcon = new WebController();
+%>
 <div class="header">
 	<img class="logo" src="images/logo.png" />
 	<form name="login">
@@ -23,6 +29,7 @@
 		<div class="input"><input type="password" name="password" /></div>
 		<input type="submit" class="button blue" value="Log In" />
 		<input type="button" class="button black" value="Sign Up" />
+	</form>
 </div>
 <div class="bar">
 	<div class="left">
@@ -33,43 +40,35 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<li>All Entries (24)</li>
-			<li>Tests (4)</li>
-			<li class="selected">Security (5)</li>
-			<li>Search (3)</li>
-			<li>Data Structures (1)</li>
-			<li>Algorithms (10)</li>
-			<li>Math (3)</li>
-		</ul>
-		<h1>Public Examples</h1>
-		<ul>
-			<li>All Entries (240)</li>
-			<li>Tests (47)</li>
-			<li>Security (53)</li>
-			<li>Search (67)</li>
-			<li>Data Structures (141)</li>
-			<li>Algorithms (108)</li>
-			<li>Math (903)</li>
+			<li class="selected">All Entries (<%= webcon.getNumEntries() %>)</li>
+			<li>Tests (0)</li>
+			<li>Security (0)</li>
+			<li>Search (0)</li>
+			<li>Data Structures (0)</li>
+			<li>Algorithms (0)</li>
+			<li>Math (0)</li>
 		</ul>
 	</div>
 	<div class="right">
 		<ul class="entrylist">
-			<a href="viewcode.jsp?id=1">
-				<li>
-					<h1>Entry Name 1</h1>
-					<div class="fade"></div>
-					<div class="code">public class MyClass {<br><br>private LoremIpsum loremIpsum;<br><br>public MyClass() {<br><br>this.loremIpsum = new LoremIpsum();</div>
-				</li>
+			<% int id = 1; %>
+			<% List<IExample> ex = webcon.getExamples(); %>
+			<a href="viewcode.jsp?id=<%=id%>">
+				<% for (IExample e : ex) { %>
+					<li>
+						<h1><%= e.getTitle() %></h1>
+						<div class="fade"></div>
+						<div class="code"><%= e.getCode() %></div>
+					</li>
+				<%}%>
 			</a>
-			<a href="viewcode.jsp?id=2">
-				<li>
-					<h1>Entry Name 2</h1>
-					<div class="fade"></div>
-					<div class="code">public class MyClass {<br><br>private LoremIpsum loremIpsum;<br><br>public MyClass() {<br><br>this.loremIpsum = new LoremIpsum();</div>
-				</li>
-			</a>
+			<% id++; %>
 		</ul>
 	</div>
 </div>
+<%
+	// Close the web controller
+	webcon.close();
+%>
 </body>
 </html>
