@@ -1,9 +1,11 @@
 package database;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.db4o.*;
 import com.db4o.query.*;
 
+import dataStructure.ICategory;
 import dataStructure.IEntry;
 import dataStructure.IExample;
 import dataStructure.IPerson;
@@ -22,11 +24,11 @@ import dataStructure.IPerson;
 public class Db4oDatabase implements IDatabase {
 
 	private ObjectContainer db;
-	
+
 	public Db4oDatabase(String path) {
 		db = Db4oEmbedded.openFile(path);
 	}
-	
+
 	@Override
 	public void store(IEntry e) {
 		long id = this.getNewId();
@@ -45,32 +47,32 @@ public class Db4oDatabase implements IDatabase {
 
 		boolean hasTitle = (title != null);
 		boolean hasOwner = (owner != null);
-		
+
 		// All authors searches only work if lists are ordered the same.
 		if (hasTitle && hasOwner) {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
-					return (e.getTitle().equals(title) && e.getOwnerId()==owner.getId());
+					return (e.getTitle().equals(title) && e.getOwnerId() == owner
+							.getId());
 				}
 			});
-		}
-		else if (hasTitle) {
+		} else if (hasTitle) {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
 					return e.getTitle().equals(title);
 				}
 			});
-		}
-		else if (hasOwner) {
+		} else if (hasOwner) {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
-					if(e.getOwner()!=null)
+					if (e.getOwner() != null)
 						return e.getOwner().getName().equals(owner.getName());
-					else return(e.getOwner()==owner);
+					else
+						return (e.getOwner() == owner);
 				}
 			});
-		}
-		else return db.query(IExample.class);
+		} else
+			return db.query(IExample.class);
 	}
 
 	@Override
@@ -83,7 +85,7 @@ public class Db4oDatabase implements IDatabase {
 	public void delete(IEntry e) {
 		// TODO Auto-generated method stub
 	}
-	
+
 	@Override
 	public void close() {
 		db.close();
@@ -93,12 +95,48 @@ public class Db4oDatabase implements IDatabase {
 		return db.query(IExample.class);
 	}
 
-	
+	public List<ICategory> getAllCategory() {
+		return db.query(ICategory.class);
+	}
+
 	/**
 	 * TODO: generate it, somehow
 	 */
-	private Long getNewId() 
-	{
-		return (long) (Math.random()*1000000);
+	private Long getNewId() {
+		return (long) (Math.random() * 1000000);
+	}
+
+	/**
+	 * 
+	 * @return nameList, a list of the name of each category, as a string.
+	 */
+
+	public ArrayList<String> listCategoryNames() {
+		List<ICategory> catList = getAllCategory();
+		ArrayList<String> nameList = new ArrayList<String>();
+		int i;
+		for (i = 0; i <= catList.size(); i++) {
+			nameList.add(catList.get(i).getName());
+		}
+		return nameList;
+	}
+
+	/**
+	 * 
+	 * @param name
+	 * @return true if the name given is already taken by another category false
+	 *         otherwise
+	 */
+
+	public boolean isNameRepeat(String name) {
+		ArrayList<String> catNameList = listCategoryNames();
+		int i;
+		boolean isSame = false;
+		for (i = 0; i <= catNameList.size(); i++) {
+			if (name.equals(catNameList.get(i))) {
+				return true;
+			}
+		}
+		return isSame;
 	}
 }

@@ -30,12 +30,23 @@ public class NonUser implements IPerson
 	{
 		return this.name;
 	}
-	
+
+	@Override
+	public void assignName(String name) {
+		if(this.name!=null)
+		{
+			//throw exception
+		}
+		else 
+			this.name = name;
+	}
+
+	@Override
 	/**
-	 * @see dataStructure.IPerson#getId()
+	 * return null for non-user
 	 */
 	public Long getId() {
-		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
