@@ -9,7 +9,4 @@ public interface IController
 	
 	void addToDB(BasicExample bx);
 
-	IProperties getProperties();
-	IContent getContent();
-	IHeader getHeader();
 }

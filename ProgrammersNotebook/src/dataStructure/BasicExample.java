@@ -1,109 +1,105 @@
 package dataStructure;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * This is what the example should look like
  */
+/**
+ * @author Thanaporn
+ *
+ */
 public class BasicExample implements IExample {
-	/**
-	 * header information of the example
-	 */
-	private ExampleHeader header;
-	/**
-	 * the content information of the example
-	 */
-	private ExampleContent content;
-	/**
-	 * the properties of the example
-	 */
-	private ExampleProperties properties;
-	private Long codeId;
+
+	private List<IPerson> authors;
+	private String code;
+	private String description;
+	private Long id;
 	private IPerson owner;
+	private ExampleProperties properties;
+	private String title;
 	
-	public BasicExample(ExampleHeader h, ExampleContent c, ExampleProperties p, IPerson owner) 
+	public BasicExample()
 	{
-		this.header = h;
-		this.content = c;
-		this.properties = p;
-		this.codeId = (long)(Math.random() * 1000000);
-		this.owner = owner;
+		id = -1L;
+		authors = new LinkedList<IPerson>();
+		owner = null;
+		properties = new ExampleProperties();
+	}
+	
+	public int assignID(Long id) {
+		if (this.id != -1)
+			return 1; // return 1 if already assigned
+		else
+			this.id = id;
+		return 0;
 	}
 
-	/**
-	 * get the header data from the example
-	 * @return IHeader header information
-	 */
-	public IHeader getHeader() 
-	{
-		return this.header;
-	}
-	
-	/**
-	 * get the content of the example
-	 * @return IContent the content of example
-	 */
-	public IContent getContent() 
-	{
-		return this.content;
-	}
-	
-	/**
-	 * get the properties from the example
-	 * @return IProperties properties of example
-	 */
-	public IProperties getProperties() 
-	{
-		return this.properties;
-	}
-	
-	/**
-	 * set up the header information for the example
-	 * @param IHeader
-	 */
-	public void setHeader(IHeader inHeader)
-	{
-		//we should have conversion...maybe
-		//I know we'll pass the right type so I'll just type cast, for now
-		this.header = (ExampleHeader) inHeader;
-	}
-	
-	/**
-	 * set up the content for the example
-	 * @param IContent
-	 */
-	public void setContent(IContent inContent)
-	{
-		//we should have conversion...maybe
-		//I know we'll pass the right type so I'll just type cast, for now
-		this.content = (ExampleContent) inContent;
-	}
-	
-	/**
-	 * set up the properties for the example
-	 * @param IProperties
-	 */
-	public void setProperties(IProperties inProperties)
-	{
-		//we should have conversion...maybe
-		//I know we'll pass the right type so I'll just type cast, for now
-		this.properties = (ExampleProperties) inProperties;
+	public int assignOwner(IPerson owner) {
+		if (this.owner != null)
+			return 1; // return 1 if already assigned
+		else
+			this.owner = owner;
+		return 0;
 	}
 
-	/**
-	 * @see dataStructure.IEntry#getId()
-	 */
+	public List<IPerson> getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(List<IPerson> authors) {
+		this.authors = authors;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public ExampleProperties getProperties() {
+		return properties;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public IPerson getOwner() {
+		return owner;
+	}
+
 	@Override
-	public Long getEntryId() {
-		return codeId;
-	}
-
 	/**
-	 * @see dataStructure.IEntry#getOwnerId()
+	 * 
 	 */
-	@Override
 	public Long getOwnerId() {
-		return owner.getId();
+		return this.owner.getId();
 	}
+	
+	public void setProperties(IProperties p)
+	{
+		this.properties.setLanguage(p.getLanguage());
+		this.properties.setSource(p.getSource());
+	}
+
 }

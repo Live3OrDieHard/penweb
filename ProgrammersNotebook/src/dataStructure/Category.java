@@ -12,15 +12,15 @@ public class Category implements ICategory {
 	private IPerson owner;
 	private String description;
 	private String name;
-	private Long categoryId;
+	private Long id;
 	private List<Long> codeIds;
 
-	public Category(IPerson owner, String description, String name) {
-		this.owner = owner;
+	public Category(String name, String description) {
 		this.description = description;
 		this.name = name;
-		this.categoryId = (long)(Math.random() * 1000000);
 		this.codeIds = new ArrayList<Long>();
+		this.id = -1L;
+		this.owner = null;
 	}
 	
 	public IPerson getOwner() {
@@ -44,8 +44,8 @@ public class Category implements ICategory {
 		this.name = name;
 	}
 
-	public Long getEntryId() {
-		return categoryId;
+	public Long getId() {
+		return id;
 	}
 
 	/* (non-Javadoc)
@@ -57,6 +57,24 @@ public class Category implements ICategory {
 	}
 	
 	public void addCodeExample(IExample example) {
-		codeIds.add(example.getEntryId());
+		codeIds.add(example.getId());
+	}
+
+	@Override
+	public int assignID(Long id) {
+		if (this.id != -1)
+			return 1; // return 1 if already assigned
+		else
+			this.id = id;
+		return 0;
+	}
+
+	@Override
+	public int assignOwner(IPerson owner) {
+		if (this.owner != null)
+			return 1; // return 1 if already assigned
+		else
+			this.owner = owner;
+		return 0;
 	}
 }

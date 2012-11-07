@@ -62,7 +62,7 @@ public class ExampleProperties implements IProperties
 	}
 
 	/**
-	 * A setter fucntion to set the source property of the example
+	 * A setter function to set the source property of the example
 	 * to the given source
 	 * 
 	 * @param source

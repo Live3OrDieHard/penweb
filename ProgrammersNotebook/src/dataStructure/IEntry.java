@@ -9,8 +9,20 @@ package dataStructure;
  */
 public interface IEntry 
 {
-	Long getEntryId();
+	Long getId();
 	Long getOwnerId();
+	/**
+	 * assign an id (Long) to IEntry
+	 * return 0 on success
+	 * return 1 if the IEntry already has its id
+	 */
+	int assignID(Long id);
+	/**
+	 * assign an owner (IPerson) of IEntry
+	 * return 0 on success
+	 * return 1 if the IEntry is already assigned an owner
+	 */
+	int assignOwner(IPerson owner);
 }
 
 /*

@@ -8,11 +8,15 @@ import java.util.ArrayList;
  */
 public interface IProperties 
 {
+	public String getLanguage();
+	//public void setLanguage(String language);
+	
 	public String getSource();
+	//public void setSource(String source);
+
 	public ArrayList<Long> getCategories();
-	public void setLanguage(String language);
-	public void setSource(String source);
 	public void setCategories(ArrayList<Long> categories);
 	public void addCategory(Long categoryId);
+	
 	
 }

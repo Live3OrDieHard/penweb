@@ -17,24 +17,7 @@ public class main
 		IDatabase db = new Db4oDatabase("tempDB.yap");
 		IUserInterface  ui = null;
 		Controller controller = new Controller(db,ui);
-		/*
-		System.out.println("Please type a number in the console\n");
-		System.out.println("0 for Anjali's UI\n1 for MockUI1\nanything else for MockUI2");
-		int i = System.in.read();
-		if(i=='0')
-		{
-		*/
-			ui =  new MockUI0(controller);
-		/*}
-		else if(i=='1')
-		{
-			ui =  new MockUI1(controller);
-		}
-		else
-		{
-			ui =  new MockUI2(controller);
-		}
-		*/
+		ui =  new MockUI0(controller);
 		controller.ui = ui;
 		ui.init();
 		ui.show();

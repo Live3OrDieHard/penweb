@@ -27,7 +27,6 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JInternalFrame;
-import java.beans.PropertyVetoException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,7 +35,6 @@ import javax.swing.JLayeredPane;
 import dataStructure.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JDesktopPane;
 
 
 /**
@@ -68,9 +66,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	private JTextField stxt;
 	private JTextField tgtxt;
 	private JEditorPane ctxt;
-	private JButton btnSubmit;
 	private DefaultListModel listModel;
-	String t1, t2, t3, a1, a2, a3, l1, l2, l3, s1, s2, s3, tg1, tg2, tg3, c1, c2, c3;
 	int counter;
 	final Controller controller;
 	LinkedList<String> listTitle = new LinkedList<String>();
@@ -257,6 +253,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				listModel.addElement(ttxt.getText());
 				controller.addBasicExample();
 		}});
 		
@@ -274,15 +271,13 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		            }
 		            else {
 		            	bx = (BasicExample) l.get(index-1);
-		            	a1 = bx.getHeader().getAuthors().get(0).getName();
-		            	t1 = bx.getHeader().getTitle();
-		            	c1 = ((ExampleContent) bx.getContent()).getCode();
-		            	l1 = ((ExampleProperties) bx.getProperties()).getLanguage();
-		            	s1 = ((ExampleProperties) bx.getProperties()).getSource();
 		            	//tg1 = ((ExampleProperties) bx.getProperties()).getTags().get(0);
-		            	lblTitle_1.setText("Title: "+t1);
-		            	textArea.setText("Code:\n"+c1);
-		            	textArea_1.setText("Language: "+l1+"\n\nAuthor: "+a1+"\n\nSource: "+s1+"\n\nTags: "+tg1);
+		            	lblTitle_1.setText("Title: "+bx.getTitle());
+		            	textArea.setText("Code:\n"+bx.getCode());
+		            	textArea_1.setText("Author: "+bx.getAuthors().get(0).getName()
+		            			+"Language: "+bx.getProperties().getLanguage()
+		            			+"Source: "+bx.getProperties().getSource());
+		            	
 		            	}
 		          }
 		        }
@@ -292,10 +287,8 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		 listEx.addMouseListener(mouseListener);
 	}
 
+	/*
 	@Override
-	/**
-	 * this is hacky
-	 */
 	public IHeader getHeader() {
 		String title = ttxt.getText();
 		if(title.length()==0)
@@ -315,7 +308,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		}
 		return new ExampleHeader(ttxt.getText(),atxt.getText());
 	}
-
+	
 	@Override
 	public IContent getContent() {
 		if(ctxt.getText().length()==0)
@@ -326,7 +319,41 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		}
 		return new ExampleContent(ctxt.getText());
 	}
+	*/
 
+	@Override
+	public String getTitle()
+	{
+		String title = ttxt.getText();
+		if(title.length()==0)
+		{
+			System.out.println("Invalid title. Please try again");
+		}
+		return title;
+	}
+
+	@Override
+	public String getAuthor()
+	{
+		String author = atxt.getText();
+		if(author.length()==0)
+		{
+			System.out.println("Invalid author. Please try again");
+		}
+		return author;
+	}
+
+	@Override
+	public String getCode()
+	{
+		String code = ctxt.getText();
+		if(code.length()==0)
+		{
+			System.out.println("Invalid code. Please try again");
+		}
+		return code;
+	}
+	
 	@Override
 	public IProperties getProperties() {
 		ExampleProperties p = new ExampleProperties();
@@ -334,16 +361,18 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		p.setSource(stxt.getText());
 		//TODO: Add tag(s) and category(s) to the new entry 
 		//p.addTag(tgtxt.getText());
+		//clearFields();
 		return p;
 	}
 
 	@Override
 	public void init() 
 	{
-		List<IHeader> listH = controller.getHeaderList();
+		List<String> listH = controller.getTitleList();
+
 		for(int i=0;i<listH.size();i++)
 		{
-			listModel.addElement(listH.get(i).getTitle());
+			listModel.addElement(listH.get(i));
 		}
 	}
 

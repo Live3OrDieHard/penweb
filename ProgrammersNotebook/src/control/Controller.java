@@ -1,7 +1,6 @@
 package control;
 
-import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import database.*;
@@ -27,14 +26,18 @@ public class Controller
 
 	void addBasicExample()
 	{
+		/*
 		ExampleHeader h = (ExampleHeader) ui.getHeader();
 		ExampleContent c = (ExampleContent) ui.getContent();
-		ExampleProperties p = (ExampleProperties) ui.getProperties();
-		if((h!=null)&&(c!=null)&&(p!=null))
-		{
-			BasicExample bx = new BasicExample(h,c,p, null);
-			this.addToDB(bx);
-		}
+		*/
+		BasicExample e = new BasicExample();
+		e.setTitle(ui.getTitle());
+		e.setCode(ui.getCode());
+		ArrayList<IPerson> authors = new ArrayList<IPerson>();
+		authors.add(new NonUser(ui.getAuthor()));
+		e.setAuthors(authors);
+		e.setProperties(ui.getProperties());
+		this.addToDB(e);
 	}
 	
 	public void addToDB(IEntry e) 
@@ -46,13 +49,13 @@ public class Controller
 		return db.getAll();
 	}
 	
-	public List<IHeader> getHeaderList() 
+	public List<String> getTitleList() 
 	{
 		List<IExample> listE = db.getAllExample();
-		List<IHeader> listH = new LinkedList<IHeader>();
+		List<String> listH = new ArrayList<String>();
 		for(int i=0;i<listE.size();i++)
 		{
-			listH.add(listE.get(i).getHeader());
+			listH.add(listE.get(i).getTitle());
 		}
 		return listH;
 	}
