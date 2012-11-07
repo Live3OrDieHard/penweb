@@ -14,6 +14,7 @@ public class Category implements ICategory {
 	private String name;
 	private Long id;
 	private List<Long> codeIds;
+	private ArrayList<Long> exampleList;
 
 	public Category(IPerson owner, String description, String name) {
 		this.owner = owner;
@@ -21,6 +22,7 @@ public class Category implements ICategory {
 		this.name = name;
 		this.id = -1L;
 		this.codeIds = new ArrayList<Long>();
+		this.exampleList = new ArrayList<Long>();
 	}
 	
 	/**
@@ -93,6 +95,10 @@ public class Category implements ICategory {
 	@Override
 	public Long getId() {
 		return this.id;
+	}
+	
+	public void addExample(long exId) {
+		exampleList.add(exId);
 	}
 
 }

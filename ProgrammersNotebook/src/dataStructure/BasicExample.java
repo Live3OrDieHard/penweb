@@ -16,6 +16,7 @@ public class BasicExample implements IExample {
 	private IPerson owner;
 	private ExampleProperties properties;
 	private String title;
+	
 	/**
 	 * Categories the example belongs to
 	 */
@@ -96,7 +97,13 @@ public class BasicExample implements IExample {
 	public IPerson getOwner() {
 		return owner;
 	}
+	
 
+	public void addCategory(long catId) {
+		categoryIds.add(catId);
+	}
+
+	
 	@Override
 	/**
 	 * 
