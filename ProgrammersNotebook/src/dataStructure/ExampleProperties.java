@@ -21,7 +21,7 @@ public class ExampleProperties implements IProperties
 	/**
 	 * Categories the example belongs to
 	 */
-	private ArrayList<Long> categoryIds = new ArrayList<Long>();
+	private ArrayList<Category> categoryList = new ArrayList<Category>();
 	
 	@Override
 	/**
@@ -48,9 +48,9 @@ public class ExampleProperties implements IProperties
 	 * Gets the list of categories the example belongs to.
 	 * @return LinkedList<String>
 	 */
-	public ArrayList<Long> getCategories()
+	public ArrayList<Category> getCategories()
 	{
-		return this.categoryIds;
+		return this.categoryList;
 	}
 
 	@Override
@@ -84,22 +84,14 @@ public class ExampleProperties implements IProperties
 	 * 
 	 * @param tags
 	 */
-	public void setCategories(ArrayList<Long> categories)
+	public void setCategories(ArrayList<Category> categories)
 	{
-		this.categoryIds = categories;
+		this.categoryList = categories;
 	}
 
 	@Override
-	/**
-	 * Add the given category to the example
-	 * 
-	 * @param tag
-	 */
-	public void addCategory(Long categoryId)
-	{
-		this.categoryIds.add(categoryId);
-		//TODO: The category itself should also store a reference to the example
-		//cg = db.getCategoryById(categoryId)
-		//cg.addEntry(this.getId);
+	public void addCategory(Category category) {
+		// TODO Auto-generated method stub
+		
 	}
 }

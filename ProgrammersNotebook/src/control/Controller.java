@@ -80,4 +80,8 @@ public class Controller {
 			db.store(newC);
 		}
 	}
+
+	public List<IExample> getAllExampleinDB() {
+		return db.getAllExample();
+	}
 }
