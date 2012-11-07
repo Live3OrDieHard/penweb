@@ -3,8 +3,7 @@ package dataStructure;
 import java.util.ArrayList;
 
 /**
- * 
- * different things might want different sets of properties...I think
+ * Getters and setters for managing properties of an example
  */
 public interface IProperties 
 {

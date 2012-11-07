@@ -8,15 +8,17 @@ import java.util.List;
  */
 public class BasicExample implements IExample {
 	/**
-	 * header information of the example
+	 * Header information of the example
 	 */
 	private ExampleHeader header;
+	
 	/**
-	 * the content information of the example
+	 * The content information of the example
 	 */
 	private ExampleContent content;
+	
 	/**
-	 * the properties of the example
+	 * The properties of the example
 	 */
 	private ExampleProperties properties;
 	private Long codeId;
@@ -32,7 +34,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * get the header data from the example
+	 * Get the header data from the example
 	 * @return IHeader header information
 	 */
 	public IHeader getHeader() 
@@ -41,7 +43,7 @@ public class BasicExample implements IExample {
 	}
 	
 	/**
-	 * get the content of the example
+	 * Get the content of the example
 	 * @return IContent the content of example
 	 */
 	public IContent getContent() 
@@ -50,7 +52,7 @@ public class BasicExample implements IExample {
 	}
 	
 	/**
-	 * get the properties from the example
+	 * Get the properties from the example
 	 * @return IProperties properties of example
 	 */
 	public IProperties getProperties() 
@@ -59,7 +61,7 @@ public class BasicExample implements IExample {
 	}
 	
 	/**
-	 * set up the header information for the example
+	 * Set up the header information for the example
 	 * @param IHeader
 	 */
 	public void setHeader(IHeader inHeader)
@@ -70,7 +72,7 @@ public class BasicExample implements IExample {
 	}
 	
 	/**
-	 * set up the content for the example
+	 * Set up the content for the example
 	 * @param IContent
 	 */
 	public void setContent(IContent inContent)
@@ -81,7 +83,7 @@ public class BasicExample implements IExample {
 	}
 	
 	/**
-	 * set up the properties for the example
+	 * Set up the properties for the example
 	 * @param IProperties
 	 */
 	public void setProperties(IProperties inProperties)
@@ -94,7 +96,6 @@ public class BasicExample implements IExample {
 	/**
 	 * @see dataStructure.IEntry#getId()
 	 */
-	@Override
 	public Long getEntryId() {
 		return codeId;
 	}
@@ -102,7 +103,6 @@ public class BasicExample implements IExample {
 	/**
 	 * @see dataStructure.IEntry#getOwnerId()
 	 */
-	@Override
 	public Long getOwnerId() {
 		return owner.getId();
 	}

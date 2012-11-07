@@ -87,11 +87,8 @@ public class Db4oDatabase implements IDatabase {
 		db.close();
 	}
 
-	/* (non-Javadoc)
-	 * @see database.IDatabase#getAllExample()
-	 */
 	@Override
-	public List<IExample> getAllExample() {
+	public List<IExample> getAllExamples() {
 		return db.query(IExample.class);
 	}
 }

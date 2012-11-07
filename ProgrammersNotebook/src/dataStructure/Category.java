@@ -23,40 +23,52 @@ public class Category implements ICategory {
 		this.codeIds = new ArrayList<Long>();
 	}
 	
-	public IPerson getOwner() {
-		return owner;
-	}
-
+	/**
+	 * @see dataStructure.ICategory#getDescription()
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * @see dataStructure.ICategory#setDescription()
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	@Override
+	/**
+	 * @see dataStructure.ICategory#getName()
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @see dataStructure.ICategory#setName()
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	/**
+	 * @see dataStructure.ICategory#addCodeExample()
+	 */
+	public void addCodeExample(IExample example) {
+		codeIds.add(example.getEntryId());
+	}
 
+	/**
+	 * @see dataStructure.IEntry#getEntryId()
+	 */
 	public Long getEntryId() {
 		return categoryId;
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see dataStructure.IEntry#getOwnerId()
 	 */
-	@Override
 	public Long getOwnerId() {
 		return owner.getId();
-	}
-	
-	public void addCodeExample(IExample example) {
-		codeIds.add(example.getEntryId());
 	}
 }

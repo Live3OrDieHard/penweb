@@ -11,11 +11,6 @@ import java.util.List;
  */
 public interface IHeader 
 {
-	/* I don't think we need an interface ITitle
-	 * I think String should be enough.
-	 */
-	//IName getTitle();
-	
 	String getTitle();
 	void setTitle(String t);
 	

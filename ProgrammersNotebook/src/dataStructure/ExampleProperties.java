@@ -3,28 +3,28 @@ package dataStructure;
 import java.util.ArrayList;
 
 /**
- * 
  * @author Thanaporn
- * the fields are from Anjali's jar (for now)
- * 
+ * Properties about an example. 
  */
 public class ExampleProperties implements IProperties
 {
 	/**
-	 * language in which the example is written
+	 * Language in which the example is written
 	 */
 	private String language;
+	
 	/**
-	 * where is the source of the example
+	 * Where is the source of the example
 	 */
 	private String source;
+	
 	/**
-	 * all the tags include in the example
+	 * Categories the example belongs to
 	 */
 	private ArrayList<Long> categoryIds = new ArrayList<Long>();
 
 	/**
-	 * a getter function to get the language property of the example
+	 * Gets the language the example was written in
 	 * @return String
 	 */
 	public String getLanguage()
@@ -33,7 +33,7 @@ public class ExampleProperties implements IProperties
 	}
 
 	/**
-	 * a getter function to get the source function for the example
+	 * Gets the source of an example
 	 * @return String
 	 */
 	public String getSource()
@@ -42,7 +42,7 @@ public class ExampleProperties implements IProperties
 	}
 
 	/**
-	 * a getter function to get the tags of the example	
+	 * Gets the list of categories the example belongs to.
 	 * @return LinkedList<String>
 	 */
 	public ArrayList<Long> getCategories()
@@ -73,8 +73,8 @@ public class ExampleProperties implements IProperties
 	}
 
 	/**
-	 * a setter function to set the tag property of the example 
-	 * to the given tags
+	 * A setter function to set the tag property of the example 
+	 * to the given categories.
 	 * 
 	 * @param tags
 	 */
@@ -84,15 +84,15 @@ public class ExampleProperties implements IProperties
 	}
 
 	/**
-	 * add the given tag to the example
+	 * Add the given category to the example
 	 * 
 	 * @param tag
 	 */
 	public void addCategory(Long categoryId)
 	{
 		this.categoryIds.add(categoryId);
+		//TODO: The category itself should also store a reference to the example
 		//cg = db.getCategoryById(categoryId)
 		//cg.addEntry(this.getId);
-		
 	}
 }
