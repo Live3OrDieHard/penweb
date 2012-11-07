@@ -5,6 +5,7 @@ import com.db4o.*;
 import com.db4o.query.*;
 
 import dataStructure.IEntry;
+import dataStructure.IExample;
 import dataStructure.IHeader;
 import dataStructure.IPerson;
 
@@ -38,7 +39,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	@Override
-	public List<IEntry> getByHeader(final IHeader head) {
+	public List<IExample> getByHeader(final IHeader head) {
 		final String title = head.getTitle();
 		final List<IPerson> authors = head.getAuthors();
 
@@ -47,31 +48,31 @@ public class Db4oDatabase implements IDatabase {
 		
 		// All authors searches only work if lists are ordered the same.
 		if (hasTitle && hasAuthors) {
-			return db.query(new Predicate<IEntry>() {
-				public boolean match(IEntry e) {
+			return db.query(new Predicate<IExample>() {
+				public boolean match(IExample e) {
 					return (e.getHeader().getTitle().equals(title) && e.getHeader().getAuthors().equals(authors));
 				}
 			});
 		}
 		else if (hasTitle) {
-			return db.query(new Predicate<IEntry>() {
-				public boolean match(IEntry e) {
+			return db.query(new Predicate<IExample>() {
+				public boolean match(IExample e) {
 					return e.getHeader().getTitle().equals(head.getTitle());
 				}
 			});
 		}
 		else if (hasAuthors) {
-			return db.query(new Predicate<IEntry>() {
-				public boolean match(IEntry e) {
+			return db.query(new Predicate<IExample>() {
+				public boolean match(IExample e) {
 					return e.getHeader().getAuthors().equals(authors);
 				}
 			});
 		}
-		else return db.query(IEntry.class);
+		else return db.query(IExample.class);
 	}
 
 	@Override
-	public List<IEntry> getByKeyword(String key) {
+	public List<IExample> getByKeyword(String key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -84,5 +85,13 @@ public class Db4oDatabase implements IDatabase {
 	@Override
 	public void close() {
 		db.close();
+	}
+
+	/* (non-Javadoc)
+	 * @see database.IDatabase#getAllExample()
+	 */
+	@Override
+	public List<IExample> getAllExample() {
+		return db.query(IExample.class);
 	}
 }

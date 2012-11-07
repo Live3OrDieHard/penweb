@@ -9,5 +9,5 @@ package dataStructure;
 public interface IPerson 
 {
 	String getName();
-
+	Long getId();
 }

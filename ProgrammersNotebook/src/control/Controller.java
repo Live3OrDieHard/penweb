@@ -32,17 +32,9 @@ public class Controller
 		ExampleProperties p = (ExampleProperties) ui.getProperties();
 		if((h!=null)&&(c!=null)&&(p!=null))
 		{
-			BasicExample bx = new BasicExample(h,c,p);
+			BasicExample bx = new BasicExample(h,c,p, null);
 			this.addToDB(bx);
 		}
-	}
-	
-	void addEssay()
-	{
-		ExampleHeader h = (ExampleHeader) ui.getHeader();
-		ExampleContent c = (ExampleContent) ui.getContent();
-		MockEntry es = new MockEntry(h,c);
-		this.addToDB(es);
 	}
 	
 	private void addToDB(IEntry e) 
@@ -53,10 +45,10 @@ public class Controller
 	public List<IEntry> getAllinDB() {
 		return db.getAll();
 	}
-
+	
 	public List<IHeader> getHeaderList() 
 	{
-		List<IEntry> listE = db.getAll();
+		List<IExample> listE = db.getAllExample();
 		List<IHeader> listH = new LinkedList<IHeader>();
 		for(int i=0;i<listE.size();i++)
 		{
@@ -64,7 +56,7 @@ public class Controller
 		}
 		return listH;
 	}
-
+	
 	public void close() {
 		db.close();
 		

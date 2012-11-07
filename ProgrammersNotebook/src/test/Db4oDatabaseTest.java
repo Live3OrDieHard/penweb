@@ -22,7 +22,7 @@ public class Db4oDatabaseTest {
 	@Test
 	public void testGetByHeaderWithTitleAndAuthor() {
 		ExampleHeader head = new ExampleHeader("aTitle", "anAuthor");
-		BasicExample entry = new BasicExample(head, null, null);
+		BasicExample entry = new BasicExample(head, null, null, null);
 		testee.store(entry);
 		
 		assertEquals(testee.getByHeader(head).get(0), entry);
@@ -31,7 +31,7 @@ public class Db4oDatabaseTest {
 	@Test
 	public void testGetByHeaderWithTitleOnly() {
 		ExampleHeader head = new ExampleHeader("aTitle", null);
-		BasicExample entry = new BasicExample(head, null, null);
+		BasicExample entry = new BasicExample(head, null, null, null);
 		testee.store(entry);
 		
 		assertEquals(testee.getByHeader(head).get(0), entry);
@@ -40,7 +40,7 @@ public class Db4oDatabaseTest {
 	@Test
 	public void testGetByHeaderWithAuthorOnly() {
 		ExampleHeader head = new ExampleHeader(null, "anAuthor");
-		BasicExample entry = new BasicExample(head, null, null);
+		BasicExample entry = new BasicExample(head, null, null, null);
 		testee.store(entry);
 		
 		assertEquals(testee.getByHeader(head).get(0), entry);

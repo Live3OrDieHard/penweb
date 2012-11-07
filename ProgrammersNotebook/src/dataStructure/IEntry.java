@@ -9,9 +9,8 @@ package dataStructure;
  */
 public interface IEntry 
 {
-	IHeader getHeader();
-	IContent getContent();
-
+	Long getEntryId();
+	Long getOwnerId();
 }
 
 /*

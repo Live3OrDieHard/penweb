@@ -279,7 +279,7 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		            	c1 = ((ExampleContent) bx.getContent()).getCode();
 		            	l1 = ((ExampleProperties) bx.getProperties()).getLanguage();
 		            	s1 = ((ExampleProperties) bx.getProperties()).getSource();
-		            	tg1 = ((ExampleProperties) bx.getProperties()).getTags().get(0);
+		            	//tg1 = ((ExampleProperties) bx.getProperties()).getTags().get(0);
 		            	lblTitle_1.setText("Title: "+t1);
 		            	textArea.setText("Code:\n"+c1);
 		            	textArea_1.setText("Language: "+l1+"\n\nAuthor: "+a1+"\n\nSource: "+s1+"\n\nTags: "+tg1);
@@ -332,7 +332,8 @@ public class MockUI0 extends JFrame implements IUserInterface {
 		ExampleProperties p = new ExampleProperties();
 		p.setLanguage(ltxt.getText());
 		p.setSource(stxt.getText());
-		p.addTag(tgtxt.getText());
+		//TODO: Add tag(s) and category(s) to the new entry 
+		//p.addTag(tgtxt.getText());
 		return p;
 	}
 
