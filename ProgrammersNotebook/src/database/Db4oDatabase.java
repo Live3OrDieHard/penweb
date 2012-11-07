@@ -100,5 +100,6 @@ public class Db4oDatabase implements IDatabase {
 	private Long getNewId() 
 	{
 		return (long) (Math.random()*1000000);
+		//return (long) this.getAll().size();
 	}
 }
