@@ -15,51 +15,63 @@ public class Category implements ICategory {
 	private Long id;
 	private List<Long> codeIds;
 
-	public Category(String name, String description) {
+	public Category(IPerson owner, String description, String name) {
+		this.owner = owner;
 		this.description = description;
 		this.name = name;
-		this.codeIds = new ArrayList<Long>();
 		this.id = -1L;
-		this.owner = null;
+		this.codeIds = new ArrayList<Long>();
 	}
 	
-	public IPerson getOwner() {
-		return owner;
-	}
-
+	/**
+	 * @see dataStructure.ICategory#getDescription()
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * @see dataStructure.ICategory#setDescription()
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	@Override
+	/**
+	 * @see dataStructure.ICategory#getName()
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @see dataStructure.ICategory#setName()
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	/* (non-Javadoc)
-	 * @see dataStructure.IEntry#getOwnerId()
-	 */
-	@Override
-	public Long getOwnerId() {
-		return owner.getId();
-	}
 	
+	/**
+	 * @see dataStructure.ICategory#addCodeExample()
+	 */
 	public void addCodeExample(IExample example) {
 		codeIds.add(example.getId());
 	}
 
+	/**
+	 * @see dataStructure.IEntry#getEntryId()
+	 */
+	public Long getEntryId() {
+		return id;
+	}
+
+	/**
+	 * @see dataStructure.IEntry#getOwnerId()
+	 */
+	public Long getOwnerId() {
+		return owner.getId();
+	}
+	
 	@Override
 	public int assignID(Long id) {
 		if (this.id != -1)
@@ -77,4 +89,10 @@ public class Category implements ICategory {
 			this.owner = owner;
 		return 0;
 	}
+
+	@Override
+	public Long getId() {
+		return this.id;
+	}
+
 }

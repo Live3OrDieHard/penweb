@@ -13,13 +13,21 @@ public interface IExample extends IEntry
 {
 	String getTitle();
 	void setTitle(String t);
-	
+
 	List<IPerson> getAuthors();
 	void setAuthors(List<IPerson> a);
-	
+
 	String getDescription();
 	void setDescription(String d);
-	
+
+	/**
+	 * {@link BasicExample#getProperties()}
+	 */
 	IProperties getProperties();
+
+	/**
+	 * {@link BasicExample#setProperties(IProperties)}
+	 */
 	void setProperties(IProperties inProperties);
+	IPerson getOwner();
 }

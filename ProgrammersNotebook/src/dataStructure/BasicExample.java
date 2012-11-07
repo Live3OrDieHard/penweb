@@ -1,14 +1,11 @@
 package dataStructure;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * This is what the example should look like
- */
-/**
- * @author Thanaporn
- *
  */
 public class BasicExample implements IExample {
 
@@ -19,6 +16,18 @@ public class BasicExample implements IExample {
 	private IPerson owner;
 	private ExampleProperties properties;
 	private String title;
+	/**
+	 * Categories the example belongs to
+	 */
+	private ArrayList<Long> categoryIds = new ArrayList<Long>();
+	/**
+	 * Language in which the example is written
+	 */
+	private String language;
+	/**
+	 * Where is the source of the example
+	 */
+	private String source;
 	
 	public BasicExample()
 	{
@@ -100,6 +109,16 @@ public class BasicExample implements IExample {
 	{
 		this.properties.setLanguage(p.getLanguage());
 		this.properties.setSource(p.getSource());
+	}
+	
+	public BasicExample transferFromBuffer(BufferEntry e)
+	{
+		this.authors = e.getAuthors();
+		this.code = e.getCode();
+		this.description = e.getDescription();
+		this.properties = e.getProperties();
+		this.title = e.getTitle();
+		return this;
 	}
 
 }

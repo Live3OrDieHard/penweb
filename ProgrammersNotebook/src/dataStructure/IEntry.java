@@ -9,20 +9,19 @@ package dataStructure;
  */
 public interface IEntry 
 {
+	/**
+	 * @return Returns the ID of an entry in the database. Every entry has an ID.
+	 */
 	Long getId();
+	
+	/**
+	 * @return The ID of the owner of an entry.
+	 */
 	Long getOwnerId();
-	/**
-	 * assign an id (Long) to IEntry
-	 * return 0 on success
-	 * return 1 if the IEntry already has its id
-	 */
-	int assignID(Long id);
-	/**
-	 * assign an owner (IPerson) of IEntry
-	 * return 0 on success
-	 * return 1 if the IEntry is already assigned an owner
-	 */
+
 	int assignOwner(IPerson owner);
+
+	int assignID(Long id);
 }
 
 /*

@@ -64,7 +64,9 @@ public class Db4oDatabase implements IDatabase {
 		else if (hasOwner) {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
-					return e.getOwnerId()==owner.getId();
+					if(e.getOwner()!=null)
+						return e.getOwner().getName().equals(owner.getName());
+					else return(e.getOwner()==owner);
 				}
 			});
 		}
@@ -87,10 +89,6 @@ public class Db4oDatabase implements IDatabase {
 		db.close();
 	}
 
-	/* (non-Javadoc)
-	 * @see database.IDatabase#getAllExample()
-	 */
-	@Override
 	public List<IExample> getAllExample() {
 		return db.query(IExample.class);
 	}

@@ -24,19 +24,20 @@ public class Controller
 		this.ui = ui;
 	}
 
-	void addBasicExample()
+	void addBasicExample(BufferEntry buf)
 	{
 		/*
 		ExampleHeader h = (ExampleHeader) ui.getHeader();
 		ExampleContent c = (ExampleContent) ui.getContent();
 		*/
 		BasicExample e = new BasicExample();
-		e.setTitle(ui.getTitle());
-		e.setCode(ui.getCode());
-		ArrayList<IPerson> authors = new ArrayList<IPerson>();
-		authors.add(new NonUser(ui.getAuthor()));
-		e.setAuthors(authors);
-		e.setProperties(ui.getProperties());
+		e.setTitle(buf.getTitle());
+		e.setCode(buf.getCode());
+		e.setAuthors(buf.getAuthors());
+		ExampleProperties prop = new ExampleProperties();
+		prop.setLanguage(buf.getLanguage());
+		prop.setSource(buf.getSource());
+		e.setProperties(prop);
 		this.addToDB(e);
 	}
 	

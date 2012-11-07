@@ -17,7 +17,7 @@ public class main
 		IDatabase db = new Db4oDatabase("tempDB.yap");
 		IUserInterface  ui = null;
 		Controller controller = new Controller(db,ui);
-		ui =  new MockUI0(controller);
+		ui =  new DesktopUI(controller);
 		controller.ui = ui;
 		ui.init();
 		ui.show();
