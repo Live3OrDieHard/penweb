@@ -265,7 +265,7 @@ public class DesktopUI extends JFrame implements IUserInterface {
 					if (index >= 0) {
 						//Object o = list.getModel().getElementAt(index);
 						//System.out.println("Double-clicked on: " + o.toString());
-						List<IEntry> l = controller.getAllinDB();
+						List<IExample> l = controller.getAllExampleinDB();
 						BasicExample bx;
 						if(index==0){
 							ttxt.requestFocus();

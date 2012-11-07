@@ -2,6 +2,7 @@ package database;
 
 //This is a comment to make sure I have commit access
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dataStructure.*;
@@ -21,4 +22,19 @@ public interface IDatabase {
 	 * @return
 	 */
 	public List<IExample> getAllExample();
+	
+	/**
+	 * 
+	 * @param name
+	 * @return true if the name given is already taken by another category
+	 * false otherwise 
+	 */
+	public boolean isNameRepeat (String name);
+	
+	/**
+	 * 
+	 */
+	
+	public ArrayList<String> listCategoryNames ();
+	List<ICategory> getAllCategory();
 }
