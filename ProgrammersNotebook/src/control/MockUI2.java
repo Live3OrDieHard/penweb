@@ -50,7 +50,7 @@ public class MockUI2 extends JFrame implements IUserInterface {
 	 * Create the frame.
 	 * @param desktopGUIController 
 	 */
-	public MockUI2(final DesktopGUIController controller) {
+	public MockUI2(final Controller controller) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 480);
 		contentPane = new JPanel();

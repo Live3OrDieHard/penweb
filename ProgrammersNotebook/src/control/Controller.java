@@ -15,12 +15,12 @@ import dataStructure.*;
  * MockUI0 has a prototype of retrieve function
  * see MockUI0 for more info
  */
-public class DesktopGUIController 
+public class Controller 
 {
 	IDatabase db;
 	IUserInterface  ui;
 	
-	public DesktopGUIController(IDatabase db, IUserInterface ui) {
+	public Controller(IDatabase db, IUserInterface ui) {
 		this.db = db;
 		this.ui = ui;
 	}
@@ -34,7 +34,6 @@ public class DesktopGUIController
 		{
 			BasicExample bx = new BasicExample(h,c,p);
 			this.addToDB(bx);
-			((MockUI0) ui).clearFields();
 		}
 	}
 	

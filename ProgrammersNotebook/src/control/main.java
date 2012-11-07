@@ -16,7 +16,7 @@ public class main
 	{
 		IDatabase db = new Db4oDatabase("MarchTest.yap");
 		IUserInterface  ui = null;
-		DesktopGUIController controller = new DesktopGUIController(db,ui);
+		Controller controller = new Controller(db,ui);
 		/*
 		System.out.println("Please type a number in the console\n");
 		System.out.println("0 for Anjali's UI\n1 for MockUI1\nanything else for MockUI2");

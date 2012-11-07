@@ -72,14 +72,14 @@ public class MockUI0 extends JFrame implements IUserInterface {
 	private DefaultListModel listModel;
 	String t1, t2, t3, a1, a2, a3, l1, l2, l3, s1, s2, s3, tg1, tg2, tg3, c1, c2, c3;
 	int counter;
-	final DesktopGUIController controller;
+	final Controller controller;
 	LinkedList<String> listTitle = new LinkedList<String>();
 
 	/**
 	 * Create the frame.
 	 * @param controller 
 	 */
-	public MockUI0(final DesktopGUIController controller) {
+	public MockUI0(final Controller controller) {
 		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
