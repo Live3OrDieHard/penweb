@@ -2,8 +2,11 @@ package penweb;
 
 import database.*;
 import dataStructure.*;
+
 import java.util.List;
 import java.util.ArrayList;
+
+import javax.swing.plaf.basic.BasicProgressBarUI;
 
 public class WebController {
 
@@ -25,6 +28,17 @@ public class WebController {
 	
 	public void addCode(String title, String content, String language, String author) {
 		IExample ex = new BasicExample();
+		ex.setTitle(title);
+		ex.setCode(content);
+		IProperties prop = new ExampleProperties();
+		prop.setLanguage(language);
+		ex.setProperties(prop);
+		IPerson auth = new User();
+		auth.assignName(author);
+		List<IPerson> authors = new ArrayList<IPerson>();
+		authors.add(auth);
+		ex.setAuthors(authors);
+		db.store(ex);
 	}
 	
 	public String getText() {
