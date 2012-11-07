@@ -364,7 +364,7 @@ public class DesktopUI extends JFrame implements IUserInterface {
 			System.out.println("Invalid title. Please try again");
 			return null;
 		}
-		else e.setCode(code);
+		else e.setTitle(title);
 		if(author.length()==0)
 		{
 			System.out.println("Invalid author. Please try again");
