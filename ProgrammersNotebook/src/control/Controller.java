@@ -37,7 +37,7 @@ public class Controller
 		}
 	}
 	
-	private void addToDB(IEntry e) 
+	public void addToDB(IEntry e) 
 	{
 		db.store(e);
 	}
