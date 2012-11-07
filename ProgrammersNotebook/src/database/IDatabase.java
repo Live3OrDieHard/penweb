@@ -14,8 +14,5 @@ public interface IDatabase {
 	// More "getBy" functions to come based on metadata choices
 	public void delete(IEntry e);
 	public void close(); // Close the connection
-	/**
-	 * @return
-	 */
-	public List<IExample> getAllExample();
+	public List<IExample> getAllExamples();
 }

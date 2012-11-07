@@ -1,6 +1,6 @@
 package dataStructure;
+
 /**
- * 
  * @author Team3
  * 
  * The ExampleContent class contains the code
@@ -10,30 +10,33 @@ package dataStructure;
  */
 public class ExampleContent implements IContent
 {
-/**
- * Code in the example.
- */
+	/**
+	 * Code in the example.
+	 */
 	private String code;
-/**
- * getter function to get code from the example
- * 
- * @return String
- */
+	
+	/**
+	 * Getter function to get code from the example
+	 * 
+	 * @return String
+	 */
 	public String getCode()
 	{
 		return this.code;
 	}
-/**
- * set up the code to the example
- * @param code
- */
+	
+	/**
+	 * Set up the code to the example
+	 * @param code
+	 */
 	public void setCode(String code)
 	{
 		this.code = code;
 	}
-/**
- * default constructor for the ExampleContent class
- */
+	
+	/**
+	 * Default constructor for the ExampleContent class
+	 */
 	public ExampleContent(String code)
 	{
 		this.code = code;

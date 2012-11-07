@@ -48,7 +48,7 @@ public class Controller
 	
 	public List<IHeader> getHeaderList() 
 	{
-		List<IExample> listE = db.getAllExample();
+		List<IExample> listE = db.getAllExamples();
 		List<IHeader> listH = new LinkedList<IHeader>();
 		for(int i=0;i<listE.size();i++)
 		{

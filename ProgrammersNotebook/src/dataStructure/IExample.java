@@ -6,31 +6,35 @@ package dataStructure;
  * IExample is basically the actual entry (code/test/etc)
  * Prof. Pollice prefers to call it an example.
  */
-
 public interface IExample extends IEntry
 {
-/**
- *{@link BasicExample#getHeader()}
- */
+	/**
+	 *{@link BasicExample#getHeader()}
+	 */
 	IHeader getHeader();
-/**
- * {@link BasicExample#getContent()}
- */
+	
+	/**
+	 * {@link BasicExample#getContent()}
+	 */
 	IContent getContent();
-/**
- * {@link BasicExample#getProperties()}
- */
+	
+	/**
+	 * {@link BasicExample#getProperties()}
+	 */
 	IProperties getProperties();
-/**
- * {@link BasicExample#setHeader(IHeader)}
- */
+	
+	/**
+	 * {@link BasicExample#setHeader(IHeader)}
+	 */
 	void setHeader(IHeader inHeader);
-/**
- * {@link BasicExample#setContent(IContent)}
- */
+	
+	/**
+	 * {@link BasicExample#setContent(IContent)}
+	 */
 	void setContent(IContent inContent);
-/**
- * {@link BasicExample#setProperties(IProperties)}
- */
+	
+	/**
+	 * {@link BasicExample#setProperties(IProperties)}
+	 */
 	void setProperties(IProperties inProperties);
 }

@@ -9,7 +9,14 @@ package dataStructure;
  */
 public interface IEntry 
 {
+	/**
+	 * @return Returns the ID of an entry in the database. Every entry has an ID.
+	 */
 	Long getEntryId();
+	
+	/**
+	 * @return The ID of the owner of an entry.
+	 */
 	Long getOwnerId();
 }
 
