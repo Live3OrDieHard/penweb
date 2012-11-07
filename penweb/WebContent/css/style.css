@@ -5,6 +5,11 @@ body {
 	font-family: Verdana, Helvetica, Arial;
 	font-size: 14px;
 	min-width: 900px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 
 .header {
@@ -69,7 +74,7 @@ body {
 	top: 140px;
 	bottom: 0;
 	left: 0;
-	right: 0;
+	width: 100%;
 }
 
 .content .left h1 {
@@ -106,17 +111,60 @@ body {
 	color: #72FF72;
 }
 
-.content .right ul.entrylist {
+ul.entrylist {
 	width: 100%;
 }
 
-.content .right ul.entrylist li {
+ul.entrylist a {
+	color: #FFFFFF;
+}
+
+ul.entrylist li {
+	position: relative;
 	height: 100px;
 	width: 100%;
 	border-top: 1px solid #666666;
 	border-bottom: 1px solid #000000;
-	background: #333333;
+	background: #333333 url('../images/entry-arrow.png') center right no-repeat;
 }
+
+ul.entrylist li:hover {
+	background-color: #444444;
+}
+
+ul.entrylist li:hover div.fade {
+	background-image: url('../images/fade-hover.png');
+}
+
+
+ul.entrylist li h1 {
+	height: 100%;
+	width: 200px;
+	line-height: 100px;
+	padding: 0 25px;
+	font-weight: bold;
+	float: left;
+	overflow: hidden;
+}
+
+ul.entrylist li div {
+	position: absolute;
+	top: 15px;
+	height: 70px;
+	left: 250px;
+	right: 75px;
+}
+
+ul.entrylist li div.code {
+	overflow: hidden;
+	font-family: Courier;
+}
+
+ul.entrylist li div.fade {
+	background: url('../images/fade.png');
+	z-index: 2;	
+}
+
 
 /* Buttons */
 
