@@ -30,4 +30,7 @@ public interface IExample extends IEntry
 	 */
 	void setProperties(IProperties inProperties);
 	IPerson getOwner();
+	BasicExample transferFromBuffer(BufferEntry e);
+	String getCode();
+	void setCode(String code);
 }

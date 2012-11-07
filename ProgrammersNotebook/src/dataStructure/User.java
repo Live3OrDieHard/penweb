@@ -16,6 +16,7 @@ public class User implements IPerson
 	 */
 	private Long userId;
 	
+	@Override
 	/**
 	 * Get the name of the user
 	 * @return String user's name
@@ -34,12 +35,18 @@ public class User implements IPerson
 		return this.userId;
 	}
 	
+	@Override
 	/**
 	 * Set the given name for the user
 	 * @param String name
 	 */
-	public void setName(String name)
+	public void assignName(String name)
 	{
-		this.name = name;
+		if(this.name!=null)
+		{
+			//throw exception
+		}
+		else 
+			this.name = name;
 	}	
 }
