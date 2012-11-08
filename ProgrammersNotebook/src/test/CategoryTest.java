@@ -25,7 +25,7 @@ public class CategoryTest {
 		// Connect to test database
 		db = new Db4oDatabase("CategoryTest.yap");
 		
-		testee = new Category(null, null, null);
+		testee = new Category(null, null);
 	}
 	
 	@Test

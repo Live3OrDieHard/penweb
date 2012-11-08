@@ -122,7 +122,7 @@ public class Db4oDatabase implements IDatabase {
 		ArrayList<String> catNameList = listCategoryNames();
 
 		boolean isSame = false;
-		for (int i = 0; i <= catNameList.size(); i++) {
+		for (int i = 0; i < catNameList.size(); i++) {
 			if (name.equals(catNameList.get(i))) {
 				return true;
 			}

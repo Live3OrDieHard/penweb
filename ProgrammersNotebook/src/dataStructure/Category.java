@@ -15,8 +15,7 @@ public class Category implements ICategory {
 	private List<IExample> exampleList;
 	private Long id;
 	
-	public Category(IPerson owner, String description, String title) {
-		this.owner = owner;
+	public Category(String title, String description) {
 		this.description = description;
 		this.title = title;
 		this.exampleList = new ArrayList<IExample>();

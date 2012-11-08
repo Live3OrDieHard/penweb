@@ -1,10 +1,14 @@
 package control;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 
 import database.*;
 import dataStructure.*;
+import exceptions.CannotAddToDbException;
+import exceptions.NoTitleException;
+import exceptions.PENException;
 
 /**
  * 
@@ -23,11 +27,14 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void addBasicExample(BufferEntry buf) {
-		/*
-		 * ExampleHeader h = (ExampleHeader) ui.getHeader(); ExampleContent c =
-		 * (ExampleContent) ui.getContent();
-		 */
+	public void addBasicExample(BufferEntry buf) throws PENException {
+		if ((buf.getTitle() == null)||buf.getTitle().equals("")) {
+			throw (new NoTitleException("Example must have a title."));
+		}
+		if ((buf.getCode() == null)||buf.getCode().equals("")) {
+			throw (new NoTitleException("Example must have a code."));
+		}
+
 		BasicExample e = new BasicExample();
 		e.setTitle(buf.getTitle());
 		e.setCode(buf.getCode());
@@ -66,24 +73,27 @@ public class Controller implements IController {
 	 *         creates a new category, which is pushed to the database. The
 	 *         category is initially empty, meaning it has no code entries
 	 *         associated with it.
-	 * @param buff
+	 * @param buf
+	 * @throws CannotAddToDbException
 	 */
-	public void addCategory(BufferEntry buff) {
-		// if (db.isNameRepeat(buff.getTitle()))
-		// {
-		// //TODO: Throw exception
-		// }
-		//
-		// else
-		{
-			Category newC = new Category(buff.getOwner(),
-					buff.getDescription(), buff.getTitle());
+	public void addCategory(BufferEntry buf) throws PENException {
+		if ((buf.getTitle() == null)||buf.getTitle().equals("")) {
+			throw (new NoTitleException("Category must have a title."));
+		} else if (db.isNameRepeat(buf.getTitle())) {
+			throw (new CannotAddToDbException("The title \"" + buf.getTitle()
+					+ "\" for category is taken."));
+		} else {
+			Category newC = new Category(buf.getTitle(), buf.getDescription());
 			db.store(newC);
 		}
 	}
 
 	public List<IExample> getAllExampleinDB() {
 		return db.getAllExample();
+	}
+
+	public List<ICategory> getAllCategoryinDB() {
+		return this.db.getAllCategory();
 	}
 
 }

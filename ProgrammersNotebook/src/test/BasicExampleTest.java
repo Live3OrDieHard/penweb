@@ -21,7 +21,7 @@ public class BasicExampleTest {
 
 	@Test
 	public void testAddCategory() {
-		Category category = new Category(null, null, null);
+		Category category = new Category(null, null);
 		
 		// Attempt to add the same category twice
 		testee.addCategory(category);

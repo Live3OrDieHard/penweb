@@ -125,11 +125,11 @@ public class Db4oDatabaseTest {
 	@Test
 	public void testGetTitleList() {
 
-		Category entry1 = new Category(null,null,"Live");
-		Category entry2 = new Category(null,null,"Three");
-		Category entry3 = new Category(null,null,"Or");
-		Category entry4 = new Category(null,null,"Die");
-		Category entry5 = new Category(null,null,"Hard");
+		Category entry1 = new Category("Live",null);
+		Category entry2 = new Category("Three",null);
+		Category entry3 = new Category("Or",null);
+		Category entry4 = new Category("Die",null);
+		Category entry5 = new Category("Hard",null);
 		
 		testee.store(entry1);
 		testee.store(entry2);

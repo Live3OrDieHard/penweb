@@ -33,6 +33,8 @@ import java.util.List;
 import javax.swing.JLayeredPane;
 
 import dataStructure.*;
+import exceptions.PENException;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -250,8 +252,12 @@ public class DesktopUI extends JFrame implements IUserInterface {
 
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BufferEntry e = DesktopUI.this.getBufferEntry();
-				controller.addBasicExample(e);
+				BufferEntry buf = DesktopUI.this.getBufferEntry();
+				try {
+					controller.addBasicExample(buf);
+				} catch (PENException exception) {
+					System.out.println(exception.getMessage());
+				}
 				listModel.addElement(ttxt.getText());
 			}});
 
@@ -284,42 +290,6 @@ public class DesktopUI extends JFrame implements IUserInterface {
 
 		listEx.addMouseListener(mouseListener);
 	}
-
-	/*
-	@Override
-	public IHeader getHeader() {
-		String title = ttxt.getText();
-		if(title.length()==0)
-		{
-			errorBox box = new errorBox("bad title");
-			box.show();
-			return null;
-		}
-		else if ((title.length() != 0) && (ctxt.getText().length() != 0) && (atxt.getText().length()!=0)) {
-			listModel.addElement(title);
-			}
-		if(atxt.getText().length()==0)
-		{
-			errorBox box = new errorBox("bad author");
-			box.show();
-			return null;
-		}
-		return new ExampleHeader(ttxt.getText(),atxt.getText());
-	}
-
-	@Override
-	public IContent getContent() {
-		if(ctxt.getText().length()==0)
-		{
-			errorBox box = new errorBox("bad code");
-			box.show();
-			return null;
-		}
-		return new ExampleContent(ctxt.getText());
-	}
-	 */
-
-
 
 	@Override
 	public void init() 

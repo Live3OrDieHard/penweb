@@ -16,10 +16,9 @@ public class runMVC
 		IUserInterface  ui = null;
 		Controller controller = new Controller(db,ui);
 		ui =  new DesktopUI(controller);
-		//ui =  new NewDesktopUI(controller);
+		//ui =  new NewDesktopUI2(controller);
 		controller.ui = ui;
 		ui.init();
 		ui.show();
 	}
-	
 }

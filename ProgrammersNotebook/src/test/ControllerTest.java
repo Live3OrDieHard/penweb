@@ -14,6 +14,8 @@ import dataStructure.Category;
 import dataStructure.IExample;
 import database.Db4oDatabase;
 import database.IDatabase;
+import exceptions.CannotAddToDbException;
+import exceptions.PENException;
 
 public class ControllerTest {
 	private Controller testee;
@@ -27,7 +29,7 @@ public class ControllerTest {
 	}
 	
 	@Test
-	public void testAddBasicExample() {
+	public void testAddBasicExample() throws PENException {
 		BufferEntry buff = new BufferEntry();
 		buff.setCode("Hello World");
 		buff.setDescription("This statement is false");
@@ -49,14 +51,32 @@ public class ControllerTest {
 		BufferEntry b = new BufferEntry();
 		b.setTitle("Title");
 		b.setDescription("Desc");
-		testee.addCategory(b);
+		//first time, should be okay
+		try
+		{
+			testee.addCategory(b);
+		}
+		catch(PENException exception)
+		{
+			fail("exception thrown on first try");
+		}
+		
+		try
+		{
+			testee.addCategory(b);
+			fail("exception not thrown on second try");
+		}
+		catch(PENException exception)
+		{
+			assertEquals(exception.getMessage(),"The title: Title for category is taken.");
+			
+		}
 		
 		//TODO: Write test to ensure exception is thrown
-		testee.addCategory(b);
 	}
 	
 	@Test
-	public void testAddCategorySuccess() {
+	public void testAddCategorySuccess() throws PENException {
 		BufferEntry b = new BufferEntry();
 		b.setTitle("Title");
 		b.setDescription("Desc");
