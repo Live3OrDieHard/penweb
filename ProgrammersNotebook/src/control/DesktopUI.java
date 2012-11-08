@@ -38,7 +38,6 @@ import java.awt.event.WindowEvent;
 
 
 /**
- * 
  * @author Thanaporn original from Anjali's GUI
  * This can interact with database in repo (MarchTest.yap)
  * it can store and retrieve file from data base
@@ -51,7 +50,6 @@ import java.awt.event.WindowEvent;
  * in the list when there are more than 3 entries
  * and lack of init function that retrieves data from database
  * at the start of the program
- *
  */
 public class DesktopUI extends JFrame implements IUserInterface {
 

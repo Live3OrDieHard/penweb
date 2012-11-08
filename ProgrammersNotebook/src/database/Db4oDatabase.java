@@ -95,15 +95,6 @@ public class Db4oDatabase implements IDatabase {
 		return db.query(ICategory.class);
 	}
 
-	/**
-	 * TODO: generate it, somehow
-	 */
-
-	/**
-	 * 
-	 * @return nameList, a list of the name of each category, as a string.
-	 */
-
 	public ArrayList<String> listCategoryNames() {
 		List<ICategory> catList = getAllCategory();
 		ArrayList<String> nameList = new ArrayList<String>();
@@ -113,12 +104,6 @@ public class Db4oDatabase implements IDatabase {
 		}
 		return nameList;
 	}
-
-	/**
-	 * @param name
-	 * @return true if the name given is already taken by another category false
-	 *         otherwise
-	 */
 
 	public boolean isNameRepeat(String name) {
 		ArrayList<String> catNameList = listCategoryNames();
