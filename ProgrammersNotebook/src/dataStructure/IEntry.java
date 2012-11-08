@@ -10,11 +10,19 @@ package dataStructure;
 public interface IEntry 
 {
 	/**
+	 * 
+	 * @return a unique ID associated with the entry
+	 */
+	Long getId();
+	
+	/**
 	 * @return The ID of the owner of an entry.
 	 */
 	Long getOwnerId();
 	
 	int assignOwner(IPerson owner);
+
+	int assignId(Long id);
 }
 
 /*

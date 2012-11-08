@@ -13,12 +13,14 @@ public class Category implements ICategory {
 	private String description;
 	private String name;
 	private List<IExample> exampleList;
+	private Long id;
 
 	public Category(IPerson owner, String description, String name) {
 		this.owner = owner;
 		this.description = description;
 		this.name = name;
 		this.exampleList = new ArrayList<IExample>();
+		this.id = -1L;
 	}
 	
 	/**
@@ -73,5 +75,19 @@ public class Category implements ICategory {
 		else
 			this.owner = owner;
 		return 0;
+	}
+
+	@Override
+	public int assignId(Long id) {
+		if (this.id != -1)
+			return 1; // return 1 if already assigned
+		else
+			this.id = id;
+		return 0;
+	}
+
+	@Override
+	public Long getId() {
+		return this.id;
 	}
 }
