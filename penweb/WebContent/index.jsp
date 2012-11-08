@@ -3,8 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<%
+		// Instantiate the webcon
+		WebController webcon = new WebController();
+	%>
 	<meta charset="UTF-8">
-	<title>PEN &middot; The Programmer's Examples Notebook</title>
+	<title>PEN &middot; All Entries (<%= webcon.getNumEntries() %>)</title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -12,18 +16,16 @@
 	<script src="js/jquery.watermark.min.js"></script>
 	<script>
 		$(document).ready(function(){
+			// Watermarks for login
 			$("input[name=username]").watermark("Username");
 			$("input[name=password]").watermark("Password");
 		});
 	</script>
 </head>
 <body>
-<%
-	// Instantiate the webcon
-	WebController webcon = new WebController();
-%>
 <div class="header">
-	<img class="logo" src="images/logo.png" />
+	<h1>PEN</h1>
+	<h2>The Programmer's<br>Examples Notebook</h2>
 	<form name="login">
 		<div class="input"><input type="text" name="username" /></div>
 		<div class="input"><input type="password" name="password" /></div>
@@ -33,14 +35,17 @@
 </div>
 <div class="bar">
 	<div class="left">
-		<div class="button green">New Entry</div>
+		<a href="create.jsp"><div class="button green">New Entry</div></a>
+	</div>
+	<div class="right">
+		<h1>All Entries (<%= webcon.getNumEntries() %>)</h1>
 	</div>
 </div>
 <div class="content">
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<li class="selected">All Entries (<%= webcon.getNumEntries() %>)</li>
+			<a href="index.jsp"></a><li class="selected">All Entries (<%= webcon.getNumEntries() %>)</li></a>
 			<li>Tests (0)</li>
 			<li>Security (0)</li>
 			<li>Search (0)</li>
@@ -58,7 +63,7 @@
 					<li>
 						<h1><%= e.getTitle() %></h1>
 						<div class="fade"></div>
-						<div class="code"><%= e.getCode() %></div>
+						<div class="code"><%= e.getCode().replaceAll("\n", "<br>") %></div>
 					</li>
 				</a>
 				<% id++; %>
