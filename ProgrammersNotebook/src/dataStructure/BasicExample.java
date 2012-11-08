@@ -10,10 +10,11 @@ import java.util.List;
 public class BasicExample implements IExample {
 
 	private List<IPerson> authors;
+	
 	/**
 	 * Categories the example belongs to
 	 */
-	private ArrayList<Category> categoryList = new ArrayList<Category>();
+	private ArrayList<ICategory> categoryList = new ArrayList<ICategory>();
 	private String code;
 	private String description;
 	private Long id;
@@ -23,6 +24,7 @@ public class BasicExample implements IExample {
 	 */
 	private String language;
 	private IPerson owner;
+	
 	/**
 	 * Where is the source of the example
 	 */
@@ -32,6 +34,7 @@ public class BasicExample implements IExample {
 	 */
 	private ArrayList<String> tags = new ArrayList<String>();
 	private String title;
+	
 
 	public BasicExample() {
 		authors = new LinkedList<IPerson>();
@@ -43,7 +46,7 @@ public class BasicExample implements IExample {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addCategory(Category category) {
+	public void addCategory(ICategory category) {
 		if (!this.isInCategory(category)) {
 			categoryList.add(category);
 			category.addCodeExample(this);
@@ -93,8 +96,8 @@ public class BasicExample implements IExample {
 	 * Gets the list of categories the example belongs to.
 	 * @return LinkedList<String>
 	 */
-	public ArrayList<Category> getCategories() {
-		return this.categoryList;
+	public List<ICategory> getCategories() {
+		return categoryList;
 	}
 
 	/**
@@ -160,6 +163,7 @@ public class BasicExample implements IExample {
 	 * 
 	 * @return LinkedList<String>
 	 */
+	@Override
 	public ArrayList<String> getTags() {
 		return this.tags;
 	}
@@ -179,7 +183,7 @@ public class BasicExample implements IExample {
 	 *            the category wanted to be check
 	 * @return true if the example is in category. false otherwise
 	 */
-	private boolean isInCategory(Category category) {
+	private boolean isInCategory(ICategory category) {
 		for (int i = 0; i < this.categoryList.size(); i++) {
 			if (this.categoryList.get(i).equals(category))
 				return true;
@@ -202,7 +206,7 @@ public class BasicExample implements IExample {
 	 * 
 	 * @param tags
 	 */
-	public void setCategories(ArrayList<Category> categories) {
+	public void setCategories(ArrayList<ICategory> categories) {
 		this.categoryList = categories;
 	}
 
@@ -250,6 +254,7 @@ public class BasicExample implements IExample {
 	 * 
 	 * @param tags
 	 */
+	@Override
 	public void setTags(ArrayList<String> tags) {
 		this.tags = tags;
 	}
@@ -261,14 +266,17 @@ public class BasicExample implements IExample {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public BasicExample transferFromBuffer(BufferEntry e) {
 		this.authors = e.getAuthors();
 		this.code = e.getCode();
 		this.description = e.getDescription();
-		this.language = e.getLanguage();
 		this.source = e.getSource();
+		this.language = e.getLanguage();
 		this.title = e.getTitle();
 		return this;
 	}

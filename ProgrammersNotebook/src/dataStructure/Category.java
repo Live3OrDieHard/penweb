@@ -22,7 +22,7 @@ public class Category implements ICategory {
 		this.exampleList = new ArrayList<IExample>();
 		this.id = -1L;
 	}
-
+	
 	/**
 	 * @see dataStructure.ICategory#getDescription()
 	 */
@@ -50,7 +50,7 @@ public class Category implements ICategory {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
+	
 	/**
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
