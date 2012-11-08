@@ -17,9 +17,11 @@ public class WebController {
 	public void populate() {
 		// Add some stuff to the database
 		IExample e1 = new BasicExample();
-		e1.setTitle("test1");
+		e1.setTitle("test3");
+		e1.setCode("This is test code");
 		IExample e2 = new BasicExample();
-		e2.setTitle("test2");
+		e2.setCode("This is more test code");
+		e2.setTitle("test4");
 		db.store(e1);
 		db.store(e2);
 	}
@@ -55,6 +57,10 @@ public class WebController {
 	public int getNumEntries() {
 		List<IExample> examples = this.db.getAllExample();
 		return examples.size();
+	}
+	
+	public List<IExample> getExamples() {
+		return this.db.getAllExample();
 	}
 	
 	public void close() {
