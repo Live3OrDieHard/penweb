@@ -1,6 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="database.*,penweb.*,dataStructure.*,java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
+	<%
+		// Instantiate the web controller and grab id paramter
+		WebController webcon = new WebController();
+		int id = Integer.parseInt(request.getParameter("id")) - 1;
+	%>
 	<meta charset="UTF-8">
 	<title>PEN &middot; Create Entry</title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
@@ -60,7 +67,7 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<a href="index.jsp"><li>All Entries (1)</li></a>
+			<a href="index.jsp"><li>All Entries (<%=webcon.getNumEntries() %>)</li></a>
 			<li>Tests (0)</li>
 			<li>Security (0)</li>
 			<li>Search (0)</li>
@@ -80,5 +87,9 @@
 		</form>
 	</div>
 </div>
+<%
+	// Close the webcon
+	webcon.close();
+%>
 </body>
 </html>
