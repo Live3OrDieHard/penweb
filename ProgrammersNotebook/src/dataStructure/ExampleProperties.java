@@ -22,76 +22,66 @@ public class ExampleProperties implements IProperties
 	 * Categories the example belongs to
 	 */
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
-	
-	@Override
+
 	/**
-	 * Gets the language the example was written in
-	 * @return String
+	 * {@inheritDoc}
 	 */
+	@Override
 	public String getLanguage()
 	{
 		return this.language;
 	}
-	
-	@Override
+
 	/**
-	 * Gets the source of an example
-	 * @return String
+	 * {@inheritDoc}
 	 */
+	@Override
 	public String getSource()
 	{
 		return this.source;
 	}
 	
-	@Override
 	/**
-	 * Gets the list of categories the example belongs to.
-	 * @return LinkedList<String>
+	 * {@inheritDoc}
 	 */
+	@Override
 	public ArrayList<Category> getCategories()
 	{
 		return this.categoryList;
 	}
 
-	@Override
 	/**
-	 * A setter function to set the language property of the example
-	 * to the given language
-	 * 
-	 * @param language
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void setLanguage(String language)
 	{
 		this.language = language;
 	}
 
-	@Override
 	/**
-	 * A setter fucntion to set the source property of the example
-	 * to the given source
-	 * 
-	 * @param source
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void setSource(String source)
 	{
 		this.source = source;
 	}
 
-	@Override
 	/**
-	 * A setter function to set the tag property of the example 
-	 * to the given categories.
-	 * 
-	 * @param tags
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void setCategories(ArrayList<Category> categories)
 	{
 		this.categoryList = categories;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void addCategory(Category category) {
 		// TODO Auto-generated method stub
-		
 	}
 }

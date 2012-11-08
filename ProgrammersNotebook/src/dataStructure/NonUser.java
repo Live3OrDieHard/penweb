@@ -2,7 +2,8 @@ package dataStructure;
 
 /**
  * @author Thanaporn 
- * for non-user people involved e.g. authors that are not users
+ * for non-user people involved 
+ * e.g. authors that are not users
  */
 public class NonUser implements IPerson {
 	/**

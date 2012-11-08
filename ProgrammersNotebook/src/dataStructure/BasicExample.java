@@ -38,15 +38,14 @@ public class BasicExample implements IExample {
 		owner = null;
 		this.id = -1L;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void addCategory(Category category) {
-		if(!this.isInCategory(category))
-		{
-			categoryList.add(category);	
+		if (!this.isInCategory(category)) {
+			categoryList.add(category);
 			category.addCodeExample(this);
 		}
 	}
@@ -94,8 +93,7 @@ public class BasicExample implements IExample {
 	 * Gets the list of categories the example belongs to.
 	 * @return LinkedList<String>
 	 */
-	public ArrayList<Category> getCategories()
-	{
+	public ArrayList<Category> getCategories() {
 		return this.categoryList;
 	}
 
@@ -114,19 +112,18 @@ public class BasicExample implements IExample {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	@Override
 	public Long getId() {
 		return this.id;
 	}
-	
+
 	@Override
 	/**
 	 * Gets the language the example was written in
 	 * @return String
 	 */
-	public String getLanguage()
-	{
+	public String getLanguage() {
 		return this.language;
 	}
 
@@ -154,8 +151,7 @@ public class BasicExample implements IExample {
 	 * Gets the source of an example
 	 * @return String
 	 */
-	public String getSource()
-	{
+	public String getSource() {
 		return this.source;
 	}
 
@@ -199,7 +195,6 @@ public class BasicExample implements IExample {
 		this.authors = authors;
 	}
 
-
 	@Override
 	/**
 	 * A setter function to set the tag property of the example 
@@ -207,8 +202,7 @@ public class BasicExample implements IExample {
 	 * 
 	 * @param tags
 	 */
-	public void setCategories(ArrayList<Category> categories)
-	{
+	public void setCategories(ArrayList<Category> categories) {
 		this.categoryList = categories;
 	}
 
@@ -235,8 +229,7 @@ public class BasicExample implements IExample {
 	 * 
 	 * @param language
 	 */
-	public void setLanguage(String language)
-	{
+	public void setLanguage(String language) {
 		this.language = language;
 	}
 
@@ -247,8 +240,7 @@ public class BasicExample implements IExample {
 	 * 
 	 * @param source
 	 */
-	public void setSource(String source)
-	{
+	public void setSource(String source) {
 		this.source = source;
 	}
 
@@ -283,8 +275,9 @@ public class BasicExample implements IExample {
 
 	@Override
 	public void addTags(String tag) {
-		//@TODO check existence of tag in tags
+		// @TODO check existence of tag in tags
 		this.tags.add(tag);
-		
+
 	}
+
 }

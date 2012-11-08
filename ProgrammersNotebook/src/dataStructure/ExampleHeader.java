@@ -23,8 +23,7 @@ public class ExampleHeader implements IHeader
 	private List<IPerson> authors = new LinkedList<IPerson>();
 	
 	/**
-	 * The getter function to get the title of the example
-	 * @return String
+	 * @see dataStructure.IHeader#getTitle()
 	 */
 	public String getTitle() 
 	{
@@ -32,17 +31,21 @@ public class ExampleHeader implements IHeader
 	}
 	
 	/**
-	 * The getter function to get the authors of the examples
-	 * @return List<IPerson>
+	 * @see dataStructure.IHeader#getAuthors()
 	 */
 	public List<IPerson> getAuthors() 
 	{
+		/*
+		 * It's better to be an object so we'll be able to associate
+		 * this field to user data (personal folder and stuff)
+		 * I use IPerson instead of IUser because there might be
+		 * some codes from non-users.
+		 */
 		return this.authors;
 	}
 	
 	/**
-	 * Set the title of the example to the given string
-	 * @param String title
+	 * @see dataStructure.IHeader#setTitle(String)
 	 */
 	public void setTitle(String title)
 	{
@@ -50,8 +53,7 @@ public class ExampleHeader implements IHeader
 	}
 	
 	/**
-	 *set the authors of the example to the given authors
-	 *@param List<IPerson> The authors for the example
+	 * @see dataStructure.IHeader#setAuthors(List)
 	 */
 	public void setAuthors(List<IPerson> authors)
 	{
@@ -68,12 +70,12 @@ public class ExampleHeader implements IHeader
 	}
 	
 	/**
-	 * default constructor for the ExampleHeader class
-	 * set the default author to be one NonUser
+	 * Default constructor for the ExampleHeader class
+	 * Set the default author to be one NonUser
 	 */
-	//just ONE NonUser name, please
-	public ExampleHeader(String title, String name)
+	public ExampleHeader(String title, String name) //just ONE NonUser name, please
 	{
+		
 		this.title = title;
 		this.authors.add(new NonUser(name));
 	}

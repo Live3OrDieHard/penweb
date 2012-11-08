@@ -45,8 +45,8 @@ public interface IDatabase {
 	 * @return A list of all categories in the database
 	 */
 	List<ICategory> getAllCategory();
-	
-	public IEntry getByID(Long id);
-	
-	public Long getNewId();
+
+	Long getNewId();
+
+	IEntry getByID(Long id);
 }

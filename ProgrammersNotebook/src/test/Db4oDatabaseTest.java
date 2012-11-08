@@ -124,6 +124,7 @@ public class Db4oDatabaseTest {
 	public void cleanup() throws IOException {
 		testee.close();
 
+		//Delete the database. We don't need it anymore.
 		File f = new File(databaseName);
 		if (f.exists())
 			f.delete();
