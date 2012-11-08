@@ -53,16 +53,16 @@
 		<ul class="entrylist">
 			<% int id = 1; %>
 			<% List<IExample> ex = webcon.getExamples(); %>
-			<a href="viewcode.jsp?id=<%=id%>">
-				<% for (IExample e : ex) { %>
+			<% for (IExample e : ex) { %>
+				<a href="viewcode.jsp?id=<%=id%>">
 					<li>
 						<h1><%= e.getTitle() %></h1>
 						<div class="fade"></div>
 						<div class="code"><%= e.getCode() %></div>
 					</li>
-				<%}%>
-			</a>
-			<% id++; %>
+				</a>
+				<% id++; %>
+			<%}%>
 		</ul>
 	</div>
 </div>
