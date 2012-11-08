@@ -6,7 +6,6 @@
 	<%
 		// Instantiate the web controller and grab id paramter
 		WebController webcon = new WebController();
-		int id = Integer.parseInt(request.getParameter("id")) - 1;
 	%>
 	<meta charset="UTF-8">
 	<title>PEN &middot; Create Entry</title>
