@@ -12,17 +12,13 @@ public class Category implements ICategory {
 	private IPerson owner;
 	private String description;
 	private String name;
-	private Long id;
-	private List<Long> codeIds;
-	private ArrayList<Long> exampleList;
+	private List<IExample> exampleList;
 
 	public Category(IPerson owner, String description, String name) {
 		this.owner = owner;
 		this.description = description;
 		this.name = name;
-		this.id = -1L;
-		this.codeIds = new ArrayList<Long>();
-		this.exampleList = new ArrayList<Long>();
+		this.exampleList = new ArrayList<IExample>();
 	}
 	
 	/**
@@ -57,14 +53,10 @@ public class Category implements ICategory {
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
 	public void addCodeExample(IExample example) {
-		codeIds.add(example.getId());
-	}
-
-	/**
-	 * @see dataStructure.IEntry#getEntryId()
-	 */
-	public Long getEntryId() {
-		return id;
+		this.exampleList.add(example);
+		//TODO: check if it isn't there
+		if(true)
+			example.getProperties().addCategory(this);
 	}
 
 	/**
@@ -72,15 +64,6 @@ public class Category implements ICategory {
 	 */
 	public Long getOwnerId() {
 		return owner.getId();
-	}
-	
-	@Override
-	public int assignID(Long id) {
-		if (this.id != -1)
-			return 1; // return 1 if already assigned
-		else
-			this.id = id;
-		return 0;
 	}
 
 	@Override
@@ -91,14 +74,4 @@ public class Category implements ICategory {
 			this.owner = owner;
 		return 0;
 	}
-
-	@Override
-	public Long getId() {
-		return this.id;
-	}
-	
-	public void addExample(long exId) {
-		exampleList.add(exId);
-	}
-
 }

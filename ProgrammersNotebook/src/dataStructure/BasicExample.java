@@ -12,7 +12,6 @@ public class BasicExample implements IExample {
 	private List<IPerson> authors;
 	private String code;
 	private String description;
-	private Long id;
 	private IPerson owner;
 	private ExampleProperties properties;
 	private String title;
@@ -20,7 +19,7 @@ public class BasicExample implements IExample {
 	/**
 	 * Categories the example belongs to
 	 */
-	private ArrayList<Long> categoryIds = new ArrayList<Long>();
+	private ArrayList<Category> categoryList = new ArrayList<Category>();
 	/**
 	 * Language in which the example is written
 	 */
@@ -32,21 +31,11 @@ public class BasicExample implements IExample {
 	
 	public BasicExample()
 	{
-		id = -1L;
 		authors = new LinkedList<IPerson>();
 		owner = null;
 		properties = new ExampleProperties();
 	}
 	
-	@Override
-	public int assignID(Long id) {
-		if (this.id != -1)
-			return 1; // return 1 if already assigned
-		else
-			this.id = id;
-		return 0;
-	}
-
 	@Override
 	public int assignOwner(IPerson owner) {
 		if (this.owner != null)
@@ -102,18 +91,16 @@ public class BasicExample implements IExample {
 	}
 
 	@Override
-	public Long getId() {
-		return id;
-	}
-
-	@Override
 	public IPerson getOwner() {
 		return owner;
 	}
 	
 
-	public void addCategory(long catId) {
-		categoryIds.add(catId);
+	public void addCategory(Category category) {
+		categoryList.add(category);
+		//check if it isn't there
+		//TODO
+		category.addCodeExample(this);
 	}
 
 	

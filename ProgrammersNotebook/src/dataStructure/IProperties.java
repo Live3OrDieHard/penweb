@@ -14,8 +14,8 @@ public interface IProperties
 	public String getLanguage();
 	public void setLanguage(String language);
 
-	public ArrayList<Long> getCategories();
-	public void setCategories(ArrayList<Long> categories);
-	public void addCategory(Long categoryId);
+	public ArrayList<Category> getCategories();
+	public void setCategories(ArrayList<Category> categories);
+	public void addCategory(Category category);
 	
 }

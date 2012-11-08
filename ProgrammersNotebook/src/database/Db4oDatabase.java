@@ -31,8 +31,6 @@ public class Db4oDatabase implements IDatabase {
 
 	@Override
 	public void store(IEntry e) {
-		long id = this.getNewId();
-		e.assignID(id);
 		e.assignOwner(null);
 		db.store(e);
 	}
@@ -52,8 +50,7 @@ public class Db4oDatabase implements IDatabase {
 		if (hasTitle && hasOwner) {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
-					return (e.getTitle().equals(title) && e.getOwnerId() == owner
-							.getId());
+					return (e.getTitle().equals(title) && e.getOwnerId() == owner.getId());
 				}
 			});
 		} else if (hasTitle) {
@@ -102,9 +99,6 @@ public class Db4oDatabase implements IDatabase {
 	/**
 	 * TODO: generate it, somehow
 	 */
-	private Long getNewId() {
-		return (long) (Math.random() * 1000000);
-	}
 
 	/**
 	 * 
