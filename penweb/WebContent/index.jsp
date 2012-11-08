@@ -59,11 +59,11 @@
 			<% int id = 1; %>
 			<% List<IExample> ex = webcon.getExamples(); %>
 			<% for (IExample e : ex) { %>
-				<a href="viewcode.jsp?id=<%=id%>">
+				<a href="view.jsp?id=<%=id%>">
 					<li>
 						<h1><%= e.getTitle() %></h1>
 						<div class="fade"></div>
-						<div class="code"><%= e.getCode().replaceAll("\n", "<br>") %></div>
+						<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
 					</li>
 				</a>
 				<% id++; %>

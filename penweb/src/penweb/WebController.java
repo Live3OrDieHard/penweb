@@ -11,7 +11,7 @@ public class WebController {
 	private IDatabase db;
 	
 	public WebController() {
-		this.db = new Db4oDatabase("webDb.yap");
+		this.db = new Db4oDatabase("webDb2.yap");
 	}
 	
 	public void populate() {
