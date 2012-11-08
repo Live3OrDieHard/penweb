@@ -1,7 +1,6 @@
 package dataStructure;
 
 /**
- * 
  * @author Thanaporn
  * for non-user people involved
  * e.g. authors that are not users
@@ -26,11 +25,15 @@ public class NonUser implements IPerson
 	/**
 	 * @see dataStructure.IPerson#getName()
 	 */
+	@Override
 	public String getName()
 	{
 		return this.name;
 	}
 
+	/**
+	 * @see dataStructure.IPerson#assignName(String)
+	 */
 	@Override
 	public void assignName(String name) {
 		if(this.name!=null)
@@ -41,10 +44,11 @@ public class NonUser implements IPerson
 			this.name = name;
 	}
 
-	@Override
 	/**
-	 * return null for non-user
+	 * Return null for non-user
+	 * @see dataStructure.IPerson#getId()
 	 */
+	@Override
 	public Long getId() {
 		return null;
 	}

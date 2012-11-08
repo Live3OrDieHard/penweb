@@ -38,6 +38,9 @@ public class BasicExample implements IExample {
 		this.id = -1L;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int assignOwner(IPerson owner) {
 		if (this.owner != null)
@@ -47,57 +50,89 @@ public class BasicExample implements IExample {
 		return 0;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<IPerson> getAuthors() {
 		return authors;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setAuthors(List<IPerson> authors) {
 		this.authors = authors;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getCode() {
 		return code;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setCode(String code) {
 		this.code = code;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ExampleProperties getProperties() {
 		return properties;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public IPerson getOwner() {
 		return owner;
 	}
 	
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public void addCategory(Category category) {
 		categoryList.add(category);
 		//check if it isn't there
@@ -105,15 +140,17 @@ public class BasicExample implements IExample {
 		category.addCodeExample(this);
 	}
 
-	
-	@Override
 	/**
-	 * 
+	 * {@inheritDoc}
 	 */
+	@Override
 	public Long getOwnerId() {
 		return this.owner.getId();
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setProperties(IProperties p)
 	{
@@ -121,6 +158,9 @@ public class BasicExample implements IExample {
 		this.properties.setSource(p.getSource());
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public BasicExample transferFromBuffer(BufferEntry e)
 	{
@@ -132,7 +172,9 @@ public class BasicExample implements IExample {
 		return this;
 	}
 	
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int assignId(Long id) {
 		if (this.id != -1)
@@ -142,6 +184,9 @@ public class BasicExample implements IExample {
 		return 0;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Long getId() {
 		return this.id;

@@ -68,12 +68,12 @@ public class Controller {
 	 * @param buff
 	 */
 	public void addCategory(BufferEntry buff) {
-		if (db.isNameRepeat(buff.getTitle()))
-		{
-			//TODO: Throw exception
-		}
-		
-		else 
+//		if (db.isNameRepeat(buff.getTitle()))
+//		{
+//			//TODO: Throw exception
+//		}
+//		
+//		else 
 		{
 			Category newC = new Category(buff.getOwner(), buff.getDescription(),
 					buff.getTitle());

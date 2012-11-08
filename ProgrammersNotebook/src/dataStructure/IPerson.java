@@ -18,5 +18,8 @@ public interface IPerson
 	 */
 	Long getId();
 
+	/**
+	 * @param name The new name for a person. Fails if the person already has a name.
+	 */
 	void assignName(String name);
 }
