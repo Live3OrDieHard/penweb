@@ -1,23 +1,17 @@
 package dataStructure;
 
 /**
- * 
  * @author Thanaporn
  * IEntry should be an entry
  * covering anything from examples/codes/tests to folders
  * 
  */
 public interface IEntry 
-{
+{	
 	/**
-	 * @return a unique ID associated with the entry
+	 * @return The owner of an entry.
 	 */
-	Long getId();
-	
-	/**
-	 * @return The ID of the owner of an entry.
-	 */
-	Long getOwnerId();
+	IPerson getOwner();
 	
 	/**
 	 * Assigns an owner for an entry. It will do nothing if the entry already has an owner
@@ -25,12 +19,6 @@ public interface IEntry
 	 * @return 0 if success, 1 if entry already has an owner
 	 */
 	int assignOwner(IPerson owner);
-
-	/**
-	 * @param id The id for the entry
-	 * @return 0 if success, 1 otherwise.
-	 */
-	int assignId(Long id);
 }
 
 /*

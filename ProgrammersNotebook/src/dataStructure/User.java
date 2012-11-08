@@ -11,21 +11,10 @@ public class User implements IPerson
 	 */
 	private String name;
 	
-	/**
-	 * The user id number
-	 */
-	private Long userId;
-	
 	@Override
 	public String getName()
 	{
 		return this.name;
-	}
-
-	@Override
-	public Long getId()
-	{
-		return this.userId;
 	}
 	
 	@Override

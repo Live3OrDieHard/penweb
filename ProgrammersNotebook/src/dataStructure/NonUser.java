@@ -44,13 +44,4 @@ public class NonUser implements IPerson
 			this.name = name;
 	}
 
-	/**
-	 * Return null for non-user
-	 * @see dataStructure.IPerson#getId()
-	 */
-	@Override
-	public Long getId() {
-		return null;
-	}
-
 }

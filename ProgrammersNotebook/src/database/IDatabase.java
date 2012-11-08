@@ -37,8 +37,4 @@ public interface IDatabase {
 	
 	public ArrayList<String> listCategoryNames ();
 	List<ICategory> getAllCategory();
-	
-	public IEntry getByID(Long id);
-	
-	public Long getNewId();
 }

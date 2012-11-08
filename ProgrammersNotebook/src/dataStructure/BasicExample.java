@@ -15,7 +15,6 @@ public class BasicExample implements IExample {
 	private IPerson owner;
 	private ExampleProperties properties;
 	private String title;
-	private Long id;
 	
 	/**
 	 * Categories the example belongs to
@@ -35,7 +34,6 @@ public class BasicExample implements IExample {
 		authors = new LinkedList<IPerson>();
 		owner = null;
 		properties = new ExampleProperties();
-		this.id = -1L;
 	}
 	
 	/**
@@ -139,14 +137,6 @@ public class BasicExample implements IExample {
 		//TODO
 		category.addCodeExample(this);
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Long getOwnerId() {
-		return this.owner.getId();
-	}
 	
 	/**
 	 * {@inheritDoc}
@@ -170,25 +160,5 @@ public class BasicExample implements IExample {
 		this.properties = e.getProperties();
 		this.title = e.getTitle();
 		return this;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int assignId(Long id) {
-		if (this.id != -1)
-			return 1; // return 1 if already assigned
-		else
-			this.id = id;
-		return 0;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Long getId() {
-		return this.id;
 	}
 }

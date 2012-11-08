@@ -87,47 +87,15 @@ public class Db4oDatabaseTest {
 				break;
 			}
 		}
+		
 		assertEquals(entry2.getDescription().equals("itworks!"), true);
-	}
-	
-	@Test
-	public void testID() {
-		BasicExample entry1 = new BasicExample();
-		BasicExample entry2 = new BasicExample();
-		BasicExample entry3 = new BasicExample();
-		BasicExample entry4 = new BasicExample();
-		BasicExample entry5 = new BasicExample();
-		
-		testee.store(entry1);
-		testee.store(entry2);
-		testee.store(entry3);
-		testee.store(entry4);
-		testee.store(entry5);
-		
-		assertEquals(entry1.getId()==0 && entry5.getId()==4, true);
-	}
-	
-	@Test
-	public void testGetByID() {
-		BasicExample entry1 = new BasicExample();
-		BasicExample entry2 = new BasicExample();
-		BasicExample entry3 = new BasicExample();
-		BasicExample entry4 = new BasicExample();
-		BasicExample entry5 = new BasicExample();
-
-		testee.store(entry1);
-		testee.store(entry2);
-		testee.store(entry3);
-		testee.store(entry4);
-		testee.store(entry5);
-		
-		assertEquals(testee.getByID(entry5.getId()), entry5);
 	}
 	
 	@After
 	public void cleanup() throws IOException {
 		testee.close();
 
+		//Delete the database. We don't need it anymore.
 		File f = new File(databaseName);
 		if (f.exists())
 			f.delete();

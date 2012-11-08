@@ -55,5 +55,4 @@ public interface IProperties
 	 * @param category The category to add the code example to.
 	 */
 	public void addCategory(Category category);
-	
 }

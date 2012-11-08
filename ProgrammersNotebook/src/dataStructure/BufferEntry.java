@@ -24,8 +24,6 @@ public class BufferEntry
 
 	private String description;
 
-	private Long id; //shouldn't have an id. It's server-side
-
 	/**
 	 * Language in which the example is written
 	 */
@@ -63,12 +61,7 @@ public class BufferEntry
 	}
 	public String getDescription() {
 		return description;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
+	}	
 	public String getLanguage() {
 		return language;
 	}
@@ -95,9 +88,6 @@ public class BufferEntry
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 	public void setLanguage(String language) {
 		this.language = language;

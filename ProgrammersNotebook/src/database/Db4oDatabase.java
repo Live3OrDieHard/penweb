@@ -31,8 +31,6 @@ public class Db4oDatabase implements IDatabase {
 
 	@Override
 	public void store(IEntry e) {
-		e.assignOwner(null);
-		e.assignId(this.getNewId());
 		db.store(e);
 	}
 
@@ -51,8 +49,7 @@ public class Db4oDatabase implements IDatabase {
 		if (hasTitle && hasOwner) {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
-					return (e.getTitle().equals(title) && e.getOwnerId() == owner
-							.getId());
+					return (e.getTitle().equals(title) && e.getOwner() == owner);
 				}
 			});
 		} else if (hasTitle) {
@@ -118,7 +115,6 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * 
 	 * @param name
 	 * @return true if the name given is already taken by another category false
 	 *         otherwise
@@ -134,38 +130,5 @@ public class Db4oDatabase implements IDatabase {
 			}
 		}
 		return isSame;
-	}
-
-	@Override
-	/**
-	 * search for an entry by its id (examples or categories)
-	 * @return IEntry containing that id if there is only one result.
-	 * Null if there is no IEntry with that ID.
-	 * @throw non-unique exception if there is more than one result
-	 */
-	public IEntry getByID(final Long id) {
-		List<IEntry> list = db.query(new Predicate<IEntry>() {
-			public boolean match(IEntry e) {
-				Long thisid = e.getId();
-				return (thisid == id);
-			}
-		});
-		if (list.size() == 1)
-			return list.get(0);
-		else if (list.size() == 0)
-			return null;
-		else
-			return null; // throw non-unique exception if there is more than one
-							// result
-	}
-
-	@Override
-	/**
-	 * get a unique id from the database
-	 *  @return a unique id (Long)
-	 */
-	public Long getNewId() {
-		return (long) this.getAll().size(); // should have a better way to do
-		// this
 	}
 }
