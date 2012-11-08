@@ -4,8 +4,6 @@ import dataStructure.*;
 
 public interface IController 
 {
-	void addEntry();
-	
-	void addToDB(BasicExample bx);
-
+	public void addBasicExample(BufferEntry buf);
+	public void addCategory(BufferEntry buf);
 }

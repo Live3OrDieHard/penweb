@@ -13,7 +13,7 @@ import dataStructure.*;
  *         MockUI0 has a prototype of retrieve function see MockUI0 for more
  *         info
  */
-public class Controller {
+public class Controller implements IController {
 	IDatabase db;
 	IUserInterface ui;
 
@@ -22,7 +22,8 @@ public class Controller {
 		this.ui = ui;
 	}
 
-	void addBasicExample(BufferEntry buf) {
+	@Override
+	public void addBasicExample(BufferEntry buf) {
 		/*
 		 * ExampleHeader h = (ExampleHeader) ui.getHeader(); ExampleContent c =
 		 * (ExampleContent) ui.getContent();
@@ -33,6 +34,7 @@ public class Controller {
 		e.setAuthors(buf.getAuthors());
 		e.setLanguage(buf.getLanguage());
 		e.setSource(buf.getSource());
+		e.setDescription(buf.getDescription());
 		this.addToDB(e);
 	}
 
@@ -60,21 +62,22 @@ public class Controller {
 
 	/**
 	 * @author Awiovanna, kirkgrimsley, dmulcahy, pren, tpatikorn, jchines
-	 * addCategory takes in a buffer object (entered from the GUI) and creates
-	 * a new category, which is pushed to the database. The category is initially
-	 * empty, meaning it has no code entries associated with it. 
+	 *         addCategory takes in a buffer object (entered from the GUI) and
+	 *         creates a new category, which is pushed to the database. The
+	 *         category is initially empty, meaning it has no code entries
+	 *         associated with it.
 	 * @param buff
 	 */
 	public void addCategory(BufferEntry buff) {
-//		if (db.isNameRepeat(buff.getTitle()))
-//		{
-//			//TODO: Throw exception
-//		}
-//		
-//		else 
+		// if (db.isNameRepeat(buff.getTitle()))
+		// {
+		// //TODO: Throw exception
+		// }
+		//
+		// else
 		{
-			Category newC = new Category(buff.getOwner(), buff.getDescription(),
-					buff.getTitle());
+			Category newC = new Category(buff.getOwner(),
+					buff.getDescription(), buff.getTitle());
 			db.store(newC);
 		}
 	}
@@ -82,4 +85,5 @@ public class Controller {
 	public List<IExample> getAllExampleinDB() {
 		return db.getAllExample();
 	}
+
 }

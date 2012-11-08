@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -119,6 +120,28 @@ public class Db4oDatabaseTest {
 	public void testGetByIDnotfound() {
 		assertEquals(testee.getByID(-1L), null);
 	}
+	
+
+	@Test
+	public void testGetTitleList() {
+
+		Category entry1 = new Category(null,null,"Live");
+		Category entry2 = new Category(null,null,"Three");
+		Category entry3 = new Category(null,null,"Or");
+		Category entry4 = new Category(null,null,"Die");
+		Category entry5 = new Category(null,null,"Hard");
+		
+		testee.store(entry1);
+		testee.store(entry2);
+		testee.store(entry3);
+		testee.store(entry4);
+		testee.store(entry5);
+		
+		ArrayList<String> list = testee.listCategoryNames();
+		String name = list.get(0)+list.get(1)+list.get(2)+list.get(3)+list.get(4);
+		assertEquals(name,"LiveThreeOrDieHard");
+	}
+
 	
 	@After
 	public void cleanup() throws IOException {

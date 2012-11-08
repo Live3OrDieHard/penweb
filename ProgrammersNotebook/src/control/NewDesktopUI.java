@@ -31,10 +31,13 @@ import java.awt.SystemColor;
 import javax.swing.border.LineBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JTextPane;
+
+import dataStructure.BufferEntry;
+
 import java.awt.Toolkit;
 
 
-public class NewDesktopUI extends JFrame {
+public class NewDesktopUI extends JFrame implements IUserInterface {
 
 	private JPanel contentPane;
 	private JDesktopPane desktopPane;
@@ -45,10 +48,9 @@ public class NewDesktopUI extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-
-	/**
-	 * Launch the application.
-	 */
+	private IController controller;
+	
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -60,12 +62,12 @@ public class NewDesktopUI extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public NewDesktopUI() {
+	public NewDesktopUI(IController controller) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NewDesktopUI.class.getResource("/javagui/resources/Notebook-icon.png")));
 		setTitle("Personal Example Notebook (PEN)");
 		setBackground(SystemColor.desktop);
@@ -383,6 +385,18 @@ public class NewDesktopUI extends JFrame {
 		scrollBar.setBounds(679, 11, 17, 398);
 		desktopPane.add(scrollBar);
 		contentPane.setLayout(gl_contentPane);
+	}
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BufferEntry getBufferEntry() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

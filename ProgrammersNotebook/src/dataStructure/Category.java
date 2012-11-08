@@ -11,14 +11,14 @@ import java.util.ArrayList;
 public class Category implements ICategory {
 	private IPerson owner;
 	private String description;
-	private String name;
+	private String title;
 	private List<IExample> exampleList;
 	private Long id;
 	
-	public Category(IPerson owner, String description, String name) {
+	public Category(IPerson owner, String description, String title) {
 		this.owner = owner;
 		this.description = description;
-		this.name = name;
+		this.title = title;
 		this.exampleList = new ArrayList<IExample>();
 		this.id = -1L;
 	}
@@ -38,17 +38,17 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#getName()
+	 * @see dataStructure.ICategory#getTitle()
 	 */
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
 	/**
-	 * @see dataStructure.ICategory#setName()
+	 * @see dataStructure.ICategory#setTitle()
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class Category implements ICategory {
 
 	@Override
 	public int assignId(Long id) {
-		if (this.id != -1)
+		if (this.id != -1L)
 			return 1; // return 1 if already assigned
 		else
 			this.id = id;

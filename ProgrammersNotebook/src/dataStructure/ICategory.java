@@ -1,16 +1,17 @@
 package dataStructure;
 
 public interface ICategory extends IEntry{
-	/**
-	 * @return Returns the name of the category. For example: "Web" or "Mobile".
-	 */
-	String getName();
 	
 	/**
-	 * Sets the name of a category.
-	 * @param name The name of the category
+	 * @return Returns the title of the category. For example: "Web" or "Mobile".
 	 */
-	void setName(String name);
+	String getTitle();
+	
+	/**
+	 * Sets the title of a category.
+	 * @param title The title of the category
+	 */
+	void setTitle(String title);
 	
 	/**
 	 * @return Returns the description of a category.

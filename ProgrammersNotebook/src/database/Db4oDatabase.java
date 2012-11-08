@@ -106,9 +106,8 @@ public class Db4oDatabase implements IDatabase {
 	public ArrayList<String> listCategoryNames() {
 		List<ICategory> catList = getAllCategory();
 		ArrayList<String> nameList = new ArrayList<String>();
-		int i;
-		for (i = 0; i <= catList.size(); i++) {
-			nameList.add(catList.get(i).getName());
+		for (int i = 0; i < catList.size(); i++) {
+			nameList.add(catList.get(i).getTitle());
 		}
 		return nameList;
 	}
@@ -121,9 +120,9 @@ public class Db4oDatabase implements IDatabase {
 
 	public boolean isNameRepeat(String name) {
 		ArrayList<String> catNameList = listCategoryNames();
-		int i;
+
 		boolean isSame = false;
-		for (i = 0; i <= catNameList.size(); i++) {
+		for (int i = 0; i <= catNameList.size(); i++) {
 			if (name.equals(catNameList.get(i))) {
 				return true;
 			}
