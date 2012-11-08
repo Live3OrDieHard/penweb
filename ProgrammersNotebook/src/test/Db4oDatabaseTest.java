@@ -3,22 +3,14 @@ package test;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import dataStructure.BasicExample;
-import dataStructure.ExampleHeader;
-import dataStructure.IEntry;
-import dataStructure.IExample;
-import dataStructure.NonUser;
+import dataStructure.*;
 import database.Db4oDatabase;
 
 public class Db4oDatabaseTest {
@@ -71,44 +63,43 @@ public class Db4oDatabaseTest {
 	@Test
 	public void testedit() {
 		BasicExample entry = new BasicExample();
-		entry.setCode("haha");
-		entry.setTitle("title");
-		entry.setDescription(null);
+		entry.setCode("Hello world!");
 		testee.store(entry);
 
-		entry.setDescription("itworks!");
+		entry.setTitle("itworks!");
 
 		BasicExample entry2 = new BasicExample();
 
-		List<IExample> list = testee.getByHeader("title", null);
+		List<IExample> list = testee.getByHeader("itworks!", null);
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i) instanceof BasicExample) {
 				entry2 = (BasicExample) list.get(i);
 				break;
 			}
 		}
-		assertEquals(entry2.getDescription().equals("itworks!"), true);
+		assertEquals(entry2.getCode(), "Hello world!");
 	}
 	
 	@Test
-	public void testID() {
+	public void testgetNewIdunassigned() {
 		BasicExample entry1 = new BasicExample();
-		BasicExample entry2 = new BasicExample();
-		BasicExample entry3 = new BasicExample();
-		BasicExample entry4 = new BasicExample();
-		BasicExample entry5 = new BasicExample();
 		
 		testee.store(entry1);
-		testee.store(entry2);
-		testee.store(entry3);
-		testee.store(entry4);
-		testee.store(entry5);
 		
-		assertEquals(entry1.getId()==0 && entry5.getId()==4, true);
+		assertNotSame(entry1.getId(), -1L);
+	}
+
+	@Test
+	public void testgetNewIdassigned() {
+		BasicExample entry1 = new BasicExample();
+		Long id = 55L;
+		entry1.assignId(id);
+		
+		assertEquals(entry1.getId(), id);
 	}
 	
 	@Test
-	public void testGetByID() {
+	public void testGetByIDfound() {
 		BasicExample entry1 = new BasicExample();
 		BasicExample entry2 = new BasicExample();
 		BasicExample entry3 = new BasicExample();
@@ -122,6 +113,11 @@ public class Db4oDatabaseTest {
 		testee.store(entry5);
 		
 		assertEquals(testee.getByID(entry5.getId()), entry5);
+	}
+	
+	@Test
+	public void testGetByIDnotfound() {
+		assertEquals(testee.getByID(-1L), null);
 	}
 	
 	@After

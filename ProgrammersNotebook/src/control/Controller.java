@@ -31,10 +31,8 @@ public class Controller {
 		e.setTitle(buf.getTitle());
 		e.setCode(buf.getCode());
 		e.setAuthors(buf.getAuthors());
-		ExampleProperties prop = new ExampleProperties();
-		prop.setLanguage(buf.getLanguage());
-		prop.setSource(buf.getSource());
-		e.setProperties(prop);
+		e.setLanguage(buf.getLanguage());
+		e.setSource(buf.getSource());
 		this.addToDB(e);
 	}
 

@@ -1,12 +1,9 @@
 package test;
 
 import org.junit.Before;
-import org.junit.Test;
 
-import dataStructure.Category;
 import database.Db4oDatabase;
 
-import java.util.ArrayList; 
 
 
 public class CategoryTest {

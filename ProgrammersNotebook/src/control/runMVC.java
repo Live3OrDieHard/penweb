@@ -5,7 +5,7 @@ import java.io.IOException;
 import database.Db4oDatabase;
 import database.IDatabase;
 
-public class main 
+public class runMVC 
 {
 	/**
 	 * when start running, type 

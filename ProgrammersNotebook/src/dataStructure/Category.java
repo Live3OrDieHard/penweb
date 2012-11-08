@@ -22,7 +22,7 @@ public class Category implements ICategory {
 		this.exampleList = new ArrayList<IExample>();
 		this.id = -1L;
 	}
-	
+
 	/**
 	 * @see dataStructure.ICategory#getDescription()
 	 */
@@ -50,15 +50,30 @@ public class Category implements ICategory {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
 	public void addCodeExample(IExample example) {
-		this.exampleList.add(example);
-		//TODO: check if it isn't there
-		if(true)
-			example.getProperties().addCategory(this);
+		if(!this.hasExample(example))
+		{
+			this.exampleList.add(example);
+			example.addCategory(this);
+		}
+	}
+
+	/**
+	 * helper function check if the category (this) is already has example
+	 * 
+	 * @param example the example wanted to be check
+	 * @return true if the category already has example. false otherwise
+	 */
+	private boolean hasExample(IExample example) {
+		for (int i = 0; i < this.exampleList.size(); i++) {
+			if (this.exampleList.get(i).equals(example))
+				return true;
+		}
+		return false;
 	}
 
 	/**
@@ -89,5 +104,10 @@ public class Category implements ICategory {
 	@Override
 	public Long getId() {
 		return this.id;
+	}
+	
+	@Override
+	public IPerson getOwner() {
+		return owner;
 	}
 }

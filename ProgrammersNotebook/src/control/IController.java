@@ -1,6 +1,5 @@
 package control;
 
-import database.*;
 import dataStructure.*;
 
 public interface IController 

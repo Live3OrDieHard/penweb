@@ -99,10 +99,6 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * TODO: generate it, somehow
-	 */
-
-	/**
 	 * 
 	 * @return nameList, a list of the name of each category, as a string.
 	 */
@@ -118,7 +114,6 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * 
 	 * @param name
 	 * @return true if the name given is already taken by another category false
 	 *         otherwise

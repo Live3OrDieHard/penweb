@@ -38,7 +38,6 @@ import java.awt.event.WindowEvent;
 
 
 /**
- * 
  * @author Thanaporn original from Anjali's GUI
  * This can interact with database in repo (MarchTest.yap)
  * it can store and retrieve file from data base
@@ -51,7 +50,6 @@ import java.awt.event.WindowEvent;
  * in the list when there are more than 3 entries
  * and lack of init function that retrieves data from database
  * at the start of the program
- *
  */
 public class DesktopUI extends JFrame implements IUserInterface {
 
@@ -102,7 +100,6 @@ public class DesktopUI extends JFrame implements IUserInterface {
 		lblExamples.setBounds(15, 16, 137, 16);
 		lblExamples.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/icon-book.png")));
 		listModel.addElement("Add New Example...");
-		int counter = controller.getAllinDB().size();
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(15, 35, 139, 234);
 
@@ -276,8 +273,8 @@ public class DesktopUI extends JFrame implements IUserInterface {
 							lblTitle_1.setText("Title: "+bx.getTitle());
 							textArea.setText("Code:\n"+bx.getCode());
 							textArea_1.setText("Author: "+bx.getAuthors().get(0).getName()
-									+"\n\nLanguage: "+bx.getProperties().getLanguage()
-									+"\n\nSource: "+bx.getProperties().getSource());
+									+"\n\nLanguage: "+bx.getLanguage()
+									+"\n\nSource: "+bx.getSource());
 
 						}
 					}
