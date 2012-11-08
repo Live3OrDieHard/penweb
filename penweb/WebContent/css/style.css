@@ -167,7 +167,7 @@ a {
 	display: none;
 }
 
-.content .right .code {
+.content .right p.code {
 	font-family: Courier;
 	padding: 25px;
 	background: #222222;
