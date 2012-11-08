@@ -153,12 +153,26 @@ a {
 	color: #72FF72;
 }
 
-.content .right form {
+.content .right {
 	padding: 25px;
 }
 
-.content .right form input, .content .right form textarea {
-	margin: 25px;
+.content .right p {
+	margin-bottom: 25px;
+}
+
+.content .right .code {
+	font-family: Courier;
+	padding: 25px;
+	background: #222222;
+}
+
+.content .right b {
+	font-weight: bold;
+}
+
+.content .right input, .content .right textarea {
+	margin-bottom: 25px;
 	display: block;
 	background: #333333;
 	border: none;
@@ -169,20 +183,21 @@ a {
 	font-family: Verdana, Helvetica, Arial;
 }
 
-.content .right form textarea {
+.content .right textarea {
 	width: 500px;
 	height: 300px;
+	font-family: Courier;
 }
 
-.content .right form input[type=submit] {
+.content .right input[type=submit] {
 	width: 200px;
 }
 
-.content .right form input[type=submit]:hover {
+.content .right input[type=submit]:hover {
 	background: #444444;
 }
 
-.content .right form input[type=submit]:active {
+.content .right input[type=submit]:active {
 	background: #222222;
 }
 
