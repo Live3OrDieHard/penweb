@@ -53,16 +53,6 @@
 			<li>Algorithms (0)</li>
 			<li>Math (0)</li>
 		</ul>
-		<h1>Public Examples</h1>
-		<ul>
-			<li>All Entries (0)</li>
-			<li>Tests (0)</li>
-			<li>Security (0)</li>
-			<li>Search (0)</li>
-			<li>Data Structures (0)</li>
-			<li>Algorithms (0)</li>
-			<li>Math (0)</li>
-		</ul>
 	</div>
 	<div class="right">
 		<form action="addCode" method="post">
