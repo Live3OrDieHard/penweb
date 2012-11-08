@@ -13,16 +13,14 @@ public class Category implements ICategory {
 	private String description;
 	private String name;
 	private List<IExample> exampleList;
-	private Long id;
-	
+
 	public Category(IPerson owner, String description, String name) {
 		this.owner = owner;
 		this.description = description;
 		this.name = name;
 		this.exampleList = new ArrayList<IExample>();
-		this.id = -1L;
 	}
-
+	
 	/**
 	 * @see dataStructure.ICategory#getDescription()
 	 */
@@ -50,30 +48,16 @@ public class Category implements ICategory {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
 	public void addCodeExample(IExample example) {
-		if(!this.hasExample(example))
+		if (!exampleList.contains(example))
 		{
 			this.exampleList.add(example);
-			example.addCategory(this);
+			example.getProperties().addCategory(this);
 		}
-	}
-
-	/**
-	 * helper function check if the category (this) is already has example
-	 * 
-	 * @param example the example wanted to be check
-	 * @return true if the category already has example. false otherwise
-	 */
-	private boolean hasExample(IExample example) {
-		for (int i = 0; i < this.exampleList.size(); i++) {
-			if (this.exampleList.get(i).equals(example))
-				return true;
-		}
-		return false;
 	}
 
 	@Override
@@ -88,24 +72,5 @@ public class Category implements ICategory {
 	@Override
 	public IPerson getOwner() {
 		return owner;
-	}
-
-	@Override
-	public Long getId() {
-		return this.id;
-	}
-
-	@Override
-	public Long getOwnerId() {
-		return this.owner.getId();
-	}
-
-	@Override
-	public int assignId(Long id) {
-		if (this.id != -1)
-			return 1; // return 1 if already assigned
-		else
-			this.id = id;
-		return 0;
 	}
 }
