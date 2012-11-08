@@ -1,8 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="database.*,penweb.*,dataStructure.*,java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
+	<%
+		// Instantiate the web controller and grab id paramter
+		WebController webcon = new WebController();
+		int id = Integer.parseInt(request.getParameter("id")) - 1;
+	%>
 	<meta charset="UTF-8">
-	<title>PEN &middot; Create Entry</title>
+	<title>PEN &middot; <%= webcon.getTitles().get(id) %></title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -14,27 +21,7 @@
 			$("input[name=username]").watermark("Username");
 			$("input[name=password]").watermark("Password");
 
-			// Watermarks for new entry
-			$("input[name=title]").watermark("Title");
-			$("input[name=author]").watermark("Author");
-			$("input[name=language]").watermark("Language");
-			$("textarea[name=content]").watermark("Enter code here...");
 		});
-
-		// Checks submission to make sure title and content aren't blank
-		function checkSubmit() {
-			if ($("input[name=title]").val() == "") {
-				$(".error").html("Error: Please provide a title.");
-				$(".error").show();
-				return false;
-			}
-			if ($("textarea[name=content]").val() == "") {
-				$(".error").html("Error: Please enter code.");
-				$(".error").show();
-				return false;
-			}					
-			return true;
-		}
 	</script>
 </head>
 <body>
@@ -53,14 +40,14 @@
 		<a href="create.jsp"><div class="button green">Create Entry</div></a>
 	</div>
 	<div class="right">
-		<h1>New Entry</h1>
+		<h1><%=webcon.getTitles().get(id) %></h1>
 	</div>
 </div>
 <div class="content">
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<a href="index.jsp"><li>All Entries (1)</li></a>
+			<a href="index.jsp"><li>All Entries (<%=webcon.getNumEntries() %>)</li></a>
 			<li>Tests (0)</li>
 			<li>Security (0)</li>
 			<li>Search (0)</li>
@@ -70,15 +57,17 @@
 		</ul>
 	</div>
 	<div class="right">
-		<form action="addCode" method="post" onsubmit="return checkSubmit();">
-			<p class="error"></p>
-			<input type="text" name="title" />
-			<input type="text" name="author" />
-			<input type="text" name="language" />
-			<textarea name="content"></textarea>
-			<input type="submit" class="button black" value="Save Entry" />
-		</form>
+		<% IExample ex= webcon.getExamples().get(id); %>
+		<p>Author: <b><%=ex.getAuthors().get(0).getName() %></b></p>
+		<p>Language: <%=ex.getProperties().getLanguage() %><b></b></p>
+		<p class="code">
+			<%= ex.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %>
+		</p>
 	</div>
 </div>
+<%
+	// Close the webcon
+	webcon.close();
+%>
 </body>
 </html>

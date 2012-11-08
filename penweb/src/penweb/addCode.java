@@ -34,7 +34,7 @@ public class addCode extends HttpServlet {
 		WebController webcon = new WebController();
 		webcon.addCode(title, content, language, author);
 		webcon.close();
-		response.sendRedirect("/");
+		response.sendRedirect("/penweb");
 	}
 
 }
