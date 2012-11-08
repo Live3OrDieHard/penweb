@@ -154,11 +154,10 @@ a {
 }
 
 .content .right {
-	padding: 25px;
 }
 
-.content .right p {
-	margin-bottom: 25px;
+.content .right p, .content .right form {
+	margin: 25px 25px 0 25px;
 }
 
 .content .right .error {
