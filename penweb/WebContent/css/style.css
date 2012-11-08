@@ -161,6 +161,12 @@ a {
 	margin-bottom: 25px;
 }
 
+.content .right .error {
+	font-weight: bold;
+	color: #FF0000;
+	display: none;
+}
+
 .content .right .code {
 	font-family: Courier;
 	padding: 25px;

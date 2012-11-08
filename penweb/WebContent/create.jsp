@@ -20,6 +20,21 @@
 			$("input[name=language]").watermark("Language");
 			$("textarea[name=content]").watermark("Enter code here...");
 		});
+
+		// Checks submission to make sure title and content aren't blank
+		function checkSubmit() {
+			if ($("input[name=title]").val() == "") {
+				$(".error").html("Error: Please provide a title.");
+				$(".error").show();
+				return false;
+			}
+			if ($("textarea[name=content]").val() == "") {
+				$(".error").html("Error: Please enter code.");
+				$(".error").show();
+				return false;
+			}					
+			return true;
+		}
 	</script>
 </head>
 <body>
@@ -55,7 +70,8 @@
 		</ul>
 	</div>
 	<div class="right">
-		<form action="addCode" method="post">
+		<form action="addCode" method="post" onsubmit="return checkSubmit();">
+			<p class="error"></p>
 			<input type="text" name="title" />
 			<input type="text" name="author" />
 			<input type="text" name="language" />
