@@ -31,8 +31,8 @@
 			$("textarea[name=content]").watermark("Enter code here...");
 		});
 
-		// Checks submission to make sure title and content aren't blank
-		function checkSubmit() {
+		// Checks addCode submission to make sure title and content aren't blank
+		function checkAddCodeSubmit() {
 			if ($("input[name=title]").val() == "") {
 				$(".error").html("Error: Please provide a title.");
 				$(".error").show();
@@ -45,6 +45,17 @@
 			}					
 			return true;
 		}
+
+		// Checks addCategory submission to make sure name isn't blank
+		function checkAddCategorySubmit() {
+			if ($("#createCategory input[name=name]").val() == "") {
+				$(".modal .error").html("Error: Please provide a category name.");
+				$(".modal .error").show();
+				return false;
+			}
+			return true;
+		}
+
 
 		function newCategory() {
 			$("#createCategory").show();
@@ -63,7 +74,8 @@
 		<a href="javascript: closeModal();"><div class="close"></div></a>
 		<h1>New Category</h1>
 		<div class="modalContent">
-			<form action="addCategory" method="post">
+			<form action="addCategory" method="post" onsubmit="return checkAddCategorySubmit();">
+				<p class="error"></p>
 				<input type="text" name="name" />
 				<textarea name="desc"></textarea>
 				<input type="submit" value="Create" />
@@ -102,7 +114,7 @@
 		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
-		<form action="addCode" method="post" onsubmit="return checkSubmit();">
+		<form action="addCode" method="post" onsubmit="return checkAddCodeSubmit();">
 			<p class="error"></p>
 			<input type="text" name="title" />
 			<input type="text" name="author" />
