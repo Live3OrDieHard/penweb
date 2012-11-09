@@ -30,9 +30,7 @@ public class WebController {
 		IExample ex = new BasicExample();
 		ex.setTitle(title);
 		ex.setCode(content);
-		IProperties prop = new ExampleProperties();
-		prop.setLanguage(language);
-		ex.setProperties(prop);
+		ex.setLanguage(language);
 		IPerson auth = new User();
 		auth.assignName(author);
 		List<IPerson> authors = new ArrayList<IPerson>();
