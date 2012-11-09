@@ -52,21 +52,21 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private IController controller;
+	private static IController controller;
 	
 	
-	/* public static void main(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NewDesktopUI frame = new NewDesktopUI();
+					NewDesktopUI frame = new NewDesktopUI(controller);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-	} */
+	}
 
 	/**
 	 * Create the frame.
@@ -143,102 +143,59 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		panel_2.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		
 		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(0, 0, 214, 35);
 		panel_4.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel_4.setBackground(Color.BLACK);
 		
 		JLabel lblAuthor = new JLabel("Author:");
+		lblAuthor.setBounds(28, 75, 43, 15);
 		lblAuthor.setFont(new Font("Verdana", Font.PLAIN, 11));
 		
 		JLabel lblType = new JLabel("Type:");
+		lblType.setBounds(38, 101, 33, 15);
 		lblType.setFont(new Font("Verdana", Font.PLAIN, 11));
 		
 		JLabel lblTitle = new JLabel("Title:");
+		lblTitle.setBounds(42, 49, 29, 15);
 		lblTitle.setFont(new Font("Verdana", Font.PLAIN, 11));
 		
 		JLabel lblTags = new JLabel("Tags:");
+		lblTags.setBounds(39, 127, 32, 15);
 		lblTags.setFont(new Font("Verdana", Font.PLAIN, 11));
 		
 		JLabel lblCategories = new JLabel("Categories:");
+		lblCategories.setBounds(4, 153, 67, 15);
 		lblCategories.setFont(new Font("Verdana", Font.PLAIN, 11));
 		
 		textField = new JTextField();
+		textField.setBounds(84, 47, 121, 20);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
+		textField_1.setBounds(84, 73, 121, 20);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
+		textField_2.setBounds(84, 99, 121, 20);
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
+		textField_3.setBounds(84, 125, 121, 20);
 		textField_3.setColumns(10);
 		
 		textField_4 = new JTextField();
+		textField_4.setBounds(84, 151, 121, 20);
 		textField_4.setColumns(10);
 		
 		JLabel label = new JLabel("");
-		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
-		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(label)
-					.addContainerGap(211, Short.MAX_VALUE))
-				.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblTitle)
-						.addComponent(lblCategories)
-						.addComponent(lblAuthor)
-						.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblTags)
-							.addComponent(lblType)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-						.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-						.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-						.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-						.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTitle)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblAuthor)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblType)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTags)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblCategories)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(label)
-					.addContainerGap(418, Short.MAX_VALUE))
-		);
+		label.setBounds(11, 189, 0, 0);
 		panel_4.setLayout(null);
 		
 		JLabel lblProperties = new JLabel("Properties");
 		lblProperties.setForeground(UIManager.getColor("text"));
-		lblProperties.setBounds(77, 9, 78, 17);
+		lblProperties.setBounds(70, 9, 78, 17);
 		lblProperties.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_4.add(lblProperties);
-		panel_2.setLayout(gl_panel_2);
 		
 		JButton btnNewButton = new JButton("Add Category ");
 		btnNewButton.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/category.png")));
@@ -350,8 +307,8 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(desktopPane, GroupLayout.PREFERRED_SIZE, 912, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)))
 					.addGap(34))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -375,14 +332,27 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 548, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(desktopPane, GroupLayout.PREFERRED_SIZE, 634, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(506))))
+							.addGap(506))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 548, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
+		panel_2.setLayout(null);
+		panel_2.add(label);
+		panel_2.add(lblTitle);
+		panel_2.add(lblCategories);
+		panel_2.add(lblAuthor);
+		panel_2.add(lblTags);
+		panel_2.add(lblType);
+		panel_2.add(textField_4);
+		panel_2.add(textField_2);
+		panel_2.add(textField_3);
+		panel_2.add(textField_1);
+		panel_2.add(textField);
+		panel_2.add(panel_4);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Verdana", Font.PLAIN, 11));
