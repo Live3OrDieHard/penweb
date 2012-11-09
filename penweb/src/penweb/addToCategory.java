@@ -28,7 +28,7 @@ public class addToCategory extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		WebController webcon = new WebController();
-		String[] cids = request.getParameterValues("cids");
+		String[] cids = request.getParameterValues("cids[]");
 		String eid = request.getParameter("eid");
 		for (String s : cids) {
 			webcon.getCategoryById(Long.parseLong(s)).addCodeExample(webcon.getExampleById(Long.parseLong(eid)));
