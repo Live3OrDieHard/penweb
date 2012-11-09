@@ -11,16 +11,15 @@ import java.util.ArrayList;
 public class Category implements ICategory {
 	private IPerson owner;
 	private String description;
-	private String name;
+	private String title;
+	private List<IExample> exampleList;
 	private Long id;
-	private List<Long> codeIds;
-
-	public Category(IPerson owner, String description, String name) {
-		this.owner = owner;
+	
+	public Category(String title, String description) {
 		this.description = description;
-		this.name = name;
+		this.title = title;
+		this.exampleList = new ArrayList<IExample>();
 		this.id = -1L;
-		this.codeIds = new ArrayList<Long>();
 	}
 	
 	/**
@@ -38,47 +37,42 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#getName()
+	 * @see dataStructure.ICategory#getTitle()
 	 */
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
 	/**
-	 * @see dataStructure.ICategory#setName()
+	 * @see dataStructure.ICategory#setTitle()
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	/**
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
 	public void addCodeExample(IExample example) {
-		codeIds.add(example.getId());
+		if(!this.hasExample(example))
+		{
+			this.exampleList.add(example);
+			example.addCategory(this);
+		}
 	}
 
 	/**
-	 * @see dataStructure.IEntry#getEntryId()
+	 * helper function check if the category (this) is already has example
+	 * 
+	 * @param example the example wanted to be check
+	 * @return true if the category already has example. false otherwise
 	 */
-	public Long getEntryId() {
-		return id;
-	}
-
-	/**
-	 * @see dataStructure.IEntry#getOwnerId()
-	 */
-	public Long getOwnerId() {
-		return owner.getId();
-	}
-	
-	@Override
-	public int assignID(Long id) {
-		if (this.id != -1)
-			return 1; // return 1 if already assigned
-		else
-			this.id = id;
-		return 0;
+	private boolean hasExample(IExample example) {
+		for (int i = 0; i < this.exampleList.size(); i++) {
+			if (this.exampleList.get(i).equals(example))
+				return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -91,8 +85,26 @@ public class Category implements ICategory {
 	}
 
 	@Override
+	public IPerson getOwner() {
+		return owner;
+	}
+
+	@Override
 	public Long getId() {
 		return this.id;
 	}
 
+	@Override
+	public Long getOwnerId() {
+		return this.owner.getId();
+	}
+
+	@Override
+	public int assignId(Long id) {
+		if (this.id != -1L)
+			return 1; // return 1 if already assigned
+		else
+			this.id = id;
+		return 0;
+	}
 }

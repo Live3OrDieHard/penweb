@@ -1,9 +1,11 @@
 package database;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.db4o.*;
 import com.db4o.query.*;
 
+import dataStructure.ICategory;
 import dataStructure.IEntry;
 import dataStructure.IExample;
 import dataStructure.IPerson;
@@ -22,16 +24,15 @@ import dataStructure.IPerson;
 public class Db4oDatabase implements IDatabase {
 
 	private ObjectContainer db;
-	
+
 	public Db4oDatabase(String path) {
 		db = Db4oEmbedded.openFile(path);
 	}
-	
+
 	@Override
 	public void store(IEntry e) {
-		long id = this.getNewId();
-		e.assignID(id);
 		e.assignOwner(null);
+		e.assignId(this.getNewId());
 		db.store(e);
 	}
 
@@ -45,32 +46,32 @@ public class Db4oDatabase implements IDatabase {
 
 		boolean hasTitle = (title != null);
 		boolean hasOwner = (owner != null);
-		
+
 		// All authors searches only work if lists are ordered the same.
 		if (hasTitle && hasOwner) {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
-					return (e.getTitle().equals(title) && e.getOwnerId()==owner.getId());
+					return (e.getTitle().equals(title) && e.getOwnerId() == owner
+							.getId());
 				}
 			});
-		}
-		else if (hasTitle) {
+		} else if (hasTitle) {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
 					return e.getTitle().equals(title);
 				}
 			});
-		}
-		else if (hasOwner) {
+		} else if (hasOwner) {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
-					if(e.getOwner()!=null)
+					if (e.getOwner() != null)
 						return e.getOwner().getName().equals(owner.getName());
-					else return(e.getOwner()==owner);
+					else
+						return (e.getOwner() == owner);
 				}
 			});
-		}
-		else return db.query(IExample.class);
+		} else
+			return db.query(IExample.class);
 	}
 
 	@Override
@@ -83,7 +84,7 @@ public class Db4oDatabase implements IDatabase {
 	public void delete(IEntry e) {
 		// TODO Auto-generated method stub
 	}
-	
+
 	@Override
 	public void close() {
 		db.close();
@@ -93,12 +94,72 @@ public class Db4oDatabase implements IDatabase {
 		return db.query(IExample.class);
 	}
 
-	
+	public List<ICategory> getAllCategory() {
+		return db.query(ICategory.class);
+	}
+
 	/**
-	 * TODO: generate it, somehow
+	 * 
+	 * @return nameList, a list of the name of each category, as a string.
 	 */
-	private Long getNewId() 
-	{
-		return (long) (Math.random()*1000000);
+
+	public ArrayList<String> listCategoryNames() {
+		List<ICategory> catList = getAllCategory();
+		ArrayList<String> nameList = new ArrayList<String>();
+		for (int i = 0; i < catList.size(); i++) {
+			nameList.add(catList.get(i).getTitle());
+		}
+		return nameList;
+	}
+
+	/**
+	 * @param name
+	 * @return true if the name given is already taken by another category false
+	 *         otherwise
+	 */
+
+	public boolean isNameRepeat(String name) {
+		ArrayList<String> catNameList = listCategoryNames();
+
+		boolean isSame = false;
+		for (int i = 0; i < catNameList.size(); i++) {
+			if (name.equals(catNameList.get(i))) {
+				return true;
+			}
+		}
+		return isSame;
+	}
+
+	@Override
+	/**
+	 * search for an entry by its id (examples or categories)
+	 * @return IEntry containing that id if there is only one result.
+	 * Null if there is no IEntry with that ID.
+	 * @throw non-unique exception if there is more than one result
+	 */
+	public IEntry getByID(final Long id) {
+		List<IEntry> list = db.query(new Predicate<IEntry>() {
+			public boolean match(IEntry e) {
+				Long thisid = e.getId();
+				return (thisid == id);
+			}
+		});
+		if (list.size() == 1)
+			return list.get(0);
+		else if (list.size() == 0)
+			return null;
+		else
+			return null; // throw non-unique exception if there is more than one
+							// result
+	}
+
+	@Override
+	/**
+	 * get a unique id from the database
+	 *  @return a unique id (Long)
+	 */
+	public Long getNewId() {
+		return (long) this.getAll().size(); // should have a better way to do
+		// this
 	}
 }

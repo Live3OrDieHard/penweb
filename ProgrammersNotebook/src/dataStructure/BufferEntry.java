@@ -18,13 +18,11 @@ public class BufferEntry
 	/**
 	 * Categories the example belongs to
 	 */
-	private ArrayList<Long> categoryIds = new ArrayList<Long>();
+	private ArrayList<Category> categories = new ArrayList<Category>();
 	
 	private String code;
 
 	private String description;
-
-	private Long id; //shouldn't have an id. It's server-side
 
 	/**
 	 * Language in which the example is written
@@ -42,33 +40,28 @@ public class BufferEntry
 	
 	public BufferEntry() {
 		this.authors = new ArrayList<IPerson>();
-		this.categoryIds = new ArrayList<Long>();
+		this.categories = new ArrayList<Category>();
 	}
 	public void addAuthor(IPerson person) {
 		this.authors.add(person);
 	}
 	
-	public void addCategoryIds(Long catId) {
-		this.categoryIds.add(catId);
+	public void addCategory(Category category) {
+		this.categories.add(category);
 	}
 	
 	public List<IPerson> getAuthors() {
 		return authors;
 	}
-	public ArrayList<Long> getCategoryIds() {
-		return categoryIds;
+	public ArrayList<Category> getCategories() {
+		return categories;
 	}
 	public String getCode() {
 		return code;
 	}
 	public String getDescription() {
 		return description;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
+	}	
 	public String getLanguage() {
 		return language;
 	}
@@ -87,17 +80,14 @@ public class BufferEntry
 	public void setAuthors(List<IPerson> authors) {
 		this.authors = authors;
 	}
-	public void setCategoryIds(ArrayList<Long> categoryIds) {
-		this.categoryIds = categoryIds;
+	public void setCategories(ArrayList<Category> categories) {
+		this.categories = categories;
 	}
 	public void setCode(String code) {
 		this.code = code;
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 	public void setLanguage(String language) {
 		this.language = language;
@@ -114,4 +104,6 @@ public class BufferEntry
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	
 }

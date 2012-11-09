@@ -21,78 +21,67 @@ public class ExampleProperties implements IProperties
 	/**
 	 * Categories the example belongs to
 	 */
-	private ArrayList<Long> categoryIds = new ArrayList<Long>();
+	private ArrayList<Category> categoryList = new ArrayList<Category>();
 
 	/**
-	 * Gets the language the example was written in
-	 * @return String
+	 * {@inheritDoc}
 	 */
+	@Override
 	public String getLanguage()
 	{
 		return this.language;
 	}
 
 	/**
-	 * Gets the source of an example
-	 * @return String
+	 * {@inheritDoc}
 	 */
+	@Override
 	public String getSource()
 	{
 		return this.source;
 	}
-
+	
 	/**
-	 * Gets the list of categories the example belongs to.
-	 * @return LinkedList<String>
+	 * {@inheritDoc}
 	 */
-	public ArrayList<Long> getCategories()
+	@Override
+	public ArrayList<Category> getCategories()
 	{
-		return this.categoryIds;
+		return this.categoryList;
 	}
 
 	/**
-	 * A setter function to set the language property of the example
-	 * to the given language
-	 * 
-	 * @param language
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void setLanguage(String language)
 	{
 		this.language = language;
 	}
 
 	/**
-	 * A setter fucntion to set the source property of the example
-	 * to the given source
-	 * 
-	 * @param source
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void setSource(String source)
 	{
 		this.source = source;
 	}
 
 	/**
-	 * A setter function to set the tag property of the example 
-	 * to the given categories.
-	 * 
-	 * @param tags
+	 * {@inheritDoc}
 	 */
-	public void setCategories(ArrayList<Long> categories)
+	@Override
+	public void setCategories(ArrayList<Category> categories)
 	{
-		this.categoryIds = categories;
+		this.categoryList = categories;
 	}
 
 	/**
-	 * Add the given category to the example
-	 * 
-	 * @param tag
+	 * {@inheritDoc}
 	 */
-	public void addCategory(Long categoryId)
-	{
-		this.categoryIds.add(categoryId);
-		//TODO: The category itself should also store a reference to the example
-		//cg = db.getCategoryById(categoryId)
-		//cg.addEntry(this.getId);
+	@Override
+	public void addCategory(Category category) {
+		// TODO Auto-generated method stub
 	}
 }

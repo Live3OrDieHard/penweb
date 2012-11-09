@@ -6,7 +6,6 @@ package dataStructure;
  * The ExampleContent class contains the code
  * of the examples and allows the user to access
  * and edit code.
- *
  */
 public class ExampleContent implements IContent
 {
@@ -17,7 +16,6 @@ public class ExampleContent implements IContent
 	
 	/**
 	 * Getter function to get code from the example
-	 * 
 	 * @return String
 	 */
 	public String getCode()

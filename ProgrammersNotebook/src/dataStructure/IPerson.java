@@ -17,4 +17,9 @@ public interface IPerson
 	 * @return The ID of the person as a Long. Everything in the DB has an ID.
 	 */
 	Long getId();
+	
+	/**
+	 * @param name The new name for a person. Fails if the person already has a name.
+	 */
+	void assignName(String name);
 }

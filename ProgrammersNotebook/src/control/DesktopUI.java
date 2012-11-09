@@ -33,12 +33,13 @@ import java.util.List;
 import javax.swing.JLayeredPane;
 
 import dataStructure.*;
+import exceptions.PENException;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 
 /**
- * 
  * @author Thanaporn original from Anjali's GUI
  * This can interact with database in repo (MarchTest.yap)
  * it can store and retrieve file from data base
@@ -51,7 +52,6 @@ import java.awt.event.WindowEvent;
  * in the list when there are more than 3 entries
  * and lack of init function that retrieves data from database
  * at the start of the program
- *
  */
 public class DesktopUI extends JFrame implements IUserInterface {
 
@@ -102,7 +102,6 @@ public class DesktopUI extends JFrame implements IUserInterface {
 		lblExamples.setBounds(15, 16, 137, 16);
 		lblExamples.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/icon-book.png")));
 		listModel.addElement("Add New Example...");
-		int counter = controller.getAllinDB().size();
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(15, 35, 139, 234);
 
@@ -253,8 +252,12 @@ public class DesktopUI extends JFrame implements IUserInterface {
 
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BufferEntry e = DesktopUI.this.getBufferEntry();
-				controller.addBasicExample(e);
+				BufferEntry buf = DesktopUI.this.getBufferEntry();
+				try {
+					controller.addBasicExample(buf);
+				} catch (PENException exception) {
+					System.out.println(exception.getMessage());
+				}
 				listModel.addElement(ttxt.getText());
 			}});
 
@@ -265,7 +268,7 @@ public class DesktopUI extends JFrame implements IUserInterface {
 					if (index >= 0) {
 						//Object o = list.getModel().getElementAt(index);
 						//System.out.println("Double-clicked on: " + o.toString());
-						List<IEntry> l = controller.getAllinDB();
+						List<IExample> l = controller.getAllExampleinDB();
 						BasicExample bx;
 						if(index==0){
 							ttxt.requestFocus();
@@ -276,8 +279,8 @@ public class DesktopUI extends JFrame implements IUserInterface {
 							lblTitle_1.setText("Title: "+bx.getTitle());
 							textArea.setText("Code:\n"+bx.getCode());
 							textArea_1.setText("Author: "+bx.getAuthors().get(0).getName()
-									+"\n\nLanguage: "+bx.getProperties().getLanguage()
-									+"\n\nSource: "+bx.getProperties().getSource());
+									+"\n\nLanguage: "+bx.getLanguage()
+									+"\n\nSource: "+bx.getSource());
 
 						}
 					}
@@ -287,42 +290,6 @@ public class DesktopUI extends JFrame implements IUserInterface {
 
 		listEx.addMouseListener(mouseListener);
 	}
-
-	/*
-	@Override
-	public IHeader getHeader() {
-		String title = ttxt.getText();
-		if(title.length()==0)
-		{
-			errorBox box = new errorBox("bad title");
-			box.show();
-			return null;
-		}
-		else if ((title.length() != 0) && (ctxt.getText().length() != 0) && (atxt.getText().length()!=0)) {
-			listModel.addElement(title);
-			}
-		if(atxt.getText().length()==0)
-		{
-			errorBox box = new errorBox("bad author");
-			box.show();
-			return null;
-		}
-		return new ExampleHeader(ttxt.getText(),atxt.getText());
-	}
-
-	@Override
-	public IContent getContent() {
-		if(ctxt.getText().length()==0)
-		{
-			errorBox box = new errorBox("bad code");
-			box.show();
-			return null;
-		}
-		return new ExampleContent(ctxt.getText());
-	}
-	 */
-
-
 
 	@Override
 	public void init() 
@@ -364,7 +331,7 @@ public class DesktopUI extends JFrame implements IUserInterface {
 			System.out.println("Invalid title. Please try again");
 			return null;
 		}
-		else e.setCode(code);
+		else e.setTitle(title);
 		if(author.length()==0)
 		{
 			System.out.println("Invalid author. Please try again");

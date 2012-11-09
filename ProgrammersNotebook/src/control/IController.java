@@ -1,12 +1,12 @@
 package control;
 
-import database.*;
 import dataStructure.*;
+import exceptions.CannotAddToDbException;
+import exceptions.PENException;
 
 public interface IController 
 {
-	void addEntry();
-	
-	void addToDB(BasicExample bx);
-
+	public void addBasicExample(BufferEntry buf) throws PENException;
+	public void addCategory(BufferEntry buf) throws PENException;
+	public void close();
 }

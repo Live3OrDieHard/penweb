@@ -5,22 +5,21 @@ import java.io.IOException;
 import database.Db4oDatabase;
 import database.IDatabase;
 
-public class main 
+public class runMVC 
 {
 	/**
-	 * when start running, type 
-	 * 1 in the console for UserInterfaceCopied
-	 * 2 in the console for UserInterfaceCopied2 (no properties panel, a big '2' is there instead
+	 * The main function for the desktop application
 	 */
 	public static void main(String args[]) throws IOException
 	{
-		IDatabase db = new Db4oDatabase("tempDB.yap");
+		IDatabase db = new Db4oDatabase("PEN.yap");
 		IUserInterface  ui = null;
 		Controller controller = new Controller(db,ui);
 		ui =  new DesktopUI(controller);
 		controller.ui = ui;
 		ui.init();
 		ui.show();
+		
+		// Database closed in windowClosing listener in UI
 	}
-	
 }

@@ -5,13 +5,44 @@ body {
 	font-family: Verdana, Helvetica, Arial;
 	font-size: 14px;
 	min-width: 900px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
+
+a {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+/* Header */
 
 .header {
 	position: relative;
 	background: url('../images/bg-header.png') top center repeat-x;
 	height: 100px;
 	width: 100%;
+}
+
+.header h1 {
+	position: absolute;
+	bottom: 15px;
+	left: 20px;
+	font-size: 70px;
+	font-family: Tahoma;
+	font-weight: bold;
+	text-shadow: 0 -3px 0 #000000;
+}
+
+.header h2 {
+	position: absolute;
+	bottom: 20px;
+	left: 175px;
+	font-size: 14px;
+	font-family: Courier;
+	text-shadow: 0 -2px 0 #000000;
 }
 
 .header .logo {
@@ -29,6 +60,8 @@ body {
 	float: left;
 	margin-right: 25px;
 }
+
+/* Columns */
 
 .left {
 	position: absolute;
@@ -50,6 +83,8 @@ body {
 	overflow-y: auto;
 }
 
+/* Sub-Header Bar */
+
 .bar {
 	position: absolute;
 	top: 100px;
@@ -64,13 +99,25 @@ body {
 	margin: 7px auto;
 }
 
+.bar .right h1 {
+	height: 40px;
+	line-height: 40px;
+	font-size: 20px;
+	font-weight: bold;
+	margin-left: 25px;
+}
+
+/* Main Content */
+
 .content {
 	position: absolute;
 	top: 140px;
 	bottom: 0;
 	left: 0;
-	right: 0;
+	width: 100%;
 }
+
+/* Left Menu */
 
 .content .left h1 {
 	font-weight: bold;
@@ -106,17 +153,115 @@ body {
 	color: #72FF72;
 }
 
-.content .right ul.entrylist {
+.content .right {
+}
+
+.content .right p, .content .right form {
+	margin: 25px 25px 0 25px;
+}
+
+.content .right .error {
+	font-weight: bold;
+	color: #FF0000;
+	display: none;
+}
+
+.content .right p.code {
+	font-family: Courier;
+	padding: 25px;
+	background: #222222;
+}
+
+.content .right b {
+	font-weight: bold;
+}
+
+.content .right input, .content .right textarea {
+	margin-bottom: 25px;
+	display: block;
+	background: #333333;
+	border: none;
+	border-right: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #FFFFFF;
+	font-size: 14px;
+	font-family: Verdana, Helvetica, Arial;
+}
+
+.content .right textarea {
+	width: 500px;
+	height: 300px;
+	font-family: Courier;
+}
+
+.content .right input[type=submit] {
+	width: 200px;
+}
+
+.content .right input[type=submit]:hover {
+	background: #444444;
+}
+
+.content .right input[type=submit]:active {
+	background: #222222;
+}
+
+/* Entry List */
+
+ul.entrylist {
 	width: 100%;
 }
 
-.content .right ul.entrylist li {
+ul.entrylist a {
+	color: #FFFFFF;
+}
+
+ul.entrylist li {
+	position: relative;
 	height: 100px;
 	width: 100%;
 	border-top: 1px solid #666666;
 	border-bottom: 1px solid #000000;
-	background: #333333;
+	background: #333333 url('../images/entry-arrow.png') center right no-repeat;
 }
+
+ul.entrylist li:hover {
+	background-color: #444444;
+}
+
+ul.entrylist li:hover div.fade {
+	background-image: url('../images/fade-hover.png');
+}
+
+
+ul.entrylist li h1 {
+	height: 100%;
+	width: 200px;
+	line-height: 100px;
+	padding: 0 25px;
+	font-weight: bold;
+	float: left;
+	overflow: hidden;
+}
+
+ul.entrylist li div {
+	position: absolute;
+	top: 15px;
+	height: 70px;
+	left: 250px;
+	right: 75px;
+}
+
+ul.entrylist li div.code {
+	overflow: hidden;
+	font-family: Courier;
+}
+
+ul.entrylist li div.fade {
+	background: url('../images/fade.png');
+	z-index: 2;	
+}
+
 
 /* Buttons */
 
@@ -125,6 +270,7 @@ body {
 	text-align: center;
 	line-height: 24px;
 	font-weight: bold;
+	text-shadow: 0 -1px 0px #000000;
 	font-family: Verdana, Helvetica, Arial;
 	font-size: 14px;
 	color: #FFFFFF;

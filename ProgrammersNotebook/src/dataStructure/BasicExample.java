@@ -10,34 +10,60 @@ import java.util.List;
 public class BasicExample implements IExample {
 
 	private List<IPerson> authors;
-	private String code;
-	private String description;
-	private Long id;
-	private IPerson owner;
-	private ExampleProperties properties;
-	private String title;
+	
 	/**
 	 * Categories the example belongs to
 	 */
-	private ArrayList<Long> categoryIds = new ArrayList<Long>();
+	private ArrayList<ICategory> categoryList = new ArrayList<ICategory>();
+	private String code;
+	private String description;
+	private Long id;
+
 	/**
 	 * Language in which the example is written
 	 */
 	private String language;
+	private IPerson owner;
+	
 	/**
 	 * Where is the source of the example
 	 */
 	private String source;
+	/**
+	 * all the tags include in the example
+	 */
+	private ArrayList<String> tags = new ArrayList<String>();
+	private String title;
 	
-	public BasicExample()
-	{
-		id = -1L;
+
+	public BasicExample() {
 		authors = new LinkedList<IPerson>();
 		owner = null;
-		properties = new ExampleProperties();
+		this.id = -1L;
 	}
-	
-	public int assignID(Long id) {
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addCategory(ICategory category) {
+		if (!this.isInCategory(category)) {
+			categoryList.add(category);
+			category.addCodeExample(this);
+		}
+	}
+
+	/**
+	 * add the given tag to the example
+	 * 
+	 * @param tag
+	 */
+	public void addTag(String tag) {
+		this.tags.add(tag);
+	}
+
+	@Override
+	public int assignId(Long id) {
 		if (this.id != -1)
 			return 1; // return 1 if already assigned
 		else
@@ -45,6 +71,10 @@ public class BasicExample implements IExample {
 		return 0;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public int assignOwner(IPerson owner) {
 		if (this.owner != null)
 			return 1; // return 1 if already assigned
@@ -53,72 +83,209 @@ public class BasicExample implements IExample {
 		return 0;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public List<IPerson> getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(List<IPerson> authors) {
-		this.authors = authors;
+	@Override
+	/**
+	 * Gets the list of categories the example belongs to.
+	 * @return LinkedList<String>
+	 */
+	public List<ICategory> getCategories() {
+		return categoryList;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public ExampleProperties getProperties() {
-		return properties;
-	}
-	
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
+	@Override
 	public Long getId() {
-		return id;
-	}
-
-	public IPerson getOwner() {
-		return owner;
+		return this.id;
 	}
 
 	@Override
 	/**
-	 * 
+	 * Gets the language the example was written in
+	 * @return String
+	 */
+	public String getLanguage() {
+		return this.language;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IPerson getOwner() {
+		return owner;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	/**
+	 * {@inheritDoc}
 	 */
 	public Long getOwnerId() {
 		return this.owner.getId();
 	}
-	
-	public void setProperties(IProperties p)
-	{
-		this.properties.setLanguage(p.getLanguage());
-		this.properties.setSource(p.getSource());
+
+	@Override
+	/**
+	 * Gets the source of an example
+	 * @return String
+	 */
+	public String getSource() {
+		return this.source;
+	}
+
+	/**
+	 * a getter function to get the tags of the example
+	 * 
+	 * @return LinkedList<String>
+	 */
+	@Override
+	public ArrayList<String> getTags() {
+		return this.tags;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * helper function check if the example (this) is already in category
+	 * 
+	 * @param category
+	 *            the category wanted to be check
+	 * @return true if the example is in category. false otherwise
+	 */
+	private boolean isInCategory(ICategory category) {
+		for (int i = 0; i < this.categoryList.size(); i++) {
+			if (this.categoryList.get(i).equals(category))
+				return true;
+		}
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setAuthors(List<IPerson> authors) {
+		this.authors = authors;
+	}
+
+	@Override
+	/**
+	 * A setter function to set the tag property of the example 
+	 * to the given categories.
+	 * 
+	 * @param tags
+	 */
+	public void setCategories(ArrayList<ICategory> categories) {
+		this.categoryList = categories;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Override
+	/**
+	 * A setter function to set the language property of the example
+	 * to the given language
+	 * 
+	 * @param language
+	 */
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	@Override
+	/**
+	 * A setter fucntion to set the source property of the example
+	 * to the given source
+	 * 
+	 * @param source
+	 */
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	/**
+	 * a setter function to set the tag property of the example to the given
+	 * tags
+	 * 
+	 * @param tags
+	 */
+	@Override
+	public void setTags(ArrayList<String> tags) {
+		this.tags = tags;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
-	public BasicExample transferFromBuffer(BufferEntry e)
-	{
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public BasicExample transferFromBuffer(BufferEntry e) {
 		this.authors = e.getAuthors();
 		this.code = e.getCode();
 		this.description = e.getDescription();
-		this.properties = e.getProperties();
+		this.source = e.getSource();
+		this.language = e.getLanguage();
 		this.title = e.getTitle();
 		return this;
+	}
+
+	@Override
+	public void addTags(String tag) {
+		// @TODO check existence of tag in tags
+		this.tags.add(tag);
+
 	}
 
 }

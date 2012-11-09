@@ -1,45 +1,39 @@
 package dataStructure;
 
 /**
- * @author Thanaporn
- * IUser should be used to identify user
+ * @author Thanaporn IUser should be used to identify user
  */
-public class User implements IPerson
-{
+public class User implements IPerson {
 	/**
 	 * The name of the user
 	 */
 	private String name;
-	
-	/**
-	 * The user id number
-	 */
-	private Long userId;
-	
-	/**
-	 * Get the name of the user
-	 * @return String user's name
-	 */
-	public String getName()
-	{
+
+	private Long id;
+
+	@Override
+	public String getName() {
 		return this.name;
 	}
-	
-	/**
-	 * Get the id number of the user
-	 * @return Long user's id number
-	 */
-	public Long getId()
-	{
-		return this.userId;
+
+	@Override
+	public void assignName(String name) {
+		if (this.name != null) {
+			// throw exception
+		} else
+			this.name = name;
 	}
 	
-	/**
-	 * Set the given name for the user
-	 * @param String name
-	 */
-	public void setName(String name)
-	{
-		this.name = name;
-	}	
+	public int assignId(Long id) {
+		if (this.id != -1)
+			return 1; // return 1 if already assigned
+		else
+			this.id = id;
+		return 0;
+	}
+	
+	@Override
+	public Long getId() {
+		return this.id;
+	}
 }
