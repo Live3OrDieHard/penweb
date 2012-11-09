@@ -98,10 +98,9 @@
 		<form action="addToCategory" method="post">
 			<input type="hidden" name="eid" value="entryIDHere" />
 			<p>Categories</p>
-			<p><input type="checkbox" name="cids[]" value="categoryIDHere" /> CategoryTitleHere</p>
-			<p><input type="checkbox" name="cids[]" value="categoryIDHere" checked="yes" /> CategoryTitleHere</p>
-			<p><input type="checkbox" name="cids[]" value="categoryIDHere" /> CategoryTitleHere</p>
-			<p><input type="checkbox" name="cids[]" value="categoryIDHere" /> CategoryTitleHere</p>
+			<% for (ICategory ca : cat) { %>
+				<p><input type="checkbox" name="cids[]" value="<%=ca.getId() %>" /> <%=ca.getTitle() %></p>
+			<%} %>
 			<input type="submit" class="button black" value="Add" />
 		</form>
 	</div>
