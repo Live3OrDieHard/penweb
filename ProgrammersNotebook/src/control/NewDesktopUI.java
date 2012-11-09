@@ -66,6 +66,9 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 	final IController controller;
 	private DefaultTreeModel model; 
 	DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+	ArrayList<DefaultMutableTreeNode> nodelist = new ArrayList<DefaultMutableTreeNode>();
+	ArrayList<DefaultMutableTreeNode> leaflist = new ArrayList<DefaultMutableTreeNode>();
+	ArrayList<IExample> Examplelist = new ArrayList<IExample>();
 	
 	/**
 	 * Create the frame.
@@ -179,6 +182,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 						DefaultMutableTreeNode child = new DefaultMutableTreeNode();
 						child.setUserObject(bx.getTitle());
 						root.add(child);
+						nodelist.add(child);
 						model.reload(root);
 					} catch (PENException exception) {
 						NewDesktopUI.this.displayMessage(exception
@@ -187,21 +191,29 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 				}
 				else if (comp instanceof ExamplePanel) {
 					ExamplePanel p = (ExamplePanel) comp;
-					BufferEntry be = p.getBufferEntry();
+					BufferEntry buf = p.getBufferEntry();
 					try {
-						BasicExample example = controller.addBasicExample(be);
+						BasicExample example = controller.addBasicExample(buf);
 						NewDesktopUI.this.displayMessage("Example added");
 						tabbedPane.remove(tabbedPane.getSelectedIndex());
-						DefaultMutableTreeNode leaf = new DefaultMutableTreeNode(be);
-						String categoryName = be.getCategoryName();
+						DefaultMutableTreeNode leaf = new DefaultMutableTreeNode(buf.getTitle());
+						leaflist.add(leaf);
+						Examplelist.add(example);
+						String categoryName = buf.getCategoryName();
 						List<ICategory> listCategory = controller.getAllCategoryinDB();
 						for(int i=0;i<listCategory.size();i++)
 						{
 							ICategory category = listCategory.get(i);
 							if(category.getTitle().equals(categoryName))
+							{
 								category.addCodeExample(example);
+								for(int j=0;j<nodelist.size();j++)
+								{
+									nodelist.get(j).add(leaf);
+								}
+								model.reload();
+							}
 							
-							root.getChildAt(index)
 						}
 					} catch (PENException exception) {
 						NewDesktopUI.this.displayMessage(exception
@@ -254,6 +266,18 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		tree.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		tree.setShowsRootHandles(true);
 		tree.setEditable(true);
+		tree.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				IExample example = doMouseClicked(e);
+				
+				if(example==null)
+					return;
+				ExamplePanel pane = new ExamplePanel();
+				pane.displayExample(example);
+				tabbedPane.addTab(example.getTitle(), pane);
+				}
+		});
 		panel_3.setLayout(null);
 		
 		JLabel lblExampleCode = new JLabel("My Examples");
@@ -372,24 +396,27 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 	public void displayMessage(String message) {
 		this.consolePanel.setText(message);
 	}
-	
-	
-	public void doMouseClicked(MouseEvent me){
-		TreePath tp = tree.getPathForLocation(me.getX(), me.getY());
-		List<IExample> list = controller.getAllExampleinDB();
-		if(tp!=null){
-			for(int i=0;i<list.size();i++){
-				if(tp.getLastPathComponent().equals(list.get(i))){
-					IExample bx = list.get(i);
-					ExamplePanel p = new ExamplePanel();
-					p.displayExample(bx);
-					tabbedPane.addTab(bx.getTitle(), p);
-					//System.out.println(tp.toString());
-					break;	
-				}
-				System.out.println(tp.getLastPathComponent().toString());
-			}		
+
+
+	public IExample doMouseClicked(MouseEvent me){
+		if(me.getClickCount() == 2){
+			TreePath tp = tree.getPathForLocation(me.getX(), me.getY());
+			//List<IExample> list = controller.getAllExampleinDB();
+			if(tp!=null){
+				for(int i=0;i<leaflist.size();i++){
+					if(tp.getLastPathComponent().equals(leaflist.get(i))){
+						IExample bx = Examplelist.get(i);
+						//ExamplePanel p = new ExamplePanel();
+						//p.displayExample(bx);
+						//tabbedPane.addTab(bx.getTitle(), p);
+						//System.out.println(tp.toString());
+						return bx;
+					}
+					System.out.println(tp.getLastPathComponent().toString());
+				}		
+			}
 		}
+		return null;
 	}	
 
 }

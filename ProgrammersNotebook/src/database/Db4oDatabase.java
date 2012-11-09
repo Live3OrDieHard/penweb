@@ -159,7 +159,7 @@ public class Db4oDatabase implements IDatabase {
 	 *  @return a unique id (Long)
 	 */
 	public Long getNewId() {
-		return (long) Math.random()*100000000; // should have a better way to do
+		return (long) (Math.random()*100000000); // should have a better way to do
 		// this
 	}
 }
