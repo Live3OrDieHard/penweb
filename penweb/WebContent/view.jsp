@@ -59,7 +59,7 @@
 	<div class="right">
 		<% IExample ex= webcon.getExamples().get(id); %>
 		<p>Author: <b><%=ex.getAuthors().get(0).getName() %></b></p>
-		<p>Language: <%=ex.getProperties().getLanguage() %><b></b></p>
+		<p>Language: <%=ex.getLanguage() %><b></b></p>
 		<p class="code">
 			<%= ex.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %>
 		</p>
