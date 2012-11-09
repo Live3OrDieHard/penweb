@@ -17,6 +17,90 @@ a {
 	color: #FFFFFF;
 }
 
+/* Modal Sheet */
+
+.modal {
+	position: absolute;
+	z-index: 3;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgb(0, 0, 0);
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+
+.modal .sheet {
+	position: relative;
+	margin: 200px auto 0 auto;
+	height: 400px;
+	width: 400px;
+	background: #222222;
+	border: 5px solid #666666;
+	display: none;
+}
+
+.modal .sheet .close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 3;
+	height: 40px;
+	width: 40px;
+	background: url('../images/icon-close.png') center center no-repeat;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal .sheet h1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 40px;
+	line-height: 40px;
+	background: url('../images/bg-bar.png') top center repeat-x;
+	font-size: 20px;
+	font-weight: bold;
+	padding-left: 25px;
+}
+
+.modal .sheet .modalContent {
+	position: absolute;
+	top: 40px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 25px;
+}
+.modal input, .modal textarea {
+	margin-bottom: 25px;
+	display: block;
+	background: #333333;
+	border: none;
+	border-right: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #FFFFFF;
+	font-size: 14px;
+	font-family: Verdana, Helvetica, Arial;
+}
+
+.modal textarea {
+	width: 300px;
+	height: 100px;
+}
+
+.modal input[type=submit]:hover {
+	background: #444444;
+}
+
+.modal input[type=submit]:active {
+	background: #222222;
+}
+
+
+
 /* Header */
 
 .header {
@@ -153,6 +237,10 @@ a {
 	color: #72FF72;
 }
 
+.content .left .button {
+	margin: auto;
+}
+
 .content .right {
 }
 
@@ -174,6 +262,7 @@ a {
 .content .right p.code {
 	font-family: Courier;
 	padding: 25px;
+	margin: 0 25px;
 	background: #222222;
 }
 
@@ -317,6 +406,11 @@ ul.entrylist li div.fade {
 .button.black {
 	width: 76px;
 	background-image: url('../images/button-black.png');
+}
+
+.button.black-wide {
+	width: 151px;
+	background-image: url('../images/button-black-wide.png');
 }
 
 /* Text inputs */

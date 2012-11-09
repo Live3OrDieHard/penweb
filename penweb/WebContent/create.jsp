@@ -20,6 +20,10 @@
 			$("input[name=username]").watermark("Username");
 			$("input[name=password]").watermark("Password");
 
+			// Watermarks for new categories
+			$("#createCategory input[name=name]").watermark("Category Name");
+			$("#createCategory textarea[name=desc]").watermark("Enter description...");			
+
 			// Watermarks for new entry
 			$("input[name=title]").watermark("Title");
 			$("input[name=author]").watermark("Author");
@@ -41,9 +45,32 @@
 			}					
 			return true;
 		}
+
+		function newCategory() {
+			$("#createCategory").show();
+			$(".modal").show();		
+		}
+ 
+		function closeModal() {
+			$(".modal").hide();
+			$(".modal .sheet").hide();
+		}
 	</script>
 </head>
 <body>
+<div class="modal">
+	<div class="sheet" id="createCategory">
+		<a href="javascript: closeModal();"><div class="close"></div></a>
+		<h1>New Category</h1>
+		<div class="modalContent">
+			<form action="addCategory" method="post">
+				<input type="text" name="name" />
+				<textarea name="desc"></textarea>
+				<input type="submit" value="Create" />
+			</form>
+		</div>
+	</div>
+</div>
 <div class="header">
 	<h1>PEN</h1>
 	<h2>The Programmer's<br>Examples Notebook</h2>
@@ -56,7 +83,7 @@
 </div>
 <div class="bar">
 	<div class="left">
-		<a href="create.jsp"><div class="button green">Create Entry</div></a>
+		<a href="create.jsp"><div class="button green">New Entry</div></a>
 	</div>
 	<div class="right">
 		<h1>New Entry</h1>
@@ -66,14 +93,13 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
+			<%List<ICategory> cats = webcon.getCategories(); %>
 			<a href="index.jsp"><li>All Entries (<%=webcon.getNumEntries() %>)</li></a>
-			<li>Tests (0)</li>
-			<li>Security (0)</li>
-			<li>Search (0)</li>
-			<li>Data Structures (0)</li>
-			<li>Algorithms (0)</li>
-			<li>Math (0)</li>
+			<% for (ICategory c : cats) { %>
+				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=c.getExampleList().size() %>)</li></a>
+			<%} %>
 		</ul>
+		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
 		<form action="addCode" method="post" onsubmit="return checkSubmit();">
@@ -83,9 +109,8 @@
 			<input type="text" name="language" />
 			<textarea name="content"></textarea>
 			<p>Categories</p>
-			<% List<ICategory> cats = webcon.getCategories(); %>
-			<% for (ICategory c : cats) { %>
-				<p><input type="checkbox" name="cids[]" value="<%=c.getId() %>" /> <%=c.getTitle() %></p>
+			<% for (ICategory ca : cats) { %>
+				<p><input type="checkbox" name="cids[]" value="<%=ca.getId() %>" /> <%=ca.getTitle() %></p>
 			<%} %>
 			<input type="submit" class="button black" value="Save Entry" />
 		</form>
