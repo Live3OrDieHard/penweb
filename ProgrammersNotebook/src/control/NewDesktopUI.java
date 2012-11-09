@@ -357,7 +357,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Verdana", Font.PLAIN, 11));
 		tabbedPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		tabbedPane.setBounds(10, 0, 902, 443);
+		tabbedPane.setBounds(0, 0, 912, 443);
 		desktopPane.add(tabbedPane);
 		
 		JTextPane txtpnVb = new JTextPane();
@@ -366,7 +366,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		tabbedPane.addTab("New Example*", null, txtpnVb, null);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 454, 902, 93);
+		panel_1.setBounds(0, 454, 912, 93);
 		desktopPane.add(panel_1);
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		panel_1.setLayout(null);
