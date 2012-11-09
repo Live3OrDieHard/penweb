@@ -76,6 +76,11 @@ public class Category implements ICategory {
 	}
 
 	@Override
+	public List<IExample> getExampleList() {
+		return exampleList;
+	}
+
+	@Override
 	public int assignOwner(IPerson owner) {
 		if (this.owner != null)
 			return 1; // return 1 if already assigned
