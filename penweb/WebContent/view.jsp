@@ -6,6 +6,10 @@
 	<%
 		// Instantiate the web controller and grab id paramter
 		WebController webcon = new WebController();
+		if (!request.getParameterMap().containsKey("id")) {
+			webcon.close();
+			response.sendRedirect("penweb");
+		}
 		int id = Integer.parseInt(request.getParameter("id")) - 1;
 	%>
 	<meta charset="UTF-8">
