@@ -6,6 +6,8 @@
 	<%
 		// Instantiate the webcon
 		WebController webcon = new WebController();
+		// Check if we are showing all or category
+		boolean disp = request.getParameterMap().containsKey("cat");
 	%>
 	<meta charset="UTF-8">
 	<title>PEN &middot; All Entries (<%= webcon.getNumEntries() %>)</title>
@@ -66,37 +68,56 @@
 		<a href="create.jsp"><div class="button green">New Entry</div></a>
 	</div>
 	<div class="right">
-		<h1>All Entries (<%= webcon.getNumEntries() %>)</h1>
+		<%if (!disp) {%>
+			<h1>All Entries (<%= webcon.getNumEntries() %>)</h1>
+		<%} else {
+			ICategory catego = webcon.getCategoryById(Long.parseLong(request.getParameter("cat")));
+			%>
+			<h1><%=catego.getTitle() %> (<%=catego.getExampleList().size() %>)</h1>
+		<%} %>
 	</div>
 </div>
 <div class="content">
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<a href="index.jsp"></a><li class="selected">All Entries (<%= webcon.getNumEntries() %>)</li></a>
+			<a href="index.jsp"><li <% if (!disp) {%>class="selected"<%} %>>All Entries (<%= webcon.getNumEntries() %>)</li></a>
 			<%
 				List<ICategory> cat = webcon.getCategories();
 				for (ICategory c : cat) {
 			%>
-			<a href="index.jsp?cat=<%=c.getId() %>"><li> <%= c.getTitle() %> (<%= c.getExampleList().size() %>)</li></a>
+			<a href="index.jsp?cat=<%=c.getId() %>"><li <% if ((disp) && (c.getId().equals(Long.parseLong(request.getParameter("cat"))))) { %>class="selected"<%} %>> <%= c.getTitle() %> (<%= c.getExampleList().size() %>)</li></a>
 			<% } %> 
 		</ul>
 		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
 		<ul class="entrylist">
-			<% int id = 1; %>
-			<% List<IExample> ex = webcon.getExamples(); %>
-			<% for (IExample e : ex) { %>
-				<a href="view.jsp?id=<%=id%>">
+			<% if (!disp) {%>
+				<% List<IExample> ex = webcon.getExamples(); %>
+				<% for (IExample e : ex) { %>
+					<a href="view.jsp?id=<%=e.getId()%>">
+						<li>
+							<h1><%= e.getTitle() %></h1>
+							<div class="fade"></div>
+							<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
+						</li>
+					</a>
+				<%}%>
+			<%} else {%>
+				<%long catid = Long.parseLong(request.getParameter("cat"));
+				ICategory categ = webcon.getCategoryById(catid);
+				List<IExample> examp = categ.getExampleList();
+				for (IExample exa : examp) {%>
+					<a href="view.jsp?id=<%=exa.getId()%>">
 					<li>
-						<h1><%= e.getTitle() %></h1>
+						<h1><%= exa.getTitle() %></h1>
 						<div class="fade"></div>
-						<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
+						<div class="code"><%= exa.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
 					</li>
 				</a>
-				<% id++; %>
-			<%}%>
+				<%}%>
+			<%} %>
 		</ul>
 	</div>
 </div>
