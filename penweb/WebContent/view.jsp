@@ -8,7 +8,8 @@
 		WebController webcon = new WebController();
 		if (!request.getParameterMap().containsKey("id")) {
 			webcon.close();
-			response.sendRedirect("penweb");
+			pageContext.forward("/");
+			return;
 		}
 		int id = Integer.parseInt(request.getParameter("id")) - 1;
 	%>
