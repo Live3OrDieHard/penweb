@@ -82,6 +82,12 @@
 			<input type="text" name="author" />
 			<input type="text" name="language" />
 			<textarea name="content"></textarea>
+			<p>Categories</p>
+			<p><input type="checkbox" name="cids[]" value="categoryIdHere" /> Category Name 1</p>
+			<p><input type="checkbox" name="cids[]" value="categoryIdHere" /> Category Name 2</p>
+			<p><input type="checkbox" name="cids[]" value="categoryIdHere" /> Category Name 3</p>
+			<p><input type="checkbox" name="cids[]" value="categoryIdHere" /> Category Name 4</p>
+			<p><input type="checkbox" name="cids[]" value="categoryIdHere" /> Category Name 5</p>
 			<input type="submit" class="button black" value="Save Entry" />
 		</form>
 	</div>
