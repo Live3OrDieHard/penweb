@@ -95,6 +95,15 @@
 		<p class="code">
 			<%= ex.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %>
 		</p>
+		<form action="addToCategory" method="post">
+			<input type="hidden" name="eid" value="entryIDHere" />
+			<p>Categories</p>
+			<p><input type="checkbox" name="cids[]" value="categoryIDHere" /> CategoryTitleHere</p>
+			<p><input type="checkbox" name="cids[]" value="categoryIDHere" checked="yes" /> CategoryTitleHere</p>
+			<p><input type="checkbox" name="cids[]" value="categoryIDHere" /> CategoryTitleHere</p>
+			<p><input type="checkbox" name="cids[]" value="categoryIDHere" /> CategoryTitleHere</p>
+			<input type="submit" class="button black" value="Add" />
+		</form>
 	</div>
 </div>
 <%
