@@ -19,10 +19,38 @@
 			// Watermarks for login
 			$("input[name=username]").watermark("Username");
 			$("input[name=password]").watermark("Password");
+
+			// Watermarks for new categories
+			$("#createCategory input[name=name]").watermark("Category Name");
+			$("#createCategory textarea[name=desc]").watermark("Enter description...");			
 		});
+
+		function newCategory() {
+			$("#createCategory").show();
+			$(".modal").show();		
+		}
+ 
+		function closeModal() {
+			$(".modal").hide();
+			$(".modal .sheet").hide();
+
+		}
 	</script>
 </head>
 <body>
+<div class="modal">
+	<div class="sheet" id="createCategory">
+		<a href="javascript: closeModal();"><div class="close"></div></a>
+		<h1>New Category</h1>
+		<div class="modalContent">
+			<form action="addCategory" method="post">
+				<input type="text" name="name" />
+				<textarea name="desc"></textarea>
+				<input type="submit" value="Create" />
+			</form>
+		</div>
+	</div>
+</div>
 <div class="header">
 	<h1>PEN</h1>
 	<h2>The Programmer's<br>Examples Notebook</h2>
@@ -53,6 +81,7 @@
 			<li>Algorithms (0)</li>
 			<li>Math (0)</li>
 		</ul>
+		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
 		<ul class="entrylist">
