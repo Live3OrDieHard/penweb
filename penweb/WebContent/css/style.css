@@ -99,7 +99,12 @@ a {
 	background: #222222;
 }
 
-
+.modal .error {
+	font-weight: bold;
+	color: #FF0000;
+	display: none;
+	padding-bottom: 25px;
+}
 
 /* Header */
 
