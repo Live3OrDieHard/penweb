@@ -8,17 +8,18 @@ import database.IDatabase;
 public class runMVC 
 {
 	/**
-	 * 
+	 * The main function for the desktop application
 	 */
 	public static void main(String args[]) throws IOException
 	{
-		IDatabase db = new Db4oDatabase("tempDB.yap");
+		IDatabase db = new Db4oDatabase("PEN.yap");
 		IUserInterface  ui = null;
 		Controller controller = new Controller(db,ui);
 		ui =  new DesktopUI(controller);
-		//ui =  new NewDesktopUI2(controller);
 		controller.ui = ui;
 		ui.init();
 		ui.show();
+		
+		// Database closed in windowClosing listener in UI
 	}
 }

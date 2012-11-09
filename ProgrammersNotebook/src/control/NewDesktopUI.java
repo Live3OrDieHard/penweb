@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
@@ -37,8 +39,12 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.JTextPane;
 
 import dataStructure.BufferEntry;
+import dataStructure.NonUser;
+import exceptions.PENException;
 
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class NewDesktopUI extends JFrame implements IUserInterface {
@@ -52,7 +58,8 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private IController controller;
+	private JTextPane txtpnVb;
+	final IController controller;
 	
 	
 	/* public static void main(String[] args) {
@@ -71,8 +78,16 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 	/**
 	 * Create the frame.
 	 */
-			
-	public NewDesktopUI(IController controller) {
+	public NewDesktopUI(final IController controller) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				// Close the database
+				controller.close();
+			}
+		});
+		this.controller = controller;
+		
 		setFont(new Font("Verdana", Font.PLAIN, 12));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NewDesktopUI.class.getResource("/javagui/resources/Notebook-icon.png")));
 		setTitle("Programmer's Examples Notebook (PEN) 1.1");
@@ -247,6 +262,16 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		btnNewButton.setBackground(Color.BLACK);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BufferEntry buf = NewDesktopUI.this.getBufferEntry();
+				try {
+					NewDesktopUI.this.controller.addBasicExample(buf);
+				} catch (PENException exception) {
+					System.out.println(exception.getMessage());
+				}
+				//TODO: Update left-panel tree
+		}});
 		btnSave.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/save.png")));
 		btnSave.setForeground(Color.WHITE);
 		btnSave.setFont(new Font("Verdana", Font.BOLD, 11));
@@ -316,7 +341,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		panel.add(tree);
 		panel.add(panel_3);
 		
-		JButton btnAddEntry = new JButton("Add Entry");
+		JButton btnAddEntry = new JButton("Add Entry");		
 		btnAddEntry.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/add-icon.png")));
 		btnAddEntry.setForeground(Color.WHITE);
 		btnAddEntry.setFont(new Font("Verdana", Font.BOLD, 11));
@@ -390,7 +415,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		tabbedPane.setBounds(10, 0, 902, 443);
 		desktopPane.add(tabbedPane);
 		
-		JTextPane txtpnVb = new JTextPane();
+		txtpnVb = new JTextPane();
 		txtpnVb.setFont(new Font("Monospaced", Font.PLAIN, 17));
 		txtpnVb.setForeground(Color.BLACK);
 		tabbedPane.addTab("New Example*", null, txtpnVb, null);
@@ -415,8 +440,35 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 	}
 
 	@Override
-	public BufferEntry getBufferEntry() {
-		// TODO Auto-generated method stub
-		return null;
+	public BufferEntry getBufferEntry()
+	{
+		BufferEntry e = new BufferEntry();
+		String code = txtpnVb.getText();
+		String title = textField.getText();
+		String author = textField_1.getText();
+
+		if(code.length()==0)
+		{
+			System.out.println("Invalid code. Please try again");
+			return null;
+		}
+		else e.setCode(code);
+
+		if(title.length()==0)
+		{
+			System.out.println("Invalid title. Please try again");
+			return null;
+		}
+		else e.setTitle(title);
+		if(author.length()==0)
+		{
+			System.out.println("Invalid author. Please try again");
+			return null;
+		}
+		else e.addAuthor(new NonUser(author));
+
+		e.setLanguage(textField_2.getText());
+		//TODO: Set category
+		return e;
 	}
 }
