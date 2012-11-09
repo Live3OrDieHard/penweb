@@ -86,6 +86,7 @@
 			<a href="index.jsp?cat=<%=c.getId() %>"><li> <%= c.getTitle() %> (<%= c.getExampleList().size() %>)</li></a>
 			<% } %> 
 		</ul>
+		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
 		<% IExample ex= webcon.getExamples().get(id); %>
