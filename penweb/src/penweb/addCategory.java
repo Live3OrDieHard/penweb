@@ -31,7 +31,7 @@ public class addCategory extends HttpServlet {
 		String desc = request.getParameter("desc");
 		webcon.addCategory(name, desc);
 		webcon.close();
-		response.sendRedirect("penweb");
+		response.sendRedirect("/penweb");
 	}
 
 }
