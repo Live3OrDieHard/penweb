@@ -18,7 +18,7 @@ public class BufferEntry
 	/**
 	 * Categories the example belongs to
 	 */
-	private ArrayList<Long> categoryIds = new ArrayList<Long>();
+	private ArrayList<Category> categories = new ArrayList<Category>();
 	
 	private String code;
 
@@ -40,21 +40,21 @@ public class BufferEntry
 	
 	public BufferEntry() {
 		this.authors = new ArrayList<IPerson>();
-		this.categoryIds = new ArrayList<Long>();
+		this.categories = new ArrayList<Category>();
 	}
 	public void addAuthor(IPerson person) {
 		this.authors.add(person);
 	}
 	
-	public void addCategoryIds(Long catId) {
-		this.categoryIds.add(catId);
+	public void addCategory(Category category) {
+		this.categories.add(category);
 	}
 	
 	public List<IPerson> getAuthors() {
 		return authors;
 	}
-	public ArrayList<Long> getCategoryIds() {
-		return categoryIds;
+	public ArrayList<Category> getCategories() {
+		return categories;
 	}
 	public String getCode() {
 		return code;
@@ -80,8 +80,8 @@ public class BufferEntry
 	public void setAuthors(List<IPerson> authors) {
 		this.authors = authors;
 	}
-	public void setCategoryIds(ArrayList<Long> categoryIds) {
-		this.categoryIds = categoryIds;
+	public void setCategories(ArrayList<Category> categories) {
+		this.categories = categories;
 	}
 	public void setCode(String code) {
 		this.code = code;
