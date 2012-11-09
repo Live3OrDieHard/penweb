@@ -16,14 +16,8 @@ public class WebController {
 	
 	public void populate() {
 		// Add some stuff to the database
-		IExample e1 = new BasicExample();
-		e1.setTitle("test3");
-		e1.setCode("This is test code");
-		IExample e2 = new BasicExample();
-		e2.setCode("This is more test code");
-		e2.setTitle("test4");
-		db.store(e1);
-		db.store(e2);
+		addCategory("Test Cat", "This is a test cat");
+		addCategory("Another Cat", "This is another cat");
 	}
 	
 	public void addCategory(String name, String desc) {
