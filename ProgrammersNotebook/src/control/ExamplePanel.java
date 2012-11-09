@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import java.awt.SystemColor;
 import javax.swing.border.TitledBorder;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextPane;
 
@@ -156,7 +158,7 @@ public class ExamplePanel extends JPanel {
 		this.langText.setText(bx.getLanguage());
 		this.authorText.setText(bx.getAuthors().get(0).getName());
 	}
-	
+
 	public BufferEntry getBufferEntry() {
 		BufferEntry entry = new BufferEntry();
 		entry.setTitle(this.titleText.getText());
@@ -168,4 +170,32 @@ public class ExamplePanel extends JPanel {
 		return entry;
 	}
 	
+	/**
+	 * return an arraylist of strings separated by comma in input
+	 * @param input
+	 * @return
+	 */
+	public ArrayList<String> interpretCategories(String input)
+	{
+		ArrayList<String> stringlist = new ArrayList<String>();
+		boolean hasComma = true;
+		while(hasComma)
+		{
+			hasComma = input.contains(",");
+			if(hasComma)
+			{
+				String sub = input.substring(0,input.indexOf(","));
+				stringlist.add(sub);
+				input = input.substring(input.indexOf(",")+1);
+			}
+			else
+			{
+				if(input.length()!=0)
+					stringlist.add(input);
+				return stringlist;
+			}
+		}
+		return stringlist;
 	}
+
+}

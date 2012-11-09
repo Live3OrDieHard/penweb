@@ -197,23 +197,57 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 						NewDesktopUI.this.displayMessage("Example added");
 						tabbedPane.remove(tabbedPane.getSelectedIndex());
 						DefaultMutableTreeNode leaf = new DefaultMutableTreeNode(buf.getTitle());
-						leaflist.add(leaf);
-						Examplelist.add(example);
+						
 						String categoryName = buf.getCategoryName();
+						if(categoryName.equals("")){
+							root.add(leaf);
+							leaflist.add(leaf);
+							Examplelist.add(example);
+							model.reload();
+						}
+						else{
 						List<ICategory> listCategory = controller.getAllCategoryinDB();
 						for(int i=0;i<listCategory.size();i++)
 						{
 							ICategory category = listCategory.get(i);
+							ArrayList<String> categoryNamesFromInput = p.interpretCategories(categoryName);
+							for(int c=0;c<categoryNamesFromInput.size();c++){
+								if(categoryNamesFromInput.get(c).equals(category.getTitle())) {
+									category.addCodeExample(example);
+									for(int j=0;j<nodelist.size();j++)
+									{
+										if(nodelist.get(j).toString().equals(categoryNamesFromInput.get(c)))
+										{
+											nodelist.get(j).add(leaf);
+											System.out.println("yes");
+											model.reload();
+										}
+										System.out.println("no");
+									}
+									
+								}
+								leaf = new DefaultMutableTreeNode(buf.getTitle());
+								leaflist.add(leaf);
+								Examplelist.add(example);
+							}
+							leaflist.add(leaf);
+							Examplelist.add(example);
+							/*
 							if(category.getTitle().equals(categoryName))
 							{
 								category.addCodeExample(example);
 								for(int j=0;j<nodelist.size();j++)
 								{
-									nodelist.get(j).add(leaf);
+									if(nodelist.get(j).equals(categoryName))
+									{
+										nodelist.get(j).add(leaf);
+									}
 								}
 								model.reload();
 							}
+							*/
 							
+						}
 						}
 					} catch (PENException exception) {
 						NewDesktopUI.this.displayMessage(exception
