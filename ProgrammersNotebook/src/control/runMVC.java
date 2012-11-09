@@ -15,7 +15,7 @@ public class runMVC
 		IDatabase db = new Db4oDatabase("PEN.yap");
 		IUserInterface  ui = null;
 		Controller controller = new Controller(db,ui);
-		ui =  new DesktopUI(controller);
+		ui =  new NewDesktopUI(controller);
 		controller.ui = ui;
 		ui.init();
 		ui.show();

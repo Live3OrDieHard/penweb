@@ -66,13 +66,11 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
+			<%List<ICategory> cats = webcon.getCategories(); %>
 			<a href="index.jsp"><li>All Entries (<%=webcon.getNumEntries() %>)</li></a>
-			<li>Tests (0)</li>
-			<li>Security (0)</li>
-			<li>Search (0)</li>
-			<li>Data Structures (0)</li>
-			<li>Algorithms (0)</li>
-			<li>Math (0)</li>
+			<% for (ICategory c : cats) { %>
+				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=c.getExampleList().size() %>)</li></a>
+			<%} %>
 		</ul>
 	</div>
 	<div class="right">
@@ -83,11 +81,9 @@
 			<input type="text" name="language" />
 			<textarea name="content"></textarea>
 			<p>Categories</p>
-			<p><input type="checkbox" name="cids[]" value="categoryIdHere" /> Category Name 1</p>
-			<p><input type="checkbox" name="cids[]" value="categoryIdHere" /> Category Name 2</p>
-			<p><input type="checkbox" name="cids[]" value="categoryIdHere" /> Category Name 3</p>
-			<p><input type="checkbox" name="cids[]" value="categoryIdHere" /> Category Name 4</p>
-			<p><input type="checkbox" name="cids[]" value="categoryIdHere" /> Category Name 5</p>
+			<% for (ICategory ca : cats) { %>
+				<p><input type="checkbox" name="cids[]" value="<%=ca.getId() %>" /> <%=ca.getTitle() %></p>
+			<%} %>
 			<input type="submit" class="button black" value="Save Entry" />
 		</form>
 	</div>

@@ -1,5 +1,7 @@
 package dataStructure;
 
+import java.util.List;
+
 public interface ICategory extends IEntry{
 	
 	/**
@@ -29,4 +31,6 @@ public interface ICategory extends IEntry{
 	 * @param example The example entry to add.
 	 */
 	void addCodeExample(IExample example);
+
+	List<IExample> getExampleList();
 }

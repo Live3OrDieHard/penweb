@@ -27,7 +27,10 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void addBasicExample(BufferEntry buf) throws PENException {
+	/**
+	 * return the added Example after it's added
+	 */
+	public BasicExample addBasicExample(BufferEntry buf) throws PENException {
 		if ((buf.getTitle() == null)||buf.getTitle().equals("")) {
 			throw (new NoTitleException("Example must have a title."));
 		}
@@ -43,6 +46,7 @@ public class Controller implements IController {
 		e.setSource(buf.getSource());
 		e.setDescription(buf.getDescription());
 		this.addToDB(e);
+		return e;
 	}
 
 	public void addToDB(IEntry e) {
@@ -87,11 +91,13 @@ public class Controller implements IController {
 			db.store(newC);
 		}
 	}
-
+	
+	@Override
 	public List<IExample> getAllExampleinDB() {
 		return db.getAllExample();
 	}
-
+	
+	@Override
 	public List<ICategory> getAllCategoryinDB() {
 		return this.db.getAllCategory();
 	}

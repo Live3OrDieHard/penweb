@@ -15,6 +15,7 @@ import javax.swing.JTextPane;
 
 import dataStructure.BasicExample;
 import dataStructure.BufferEntry;
+import dataStructure.IExample;
 import dataStructure.NonUser;
 
 public class ExamplePanel extends JPanel {
@@ -148,7 +149,7 @@ public class ExamplePanel extends JPanel {
 
 	}
 
-	public void displayExample(BasicExample bx) {
+	public void displayExample(IExample bx) {
 		this.codeText.setText(bx.getCode());
 		this.titleText.setText(bx.getTitle());
 		this.sourceText.setText(bx.getSource());
@@ -163,6 +164,7 @@ public class ExamplePanel extends JPanel {
 		entry.setLanguage(this.langText.getText());
 		entry.setCode(this.codeText.getText());
 		entry.addAuthor(new NonUser(this.authorText.getText()));
+		entry.setCategoryName(this.catText.getText());
 		return entry;
 	}
 

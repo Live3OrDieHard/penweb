@@ -37,15 +37,23 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import javax.swing.border.LineBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import javax.swing.JTextPane;
 
+import dataStructure.BasicExample;
 import dataStructure.BufferEntry;
+import dataStructure.ICategory;
+import dataStructure.IExample;
 import dataStructure.NonUser;
 import exceptions.PENException;
 
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class NewDesktopUI extends JFrame implements IUserInterface {
@@ -56,21 +64,9 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 	private JTabbedPane tabbedPane;
 	private JTextPane consolePanel;
 	final IController controller;
+	private DefaultTreeModel model; 
+	DefaultMutableTreeNode root = new DefaultMutableTreeNode();
 	
-	
-	/* public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					NewDesktopUI frame = new NewDesktopUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	} */
-
 	/**
 	 * Create the frame.
 	 */
@@ -90,7 +86,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		setBackground(SystemColor.desktop);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		setBounds(0, 0,screen.width,screen.height - 30);
+		setBounds(0, 0,1131,709);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Verdana", Font.PLAIN, 12));
@@ -180,6 +176,10 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 										+ bx.getTitle() + "\". Description: \""
 										+ bx.getDescription() + "\"");
 						tabbedPane.remove(tabbedPane.getSelectedIndex());
+						DefaultMutableTreeNode child = new DefaultMutableTreeNode();
+						child.setUserObject(bx.getTitle());
+						root.add(child);
+						model.reload(root);
 					} catch (PENException exception) {
 						NewDesktopUI.this.displayMessage(exception
 								.getMessage());
@@ -187,11 +187,22 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 				}
 				else if (comp instanceof ExamplePanel) {
 					ExamplePanel p = (ExamplePanel) comp;
-					BufferEntry bx = p.getBufferEntry();
+					BufferEntry be = p.getBufferEntry();
 					try {
-						controller.addBasicExample(bx);
+						BasicExample example = controller.addBasicExample(be);
 						NewDesktopUI.this.displayMessage("Example added");
 						tabbedPane.remove(tabbedPane.getSelectedIndex());
+						DefaultMutableTreeNode leaf = new DefaultMutableTreeNode(be);
+						String categoryName = be.getCategoryName();
+						List<ICategory> listCategory = controller.getAllCategoryinDB();
+						for(int i=0;i<listCategory.size();i++)
+						{
+							ICategory category = listCategory.get(i);
+							if(category.getTitle().equals(categoryName))
+								category.addCodeExample(example);
+							
+							root.getChildAt(index)
+						}
 					} catch (PENException exception) {
 						NewDesktopUI.this.displayMessage(exception
 								.getMessage());
@@ -235,7 +246,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		panel_3.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel_3.setBackground(Color.BLACK);
 		
-		tree = new JTree();
+		tree = new JTree(root);
 		tree.setBounds(11, 71, 159, 466);
 		tree.setFont(new Font("Verdana", Font.PLAIN, 11));
 		tree.setForeground(Color.WHITE);
@@ -342,6 +353,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		consolePanel.setBounds(10, 24, 882, 58);
 		panel_1.add(consolePanel);
 		contentPane.setLayout(gl_contentPane);
+		model = (DefaultTreeModel)tree.getModel();
 	}
 
 	@Override
@@ -360,4 +372,24 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 	public void displayMessage(String message) {
 		this.consolePanel.setText(message);
 	}
+	
+	
+	public void doMouseClicked(MouseEvent me){
+		TreePath tp = tree.getPathForLocation(me.getX(), me.getY());
+		List<IExample> list = controller.getAllExampleinDB();
+		if(tp!=null){
+			for(int i=0;i<list.size();i++){
+				if(tp.getLastPathComponent().equals(list.get(i))){
+					IExample bx = list.get(i);
+					ExamplePanel p = new ExamplePanel();
+					p.displayExample(bx);
+					tabbedPane.addTab(bx.getTitle(), p);
+					//System.out.println(tp.toString());
+					break;	
+				}
+				System.out.println(tp.getLastPathComponent().toString());
+			}		
+		}
+	}	
+
 }

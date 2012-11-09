@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 
  * @author Thanaporn
- *
+ *w
  * This object will accumulate all fields of all kind of IEntry
  * to be a buffer entry
  * this should help web app - controller interaction
@@ -14,6 +14,14 @@ import java.util.List;
  */
 public class BufferEntry 
 {
+	private String categoryName;
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	private List<IPerson> authors;
 	/**
 	 * Categories the example belongs to

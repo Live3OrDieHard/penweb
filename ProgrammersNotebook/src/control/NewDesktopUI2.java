@@ -33,6 +33,7 @@ import java.util.List;
 import java.awt.SystemColor;
 import javax.swing.border.LineBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.tree.TreePath;
 import javax.swing.JTextPane;
 
 import dataStructure.BasicExample;
@@ -367,4 +368,5 @@ public class NewDesktopUI2 extends JFrame implements IUserInterface {
 	public void displayMessage(String message) {
 		this.consolePane.setText(message);
 	}
+	
 }
