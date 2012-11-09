@@ -27,6 +27,16 @@
 			$("#createCategory textarea[name=desc]").watermark("Enter description...");			
 		});
 
+		// Checks addCategory submission to make sure name isn't blank
+		function checkAddCategorySubmit() {
+			if ($("#createCategory input[name=name]").val() == "") {
+				$(".modal .error").html("Error: Please provide a category name.");
+				$(".modal .error").show();
+				return false;
+			}
+			return true;
+		}
+
 		function newCategory() {
 			$("#createCategory").show();
 			$(".modal").show();		
@@ -45,7 +55,8 @@
 		<a href="javascript: closeModal();"><div class="close"></div></a>
 		<h1>New Category</h1>
 		<div class="modalContent">
-			<form action="addCategory" method="post">
+			<form action="addCategory" method="post" onsubmit="return checkAddCategorySubmit();">
+				<p class="error"></p>
 				<input type="text" name="name" />
 				<textarea name="desc"></textarea>
 				<input type="submit" value="Create" />
