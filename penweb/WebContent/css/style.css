@@ -156,14 +156,19 @@ a {
 .content .right {
 }
 
-.content .right p, .content .right form {
-	margin: 25px 25px 0 25px;
+.content .right form {
+	margin: 25px;
+}
+
+.content .right p {
+	padding: 25px;
 }
 
 .content .right .error {
 	font-weight: bold;
 	color: #FF0000;
 	display: none;
+	padding-bottom: 0;
 }
 
 .content .right p.code {
@@ -174,6 +179,11 @@ a {
 
 .content .right b {
 	font-weight: bold;
+}
+
+.content .right form p {
+	padding: 0;
+	margin-bottom: 25px;
 }
 
 .content .right input, .content .right textarea {
@@ -196,6 +206,11 @@ a {
 
 .content .right input[type=submit] {
 	width: 200px;
+}
+
+.content .right input[type=checkbox] {
+	display: inline;
+	margin: 0;
 }
 
 .content .right input[type=submit]:hover {
