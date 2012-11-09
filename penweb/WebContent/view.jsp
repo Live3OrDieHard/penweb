@@ -53,12 +53,12 @@
 		<h1>My Examples</h1>
 		<ul>
 			<a href="index.jsp"><li>All Entries (<%=webcon.getNumEntries() %>)</li></a>
-			<li>Tests (0)</li>
-			<li>Security (0)</li>
-			<li>Search (0)</li>
-			<li>Data Structures (0)</li>
-			<li>Algorithms (0)</li>
-			<li>Math (0)</li>
+			<%
+				List<ICategory> cat = webcon.getCategories();
+				for (ICategory c : cat) {
+			%>
+			<a href="index.jsp?cat=<%=c.getId() %>"><li> <%= c.getTitle() %> (<%= c.getExampleList().size() %>)</li></a>
+			<% } %> 
 		</ul>
 	</div>
 	<div class="right">
