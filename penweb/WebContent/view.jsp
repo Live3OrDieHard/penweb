@@ -11,10 +11,10 @@
 			pageContext.forward("/");
 			return;
 		}
-		int id = Integer.parseInt(request.getParameter("id")) - 1;
+		Long id = Long.parseLong(request.getParameter("id"));
 	%>
 	<meta charset="UTF-8">
-	<title>PEN &middot; <%= webcon.getTitles().get(id) %></title>
+	<title>PEN &middot; <%= webcon.getExampleById(id).getTitle() %></title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -71,7 +71,7 @@
 		<a href="create.jsp"><div class="button green">Create Entry</div></a>
 	</div>
 	<div class="right">
-		<h1><%=webcon.getTitles().get(id) %></h1>
+		<h1><%=webcon.getExampleById(id).getTitle() %></h1>
 	</div>
 </div>
 <div class="content">
@@ -89,7 +89,7 @@
 		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
-		<% IExample ex= webcon.getExamples().get(id); %>
+		<% IExample ex= webcon.getExampleById(id); %>
 		<p>Author: <b><%=ex.getAuthors().get(0).getName() %></b></p>
 		<p>Language: <%=ex.getLanguage() %><b></b></p>
 		<p class="code">
