@@ -11,10 +11,10 @@
 			pageContext.forward("/");
 			return;
 		}
-		int id = Integer.parseInt(request.getParameter("id")) - 1;
+		Long id = Long.parseLong(request.getParameter("id"));
 	%>
 	<meta charset="UTF-8">
-	<title>PEN &middot; <%= webcon.getTitles().get(id) %></title>
+	<title>PEN &middot; <%= webcon.getExampleById(id).getTitle() %></title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -30,6 +30,17 @@
 			$("#createCategory input[name=name]").watermark("Category Name");
 			$("#createCategory textarea[name=desc]").watermark("Enter description...");			
 		});
+
+		// Checks addCategory submission to make sure name isn't blank
+		function checkAddCategorySubmit() {
+			if ($("#createCategory input[name=name]").val() == "") {
+				$(".modal .error").html("Error: Please provide a category name.");
+				$(".modal .error").show();
+				return false;
+			}
+			return true;
+		}
+
 
 		function newCategory() {
 			$("#createCategory").show();
@@ -48,7 +59,8 @@
 		<a href="javascript: closeModal();"><div class="close"></div></a>
 		<h1>New Category</h1>
 		<div class="modalContent">
-			<form action="addCategory" method="post">
+			<form action="addCategory" method="post" onsubmit="return checkAddCategorySubmit();">
+				<p class="error"></p>
 				<input type="text" name="name" />
 				<textarea name="desc"></textarea>
 				<input type="submit" value="Create" />
@@ -71,7 +83,7 @@
 		<a href="create.jsp"><div class="button green">Create Entry</div></a>
 	</div>
 	<div class="right">
-		<h1><%=webcon.getTitles().get(id) %></h1>
+		<h1><%=webcon.getExampleById(id).getTitle() %></h1>
 	</div>
 </div>
 <div class="content">
@@ -89,12 +101,20 @@
 		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
-		<% IExample ex= webcon.getExamples().get(id); %>
+		<% IExample ex= webcon.getExampleById(id); %>
 		<p>Author: <b><%=ex.getAuthors().get(0).getName() %></b></p>
 		<p>Language: <%=ex.getLanguage() %><b></b></p>
 		<p class="code">
 			<%= ex.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %>
 		</p>
+		<form action="addToCategory" method="post">
+			<input type="hidden" name="eid" value="entryIDHere" />
+			<p>Categories</p>
+			<% for (ICategory ca : cat) { %>
+				<p><input type="checkbox" name="cids[]" value="<%=ca.getId() %>" /> <%=ca.getTitle() %></p>
+			<%} %>
+			<input type="submit" class="button black" value="Add" />
+		</form>
 	</div>
 </div>
 <%
