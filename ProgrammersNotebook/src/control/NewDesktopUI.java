@@ -11,6 +11,8 @@ import javax.swing.JMenu;
 import javax.swing.JToolBar;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import javax.swing.UIManager;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
@@ -26,6 +28,8 @@ import javax.swing.JComboBox;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTree;
 import javax.swing.JSeparator;
+
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.SystemColor;
 import javax.swing.border.LineBorder;
@@ -50,8 +54,8 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 	private JTextField textField_4;
 	private IController controller;
 	
-	/*
-	public static void main(String[] args) {
+	
+	/* public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -62,231 +66,100 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 				}
 			}
 		});
-	}*/
+	} */
 
 	/**
 	 * Create the frame.
 	 */
+			
 	public NewDesktopUI(IController controller) {
+		setFont(new Font("Verdana", Font.PLAIN, 12));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NewDesktopUI.class.getResource("/javagui/resources/Notebook-icon.png")));
-		setTitle("Personal Example Notebook (PEN)");
+		setTitle("Programmer's Examples Notebook (PEN) 1.1");
 		setBackground(SystemColor.desktop);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 952, 625);
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		setBounds(0, 0,screen.width,screen.height - 30);
 		
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setFont(new Font("Verdana", Font.PLAIN, 12));
 		setJMenuBar(menuBar);
 		
 		JMenu mnFile = new JMenu("File");
+		mnFile.setFont(new Font("Verdana", Font.PLAIN, 12));
 		menuBar.add(mnFile);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.setFont(new Font("Verdana", Font.PLAIN, 11));
 		mnFile.add(mntmExit);
 		
 		JMenu mnEdit = new JMenu("Edit");
+		mnEdit.setFont(new Font("Verdana", Font.PLAIN, 12));
 		menuBar.add(mnEdit);
 		
 		JMenuItem mntmAddNewEntry = new JMenuItem("Add New Entry");
+		mntmAddNewEntry.setFont(new Font("Verdana", Font.PLAIN, 11));
 		mnEdit.add(mntmAddNewEntry);
 		
-		JMenuItem mntmDeleteEntry = new JMenuItem("Delete Entry ");
+		JMenuItem mntmDeleteEntry = new JMenuItem("Delete Entry");
+		mntmDeleteEntry.setFont(new Font("Verdana", Font.PLAIN, 11));
 		mnEdit.add(mntmDeleteEntry);
 		
-		JMenuItem mntmAddCategory = new JMenuItem("Add Category ");
+		JMenuItem mntmAddCategory = new JMenuItem("Add Category");
+		mntmAddCategory.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 		mnEdit.add(mntmAddCategory);
 		
 		JMenuItem mntmDeleteCategory = new JMenuItem("Delete Category");
+		mntmDeleteCategory.setFont(new Font("Verdana", Font.PLAIN, 11));
 		mnEdit.add(mntmDeleteCategory);
 		
 		JMenu mnHelp = new JMenu("Help");
+		mnHelp.setFont(new Font("Verdana", Font.PLAIN, 12));
 		menuBar.add(mnHelp);
 		
 		JMenuItem mntmWelcome = new JMenuItem("Welcome");
+		mntmWelcome.setFont(new Font("Verdana", Font.PLAIN, 11));
 		mnHelp.add(mntmWelcome);
 		
 		JMenuItem mntmHelp = new JMenuItem("Help");
+		mntmHelp.setFont(new Font("Verdana", Font.PLAIN, 11));
 		mnHelp.add(mntmHelp);
+		
+		JMenuItem mntmAbout = new JMenuItem("About PEN 1.1...");
+		mntmAbout.setFont(new Font("Verdana", Font.PLAIN, 11));
+		mnHelp.add(mntmAbout);
+		
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
-		JToolBar toolBar = new JToolBar();
-		toolBar.setBackground(SystemColor.inactiveCaption);
-		
-		JButton btnAddEntry = new JButton("Add Entry ");
-		btnAddEntry.setBackground(SystemColor.inactiveCaption);
-		btnAddEntry.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			}
-		});
-		btnAddEntry.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/add-icon.png")));
-		toolBar.add(btnAddEntry);
-		
-		JButton btnNewButton = new JButton("Add Category ");
-		btnNewButton.setBackground(SystemColor.inactiveCaption);
-		toolBar.add(btnNewButton);
-		
-		JButton btnSave = new JButton("Save");
-		btnSave.setBackground(SystemColor.inactiveCaption);
-		toolBar.add(btnSave);
-		
-		JButton btnNewButton_1 = new JButton("Delete Entry");
-		btnNewButton_1.setBackground(SystemColor.inactiveCaption);
-		toolBar.add(btnNewButton_1);
-		
-		JButton btnDeleteCategory = new JButton("Delete Category ");
-		btnDeleteCategory.setBackground(SystemColor.inactiveCaption);
-		toolBar.add(btnDeleteCategory);
-		
-		JToolBar toolBar_1 = new JToolBar();
-		toolBar_1.setBackground(SystemColor.inactiveCaption);
-		toolBar.add(toolBar_1);
-		
-		JButton btnNewButton_2 = new JButton("Undo");
-		btnNewButton_2.setBackground(SystemColor.inactiveCaption);
-		toolBar_1.add(btnNewButton_2);
-		
-		JButton btnRedo = new JButton("Redo");
-		btnRedo.setBackground(SystemColor.inactiveCaption);
-		toolBar.add(btnRedo);
 		
 		JSeparator separator = new JSeparator();
 		
 		desktopPane = new JDesktopPane();
-		desktopPane.setBackground(Color.LIGHT_GRAY);
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(desktopPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 926, Short.MAX_VALUE)
-						.addComponent(toolBar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 926, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addContainerGap(64, Short.MAX_VALUE)
-							.addComponent(separator, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
-							.addGap(861)))
-					.addGap(0))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(7)
-					.addComponent(desktopPane, GroupLayout.PREFERRED_SIZE, 522, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(4))
-		);
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
-		panel.setBounds(10, 11, 149, 500);
-		desktopPane.add(panel);
-		
-		JComboBox comboBox = new JComboBox();
-		
-		JLabel lblSortBy = new JLabel("Sort By:");
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBackground(SystemColor.inactiveCaption);
-		
-		tree = new JTree();
-		tree.setForeground(Color.WHITE);
-		tree.setBackground(Color.WHITE);
-		tree.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		tree.setShowsRootHandles(true);
-		tree.setEditable(true);
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblSortBy)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(68, Short.MAX_VALUE))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(tree, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSortBy)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(tree, GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		
-		JLabel lblExampleCode = new JLabel("Example Code");
-		lblExampleCode.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
-		gl_panel_3.setHorizontalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(20)
-					.addComponent(lblExampleCode)
-					.addContainerGap(23, Short.MAX_VALUE))
-		);
-		gl_panel_3.setVerticalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(lblExampleCode))
-		);
-		panel_3.setLayout(gl_panel_3);
-		panel.setLayout(gl_panel);
-		
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
-		tabbedPane.setBounds(157, 11, 519, 398);
-		desktopPane.add(tabbedPane);
-		
-		JTextPane txtpnVb = new JTextPane();
-		tabbedPane.addTab("New tab", null, txtpnVb, null);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
-		panel_1.setBounds(157, 409, 539, 102);
-		desktopPane.add(panel_1);
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 595, Short.MAX_VALUE)
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 102, Short.MAX_VALUE)
-		);
-		panel_1.setLayout(gl_panel_1);
+		desktopPane.setBackground(Color.DARK_GRAY);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
-		panel_2.setBounds(696, 11, 220, 500);
-		desktopPane.add(panel_2);
+		panel_2.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_4.setBackground(SystemColor.inactiveCaption);
+		panel_4.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_4.setBackground(Color.BLACK);
 		
 		JLabel lblAuthor = new JLabel("Author:");
+		lblAuthor.setFont(new Font("Verdana", Font.PLAIN, 11));
 		
 		JLabel lblType = new JLabel("Type:");
+		lblType.setFont(new Font("Verdana", Font.PLAIN, 11));
 		
 		JLabel lblTitle = new JLabel("Title:");
+		lblTitle.setFont(new Font("Verdana", Font.PLAIN, 11));
 		
 		JLabel lblTags = new JLabel("Tags:");
+		lblTags.setFont(new Font("Verdana", Font.PLAIN, 11));
 		
 		JLabel lblCategories = new JLabel("Categories:");
+		lblCategories.setFont(new Font("Verdana", Font.PLAIN, 11));
 		
 		textField = new JTextField();
 		textField.setColumns(10);
@@ -309,35 +182,32 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addComponent(lblCategories)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblAuthor)
-								.addComponent(lblType)
-								.addComponent(lblTags)
-								.addComponent(lblTitle))
-							.addGap(23)
-							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-								.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-								.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))))
-					.addContainerGap())
-				.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+					.addComponent(label)
+					.addContainerGap(211, Short.MAX_VALUE))
+				.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
 				.addGroup(gl_panel_2.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(label)
-					.addContainerGap(158, Short.MAX_VALUE))
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblTitle)
+						.addComponent(lblCategories)
+						.addComponent(lblAuthor)
+						.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+							.addComponent(lblTags)
+							.addComponent(lblType)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+						.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+						.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+						.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-					.addGap(19)
+					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTitle)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -359,31 +229,182 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(label)
-					.addContainerGap(277, Short.MAX_VALUE))
+					.addContainerGap(418, Short.MAX_VALUE))
 		);
+		panel_4.setLayout(null);
 		
 		JLabel lblProperties = new JLabel("Properties");
-		lblProperties.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
-		gl_panel_4.setHorizontalGroup(
-			gl_panel_4.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_4.createSequentialGroup()
-					.addContainerGap(72, Short.MAX_VALUE)
-					.addComponent(lblProperties)
-					.addGap(69))
-		);
-		gl_panel_4.setVerticalGroup(
-			gl_panel_4.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_4.createSequentialGroup()
-					.addContainerGap(12, Short.MAX_VALUE)
-					.addComponent(lblProperties))
-		);
-		panel_4.setLayout(gl_panel_4);
+		lblProperties.setForeground(UIManager.getColor("text"));
+		lblProperties.setBounds(77, 9, 78, 17);
+		lblProperties.setFont(new Font("Tahoma", Font.BOLD, 14));
+		panel_4.add(lblProperties);
 		panel_2.setLayout(gl_panel_2);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(679, 11, 17, 398);
-		desktopPane.add(scrollBar);
+		JButton btnNewButton = new JButton("Add Category ");
+		btnNewButton.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/category.png")));
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnNewButton.setBackground(Color.BLACK);
+		
+		JButton btnSave = new JButton("Save");
+		btnSave.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/save.png")));
+		btnSave.setForeground(Color.WHITE);
+		btnSave.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnSave.setBackground(Color.BLACK);
+		
+		JButton btnNewButton_1 = new JButton("Delete Entry");
+		btnNewButton_1.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/delete.png")));
+		btnNewButton_1.setForeground(Color.WHITE);
+		btnNewButton_1.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnNewButton_1.setBackground(Color.BLACK);
+		
+		JButton btnDeleteCategory = new JButton("Delete Category ");
+		btnDeleteCategory.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/delete-2.png")));
+		btnDeleteCategory.setForeground(Color.WHITE);
+		btnDeleteCategory.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnDeleteCategory.setBackground(Color.BLACK);
+		
+		JButton btnNewButton_2 = new JButton("Undo");
+		btnNewButton_2.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/undo.png")));
+		btnNewButton_2.setForeground(Color.WHITE);
+		btnNewButton_2.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnNewButton_2.setBackground(Color.BLACK);
+		
+		JButton btnRedo = new JButton("Redo");
+		btnRedo.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/redo.png")));
+		btnRedo.setForeground(Color.WHITE);
+		btnRedo.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnRedo.setBackground(Color.BLACK);
+		
+		JLabel label_1 = new JLabel("New label");
+		label_1.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/attachment (1).png")));
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(UIManager.getColor("scrollbar"));
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(63, 45, 85, 20);
+		
+		JLabel lblSortBy = new JLabel("Sort By:");
+		lblSortBy.setBounds(11, 47, 48, 15);
+		lblSortBy.setFont(new Font("Verdana", Font.PLAIN, 11));
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(0, 0, 180, 33);
+		panel_3.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_3.setBackground(Color.BLACK);
+		
+		tree = new JTree();
+		tree.setBounds(11, 71, 159, 466);
+		tree.setFont(new Font("Verdana", Font.PLAIN, 11));
+		tree.setForeground(Color.WHITE);
+		tree.setBackground(UIManager.getColor("text"));
+		tree.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		tree.setShowsRootHandles(true);
+		tree.setEditable(true);
+		panel_3.setLayout(null);
+		
+		JLabel lblExampleCode = new JLabel("My Examples");
+		lblExampleCode.setForeground(UIManager.getColor("text"));
+		lblExampleCode.setBounds(40, 8, 100, 17);
+		lblExampleCode.setFont(new Font("Verdana", Font.BOLD, 14));
+		panel_3.add(lblExampleCode);
+		panel.setLayout(null);
+		panel.add(lblSortBy);
+		panel.add(comboBox);
+		panel.add(tree);
+		panel.add(panel_3);
+		
+		JButton btnAddEntry = new JButton("Add Entry");
+		btnAddEntry.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/add-icon.png")));
+		btnAddEntry.setForeground(Color.WHITE);
+		btnAddEntry.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnAddEntry.setBackground(Color.BLACK);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnAddEntry, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnNewButton)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnNewButton_1)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnDeleteCategory)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnRedo, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(separator, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
+							.addGap(653))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(desktopPane, GroupLayout.PREFERRED_SIZE, 912, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)))
+					.addGap(34))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(98)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 548, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(94, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnRedo, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnDeleteCategory, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnAddEntry, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 548, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(desktopPane, GroupLayout.PREFERRED_SIZE, 634, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(506))))
+		);
+		
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setFont(new Font("Verdana", Font.PLAIN, 11));
+		tabbedPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		tabbedPane.setBounds(10, 0, 902, 443);
+		desktopPane.add(tabbedPane);
+		
+		JTextPane txtpnVb = new JTextPane();
+		txtpnVb.setFont(new Font("Monospaced", Font.PLAIN, 17));
+		txtpnVb.setForeground(Color.BLACK);
+		tabbedPane.addTab("New Example*", null, txtpnVb, null);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(10, 454, 902, 93);
+		desktopPane.add(panel_1);
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		panel_1.setLayout(null);
+		
+		JLabel lblConsole = new JLabel("Console");
+		lblConsole.setFont(new Font("Verdana", Font.BOLD, 11));
+		lblConsole.setBounds(11, 8, 63, 14);
+		panel_1.add(lblConsole);
 		contentPane.setLayout(gl_contentPane);
 	}
 
@@ -399,4 +420,3 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		return null;
 	}
 }
-
