@@ -166,16 +166,6 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				BufferEntry buf = NewDesktopUI.this.getBufferEntry();
-				try {
-					NewDesktopUI.this.controller.addBasicExample(buf);
-				} catch (PENException exception) {
-					System.out.println(exception.getMessage());
-				}
-				//TODO: Update left-panel tree
-		}});
-		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Component comp = tabbedPane.getSelectedComponent();
 				if (comp instanceof CategoryPanel) {
