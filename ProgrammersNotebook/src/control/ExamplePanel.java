@@ -164,6 +164,7 @@ public class ExamplePanel extends JPanel {
 		entry.setLanguage(this.langText.getText());
 		entry.setCode(this.codeText.getText());
 		entry.addAuthor(new NonUser(this.authorText.getText()));
+		entry.setCategoryName(this.catText.getText());
 		return entry;
 	}
 

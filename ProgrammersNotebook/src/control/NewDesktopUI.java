@@ -44,6 +44,7 @@ import javax.swing.JTextPane;
 
 import dataStructure.BasicExample;
 import dataStructure.BufferEntry;
+import dataStructure.ICategory;
 import dataStructure.IExample;
 import dataStructure.NonUser;
 import exceptions.PENException;
@@ -186,12 +187,22 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 				}
 				else if (comp instanceof ExamplePanel) {
 					ExamplePanel p = (ExamplePanel) comp;
-					BufferEntry bx = p.getBufferEntry();
+					BufferEntry be = p.getBufferEntry();
 					try {
-						controller.addBasicExample(bx);
+						BasicExample example = controller.addBasicExample(be);
 						NewDesktopUI.this.displayMessage("Example added");
 						tabbedPane.remove(tabbedPane.getSelectedIndex());
-						DefaultMutableTreeNode leaf = new DefaultMutableTreeNode(bx.getTitle());
+						DefaultMutableTreeNode leaf = new DefaultMutableTreeNode(be);
+						String categoryName = be.getCategoryName();
+						List<ICategory> listCategory = controller.getAllCategoryinDB();
+						for(int i=0;i<listCategory.size();i++)
+						{
+							ICategory category = listCategory.get(i);
+							if(category.getTitle().equals(categoryName))
+								category.addCodeExample(example);
+							
+							root.getChildAt(index)
+						}
 					} catch (PENException exception) {
 						NewDesktopUI.this.displayMessage(exception
 								.getMessage());
