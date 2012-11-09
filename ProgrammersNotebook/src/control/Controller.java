@@ -87,11 +87,13 @@ public class Controller implements IController {
 			db.store(newC);
 		}
 	}
-
+	
+	@Override
 	public List<IExample> getAllExampleinDB() {
 		return db.getAllExample();
 	}
-
+	
+	@Override
 	public List<ICategory> getAllCategoryinDB() {
 		return this.db.getAllCategory();
 	}
