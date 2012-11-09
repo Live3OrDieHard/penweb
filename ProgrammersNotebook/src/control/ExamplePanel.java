@@ -167,5 +167,5 @@ public class ExamplePanel extends JPanel {
 		entry.setCategoryName(this.catText.getText());
 		return entry;
 	}
-
+	
 	}

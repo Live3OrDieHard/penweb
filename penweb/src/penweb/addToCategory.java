@@ -34,7 +34,7 @@ public class addToCategory extends HttpServlet {
 			webcon.getCategoryById(Long.parseLong(s)).addCodeExample(webcon.getExampleById(Long.parseLong(eid)));
 		}
 		webcon.close();
-		response.sendRedirect("penweb");
+		response.sendRedirect("/penweb");
 	}
 
 }

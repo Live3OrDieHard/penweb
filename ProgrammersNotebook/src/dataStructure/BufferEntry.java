@@ -14,11 +14,26 @@ import java.util.List;
  */
 public class BufferEntry 
 {
+
 	private String categoryName;
+	
+	private ArrayList<String> categoryNameList;
 
 	public String getCategoryName() {
 		return categoryName;
 	}
+	public ArrayList<String> getCategoryNameList() {
+		return categoryNameList;
+	}
+	
+	public void setCategoryNameList(ArrayList<String> categoryNameList) {
+		this.categoryNameList = categoryNameList;
+	}
+	
+	public void addCategoryNameList(String categoryName) {
+		this.categoryNameList.add(categoryName);
+	}
+	
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
@@ -36,9 +51,9 @@ public class BufferEntry
 	 * Language in which the example is written
 	 */
 	private String language;
-
+	
 	private IPerson owner;
-
+	
 	private ExampleProperties properties;
 	/**
 	 * Where is the source of the example
