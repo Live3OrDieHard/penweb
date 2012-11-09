@@ -20,6 +20,10 @@
 			$("input[name=username]").watermark("Username");
 			$("input[name=password]").watermark("Password");
 
+			// Watermarks for new categories
+			$("#createCategory input[name=name]").watermark("Category Name");
+			$("#createCategory textarea[name=desc]").watermark("Enter description...");			
+
 			// Watermarks for new entry
 			$("input[name=title]").watermark("Title");
 			$("input[name=author]").watermark("Author");
@@ -41,9 +45,32 @@
 			}					
 			return true;
 		}
+
+		function newCategory() {
+			$("#createCategory").show();
+			$(".modal").show();		
+		}
+ 
+		function closeModal() {
+			$(".modal").hide();
+			$(".modal .sheet").hide();
+		}
 	</script>
 </head>
 <body>
+<div class="modal">
+	<div class="sheet" id="createCategory">
+		<a href="javascript: closeModal();"><div class="close"></div></a>
+		<h1>New Category</h1>
+		<div class="modalContent">
+			<form action="addCategory" method="post">
+				<input type="text" name="name" />
+				<textarea name="desc"></textarea>
+				<input type="submit" value="Create" />
+			</form>
+		</div>
+	</div>
+</div>
 <div class="header">
 	<h1>PEN</h1>
 	<h2>The Programmer's<br>Examples Notebook</h2>
@@ -56,7 +83,7 @@
 </div>
 <div class="bar">
 	<div class="left">
-		<a href="create.jsp"><div class="button green">Create Entry</div></a>
+		<a href="create.jsp"><div class="button green">New Entry</div></a>
 	</div>
 	<div class="right">
 		<h1>New Entry</h1>
