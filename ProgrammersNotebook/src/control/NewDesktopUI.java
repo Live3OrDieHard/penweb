@@ -43,6 +43,8 @@ import dataStructure.NonUser;
 import exceptions.PENException;
 
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class NewDesktopUI extends JFrame implements IUserInterface {
@@ -76,7 +78,14 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 	/**
 	 * Create the frame.
 	 */
-	public NewDesktopUI(IController controller) {
+	public NewDesktopUI(final IController controller) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				// Close the database
+				controller.close();
+			}
+		});
 		this.controller = controller;
 		
 		setFont(new Font("Verdana", Font.PLAIN, 12));

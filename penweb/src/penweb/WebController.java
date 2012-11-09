@@ -26,6 +26,33 @@ public class WebController {
 		db.store(e2);
 	}
 	
+	public void addCategory(String name, String desc) {
+		ICategory cat = new Category(name, desc);
+		db.store(cat);
+	}
+	
+	public List<ICategory> getCategories() {
+		return db.getAllCategory();
+	}
+	
+	public ICategory getCategoryById(Long id) {
+		List<ICategory> cats = db.getAllCategory();
+		for (ICategory c : cats) {
+			if (c.getId().equals(id))
+				return c;
+		}
+		return null;
+	}
+	
+	public IExample getExampleById(Long id) {
+		List<IExample> ex = db.getAllExample();
+		for (IExample e : ex) {
+			if (e.getId().equals(id))
+				return e;
+		}
+		return null;
+	}
+	
 	public void addCode(String title, String content, String language, String author) {
 		IExample ex = new BasicExample();
 		ex.setTitle(title);
