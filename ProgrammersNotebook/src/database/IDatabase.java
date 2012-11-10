@@ -49,4 +49,8 @@ public interface IDatabase {
 	Long getNewId();
 
 	IEntry getByID(Long id);
+
+	IEntry getCategoryByID(Long id);
+
+	IEntry getExampleByID(Long id);
 }

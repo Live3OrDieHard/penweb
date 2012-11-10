@@ -146,7 +146,7 @@ public class Db4oDatabase implements IDatabase {
 		List<IEntry> list = db.query(new Predicate<IEntry>() {
 			public boolean match(IEntry e) {
 				Long thisid = e.getId();
-				return (thisid == id);
+				return (thisid.equals(id));
 			}
 		});
 		if (list.size() == 1)
@@ -167,4 +167,51 @@ public class Db4oDatabase implements IDatabase {
 		return (long) (Math.random()*100000000); // should have a better way to do
 		// this
 	}
+	
+	@Override
+	/**
+	 * search for an entry by its id (examples or categories)
+	 * @return IEntry containing that id if there is only one result.
+	 * Null if there is no IEntry with that ID.
+	 * @throw non-unique exception if there is more than one result
+	 */
+	public ICategory getCategoryByID(final Long id) {
+		List<ICategory> list = db.query(new Predicate<ICategory>() {
+			public boolean match(ICategory e) {
+				Long thisid = e.getId();
+				return (thisid.equals(id));
+			}
+		});
+		if (list.size() == 1)
+			return list.get(0);
+		else if (list.size() == 0)
+			return null;
+		else
+			return null; // throw non-unique exception if there is more than one
+							// result
+	}
+
+	@Override
+	/**
+	 * search for an entry by its id (examples or categories)
+	 * @return IEntry containing that id if there is only one result.
+	 * Null if there is no IEntry with that ID.
+	 * @throw non-unique exception if there is more than one result
+	 */
+	public IExample getExampleByID(final Long id) {
+		List<IExample> list = db.query(new Predicate<IExample>() {
+			public boolean match(IExample e) {
+				Long thisid = e.getId();
+				return (thisid.equals(id));
+			}
+		});
+		if (list.size() == 1)
+			return list.get(0);
+		else if (list.size() == 0)
+			return null;
+		else
+			return null; // throw non-unique exception if there is more than one
+							// result
+	}
+
 }
