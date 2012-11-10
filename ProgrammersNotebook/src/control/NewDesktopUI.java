@@ -64,7 +64,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 	private JTabbedPane tabbedPane;
 	private JTextPane consolePanel;
 	final IController controller;
-	private DefaultTreeModel model; 
+	private DefaultTreeModel model;
 	DefaultMutableTreeNode root = new DefaultMutableTreeNode();
 	ArrayList<DefaultMutableTreeNode> nodelist = new ArrayList<DefaultMutableTreeNode>();
 	ArrayList<DefaultMutableTreeNode> leaflist = new ArrayList<DefaultMutableTreeNode>();
@@ -293,7 +293,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		panel_3.setBackground(Color.BLACK);
 		
 		tree = new JTree(root);
-		tree.setBounds(11, 71, 159, 466);
+		tree.setBounds(11, 71, 159, 457);
 		tree.setFont(new Font("Verdana", Font.PLAIN, 11));
 		tree.setForeground(Color.WHITE);
 		tree.setBackground(UIManager.getColor("text"));
@@ -346,16 +346,16 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnAddEntry, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnAddEntry, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnNewButton)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnNewButton_1)
+							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnDeleteCategory)
-							.addGap(248))
+							.addGap(240))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(separator, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
 							.addGap(653))
@@ -369,34 +369,34 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(98)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 548, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(165, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(btnDeleteCategory, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnAddEntry, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(btnAddEntry, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnDeleteCategory, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(desktopPane, GroupLayout.PREFERRED_SIZE, 634, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(506))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(98)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 539, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(103, Short.MAX_VALUE))
 		);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Verdana", Font.PLAIN, 11));
 		tabbedPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		tabbedPane.setBounds(10, 0, 902, 443);
+		tabbedPane.setBounds(10, 0, 881, 443);
 		desktopPane.add(tabbedPane);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 454, 902, 93);
+		panel_1.setBounds(10, 447, 902, 93);
 		desktopPane.add(panel_1);
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		panel_1.setLayout(null);
@@ -407,7 +407,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		panel_1.add(lblConsole);
 		
 		consolePanel = new JTextPane();
-		consolePanel.setText("Errors and status messages will be printed here");
+		consolePanel.setToolTipText("Errors and status messages printed here.");
 		consolePanel.setBounds(10, 24, 882, 58);
 		panel_1.add(consolePanel);
 		contentPane.setLayout(gl_contentPane);
