@@ -214,6 +214,9 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 							for(int c=0;c<categoryNamesFromInput.size();c++){
 								if(categoryNamesFromInput.get(c).equals(category.getTitle())) {
 									category.addCodeExample(example);
+									// Update database entries
+									controller.addToDB(category);
+									controller.addToDB(example);
 									for(int j=0;j<nodelist.size();j++)
 									{
 										if(nodelist.get(j).toString().equals(categoryNamesFromInput.get(c)))
@@ -416,8 +419,14 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-		
+		for (ICategory category : controller.getAllCategoryinDB()) {
+			DefaultMutableTreeNode categoryFolder = new DefaultMutableTreeNode(category.getTitle());
+			root.add(categoryFolder);
+			
+			for (IExample example : category.getExampleList()) {
+				categoryFolder.add(new DefaultMutableTreeNode(example.getTitle()));
+			}
+		}
 	}
 
 	@Override

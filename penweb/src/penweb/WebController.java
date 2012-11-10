@@ -82,6 +82,10 @@ public class WebController {
 		return this.db.getAllExample();
 	}
 	
+	public void store(IEntry e) {
+		db.store(e);
+	}
+	
 	public void close() {
 		db.close();
 	}

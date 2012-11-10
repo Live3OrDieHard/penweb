@@ -3,6 +3,7 @@ package database;
 import java.util.ArrayList;
 import java.util.List;
 import com.db4o.*;
+import com.db4o.config.EmbeddedConfiguration;
 import com.db4o.query.*;
 
 import dataStructure.ICategory;
@@ -26,7 +27,11 @@ public class Db4oDatabase implements IDatabase {
 	private ObjectContainer db;
 
 	public Db4oDatabase(String path) {
-		db = Db4oEmbedded.openFile(path);
+		EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
+		configuration.common().updateDepth(10);
+		configuration.common().activationDepth(10);
+		
+		db = Db4oEmbedded.openFile(configuration, path);
 	}
 
 	@Override

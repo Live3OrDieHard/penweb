@@ -184,11 +184,7 @@ public class BasicExample implements IExample {
 	 * @return true if the example is in category. false otherwise
 	 */
 	private boolean isInCategory(ICategory category) {
-		for (int i = 0; i < this.categoryList.size(); i++) {
-			if (this.categoryList.get(i).equals(category))
-				return true;
-		}
-		return false;
+		return categoryList.contains(category);
 	}
 
 	/**

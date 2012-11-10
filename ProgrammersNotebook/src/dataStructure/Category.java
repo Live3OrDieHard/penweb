@@ -68,11 +68,7 @@ public class Category implements ICategory {
 	 * @return true if the category already has example. false otherwise
 	 */
 	private boolean hasExample(IExample example) {
-		for (int i = 0; i < this.exampleList.size(); i++) {
-			if (this.exampleList.get(i).equals(example))
-				return true;
-		}
-		return false;
+		return exampleList.contains(example);
 	}
 
 	@Override

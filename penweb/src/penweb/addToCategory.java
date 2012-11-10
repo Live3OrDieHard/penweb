@@ -1,11 +1,15 @@
 package penweb;
 
 import java.io.IOException;
+import java.util.Arrays;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dataStructure.*;
 
 
 /**
@@ -28,11 +32,15 @@ public class addToCategory extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		WebController webcon = new WebController();
-		String[] cids = request.getParameterValues("cids[]");
+		String[] cids = request.getParameterValues("cids");
 		String eid = request.getParameter("eid");
+		IExample ex = webcon.getExampleById(Long.parseLong(eid));
 		for (String s : cids) {
-			webcon.getCategoryById(Long.parseLong(s)).addCodeExample(webcon.getExampleById(Long.parseLong(eid)));
+			ICategory cat = webcon.getCategoryById(Long.parseLong(s));
+			cat.addCodeExample(ex);
+			webcon.store(cat);
 		}
+		webcon.store(ex);
 		webcon.close();
 		response.sendRedirect("/penweb");
 	}

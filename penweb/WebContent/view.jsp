@@ -80,7 +80,7 @@
 </div>
 <div class="bar">
 	<div class="left">
-		<a href="create.jsp"><div class="button green">Create Entry</div></a>
+		<a href="create.jsp"><div class="button green">New Entry</div></a>
 	</div>
 	<div class="right">
 		<h1><%=webcon.getExampleById(id).getTitle() %></h1>
@@ -108,10 +108,10 @@
 			<%= ex.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %>
 		</p>
 		<form action="addToCategory" method="post">
-			<input type="hidden" name="eid" value="entryIDHere" />
+			<input type="hidden" name="eid" value="<%=ex.getId() %>" />
 			<p>Categories</p>
 			<% for (ICategory ca : cat) { %>
-				<p><input type="checkbox" name="cids[]" value="<%=ca.getId() %>" /> <%=ca.getTitle() %></p>
+				<p><input type="checkbox" name="cids" value="<%=ca.getId() %>" /> <%=ca.getTitle() %></p>
 			<%} %>
 			<input type="submit" class="button black" value="Add" />
 		</form>
