@@ -56,7 +56,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class NewDesktopUI extends JFrame implements IUserInterface {
+public class DesktopUI extends JFrame implements IUserInterface {
 
 	private JPanel contentPane;
 	private JDesktopPane desktopPane;
@@ -73,7 +73,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 	/**
 	 * Create the frame.
 	 */
-	public NewDesktopUI(final IController controller) {
+	public DesktopUI(final IController controller) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
@@ -84,7 +84,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 		this.controller = controller;
 		
 		setFont(new Font("Verdana", Font.PLAIN, 12));
-		setIconImage(Toolkit.getDefaultToolkit().getImage(NewDesktopUI.class.getResource("/javagui/resources/Notebook-icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(DesktopUI.class.getResource("/javagui/resources/Notebook-icon.png")));
 		setTitle("Programmer's Examples Notebook (PEN) 1.1");
 		setBackground(SystemColor.desktop);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -158,7 +158,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 				
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/category.png")));
+		btnNewButton.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/category.png")));
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setFont(new Font("Verdana", Font.BOLD, 11));
 		btnNewButton.setBackground(Color.BLACK);
@@ -174,7 +174,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 					bx.setDescription(p.getDescription());
 					try {
 						controller.addCategory(bx);
-						NewDesktopUI.this
+						DesktopUI.this
 								.displayMessage("Category added. Title: \""
 										+ bx.getTitle() + "\". Description: \""
 										+ bx.getDescription() + "\"");
@@ -185,7 +185,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 						nodelist.add(child);
 						model.reload(root);
 					} catch (PENException exception) {
-						NewDesktopUI.this.displayMessage(exception
+						DesktopUI.this.displayMessage(exception
 								.getMessage());
 					}
 				}
@@ -194,7 +194,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 					BufferEntry buf = p.getBufferEntry();
 					try {
 						BasicExample example = controller.addBasicExample(buf);
-						NewDesktopUI.this.displayMessage("Example added");
+						DesktopUI.this.displayMessage("Example added");
 						tabbedPane.remove(tabbedPane.getSelectedIndex());
 						DefaultMutableTreeNode leaf = new DefaultMutableTreeNode(buf.getTitle());
 						
@@ -253,31 +253,31 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 						}
 						}
 					} catch (PENException exception) {
-						NewDesktopUI.this.displayMessage(exception
+						DesktopUI.this.displayMessage(exception
 								.getMessage());
 					}
 				}				
 			}
 		});
-		btnSave.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/save.png")));
+		btnSave.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/save.png")));
 		btnSave.setForeground(Color.WHITE);
 		btnSave.setFont(new Font("Verdana", Font.BOLD, 11));
 		btnSave.setBackground(Color.BLACK);
 		
 		JButton btnNewButton_1 = new JButton("Delete Entry");
-		btnNewButton_1.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/delete.png")));
+		btnNewButton_1.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/delete.png")));
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setFont(new Font("Verdana", Font.BOLD, 11));
 		btnNewButton_1.setBackground(Color.BLACK);
 		
 		JButton btnDeleteCategory = new JButton("Delete Category ");
-		btnDeleteCategory.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/delete-2.png")));
+		btnDeleteCategory.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/delete-2.png")));
 		btnDeleteCategory.setForeground(Color.WHITE);
 		btnDeleteCategory.setFont(new Font("Verdana", Font.BOLD, 11));
 		btnDeleteCategory.setBackground(Color.BLACK);
 		
 		JLabel label_1 = new JLabel("New label");
-		label_1.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/attachment (1).png")));
+		label_1.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/attachment (1).png")));
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(UIManager.getColor("scrollbar"));
@@ -336,7 +336,7 @@ public class NewDesktopUI extends JFrame implements IUserInterface {
 				tabbedPane.addTab("New Example", ex);
 			}
 		});
-		btnAddEntry.setIcon(new ImageIcon(NewDesktopUI.class.getResource("/javagui/resources/add-icon.png")));
+		btnAddEntry.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/add-icon.png")));
 		btnAddEntry.setForeground(Color.WHITE);
 		btnAddEntry.setFont(new Font("Verdana", Font.BOLD, 11));
 		btnAddEntry.setBackground(Color.BLACK);
