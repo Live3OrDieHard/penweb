@@ -12,9 +12,10 @@
 			return;
 		}
 		Long id = Long.parseLong(request.getParameter("id"));
+		IExample ex = webcon.getExampleById(id);
 	%>
 	<meta charset="UTF-8">
-	<title>PEN &middot; <%= webcon.getExampleById(id).getTitle() %></title>
+	<title>PEN &middot; <%= ex.getTitle() %></title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -83,7 +84,7 @@
 		<a href="create.jsp"><div class="button green">New Entry</div></a>
 	</div>
 	<div class="right">
-		<h1><%=webcon.getExampleById(id).getTitle() %></h1>
+		<h1><%=ex.getTitle() %></h1>
 	</div>
 </div>
 <div class="content">
@@ -92,8 +93,8 @@
 		<ul>
 			<a href="index.jsp"><li>All Entries (<%=webcon.getNumEntries() %>)</li></a>
 			<%
-				List<ICategory> cat = webcon.getCategories();
-				for (ICategory c : cat) {
+				List<ICategory> cats = webcon.getCategories();
+				for (ICategory c : cats) {
 			%>
 			<a href="index.jsp?cat=<%=c.getId() %>"><li> <%= c.getTitle() %> (<%= c.getExampleList().size() %>)</li></a>
 			<% } %> 
@@ -101,7 +102,6 @@
 		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
-		<% IExample ex= webcon.getExampleById(id); %>
 		<p>Author: <b><%=ex.getAuthors().get(0).getName() %></b></p>
 		<p>Language: <%=ex.getLanguage() %><b></b></p>
 		<p class="code">
@@ -110,8 +110,8 @@
 		<form action="addToCategory" method="post">
 			<input type="hidden" name="eid" value="<%=ex.getId() %>" />
 			<p>Categories</p>
-			<% for (ICategory ca : cat) { %>
-				<p><input type="checkbox" name="cids" value="<%=ca.getId() %>" /> <%=ca.getTitle() %></p>
+			<% for (ICategory c : cats) { %>
+				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" /> <%=c.getTitle() %></p>
 			<%} %>
 			<input type="submit" class="button black" value="Add" />
 		</form>
