@@ -122,7 +122,7 @@
 			<textarea name="content"></textarea>
 			<p>Categories</p>
 			<% for (ICategory c : cats) { %>
-				<p><input type="checkbox" name="cids[]" value="<%=c.getId() %>" /> <%=c.getTitle() %></p>
+				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" /> <%=c.getTitle() %></p>
 			<%} %>
 			<input type="submit" class="button black" value="Save Entry" />
 		</form>
