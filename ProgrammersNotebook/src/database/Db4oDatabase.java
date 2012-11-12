@@ -158,14 +158,18 @@ public class Db4oDatabase implements IDatabase {
 							// result
 	}
 
+
 	@Override
 	/**
 	 * get a unique id from the database
 	 *  @return a unique id (Long)
 	 */
 	public Long getNewId() {
-		return (long) (Math.random()*100000000); // should have a better way to do
-		// this
+		long newId = (long) (Math.random()*100000000000L); // should have a better way to do
+		while(this.getByID(newId)!=null) {
+			newId = (long) (Math.random()*100000000000L);
+		}
+		return newId;
 	}
 	
 	@Override
