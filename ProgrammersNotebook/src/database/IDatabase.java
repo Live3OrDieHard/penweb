@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataStructure.*;
+import exceptions.NoIdAvailableException;
 
 public interface IDatabase {
 	public void store(IEntry e);

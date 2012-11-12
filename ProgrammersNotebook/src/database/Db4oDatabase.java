@@ -10,6 +10,7 @@ import dataStructure.ICategory;
 import dataStructure.IEntry;
 import dataStructure.IExample;
 import dataStructure.IPerson;
+import exceptions.NoIdAvailableException;
 
 /*
  * How to create a new instance of this database using IDatabase:
@@ -188,7 +189,7 @@ public class Db4oDatabase implements IDatabase {
 			if(this.getByID(newId)==null)
 				return newId;
 		}
-		throw(new NoIdAvailableException("MaxID:"+maxID));
+		throw(new NoIdAvailableException(maxID,"MaxID reached"));
 	}
 	
 	@Override
