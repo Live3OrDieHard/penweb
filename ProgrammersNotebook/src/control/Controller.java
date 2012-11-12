@@ -9,6 +9,7 @@ import dataStructure.*;
 import exceptions.CannotAddToDbException;
 import exceptions.NoTitleException;
 import exceptions.PENException;
+import gui.IUserInterface;
 
 /**
  * 

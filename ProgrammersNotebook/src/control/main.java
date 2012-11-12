@@ -1,5 +1,8 @@
 package control;
 
+import gui.DesktopUI;
+import gui.IUserInterface;
+
 import java.io.IOException;
 
 import database.Db4oDatabase;

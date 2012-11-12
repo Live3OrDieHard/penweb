@@ -53,4 +53,6 @@ public interface IDatabase {
 	IEntry getCategoryByID(Long id);
 
 	IEntry getExampleByID(Long id);
+
+	Long generateNewId() throws NoIdAvailableException;
 }
