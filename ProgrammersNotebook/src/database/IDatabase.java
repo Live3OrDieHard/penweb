@@ -55,5 +55,5 @@ public interface IDatabase {
 
 	IEntry getExampleByID(Long id);
 
-	Long generateNewId() throws NoIdAvailableException;
+	Long generateEntryId() throws NoIdAvailableException;
 }

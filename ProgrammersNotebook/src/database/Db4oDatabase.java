@@ -38,7 +38,7 @@ public class Db4oDatabase implements IDatabase {
 	@Override
 	public void store(IEntry e) {
 		try {
-		e.assignId(this.generateNewId());
+		e.assignId(this.generateEntryId());
 		e.assignOwner(null);
 		db.store(e);		
 		}
@@ -184,7 +184,13 @@ public class Db4oDatabase implements IDatabase {
 	 * get a unique id from the database
 	 *  @return a unique id (Long)
 	 */
-	public Long generateNewId() throws NoIdAvailableException {
+	public Long generateEntryId() throws NoIdAvailableException {
+		//try to generate random number first
+		for(long newId=0;newId<maxID;newId++) {
+			if(this.getByID(newId)==null)
+				return newId;
+		}
+		//if no ID available after randomizing maxID times, loop through to check
 		for(long newId=0;newId<maxID;newId++) {
 			if(this.getByID(newId)==null)
 				return newId;
