@@ -53,6 +53,7 @@ public class User implements IUser {
 		if(oldPassword.equals(this.password) && newPassword.equals(reenterNew)){
 		this.password = newPassword;
 		}
+		//needs else case to the effect of System.out.println("Passwords do not match! Password not reset.") or ("Correct password not entered! Password not reset.") case when we know how we're handling it on the front end
 	}
 	
 	public int assignId(Long id) {
