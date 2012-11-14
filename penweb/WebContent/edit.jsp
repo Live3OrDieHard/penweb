@@ -144,7 +144,7 @@
 			<textarea name="content"><%if(!isNewExample) {%><%=ex.getCode()%><%}%></textarea>
 			<p>Categories</p>
 			<% for (ICategory c : cats) { %>
-				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" /> <%=c.getTitle() %></p>
+				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
 			<%} %>
 			<input type="submit" class="button black" value="Save Entry" />
 		</form>
