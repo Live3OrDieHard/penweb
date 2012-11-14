@@ -66,4 +66,18 @@ public interface IDatabase {
 	IEntry getExampleByID(Long id);
 
 	Long generateEntryId() throws NoIdAvailableException;
+	
+	/**
+	 * Returns the user with the given login name
+	 * @param loginName The name to look for
+	 * @return The IUser with the loginName if a match is found. Null otherwise.
+	 */
+	IUser getUserByLoginName(final String loginName);
+	
+	/**
+	 * Returns the user with the associated ID
+	 * @param id The id of the user to find
+	 * @return An IUser object if a match is found. Null, otherwise. 
+	 */
+	IUser getUserByID(final String id);
 }

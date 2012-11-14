@@ -245,6 +245,38 @@ public class Db4oDatabase implements IDatabase {
 			return null; // throw non-unique exception if there is more than one
 							// result
 	}
+	
+	@Override
+	public IUser getUserByLoginName(final String loginName) {
+		List<IUser> results = db.query(new Predicate<IUser>() {
+			public boolean match(IUser e) {
+				return (e.getLoginName().equals(loginName));
+			}
+		});
+		
+		if (results.size() == 1)
+			return results.get(0);
+		else if (results.size() == 0)
+			return null;
+		else
+			return null; // Throw an exception because two users have the same login name.
+	}
+	
+	@Override
+	public IUser getUserByID(final String id) {
+		List<IUser> results = db.query(new Predicate<IUser>() {
+			public boolean match(IUser e) {
+				return (e.getId().equals(id));
+			}
+		});
+		
+		if (results.size() == 1)
+			return results.get(0);
+		else if (results.size() == 0)
+			return null;
+		else
+			return null; // Throw an exception because two users have the same login name.
+	}
 
 	@Override
 	/**
