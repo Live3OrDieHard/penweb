@@ -17,7 +17,7 @@ public class Category implements ICategory {
 	private List<IExample> exampleList;
 	private Long id;
 	private ArrayList<ICategory> dependency;
-	
+
 	public Category(String title, String description) {
 		this.description = description;
 		this.title = title;
@@ -25,8 +25,8 @@ public class Category implements ICategory {
 		this.id = -1L;
 		this.dependency = new ArrayList<ICategory>();
 	}
-	
-	
+
+
 	/**
 	 * @see dataStructure.ICategory#getDescription()
 	 */
@@ -54,22 +54,20 @@ public class Category implements ICategory {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 
 	/**
 	 * @throws DuplicateException 
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
-	public void addCodeExample(IExample example) {
-		if(!this.hasExample(example))
-		{
-			this.exampleList.add(example);
-			try {
+	public void addCodeExample(IExample example) throws DuplicateException{
+		try{
+			if(!this.hasExample(example)){
+				this.exampleList.add(example);
 				example.addCategory(this);
-			} catch (DuplicateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+		} catch (DuplicateException e) {
+			throw e;
 		}
 	}
 	/**
@@ -83,7 +81,7 @@ public class Category implements ICategory {
 			dependency.add(categories.get(i));
 		}
 	}
-	
+
 	/**
 	 * @author Peng Ren, Dennis Koufos
 	 * get the categories' list that depend on each other
@@ -92,7 +90,7 @@ public class Category implements ICategory {
 	public ArrayList<ICategory> getDependency(){
 		return dependency;
 	}
-		
+
 
 	/**
 	 * helper function check if the category (this) is already has example
@@ -100,8 +98,15 @@ public class Category implements ICategory {
 	 * @param example the example wanted to be check
 	 * @return true if the category already has example. false otherwise
 	 */
-	private boolean hasExample(IExample example) {
-		return exampleList.contains(example);
+	private boolean hasExample(IExample example) throws DuplicateException{
+		ArrayList<IExample> examples = (ArrayList<IExample>)this.getExampleList();
+		int i;
+		for(i=0; i < examples.size(); i++){
+			if(example.getId() == examples.get(i).getId()){
+				throw new DuplicateException("This example has already been in the category.");
+			}
+		}
+		return false;
 	}
 
 	@Override
