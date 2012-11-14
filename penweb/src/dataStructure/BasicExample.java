@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import exceptions.DuplicateException;
+
 /**
  * This is what the example should look like
  */
@@ -65,11 +67,16 @@ public class BasicExample implements IExample {
 	/**
 	 * {@inheritDoc}
 	 */
+	
+	//This functions is not quite completed. We would complete it later.
 	@Override
-	public void addCategory(ICategory category) {
-		if (!this.isInCategory(category)) {
+	public void addCategory(ICategory category) throws DuplicateException {
+		try{this.isInCategory(category);
 			categoryList.add(category);
 			category.addCodeExample(this);
+		}
+		catch(DuplicateException e){
+			//TODO something
 		}
 	}
 
@@ -203,8 +210,15 @@ public class BasicExample implements IExample {
 	 *            the category wanted to be check
 	 * @return true if the example is in category. false otherwise
 	 */
-	private boolean isInCategory(ICategory category) {
-		return categoryList.contains(category);
+	private boolean isInCategory(ICategory category) throws DuplicateException{
+		int i;
+		ArrayList<IExample> examples = (ArrayList<IExample>) category.getExampleList();
+		for(i = 0; i < examples.size(); i++){
+			if(this.id == examples.get(i).getId()){
+				throw new DuplicateException("The example already exists in this category.");
+			}
+	}
+		return true;
 	}
 
 	/**

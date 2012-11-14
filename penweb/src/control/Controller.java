@@ -37,7 +37,6 @@ public class Controller implements IController {
 		if ((buf.getCode() == null)||buf.getCode().equals("")) {
 			throw (new NoTitleException("Example must have a code."));
 		}
-
 		BasicExample e = new BasicExample();
 		e.setTitle(buf.getTitle());
 		e.setCode(buf.getCode());

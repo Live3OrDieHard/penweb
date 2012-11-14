@@ -3,6 +3,8 @@ package dataStructure;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.DuplicateException;
+
 /**
  * @author Thanaporn
  * IExample is basically the actual entry (code/test/etc)
@@ -13,8 +15,9 @@ public interface IExample extends IEntry
 	/**
 	 * Adds the example to the given category
 	 * @param category The category the code example should be added to
+	 * @throws DuplicateException 
 	 */
-	void addCategory(ICategory category);
+	void addCategory(ICategory category) throws DuplicateException;
 	
 	void addTags(String tag);
 
