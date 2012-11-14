@@ -47,7 +47,7 @@ public class WebController {
 		return null;
 	}
 	
-	public void addCode(String title, String content, String language, String author) {
+	public long addCode(String title, String content, String language, String author) {
 		IExample ex = new BasicExample();
 		ex.setTitle(title);
 		ex.setCode(content);
@@ -58,6 +58,7 @@ public class WebController {
 		authors.add(auth);
 		ex.setAuthors(authors);
 		db.store(ex);
+		return ex.getId();
 	}
 	
 	public String getText() {
@@ -80,6 +81,10 @@ public class WebController {
 	
 	public List<IExample> getExamples() {
 		return this.db.getAllExample();
+	}
+	
+	public void store(IEntry e) {
+		db.store(e);
 	}
 	
 	public void close() {

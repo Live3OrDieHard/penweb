@@ -1,4 +1,4 @@
-package control;
+package gui;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -17,7 +17,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class CategoryPanel extends JPanel {
 	private JTextField catTitleText;
 	private JTextPane catDescText;
-	private JLabel label;
+	private JLabel lblTitle;
 	private JPanel panel;
 	private JPanel panel_1;
 	private JLabel label_5;
@@ -30,9 +30,9 @@ public class CategoryPanel extends JPanel {
 		setLayout(null);
 		
 		catTitleText = new JTextField();
-		catTitleText.setText("Put your category title here");
+		catTitleText.setText("Put your category Title here");
 		catTitleText.setColumns(10);
-		catTitleText.setBounds(77, 11, 483, 20);
+		catTitleText.setBounds(58, 11, 483, 20);
 		add(catTitleText);
 		
 		catDescText = new JTextPane();
@@ -42,10 +42,10 @@ public class CategoryPanel extends JPanel {
 		catDescText.setBounds(10, 42, 550, 307);
 		add(catDescText);
 		
-		label = new JLabel("Title");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label.setBounds(10, 17, 46, 14);
-		add(label);
+		lblTitle = new JLabel("Title:");
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTitle.setBounds(24, 13, 30, 14);
+		add(lblTitle);
 		
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dataStructure.*;
+
 /**
  * Servlet implementation class addCode
  */
@@ -30,9 +32,19 @@ public class addCode extends HttpServlet {
 		String content = request.getParameter("content");
 		String language = request.getParameter("language");
 		String author = request.getParameter("author");
+		String[] cids = request.getParameterValues("cids");
 		
 		WebController webcon = new WebController();
-		webcon.addCode(title, content, language, author);
+		long exid = webcon.addCode(title, content, language, author);
+		IExample ex = webcon.getExampleById(exid);
+		if (cids != null) {
+			for (String s : cids) {
+				ICategory cat = webcon.getCategoryById(Long.parseLong(s));
+				cat.addCodeExample(ex);
+				webcon.store(cat);
+			}
+		}
+		webcon.store(ex);
 		webcon.close();
 		response.sendRedirect("/penweb");
 	}

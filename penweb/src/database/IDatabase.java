@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataStructure.*;
-import exceptions.NoIdAvailableException;
 
 public interface IDatabase {
 	public void store(IEntry e);
@@ -54,6 +53,4 @@ public interface IDatabase {
 	IEntry getCategoryByID(Long id);
 
 	IEntry getExampleByID(Long id);
-
-	Long generateEntryId() throws NoIdAvailableException;
 }
