@@ -1,7 +1,6 @@
 package dataStructure;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import exceptions.DuplicateException;
@@ -13,7 +12,7 @@ import exceptions.DuplicateException;
 public class BasicExample implements IExample {
 
 	private ArrayList<IUser> authors;
-	
+
 	/**
 	 * Categories the example belongs to
 	 */
@@ -28,25 +27,25 @@ public class BasicExample implements IExample {
 	 */
 	private String language;
 	private IUser owner;
-	
+
 	/**
 	 * Where is the source of the example
 	 */
 	private String source;
-	
+
 	/**
 	 * all the tags include in the example
 	 */
 	private ArrayList<String> tags = new ArrayList<String>();
 	private String title;
-	
+
 
 	public BasicExample() {
 		authors = new ArrayList<IUser>();
 		owner = null;
 		this.id = -1L;
 	}
-	
+
 	/**
 	 * @author Peng Ren, Dennis Koufos
 	 * Add dependencies to the given examples
@@ -58,7 +57,7 @@ public class BasicExample implements IExample {
 			dependency.add(examples.get(i));
 		}
 	}
-	
+
 	/**
 	 * @author Peng Ren, Dennis Koufos
 	 * Add dependencies to the given examples
@@ -71,15 +70,20 @@ public class BasicExample implements IExample {
 	/**
 	 * {@inheritDoc}
 	 */
-	//This functions is not quite completed. We would complete it later.
+	//Modified by Peng Ren to check the duplication of the example and
+	//throw an exception
 	@Override
-	public void addCategory(ICategory category) throws DuplicateException {
-		if(!this.isInCategory(category)) {
-			categoryList.add(category);
-			category.addCodeExample(this);
+	public void addCategory(ICategory category) throws DuplicateException{
+		try{
+			if(!this.isInCategory(category)){
+				categoryList.add(category);
+				category.addCodeExample(this);
+			}
+		}catch(DuplicateException e){
+			throw e;
 		}
 	}
-		
+
 	/**
 	 * add the given tag to the example
 	 * 
@@ -117,7 +121,7 @@ public class BasicExample implements IExample {
 	public List<IUser> getAuthors() {
 		return authors;
 	}
-	
+
 	@Override
 	public String getAuthorsNames() {
 		return null;
@@ -211,12 +215,21 @@ public class BasicExample implements IExample {
 	/**
 	 * helper function check if the example (this) is already in category
 	 * 
+	 * modified by Peng Ren for only checking ID
+	 * 
 	 * @param category
 	 *            the category wanted to be check
 	 * @return true if the example is in category. false otherwise
 	 */
-	private boolean isInCategory(ICategory category) {
-		return categoryList.contains(category);
+	private boolean isInCategory(ICategory category) throws DuplicateException{
+		ArrayList<IExample> examples = (ArrayList<IExample>) category.getExampleList();
+		int i;
+		for(i=0; i < examples.size(); i++){
+			if(this.id == examples.get(i).getId()){
+				throw new DuplicateException("This example has already been in the category.");
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -294,7 +307,7 @@ public class BasicExample implements IExample {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -315,11 +328,11 @@ public class BasicExample implements IExample {
 		this.tags.add(tag);
 
 	}
-	
+
 	@Override
 	public BasicExample clone() {
 		BasicExample clone = new BasicExample();
-		
+
 		clone.authors = (ArrayList<IUser>) this.authors.clone();
 		clone.categoryList = (ArrayList<ICategory>) this.categoryList.clone();
 		clone.code = new String(this.code);
@@ -329,7 +342,7 @@ public class BasicExample implements IExample {
 		clone.language = new String(this.language);
 		clone.source = new String(this.source);
 		clone.tags = (ArrayList<String>) this.tags.clone(); 
-		
+
 		return clone;
 	}
 
