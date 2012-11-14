@@ -18,6 +18,7 @@ public class BasicExample implements IExample {
 	private String code;
 	private String description;
 	private Long id;
+	private ArrayList<IExample> dependency = new ArrayList<IExample>();
 
 	/**
 	 * Language in which the example is written
@@ -40,6 +41,25 @@ public class BasicExample implements IExample {
 		authors = new LinkedList<IPerson>();
 		owner = null;
 		this.id = -1L;
+	}
+	/**
+	 * @author Peng Ren, Dennis Koufos
+	 * Add dependencies to the given examples
+	 * @param examples
+	 */
+	public void addDependecy(ArrayList<IExample> examples){
+		int i;
+		for(i=0; i < examples.size(); i++){
+			dependency.add(examples.get(i));
+		}
+	}
+	/**
+	 * @author Peng Ren, Dennis Koufos
+	 * Add dependencies to the given examples
+	 * @return
+	 */
+	public ArrayList<IExample> getDependency(){
+		return dependency;
 	}
 
 	/**

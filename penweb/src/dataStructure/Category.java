@@ -14,13 +14,16 @@ public class Category implements ICategory {
 	private String title;
 	private List<IExample> exampleList;
 	private Long id;
+	private ArrayList<ICategory> dependency;
 	
 	public Category(String title, String description) {
 		this.description = description;
 		this.title = title;
 		this.exampleList = new ArrayList<IExample>();
 		this.id = -1L;
+		this.dependency = new ArrayList<ICategory>();
 	}
+	
 	
 	/**
 	 * @see dataStructure.ICategory#getDescription()
@@ -50,6 +53,7 @@ public class Category implements ICategory {
 		this.title = title;
 	}
 	
+
 	/**
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
@@ -60,6 +64,27 @@ public class Category implements ICategory {
 			example.addCategory(this);
 		}
 	}
+	/**
+	 * @author Peng Ren, Dennis Koufos
+	 * Add dependencies to the given categories
+	 * @param categories
+	 */
+	public void addDependency(ArrayList<ICategory> categories){
+		int i;
+		for(i=0; i < categories.size(); i++){
+			dependency.add(categories.get(i));
+		}
+	}
+	
+	/**
+	 * @author Peng Ren, Dennis Koufos
+	 * get the categories' list that depend on each other
+	 * @return
+	 */
+	public ArrayList<ICategory> getDependency(){
+		return dependency;
+	}
+		
 
 	/**
 	 * helper function check if the category (this) is already has example
