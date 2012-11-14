@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataStructure.*;
+import exceptions.DuplicateException;
 
 /**
  * Servlet implementation class modifyCode
@@ -32,7 +33,8 @@ public class modifyCode extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String language = request.getParameter("language");
-		Long id = Long.parseLong(request.getParameter("eid"));
+		Long id = Long.parseLong(request.getParameter("eid"));;
+		String[] cids = request.getParameterValues("cids");
 		
 		IExample ex = webcon.getExampleById(id);
 		ex.setTitle(title);
@@ -40,6 +42,16 @@ public class modifyCode extends HttpServlet {
 		ex.setLanguage(language);
 		// Note: Not going to implement modifying author, our field will soon
 		// be replaced by the new login system
+		for (String s : cids) {
+			ICategory cat = webcon.getCategoryById(Long.parseLong(s));
+			try {
+				cat.addCodeExample(ex);
+			}
+			catch (DuplicateException e){
+				// Do nothing for now
+			}
+			webcon.store(cat);
+		}
 		webcon.store(ex);
 		response.sendRedirect("/penweb");
 		webcon.close();
