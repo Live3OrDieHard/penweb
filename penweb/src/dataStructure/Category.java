@@ -57,7 +57,6 @@ public class Category implements ICategory {
 
 
 	/**
-	 * @throws DuplicateException 
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
 	public void addCodeExample(IExample example) throws DuplicateException{

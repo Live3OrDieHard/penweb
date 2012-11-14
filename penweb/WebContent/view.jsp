@@ -102,7 +102,7 @@
 		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
-		<p>Author: <b><%=ex.getAuthors().get(0).getName() %></b></p>
+		<p>Author: <b><%=ex.getAuthors().get(0).getDisplayName() %></b></p>
 		<p>Language: <%=ex.getLanguage() %><b></b></p>
 		<p class="code">
 			<%= ex.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %>
