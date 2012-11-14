@@ -2,7 +2,12 @@ package test;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import dataStructure.User;
+import database.Db4oDatabase;
 
 /**
  * @author tpatikorn
@@ -11,27 +16,41 @@ import org.junit.Test;
  * Test user-related functions
  */
 public class UserTest {
+	private Db4oDatabase db;
 	
+	@Before
+	public void setup() {
+		db = new Db4oDatabase("UserTest.yap");
+	}
 	
 	@Test
 	public void testUserHasId() {
-		/*
-		 * create and register a user
-		 * check if that user got an id
-		 */
+		User Alice = new User("Alice","WonderLandAlice","R4B8!t");
+		db.store(Alice);
+		Alice.assignId(4L);
 	}
 
 	@Test
-	public void TwoUsersTest() {
-		/*
-		 * create 2 users
-		 * and check if they have different ids
-		 */
+	public void testUserPreAssignId() {
+		User Alice = new User("Alice","WonderLandAlice","R4B8!t");
+		Alice.assignId(4L);
+		db.store(Alice);
+		assertTrue(Alice.getId().equals(4L));
 	}
 
+	@Test
+	public void TwoUsersIdTest() {
+		User Alice = new User("Alice","WonderLandAlice","R4B8!t");
+		User Bob = new User("Bobby","WonderProductsBob","W0nD3R");
+		db.store(Alice);
+		db.store(Bob);
+		assertTrue(!Alice.getId().equals(Bob.getId()));
+	}
+	
 	@Test
 	public void changePassword() {
 		/*
+		 * ///// not yet implemented /////
 		 * try to change password
 		 * User user = new User()
 		 * user.setPassword(newPassword) <<< shouldn't be allowed
@@ -39,5 +58,8 @@ public class UserTest {
 		 */
 	}
 	
-	
+	@After
+	public void cleanup() {
+		db.close();
+	}
 }
