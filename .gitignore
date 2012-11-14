@@ -38,5 +38,6 @@ Thumbs.db
 
 ProgrammersNotebook/bin/**
 penweb/bin/**
+penweb/build/**
 *.yap
 .classpath
