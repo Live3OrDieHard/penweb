@@ -57,14 +57,40 @@ public interface IDatabase {
 	 */
 	List<ICategory> getAllCategory();
 
+	/**
+	 * get a unique id from the database
+	 *  @return a unique id (Long)
+	 */
 	Long getNewId();
 
+	/**
+	 * search for an entry by its id (examples or categories)
+	 * @return IEntry containing that id if there is only one result.
+	 * Null if there is no IEntry with that ID.
+	 * @throw non-unique exception if there is more than one result
+	 */
 	IEntry getByID(Long id);
-
+	
+	/**
+	 * search for an entry by its id (examples or categories)
+	 * @return IEntry containing that id if there is only one result.
+	 * Null if there is no IEntry with that ID.
+	 * @throw non-unique exception if there is more than one result
+	 */
 	IEntry getCategoryByID(Long id);
 
+	/**
+	 * search for an entry by its id (examples or categories)
+	 * @return IEntry containing that id if there is only one result.
+	 * Null if there is no IEntry with that ID.
+	 * @throw non-unique exception if there is more than one result
+	 */
 	IEntry getExampleByID(Long id);
 
+	/**
+	 * get a unique id from the database
+	 *  @return a unique id (Long)
+	 */
 	Long generateEntryId() throws NoIdAvailableException;
 	
 	/**
