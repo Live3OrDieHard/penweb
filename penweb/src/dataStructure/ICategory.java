@@ -2,6 +2,8 @@ package dataStructure;
 
 import java.util.List;
 
+import exceptions.DuplicateException;
+
 public interface ICategory extends IEntry{
 	
 	/**
@@ -29,8 +31,9 @@ public interface ICategory extends IEntry{
 	/**
 	 * Adds a new example to this category.
 	 * @param example The example entry to add.
+	 * @throws DuplicateException 
 	 */
-	void addCodeExample(IExample example);
+	void addCodeExample(IExample example) throws DuplicateException;
 
 	List<IExample> getExampleList();
 }

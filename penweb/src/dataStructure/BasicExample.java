@@ -11,7 +11,7 @@ import exceptions.DuplicateException;
  */
 public class BasicExample implements IExample {
 
-	private List<IUser> authors;
+	private ArrayList<IUser> authors;
 	
 	/**
 	 * Categories the example belongs to
@@ -32,6 +32,7 @@ public class BasicExample implements IExample {
 	 * Where is the source of the example
 	 */
 	private String source;
+	
 	/**
 	 * all the tags include in the example
 	 */
@@ -40,7 +41,7 @@ public class BasicExample implements IExample {
 	
 
 	public BasicExample() {
-		authors = new LinkedList<IUser>();
+		authors = new ArrayList<IUser>();
 		owner = null;
 		this.id = -1L;
 	}
@@ -72,13 +73,9 @@ public class BasicExample implements IExample {
 	//This functions is not quite completed. We would complete it later.
 	@Override
 	public void addCategory(ICategory category) throws DuplicateException {
-		try{this.isInCategory(category);
-			categoryList.add(category);
-			category.addCodeExample(this);
-		}
-		catch(DuplicateException e){
-			//TODO something
-		}
+		this.isInCategory(category);
+		categoryList.add(category);
+		category.addCodeExample(this);
 	}
 		
 	/**
@@ -224,7 +221,7 @@ public class BasicExample implements IExample {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setAuthors(List<IUser> authors) {
+	public void setAuthors(ArrayList<IUser> authors) {
 		this.authors = authors;
 	}
 
@@ -315,6 +312,23 @@ public class BasicExample implements IExample {
 		// @TODO check existence of tag in tags
 		this.tags.add(tag);
 
+	}
+	
+	@Override
+	public BasicExample clone() {
+		BasicExample clone = new BasicExample();
+		
+		clone.authors = (ArrayList<IUser>) this.authors.clone();
+		clone.categoryList = (ArrayList<ICategory>) this.categoryList.clone();
+		clone.code = new String(this.code);
+		clone.description = new String(this.description);
+		clone.dependency = (ArrayList<IExample>) this.dependency.clone();
+		clone.title = new String(this.title);
+		clone.language = new String(this.language);
+		clone.source = new String(this.source);
+		clone.tags = (ArrayList<String>) this.tags.clone(); 
+		
+		return clone;
 	}
 
 }

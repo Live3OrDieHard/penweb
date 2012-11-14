@@ -3,6 +3,8 @@ package dataStructure;
 import java.util.List;
 import java.util.ArrayList;
 
+import exceptions.DuplicateException;
+
 /**
  * @author awiovanna
  *
@@ -55,13 +57,19 @@ public class Category implements ICategory {
 	
 
 	/**
+	 * @throws DuplicateException 
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
 	public void addCodeExample(IExample example) {
 		if(!this.hasExample(example))
 		{
 			this.exampleList.add(example);
-			example.addCategory(this);
+			try {
+				example.addCategory(this);
+			} catch (DuplicateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	/**

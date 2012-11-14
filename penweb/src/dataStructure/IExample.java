@@ -56,9 +56,9 @@ public interface IExample extends IEntry
 	String getTitle();
 	
 	/**
-	 * @param a List<IPerson>: A list of authors
+	 * @param a ArrayList<IPerson>: A list of authors
 	 */
-	void setAuthors(List<IUser> a);
+	void setAuthors(ArrayList<IUser> a);
 	
 	void setCategories(ArrayList<ICategory> categories);
 	
@@ -92,5 +92,4 @@ public interface IExample extends IEntry
 	ArrayList<String> getTags();
 
 	String getAuthorsNames();
-
 }

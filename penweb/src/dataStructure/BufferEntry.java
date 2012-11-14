@@ -37,7 +37,7 @@ public class BufferEntry
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	private List<IUser> authors;
+	private ArrayList<IUser> authors;
 	/**
 	 * Categories the example belongs to
 	 */
@@ -73,7 +73,7 @@ public class BufferEntry
 		this.categories.add(category);
 	}
 	
-	public List<IUser> getAuthors() {
+	public ArrayList<IUser> getAuthors() {
 		return authors;
 	}
 	public ArrayList<Category> getCategories() {
@@ -100,7 +100,7 @@ public class BufferEntry
 	public String getTitle() {
 		return title;
 	}
-	public void setAuthors(List<IUser> authors) {
+	public void setAuthors(ArrayList<IUser> authors) {
 		this.authors = authors;
 	}
 	public void setCategories(ArrayList<Category> categories) {

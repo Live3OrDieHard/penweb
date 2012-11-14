@@ -77,6 +77,7 @@ public class ExampleHeader implements IHeader
 	{
 		
 		this.title = title;
-		this.authors.add(new NonUser(name));
+		// Change this to accept an actual author object
+		this.authors.add(new User("", "", ""));
 	}
 }
