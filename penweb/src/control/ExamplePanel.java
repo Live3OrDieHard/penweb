@@ -19,6 +19,7 @@ import dataStructure.BasicExample;
 import dataStructure.BufferEntry;
 import dataStructure.IExample;
 import dataStructure.NonUser;
+import dataStructure.User;
 
 public class ExamplePanel extends JPanel {
 	private JTextField catText;
@@ -156,7 +157,7 @@ public class ExamplePanel extends JPanel {
 		this.titleText.setText(bx.getTitle());
 		this.sourceText.setText(bx.getSource());
 		this.langText.setText(bx.getLanguage());
-		this.authorText.setText(bx.getAuthors().get(0).getName());
+		this.authorText.setText(bx.getAuthors().get(0).getDisplayName());
 	}
 
 	public BufferEntry getBufferEntry() {
@@ -165,7 +166,7 @@ public class ExamplePanel extends JPanel {
 		entry.setSource(this.sourceText.getText());
 		entry.setLanguage(this.langText.getText());
 		entry.setCode(this.codeText.getText());
-		entry.addAuthor(new NonUser(this.authorText.getText()));
+		entry.addAuthor(new User(this.authorText.getText(),"",""));
 		entry.setCategoryName(this.catText.getText());
 		return entry;
 	}

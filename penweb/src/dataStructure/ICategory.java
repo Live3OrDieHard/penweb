@@ -10,6 +10,8 @@ import exceptions.DuplicateException;
  * an interface for a category, in case there are more category types.
  *
  */
+import exceptions.DuplicateException;
+
 public interface ICategory extends IEntry{
 	
 	/**

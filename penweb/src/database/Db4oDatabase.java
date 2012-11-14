@@ -9,9 +9,9 @@ import com.db4o.query.*;
 import dataStructure.ICategory;
 import dataStructure.IEntry;
 import dataStructure.IExample;
+import exceptions.NoIdAvailableException;
 import dataStructure.IUser;
 import dataStructure.IPerson;
-import exceptions.NoIdAvailableException;
 
 /*
  * How to create a new instance of this database using IDatabase:

@@ -8,7 +8,11 @@ import java.util.ArrayList;
  * @author awiovanna
  * @author kirkgrimsley
  * 
+<<<<<<< Upstream, based on origin/master
  * User should be used to identify registered user
+=======
+ * IUser should be used to identify user
+>>>>>>> 269476b Add comments to tests and exceptions.
  */
 public class User implements IUser {
 	private final String loginName; // Name used for logging in. This has to be unique.

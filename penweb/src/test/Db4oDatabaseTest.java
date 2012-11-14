@@ -34,7 +34,7 @@ public class Db4oDatabaseTest {
 	@Test
 	public void testGetByHeaderWithTitleAndAuthor() {
 		BasicExample entry = new BasicExample();
-		User u = new User("anAuthor", databaseName, databaseName);
+		User u = new User("anAuthor", "", "");
 		entry.setTitle("aTitle");
 		entry.assignOwner(u);
 		testee.store(entry);
@@ -56,7 +56,7 @@ public class Db4oDatabaseTest {
 	@Test
 	public void testGetByHeaderWithAuthorOnly() {
 		BasicExample entry = new BasicExample();
-		User u = new User("anAuthor", databaseName, databaseName);
+		User u = new User("anAuthor","","");
 		entry.assignOwner(u);
 		testee.store(entry);
 		String name = testee.getByHeader(null, u).get(0).getOwner().getDisplayName();
