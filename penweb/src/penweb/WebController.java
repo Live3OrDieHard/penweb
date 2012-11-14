@@ -96,7 +96,7 @@ public class WebController {
 		ex.setLanguage(language);
 		//XXX Change the arguments to the login name, password, and displayName
 		IUser auth = new User(null, null, null);
-		List<IUser> authors = new ArrayList<IUser>();
+		ArrayList<IUser> authors = new ArrayList<IUser>();
 		authors.add(auth);
 		ex.setAuthors(authors);
 		db.store(ex);
