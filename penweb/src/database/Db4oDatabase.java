@@ -9,7 +9,7 @@ import com.db4o.query.*;
 import dataStructure.ICategory;
 import dataStructure.IEntry;
 import dataStructure.IExample;
-import dataStructure.IPerson;
+import dataStructure.IUser;
 
 /*
  * How to create a new instance of this database using IDatabase:
@@ -47,7 +47,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	@Override
-	public List<IExample> getByHeader(final String title, final IPerson owner) {
+	public List<IExample> getByHeader(final String title, final IUser owner) {
 
 		boolean hasTitle = (title != null);
 		boolean hasOwner = (owner != null);
@@ -70,7 +70,7 @@ public class Db4oDatabase implements IDatabase {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
 					if (e.getOwner() != null)
-						return e.getOwner().getName().equals(owner.getName());
+						return e.getOwner().getLoginName().equals(owner.getLoginName());
 					else
 						return (e.getOwner() == owner);
 				}
@@ -95,19 +95,30 @@ public class Db4oDatabase implements IDatabase {
 		db.close();
 	}
 
+	/**
+	 * @return A list of all examples in the database
+	 */
 	public List<IExample> getAllExample() {
 		return db.query(IExample.class);
 	}
 
+	/**
+	 * @return A list of all categories in the database
+	 */
 	public List<ICategory> getAllCategory() {
 		return db.query(ICategory.class);
 	}
 
 	/**
-	 * 
-	 * @return nameList, a list of the name of each category, as a string.
+	 * @return A list of all users in the database
 	 */
+	public List<IUser> getAllUsers() {
+		return db.query(IUser.class);
+	}
 
+	/**
+	 * @return A list of all category names.
+	 */
 	public ArrayList<String> listCategoryNames() {
 		List<ICategory> catList = getAllCategory();
 		ArrayList<String> nameList = new ArrayList<String>();
@@ -116,23 +127,36 @@ public class Db4oDatabase implements IDatabase {
 		}
 		return nameList;
 	}
+	
+	/**
+	 * @return A list of strings containing all user login names in the database
+	 */
+	public ArrayList<String> listUserLoginNames() {
+		List<IUser> userList = getAllUsers();
+		ArrayList<String> loginNameList = new ArrayList<String>();
+		
+		for (IUser user : userList) {
+			loginNameList.add(user.getLoginName());
+		}
+		
+		return loginNameList;
+	}
 
 	/**
 	 * @param name
 	 * @return true if the name given is already taken by another category false
 	 *         otherwise
 	 */
-
 	public boolean isNameRepeat(String name) {
-		ArrayList<String> catNameList = listCategoryNames();
-
-		boolean isSame = false;
-		for (int i = 0; i < catNameList.size(); i++) {
-			if (name.equals(catNameList.get(i))) {
-				return true;
-			}
-		}
-		return isSame;
+		return listCategoryNames().contains(name);
+	}
+	
+	/**
+	 * @param loginName
+	 * @return True if a user has already been created with the given login name, false otherwise
+	 */
+	public boolean isLoginNameTaken(String loginName) {
+		return listUserLoginNames().contains(loginName);
 	}
 
 	@Override

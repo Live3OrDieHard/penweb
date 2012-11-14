@@ -24,7 +24,7 @@ public interface IExample extends IEntry
 	/**
 	 * @return List of authors
 	 */
-	List<IPerson> getAuthors();
+	List<IUser> getAuthors();
 	
 	/**
 	 * @return The list of categories that an example belongs to
@@ -46,7 +46,7 @@ public interface IExample extends IEntry
 	/**
 	 * @return The person who 'owns' this example
 	 */
-	IPerson getOwner();
+	IUser getOwner();
 	
 	String getSource();
 	
@@ -58,7 +58,7 @@ public interface IExample extends IEntry
 	/**
 	 * @param a List<IPerson>: A list of authors
 	 */
-	void setAuthors(List<IPerson> a);
+	void setAuthors(List<IUser> a);
 	
 	void setCategories(ArrayList<ICategory> categories);
 	
@@ -90,5 +90,7 @@ public interface IExample extends IEntry
 	void setTags(ArrayList<String> tags);
 
 	ArrayList<String> getTags();
+
+	String getAuthorsNames();
 
 }

@@ -11,7 +11,7 @@ import exceptions.DuplicateException;
  */
 public class BasicExample implements IExample {
 
-	private List<IPerson> authors;
+	private List<IUser> authors;
 	
 	/**
 	 * Categories the example belongs to
@@ -26,7 +26,7 @@ public class BasicExample implements IExample {
 	 * Language in which the example is written
 	 */
 	private String language;
-	private IPerson owner;
+	private IUser owner;
 	
 	/**
 	 * Where is the source of the example
@@ -40,10 +40,11 @@ public class BasicExample implements IExample {
 	
 
 	public BasicExample() {
-		authors = new LinkedList<IPerson>();
+		authors = new LinkedList<IUser>();
 		owner = null;
 		this.id = -1L;
 	}
+	
 	/**
 	 * @author Peng Ren, Dennis Koufos
 	 * Add dependencies to the given examples
@@ -55,6 +56,7 @@ public class BasicExample implements IExample {
 			dependency.add(examples.get(i));
 		}
 	}
+	
 	/**
 	 * @author Peng Ren, Dennis Koufos
 	 * Add dependencies to the given examples
@@ -67,7 +69,6 @@ public class BasicExample implements IExample {
 	/**
 	 * {@inheritDoc}
 	 */
-	
 	//This functions is not quite completed. We would complete it later.
 	@Override
 	public void addCategory(ICategory category) throws DuplicateException {
@@ -79,7 +80,7 @@ public class BasicExample implements IExample {
 			//TODO something
 		}
 	}
-
+		
 	/**
 	 * add the given tag to the example
 	 * 
@@ -102,7 +103,7 @@ public class BasicExample implements IExample {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int assignOwner(IPerson owner) {
+	public int assignOwner(IUser owner) {
 		if (this.owner != null)
 			return 1; // return 1 if already assigned
 		else
@@ -114,8 +115,13 @@ public class BasicExample implements IExample {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<IPerson> getAuthors() {
+	public List<IUser> getAuthors() {
 		return authors;
+	}
+	
+	@Override
+	public String getAuthorsNames() {
+		return null;
 	}
 
 	@Override
@@ -161,7 +167,7 @@ public class BasicExample implements IExample {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IPerson getOwner() {
+	public IUser getOwner() {
 		return owner;
 	}
 
@@ -210,22 +216,15 @@ public class BasicExample implements IExample {
 	 *            the category wanted to be check
 	 * @return true if the example is in category. false otherwise
 	 */
-	private boolean isInCategory(ICategory category) throws DuplicateException{
-		int i;
-		ArrayList<IExample> examples = (ArrayList<IExample>) category.getExampleList();
-		for(i = 0; i < examples.size(); i++){
-			if(this.id == examples.get(i).getId()){
-				throw new DuplicateException("The example already exists in this category.");
-			}
-	}
-		return true;
+	private boolean isInCategory(ICategory category) {
+		return categoryList.contains(category);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setAuthors(List<IPerson> authors) {
+	public void setAuthors(List<IUser> authors) {
 		this.authors = authors;
 	}
 

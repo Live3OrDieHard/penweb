@@ -13,7 +13,7 @@ public interface IDatabase {
 	//public List<IExample> getByHeader(IHeader head); // null is wildcard (this might be an issue, we can change later)
 	//public List<IExample> getByHeader(String title, List<IPerson> authors); // null is wildcard (this might be an issue, we can change later)
 	
-	public List<IExample> getByHeader(String title, IPerson owner); // null is wildcard (this might be an issue, we can change later)
+	public List<IExample> getByHeader(String title, IUser owner); // null is wildcard (this might be an issue, we can change later)
 	
  	public List<IExample> getByKeyword(String key); // This could be a cool function to implement (match by keyword in body or title)
 	// More "getBy" functions to come based on metadata choices
@@ -34,6 +34,13 @@ public interface IDatabase {
 	 * false otherwise 
 	 */
 	public boolean isNameRepeat (String name);
+	
+	/**
+	 * Checks to see if a user in the database already has the given loginName
+	 * @param loginName the name to check
+	 * @return True if the name is taken, false otherwise.
+	 */
+	public boolean isLoginNameTaken (String loginName);
 	
 	/**
 	 * Returns a list of all categories in the database

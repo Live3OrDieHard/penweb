@@ -37,7 +37,7 @@ public class BufferEntry
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	private List<IPerson> authors;
+	private List<IUser> authors;
 	/**
 	 * Categories the example belongs to
 	 */
@@ -52,7 +52,7 @@ public class BufferEntry
 	 */
 	private String language;
 	
-	private IPerson owner;
+	private IUser owner;
 	
 	private ExampleProperties properties;
 	/**
@@ -62,10 +62,10 @@ public class BufferEntry
 	private String title;
 	
 	public BufferEntry() {
-		this.authors = new ArrayList<IPerson>();
+		this.authors = new ArrayList<IUser>();
 		this.categories = new ArrayList<Category>();
 	}
-	public void addAuthor(IPerson person) {
+	public void addAuthor(IUser person) {
 		this.authors.add(person);
 	}
 	
@@ -73,7 +73,7 @@ public class BufferEntry
 		this.categories.add(category);
 	}
 	
-	public List<IPerson> getAuthors() {
+	public List<IUser> getAuthors() {
 		return authors;
 	}
 	public ArrayList<Category> getCategories() {
@@ -88,7 +88,7 @@ public class BufferEntry
 	public String getLanguage() {
 		return language;
 	}
-	public IPerson getOwner() {
+	public IUser getOwner() {
 		return owner;
 	}
 	public ExampleProperties getProperties() {
@@ -100,7 +100,7 @@ public class BufferEntry
 	public String getTitle() {
 		return title;
 	}
-	public void setAuthors(List<IPerson> authors) {
+	public void setAuthors(List<IUser> authors) {
 		this.authors = authors;
 	}
 	public void setCategories(ArrayList<Category> categories) {
@@ -115,7 +115,7 @@ public class BufferEntry
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-	public void setOwner(IPerson owner) {
+	public void setOwner(IUser owner) {
 		this.owner = owner;
 	}
 	public void setProperties(ExampleProperties properties) {

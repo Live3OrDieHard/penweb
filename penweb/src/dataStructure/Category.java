@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * A category into which code examples can be placed
  */
 public class Category implements ICategory {
-	private IPerson owner;
+	private IUser owner;
 	private String description;
 	private String title;
 	private List<IExample> exampleList;
@@ -102,7 +102,7 @@ public class Category implements ICategory {
 	}
 
 	@Override
-	public int assignOwner(IPerson owner) {
+	public int assignOwner(IUser owner) {
 		if (this.owner != null)
 			return 1; // return 1 if already assigned
 		else
@@ -111,7 +111,7 @@ public class Category implements ICategory {
 	}
 
 	@Override
-	public IPerson getOwner() {
+	public IUser getOwner() {
 		return owner;
 	}
 

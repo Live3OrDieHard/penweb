@@ -26,11 +26,11 @@ public interface IHeader
 	 * The getter function to get the authors of the examples
 	 * @return List<IPerson>
 	 */
-	List<IPerson> getAuthors();
+	List<IUser> getAuthors();
 	
 	/**
 	 * Set the authors of the example to the given authors
 	 * @param List<IPerson> The authors for the example
 	 */
-	void setAuthors(List<IPerson> a);
+	void setAuthors(List<IUser> a);
 }

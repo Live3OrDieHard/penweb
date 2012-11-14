@@ -20,7 +20,7 @@ public class ExampleHeader implements IHeader
 	/**
 	 * The author(s) of the examples
 	 */
-	private List<IPerson> authors = new LinkedList<IPerson>();
+	private List<IUser> authors = new LinkedList<IUser>();
 	
 	/**
 	 * @see dataStructure.IHeader#getTitle()
@@ -33,7 +33,7 @@ public class ExampleHeader implements IHeader
 	/**
 	 * @see dataStructure.IHeader#getAuthors()
 	 */
-	public List<IPerson> getAuthors() 
+	public List<IUser> getAuthors() 
 	{
 		/*
 		 * It's better to be an object so we'll be able to associate
@@ -55,7 +55,7 @@ public class ExampleHeader implements IHeader
 	/**
 	 * @see dataStructure.IHeader#setAuthors(List)
 	 */
-	public void setAuthors(List<IPerson> authors)
+	public void setAuthors(List<IUser> authors)
 	{
 		this.authors = authors;
 	}
@@ -64,7 +64,7 @@ public class ExampleHeader implements IHeader
 	 * Add a given author to the example's header
 	 * @param author a new author
 	 */
-	public void addAuthor(IPerson author)
+	public void addAuthor(IUser author)
 	{
 		this.authors.add(author);
 	}
