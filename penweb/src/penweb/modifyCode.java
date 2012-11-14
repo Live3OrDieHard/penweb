@@ -32,7 +32,7 @@ public class modifyCode extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String language = request.getParameter("language");
-		Long id = Long.parseLong(request.getParameter("id"));
+		Long id = Long.parseLong(request.getParameter("eid"));
 		
 		IExample ex = webcon.getExampleById(id);
 		ex.setTitle(title);
@@ -41,6 +41,7 @@ public class modifyCode extends HttpServlet {
 		// Note: Not going to implement modifying author, our field will soon
 		// be replaced by the new login system
 		webcon.store(ex);
+		response.sendRedirect("/penweb");
 		webcon.close();
 	}
 
