@@ -1,4 +1,4 @@
-package control;
+package gui;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -30,6 +30,7 @@ public class CategoryPanel extends JPanel {
 		setLayout(null);
 		
 		catTitleText = new JTextField();
+		catTitleText.setText("Put your category Title here");
 		catTitleText.setColumns(10);
 		catTitleText.setBounds(58, 11, 483, 20);
 		add(catTitleText);

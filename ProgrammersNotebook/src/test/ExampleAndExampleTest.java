@@ -86,7 +86,6 @@ public class ExampleAndExampleTest {
 		example4.addCategory(category3);
 		example4.addCategory(category4);
 		
-		example3.setCode("FUCK");
 		db.store(example3);
 		db.store(example4);
 		db.store(category3);
@@ -95,11 +94,6 @@ public class ExampleAndExampleTest {
 		//close and reopen
 		db.close();
 		db = new Db4oDatabase(databaseName);
-		
-		IExample example5 = db.getByHeader("Hello World", null).get(0);
-		IExample example6 = db.getByHeader("Bye World", null).get(0);
-		ICategory category5 = db.getCategoryByID(category1.getId());
-		ICategory category6 = db.getCategoryByID(category2.getId());
 		
 		IExample newExample = db.getByHeader("Hello World", null).get(0);
 		List<ICategory> categoryList = newExample.getCategories();

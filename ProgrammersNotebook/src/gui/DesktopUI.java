@@ -1,4 +1,4 @@
-package control;
+package gui;
 
 import java.awt.EventQueue;
 
@@ -41,6 +41,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.JTextPane;
+
+import control.IController;
 
 import dataStructure.BasicExample;
 import dataStructure.BufferEntry;
@@ -145,11 +147,14 @@ public class DesktopUI extends JFrame implements IUserInterface {
 		setContentPane(contentPane);
 		
 		JSeparator separator = new JSeparator();
+		separator.setBounds(679, 743, 1, 2);
 		
 		desktopPane = new JDesktopPane();
+		desktopPane.setBounds(201, 103, 912, 634);
 		desktopPane.setBackground(Color.DARK_GRAY);
 		
 		JButton btnNewButton = new JButton("Add Category ");
+		btnNewButton.setBounds(512, 16, 180, 29);
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -164,6 +169,7 @@ public class DesktopUI extends JFrame implements IUserInterface {
 		btnNewButton.setBackground(Color.BLACK);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.setBounds(702, 16, 180, 29);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Component comp = tabbedPane.getSelectedComponent();
@@ -264,22 +270,26 @@ public class DesktopUI extends JFrame implements IUserInterface {
 		btnSave.setFont(new Font("Verdana", Font.BOLD, 11));
 		btnSave.setBackground(Color.BLACK);
 		
-		JButton btnNewButton_1 = new JButton("Delete Entry");
-		btnNewButton_1.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/delete.png")));
+		JButton btnNewButton_1 = new JButton("Delete Example");
+		btnNewButton_1.setBounds(322, 64, 180, 28);
+		btnNewButton_1.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/delete-2.png")));
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setFont(new Font("Verdana", Font.BOLD, 11));
 		btnNewButton_1.setBackground(Color.BLACK);
 		
 		JButton btnDeleteCategory = new JButton("Delete Category ");
+		btnDeleteCategory.setBounds(512, 64, 180, 28);
 		btnDeleteCategory.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/delete-2.png")));
 		btnDeleteCategory.setForeground(Color.WHITE);
 		btnDeleteCategory.setFont(new Font("Verdana", Font.BOLD, 11));
 		btnDeleteCategory.setBackground(Color.BLACK);
 		
 		JLabel label_1 = new JLabel("New label");
+		label_1.setBounds(15, 16, 297, 76);
 		label_1.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/attachment (1).png")));
 		
 		JPanel panel = new JPanel();
+		panel.setBounds(15, 103, 180, 539);
 		panel.setBackground(UIManager.getColor("scrollbar"));
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		
@@ -328,69 +338,19 @@ public class DesktopUI extends JFrame implements IUserInterface {
 		panel.add(tree);
 		panel.add(panel_3);
 		
-		JButton btnAddEntry = new JButton("Add Entry");		
-		btnAddEntry.addMouseListener(new MouseAdapter() {
+		JButton btnAddExample = new JButton("Add Example");		
+		btnAddExample.setBounds(322, 16, 180, 28);
+		btnAddExample.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ExamplePanel ex = new ExamplePanel();
 				tabbedPane.addTab("New Example", ex);
 			}
 		});
-		btnAddEntry.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/add-icon.png")));
-		btnAddEntry.setForeground(Color.WHITE);
-		btnAddEntry.setFont(new Font("Verdana", Font.BOLD, 11));
-		btnAddEntry.setBackground(Color.BLACK);
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnAddEntry, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnNewButton)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnDeleteCategory)
-							.addGap(240))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(separator, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
-							.addGap(653))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(desktopPane, GroupLayout.PREFERRED_SIZE, 912, GroupLayout.PREFERRED_SIZE)
-							.addGap(220)))
-					.addGap(34))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnAddEntry, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnDeleteCategory, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(desktopPane, GroupLayout.PREFERRED_SIZE, 634, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(506))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(98)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 539, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(103, Short.MAX_VALUE))
-		);
+		btnAddExample.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/add-icon.png")));
+		btnAddExample.setForeground(Color.WHITE);
+		btnAddExample.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnAddExample.setBackground(Color.BLACK);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Verdana", Font.PLAIN, 11));
@@ -413,7 +373,29 @@ public class DesktopUI extends JFrame implements IUserInterface {
 		consolePanel.setToolTipText("Errors and status messages printed here.");
 		consolePanel.setBounds(10, 24, 882, 58);
 		panel_1.add(consolePanel);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(label_1);
+		contentPane.add(btnAddExample);
+		contentPane.add(btnNewButton);
+		contentPane.add(btnSave);
+		contentPane.add(btnNewButton_1);
+		contentPane.add(btnDeleteCategory);
+		contentPane.add(separator);
+		contentPane.add(panel);
+		contentPane.add(desktopPane);
+		
+		JButton btnCloseTab = new JButton("Close Tab");
+		btnCloseTab.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.remove(tabbedPane.getSelectedIndex());
+			}
+		});
+		btnCloseTab.setIcon(new ImageIcon(DesktopUI.class.getResource("/javagui/resources/delete.png")));
+		btnCloseTab.setForeground(Color.WHITE);
+		btnCloseTab.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnCloseTab.setBackground(Color.BLACK);
+		btnCloseTab.setBounds(702, 63, 180, 29);
+		contentPane.add(btnCloseTab);
 		model = (DefaultTreeModel)tree.getModel();
 	}
 
@@ -461,5 +443,4 @@ public class DesktopUI extends JFrame implements IUserInterface {
 		}
 		return null;
 	}	
-
 }
