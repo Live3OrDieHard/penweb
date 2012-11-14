@@ -346,4 +346,12 @@ public class BasicExample implements IExample {
 		return clone;
 	}
 
+	@Override
+	public List<Long> getCategoryIds() {
+		List<Long> ids = new ArrayList<Long>();
+		for (ICategory category : categoryList)
+			ids.add(category.getId());
+		return ids;
+	}
+
 }

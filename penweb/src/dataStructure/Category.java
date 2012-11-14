@@ -145,4 +145,13 @@ public class Category implements ICategory {
 			this.id = id;
 		return 0;
 	}
+
+
+	@Override
+	public List<Long> getExampleIds() {
+		List<Long> ids = new ArrayList<Long>();
+		for (IExample example : exampleList)
+			ids.add(example.getId());
+		return ids;
+	}
 }

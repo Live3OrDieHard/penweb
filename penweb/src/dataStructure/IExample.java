@@ -62,6 +62,8 @@ public interface IExample extends IEntry
 	
 	void setCategories(ArrayList<ICategory> categories);
 	
+	List<Long> getCategoryIds();
+	
 	/**
 	 * @param code The code content to be associated with an example
 	 */
