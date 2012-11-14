@@ -79,7 +79,7 @@
 </div>
 <div class="bar">
 	<div class="left">
-		<a href="create.jsp"><div class="button green">New Entry</div></a>
+		<a href="edit.jsp"><div class="button green">New Entry</div></a>
 	</div>
 	<div class="right">
 		<%if (cat == null) {%>
@@ -108,7 +108,7 @@
 			<% if (cat == null) {
 				List<IExample> ex = webcon.getExamples();
 					for (IExample e : ex) { %>
-					<a href="view.jsp?id=<%=e.getId()%>">
+					<a href="edit.jsp?id=<%=e.getId()%>">
 						<li>
 							<h1><%= e.getTitle() %></h1>
 							<div class="fade"></div>
@@ -119,7 +119,7 @@
 			<%} else {
 				List<IExample> ex = cat.getExampleList();
 				for (IExample e : ex) {%>
-					<a href="view.jsp?id=<%=e.getId()%>">
+					<a href="edit.jsp?id=<%=e.getId()%>">
 					<li>
 						<h1><%= e.getTitle() %></h1>
 						<div class="fade"></div>
