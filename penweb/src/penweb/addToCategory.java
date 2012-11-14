@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataStructure.*;
+import exceptions.*;
 
 
 /**
@@ -36,7 +37,12 @@ public class addToCategory extends HttpServlet {
 		IExample ex = webcon.getExampleById(Long.parseLong(eid));
 		for (String s : cids) {
 			ICategory cat = webcon.getCategoryById(Long.parseLong(s));
-			cat.addCodeExample(ex);
+			try {
+				cat.addCodeExample(ex);
+			}
+			catch (DuplicateException e){
+				// Do nothing for now
+			}
 			webcon.store(cat);
 		}
 		webcon.store(ex);

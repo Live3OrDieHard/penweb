@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataStructure.*;
+import exceptions.*;
 
 /**
  * Servlet implementation class addCode
@@ -40,7 +41,12 @@ public class addCode extends HttpServlet {
 		if (cids != null) {
 			for (String s : cids) {
 				ICategory cat = webcon.getCategoryById(Long.parseLong(s));
-				cat.addCodeExample(ex);
+				try { 
+					cat.addCodeExample(ex);
+				}
+				catch(DuplicateException e) {
+					// do nothing for now
+				}
 				webcon.store(cat);
 			}
 		}
