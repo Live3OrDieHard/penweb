@@ -33,7 +33,7 @@ public class modifyCode extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String language = request.getParameter("language");
-		Long id = Long.parseLong(request.getParameter("id"));
+		Long id = Long.parseLong(request.getParameter("eid"));;
 		String[] cids = request.getParameterValues("cids");
 		
 		IExample ex = webcon.getExampleById(id);
@@ -53,6 +53,7 @@ public class modifyCode extends HttpServlet {
 			webcon.store(cat);
 		}
 		webcon.store(ex);
+		response.sendRedirect("/penweb");
 		webcon.close();
 	}
 
