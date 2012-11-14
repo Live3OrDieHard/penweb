@@ -3,8 +3,9 @@ package dataStructure;
 import java.util.ArrayList;
 
 /**
- * @author Thanaporn
+ * @author tpatikorn
  * Properties about an example. 
+ * ***No longer used***
  */
 public class ExampleProperties implements IProperties
 {

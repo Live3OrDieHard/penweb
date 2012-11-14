@@ -14,13 +14,18 @@ import dataStructure.Category;
 import dataStructure.ICategory;
 import dataStructure.IExample;
 import database.Db4oDatabase;
+import exceptions.DuplicateException;
 
 import java.io.File;
 import java.util.List;
 
-
-
-public class ExampleAndExampleTest {
+/**
+ * @author tpatikorn
+ * @author iprangishvili
+ * @author dmulcahy
+ * Test BasicExample-Category relationship
+ */
+public class ExampleAndCategoryTest {
 	private Db4oDatabase db;
 	private String databaseName = "ExampleAndCategoryTest.yap";
 	
@@ -30,9 +35,8 @@ public class ExampleAndExampleTest {
 		db = new Db4oDatabase(databaseName);
 	}
 	
-	
 	@Test
-	public void testAddExamplePreAssignedID() {
+	public void testAddExamplePreAssignedID() throws DuplicateException {
 		Category category1 = new Category("Cat", "Cats are nice");
 		Category category2 = new Category("Dog", "Dogs are nice");
 		BasicExample example1 = new BasicExample();
@@ -51,14 +55,14 @@ public class ExampleAndExampleTest {
 		//close and reopen
 		db.close();
 		db = new Db4oDatabase(databaseName);
-				
+		
 		List<ICategory> categoryList = db.getExampleByID(example1.getId()).getCategories();
 		assertTrue((categoryList.get(0).getId().equals(category1.getId()) && categoryList.get(1).getId().equals(category2.getId()))
 				|| (categoryList.get(0).getId().equals(category2.getId()) && categoryList.get(1).getId().equals(category1.getId())));
 	}
 	
 	@Test
-	public void testAddExampleUnAssignedIDReStore() {
+	public void testAddExampleUnAssignedIDReStore() throws DuplicateException {
 		Category category1 = new Category("Cat", "Cats are nice");
 		Category category2 = new Category("Dog", "Dogs are nice");
 		BasicExample example1 = new BasicExample();
@@ -86,7 +90,6 @@ public class ExampleAndExampleTest {
 		example4.addCategory(category3);
 		example4.addCategory(category4);
 		
-		example3.setCode("FUCK");
 		db.store(example3);
 		db.store(example4);
 		db.store(category3);
@@ -95,11 +98,6 @@ public class ExampleAndExampleTest {
 		//close and reopen
 		db.close();
 		db = new Db4oDatabase(databaseName);
-		
-		IExample example5 = db.getByHeader("Hello World", null).get(0);
-		IExample example6 = db.getByHeader("Bye World", null).get(0);
-		ICategory category5 = db.getCategoryByID(category1.getId());
-		ICategory category6 = db.getCategoryByID(category2.getId());
 		
 		IExample newExample = db.getByHeader("Hello World", null).get(0);
 		List<ICategory> categoryList = newExample.getCategories();

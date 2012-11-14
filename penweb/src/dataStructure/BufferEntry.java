@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
- * @author Thanaporn
- *w
+ * @author tpatikorn
  * This object will accumulate all fields of all kind of IEntry
  * to be a buffer entry
  * this should help web app - controller interaction
@@ -127,6 +125,4 @@ public class BufferEntry
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	
 }

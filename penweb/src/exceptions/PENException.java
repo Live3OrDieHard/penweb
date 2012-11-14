@@ -1,6 +1,11 @@
 package exceptions;
 
-public class PENException extends Exception{
+/**
+ * @author tpatikorn
+ * Superclass for all exception used in PEN project
+ * This class is abstract.
+ */
+public abstract class PENException extends Exception{
 
 	private String message;
 

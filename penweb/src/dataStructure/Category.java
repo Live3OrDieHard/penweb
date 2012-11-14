@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import exceptions.DuplicateException;
 
 /**
- * @author awiovanna
+ * @author awiovanna, tpatikorn
  *
  * A category into which code examples can be placed
  */

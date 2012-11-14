@@ -4,11 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author team3
+ * @author tpatikorn
  *
  * The ExampleHeader class describes the header of the
  * examples and let user to access and edit the data
  * of the header
+ * ***No longer used***
  */
 public class ExampleHeader implements IHeader
 {

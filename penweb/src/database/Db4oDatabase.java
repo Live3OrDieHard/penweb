@@ -10,6 +10,8 @@ import dataStructure.ICategory;
 import dataStructure.IEntry;
 import dataStructure.IExample;
 import dataStructure.IUser;
+import dataStructure.IPerson;
+import exceptions.NoIdAvailableException;
 
 /*
  * How to create a new instance of this database using IDatabase:
@@ -22,8 +24,11 @@ import dataStructure.IUser;
  * If you have any questions about how to use this ask Andy C <andy@wpi.edu>
  */
 
+/**
+ * @author Andy Creeth
+ */
 public class Db4oDatabase implements IDatabase {
-
+	final private long maxID = 100000000000L;
 	private ObjectContainer db;
 
 	public Db4oDatabase(String path) {
@@ -40,7 +45,10 @@ public class Db4oDatabase implements IDatabase {
 		e.assignId(this.getNewId());
 		db.store(e);
 	}
-
+	
+	/**
+	 * NO. Shouldn't be used. NO.
+	 */
 	@Override
 	public List<IEntry> getAll() {
 		return db.query(IEntry.class);
@@ -236,6 +244,26 @@ public class Db4oDatabase implements IDatabase {
 		else
 			return null; // throw non-unique exception if there is more than one
 							// result
+	}
+
+	@Override
+	/**
+	 * get a unique id from the database
+	 *  @return a unique id (Long)
+	 */
+	public Long generateEntryId() throws NoIdAvailableException {
+		//try to generate random number first
+		for(long i=0;i<maxID;i++) {
+			long newId = (long) (Math.random()*maxID);
+			if(this.getByID(newId)==null)
+				return newId;
+		}
+		//if no ID available after randomizing maxID times, loop through to check
+		for(long newId=0;newId<maxID;newId++) {
+			if(this.getByID(newId)==null)
+				return newId;
+		}
+		throw(new NoIdAvailableException(maxID,"MaxID reached"));
 	}
 
 }

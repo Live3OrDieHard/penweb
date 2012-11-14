@@ -3,7 +3,9 @@ package dataStructure;
 import java.util.ArrayList;
 
 /**
+ * @author tpatikorn
  * Getters and setters for managing properties of an example
+ * *** no longer used***
  */
 public interface IProperties 
 {

@@ -8,14 +8,19 @@ import org.junit.Test;
 
 import dataStructure.BasicExample;
 import dataStructure.Category;
-import dataStructure.IExample;
 import database.Db4oDatabase;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList; 
 import java.util.List;
 
-
+/**
+ * @author tpatikorn
+ * @author iprangishvili
+ * @author dmulcahy
+ * Test Category-related functions
+ * Except BasicExample-Category relationship
+ * 
+ */
 public class CategoryTest {
 	private Category testee;
 	private Db4oDatabase db;

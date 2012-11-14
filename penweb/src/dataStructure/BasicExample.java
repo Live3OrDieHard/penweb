@@ -7,7 +7,8 @@ import java.util.List;
 import exceptions.DuplicateException;
 
 /**
- * This is what the example should look like
+ * @author tpatikorn
+ * Basic examples.
  */
 public class BasicExample implements IExample {
 
@@ -73,9 +74,10 @@ public class BasicExample implements IExample {
 	//This functions is not quite completed. We would complete it later.
 	@Override
 	public void addCategory(ICategory category) throws DuplicateException {
-		this.isInCategory(category);
-		categoryList.add(category);
-		category.addCodeExample(this);
+		if(!this.isInCategory(category)) {
+			categoryList.add(category);
+			category.addCodeExample(this);
+		}
 	}
 		
 	/**

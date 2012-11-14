@@ -3,12 +3,12 @@ package dataStructure;
 import java.util.ArrayList;
 
 /**
- * @author Thanaporn 
+ * @author tpatikorn
  * @author jfchines
  * @author awiovanna
  * @author kirkgrimsley
  * 
- * IUser should be used to identify user
+ * User should be used to identify registered user
  */
 public class User implements IUser {
 	private final String loginName; // Name used for logging in. This has to be unique.

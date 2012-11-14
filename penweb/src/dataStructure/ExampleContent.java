@@ -1,11 +1,11 @@
 package dataStructure;
 
 /**
- * @author Team3
- * 
+ * @author tpatikorn
  * The ExampleContent class contains the code
  * of the examples and allows the user to access
  * and edit code.
+ * ***No longer used***
  */
 public class ExampleContent implements IContent
 {

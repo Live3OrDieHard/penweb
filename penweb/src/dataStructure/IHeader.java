@@ -3,10 +3,11 @@ package dataStructure;
 import java.util.List;
 
 /**
- * @author Thanaporn
+ * @author tpatikorn
  * An instance of IHeader should contains data that identify the IEntry
  * (like name and author/owner)
  * IHeader should give IEntry uniqueness.
+ * ***No longer used***
  */
 public interface IHeader 
 {

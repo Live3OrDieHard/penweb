@@ -4,6 +4,12 @@ import java.util.List;
 
 import exceptions.DuplicateException;
 
+/**
+ * 
+ * @author tpatikorn
+ * an interface for a category, in case there are more category types.
+ *
+ */
 public interface ICategory extends IEntry{
 	
 	/**

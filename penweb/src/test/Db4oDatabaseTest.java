@@ -14,6 +14,13 @@ import org.junit.Test;
 import dataStructure.*;
 import database.Db4oDatabase;
 
+/**
+ * 
+ * @author tpatikorn
+ * @author iprangishvili
+ * @author dmulcahy
+ * Test functions in db4odatabase.java
+ */
 public class Db4oDatabaseTest {
 	private Db4oDatabase testee;
 	private String databaseName = "db4otest.yap";
@@ -27,7 +34,7 @@ public class Db4oDatabaseTest {
 	@Test
 	public void testGetByHeaderWithTitleAndAuthor() {
 		BasicExample entry = new BasicExample();
-		NonUser u = new NonUser("anAuthor");
+		User u = new User("anAuthor", databaseName, databaseName);
 		entry.setTitle("aTitle");
 		entry.assignOwner(u);
 		testee.store(entry);
@@ -49,11 +56,11 @@ public class Db4oDatabaseTest {
 	@Test
 	public void testGetByHeaderWithAuthorOnly() {
 		BasicExample entry = new BasicExample();
-		NonUser u = new NonUser("anAuthor");
+		User u = new User("anAuthor", databaseName, databaseName);
 		entry.assignOwner(u);
 		testee.store(entry);
-		String name = testee.getByHeader(null, u).get(0).getOwner().getName();
-		assertEquals(name, entry.getOwner().getName());
+		String name = testee.getByHeader(null, u).get(0).getOwner().getDisplayName();
+		assertEquals(name, entry.getOwner().getDisplayName());
 	}
 
 	@Test
@@ -140,8 +147,16 @@ public class Db4oDatabaseTest {
 		ArrayList<String> list = testee.listCategoryNames();
 		String name = list.get(0)+list.get(1)+list.get(2)+list.get(3)+list.get(4);
 		assertEquals(name,"LiveThreeOrDieHard");
+		
+		assertTrue(list.contains("Live"));
+		assertTrue(list.contains("Three"));
+		assertTrue(list.contains("Or"));
+		assertTrue(list.contains("Die"));
+		assertTrue(list.contains("Hard"));
+		
 	}
 
+	
 	
 	@After
 	public void cleanup() throws IOException {

@@ -6,7 +6,7 @@ import java.util.List;
 import exceptions.DuplicateException;
 
 /**
- * @author Thanaporn
+ * @author tpatikorn
  * IExample is basically the actual entry (code/test/etc)
  * Prof. Pollice prefers to call it an example.
  */

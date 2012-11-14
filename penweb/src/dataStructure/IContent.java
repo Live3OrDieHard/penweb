@@ -1,7 +1,8 @@
 package dataStructure;
 
 /**
- * @author Thanaporn
+ * @author tpatikorn
+ * ***No longer used***
  */
 public interface IContent 
 {

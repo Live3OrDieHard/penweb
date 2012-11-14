@@ -17,6 +17,11 @@ import database.IDatabase;
 import exceptions.CannotAddToDbException;
 import exceptions.PENException;
 
+/**
+ * @author tpatikorn
+ * test Controller functions
+ * ***not used in web***
+ */
 public class ControllerTest {
 	private Controller testee;
 	private IDatabase db;

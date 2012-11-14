@@ -186,7 +186,8 @@ public class Db4oDatabase implements IDatabase {
 	 */
 	public Long generateEntryId() throws NoIdAvailableException {
 		//try to generate random number first
-		for(long newId=0;newId<maxID;newId++) {
+		for(long i=0;i<maxID;i++) {
+			long newId = (long) (Math.random()*maxID);
 			if(this.getByID(newId)==null)
 				return newId;
 		}
