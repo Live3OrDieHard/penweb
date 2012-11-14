@@ -44,4 +44,6 @@ public interface ICategory extends IEntry{
 	void addCodeExample(IExample example) throws DuplicateException;
 
 	List<IExample> getExampleList();
+	
+	List<Long> getExampleIds();
 }
