@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * @author jfchines
  * @author awiovanna
  * @author kirkgrimsley
+ * @author avenkatesh
  * 
 <<<<<<< Upstream, based on origin/master
  * User should be used to identify registered user
@@ -48,8 +49,10 @@ public class User implements IUser {
 	}
 	
 	@Override
-	public void changePassword(String newPassword) {
+	public void changePassword(String oldPassword, String newPassword, String reenterNew) {
+		if(oldPassword.equals(this.password) && newPassword.equals(reenterNew)){
 		this.password = newPassword;
+		}
 	}
 	
 	public int assignId(Long id) {

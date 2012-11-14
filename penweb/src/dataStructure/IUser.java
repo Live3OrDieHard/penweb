@@ -35,5 +35,5 @@ public interface IUser extends IEntry
 	/**
 	 * @param newPassword The new password for the user.
 	 */
-	public void changePassword(String newPassword);
+	public void changePassword(String oldPassword, String newPassword, String reenterNew);
 }
