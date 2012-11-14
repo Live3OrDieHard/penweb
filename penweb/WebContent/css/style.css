@@ -229,6 +229,7 @@ a {
 	line-height: 30px;
 	padding-left: 20px;
 	cursor: pointer;
+	overflow: hidden;
 }
 
 .content .left ul li:hover {
