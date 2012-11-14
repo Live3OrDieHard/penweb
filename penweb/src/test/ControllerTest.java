@@ -18,9 +18,7 @@ import exceptions.CannotAddToDbException;
 import exceptions.PENException;
 
 /**
- * @author tpatikorn
- * test Controller functions
- * ***not used in web***
+ * @author tpatikorn test Controller functions ***not used in web***
  */
 public class ControllerTest {
 	private Controller testee;
@@ -32,7 +30,7 @@ public class ControllerTest {
 		db = new Db4oDatabase(databaseName);
 		testee = new Controller(db, null);
 	}
-	
+
 	@Test
 	public void testAddBasicExample() throws PENException {
 		BufferEntry buff = new BufferEntry();
@@ -43,12 +41,12 @@ public class ControllerTest {
 		buff.setTitle("untitled");
 		testee.addBasicExample(buff);
 		IExample e = db.getByHeader("untitled", null).get(0);
-		
+
 		assertEquals(e.getDescription(), "This statement is false");
 		assertEquals(e.getSource(), "pikachu.net");
 		assertEquals(e.getLanguage(), "Thai");
 		assertEquals(e.getCode(), "Hello World");
-		
+
 	}
 
 	@Test
@@ -56,37 +54,30 @@ public class ControllerTest {
 		BufferEntry b = new BufferEntry();
 		b.setTitle("Title");
 		b.setDescription("Desc");
-		//first time, should be okay
-		try
-		{
+		// first time, should be okay
+		try {
 			testee.addCategory(b);
-		}
-		catch(PENException exception)
-		{
+		} catch (PENException exception) {
 			fail("exception thrown on first try");
 		}
-		
-		try
-		{
+
+		try {
 			testee.addCategory(b);
 			fail("exception not thrown on second try");
+		} catch (PENException exception) {
+			assertEquals(exception.getMessage(), "The title \"Title\" for category is taken.");
 		}
-		catch(PENException exception)
-		{
-			assertEquals(exception.getMessage(),"The title: Title for category is taken.");
-			
-		}
-		
-		//TODO: Write test to ensure exception is thrown
+
+		// TODO: Write test to ensure exception is thrown
 	}
-	
+
 	@Test
 	public void testAddCategorySuccess() throws PENException {
 		BufferEntry b = new BufferEntry();
 		b.setTitle("Title");
 		b.setDescription("Desc");
 		testee.addCategory(b);
-		
+
 		Category c = (Category) db.getAllCategory().get(0);
 		assertEquals(c.getDescription(), "Desc");
 		assertEquals(c.getTitle(), "Title");
@@ -96,7 +87,7 @@ public class ControllerTest {
 	public void cleanup() {
 		db.close();
 
-		//Delete the database. We don't need it anymore.
+		// Delete the database. We don't need it anymore.
 		File f = new File(databaseName);
 		if (f.exists())
 			f.delete();

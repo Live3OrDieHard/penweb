@@ -9,6 +9,7 @@ import org.junit.Test;
 import dataStructure.BasicExample;
 import dataStructure.Category;
 import database.Db4oDatabase;
+import exceptions.DuplicateException;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -22,30 +23,32 @@ import java.util.List;
  * 
  */
 public class CategoryTest {
-	private Category testee;
 	private Db4oDatabase db;
 	
 	@Before
 	public void setup() {
-		// Connect to test database
 		db = new Db4oDatabase("CategoryTest.yap");
-		
-		testee = new Category(null, null);
 	}
 	
 	@Test
-	public void testAddCodeExample() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public void testAddCodeExample() {
+		Category category = new Category("Test","This is test");
 		BasicExample example = new BasicExample();
 		
 		// Attempt to add the same example twice
-		testee.addCodeExample(example);
-		testee.addCodeExample(example);
-		
-		Field field = Category.class.getDeclaredField("exampleList");
-		field.setAccessible(true);
+		try {
+			category.addCodeExample(example);
+		} catch (DuplicateException e) {
+		}
+		try {
+			category.addCodeExample(example);
+			fail();
+		} catch (DuplicateException e) {
+			//it's supposed to come here
+		}
 		
 		// The example should have been added only once
-		assertEquals(((List)field.get(testee)).size(), 1);
+		assertEquals(category.getExampleList().size(), 1);
 	}
 	
 	@After

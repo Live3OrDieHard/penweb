@@ -57,24 +57,5 @@ public class BufferEntryTest {
 		assertTrue(entry.getAuthors().contains(Bob));
 		
 	}
-	
-	@Test
-	public void testAlreadyInCategory() {
-		BufferEntry entry = new BufferEntry();
-		Category category = new Category("Team3", "We're awesome");
-
-		assertEquals(entry.getCategories().size(),0);
-		
-		entry.addCategory(category);
-
-		assertEquals(entry.getCategories().size(),1);
-		assertTrue(entry.getCategories().contains(category));
-		
-		entry.addCategory(category);
-
-		assertEquals(entry.getCategories().size(),1);
-		assertTrue(entry.getCategories().contains(category));
-		
-	}
 
 }
