@@ -37,10 +37,12 @@ public class addCode extends HttpServlet {
 		WebController webcon = new WebController();
 		long exid = webcon.addCode(title, content, language, author);
 		IExample ex = webcon.getExampleById(exid);
-		for (String s : cids) {
-			ICategory cat = webcon.getCategoryById(Long.parseLong(s));
-			cat.addCodeExample(ex);
-			webcon.store(cat);
+		if (cids != null) {
+			for (String s : cids) {
+				ICategory cat = webcon.getCategoryById(Long.parseLong(s));
+				cat.addCodeExample(ex);
+				webcon.store(cat);
+			}
 		}
 		webcon.store(ex);
 		webcon.close();
