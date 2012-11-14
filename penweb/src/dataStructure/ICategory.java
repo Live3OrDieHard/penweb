@@ -41,7 +41,7 @@ public interface ICategory extends IEntry{
 	 * @param example The example entry to add.
 	 * @throws DuplicateException 
 	 */
-	void addCodeExample(IExample example);
+	void addCodeExample(IExample example) throws DuplicateException;
 
 	List<IExample> getExampleList();
 }
