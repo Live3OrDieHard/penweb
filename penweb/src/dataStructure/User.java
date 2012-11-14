@@ -1,6 +1,7 @@
 package dataStructure;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author tpatikorn
@@ -9,11 +10,7 @@ import java.util.ArrayList;
  * @author kirkgrimsley
  * @author avenkatesh
  * 
-<<<<<<< Upstream, based on origin/master
- * User should be used to identify registered user
-=======
- * IUser should be used to identify user
->>>>>>> 269476b Add comments to tests and exceptions.
+ * A registered user who owns examples and categories.
  */
 public class User implements IUser {
 	private final String loginName; // Name used for logging in. This has to be unique.
@@ -72,6 +69,26 @@ public class User implements IUser {
 	@Override
 	public Boolean checkPassword(String passwordAttempt) {
 		return (passwordAttempt == this.password);
+	}
+
+	@Override
+	public void addOwnedExample(IExample example) {
+		ownedExamples.add(example);
+	}
+
+	@Override
+	public List<IExample> getOwnedExampleList() {
+		return ownedExamples;
+	}
+
+	@Override
+	public void addOwnedCategory(ICategory category) {
+		ownedCategories.add(category);
+	}
+
+	@Override
+	public List<ICategory> getOwnedCategoryList() {
+		return ownedCategories;
 	}
 	
 	//XXX TODO For now these will do nothing
