@@ -123,8 +123,21 @@ public class BasicExample implements IExample {
 	}
 
 	@Override
+	/**
+	 * Perhaps this should be moved into the controller. 
+	 * I don't know how I feel about functions with a lot of logic
+	 * like this in the dataStructure classes
+	 */
 	public String getAuthorsNames() {
-		return null;
+		String nameList = "";
+		
+		for (int i = 0; i < authors.size(); ++i) {
+			nameList += authors.get(i).getDisplayName();
+			if (i < authors.size() - 1)
+				nameList += ", ";
+		}
+		
+		return nameList;
 	}
 
 	@Override
@@ -344,6 +357,14 @@ public class BasicExample implements IExample {
 		clone.tags = (ArrayList<String>) this.tags.clone(); 
 
 		return clone;
+	}
+
+	@Override
+	public List<Long> getCategoryIds() {
+		List<Long> ids = new ArrayList<Long>();
+		for (ICategory category : categoryList)
+			ids.add(category.getId());
+		return ids;
 	}
 
 }

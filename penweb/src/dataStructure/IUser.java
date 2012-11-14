@@ -1,5 +1,7 @@
 package dataStructure;
 
+import java.util.List;
+
 /**
  * @author Thanaporn
  * @author jfchines
@@ -30,10 +32,32 @@ public interface IUser extends IEntry
 	 * @param passwordAttempt The password entered on the website
 	 * @return True if the password is correct. False otherwise.
 	 */
-	public Boolean checkPassword(String passwordAttempt);
+	Boolean checkPassword(String passwordAttempt);
 	
 	/**
 	 * @param newPassword The new password for the user.
 	 */
-	public void changePassword(String newPassword);
+	void changePassword(String oldPassword, String newPassword, String reenterNew);
+	
+	/**
+	 * Adds an example to a user's list of owned examples
+	 * @param example The example to add
+	 */
+	void addOwnedExample(IExample example);
+
+	/**
+	 * @return The list of examples a user owns
+	 */
+	List<IExample> getOwnedExampleList();
+	
+	/**
+	 * Adds a category to a user's list of owned category
+	 * @param category
+	 */
+	void addOwnedCategory(ICategory category);
+	
+	/**
+	 * @return The list of categories a user owns
+	 */
+	List<ICategory> getOwnedCategoryList();
 }

@@ -168,12 +168,6 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	@Override
-	/**
-	 * search for an entry by its id (examples or categories)
-	 * @return IEntry containing that id if there is only one result.
-	 * Null if there is no IEntry with that ID.
-	 * @throw non-unique exception if there is more than one result
-	 */
 	public IEntry getByID(final Long id) {
 		List<IEntry> list = db.query(new Predicate<IEntry>() {
 			public boolean match(IEntry e) {
@@ -191,22 +185,12 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	@Override
-	/**
-	 * get a unique id from the database
-	 *  @return a unique id (Long)
-	 */
 	public Long getNewId() {
 		return (long) (Math.random()*100000000); // should have a better way to do
 		// this
 	}
 	
 	@Override
-	/**
-	 * search for an entry by its id (examples or categories)
-	 * @return IEntry containing that id if there is only one result.
-	 * Null if there is no IEntry with that ID.
-	 * @throw non-unique exception if there is more than one result
-	 */
 	public ICategory getCategoryByID(final Long id) {
 		List<ICategory> list = db.query(new Predicate<ICategory>() {
 			public boolean match(ICategory e) {
@@ -224,12 +208,6 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	@Override
-	/**
-	 * search for an entry by its id (examples or categories)
-	 * @return IEntry containing that id if there is only one result.
-	 * Null if there is no IEntry with that ID.
-	 * @throw non-unique exception if there is more than one result
-	 */
 	public IExample getExampleByID(final Long id) {
 		List<IExample> list = db.query(new Predicate<IExample>() {
 			public boolean match(IExample e) {
@@ -245,12 +223,40 @@ public class Db4oDatabase implements IDatabase {
 			return null; // throw non-unique exception if there is more than one
 							// result
 	}
+	
+	@Override
+	public IUser getUserByLoginName(final String loginName) {
+		List<IUser> results = db.query(new Predicate<IUser>() {
+			public boolean match(IUser e) {
+				return (e.getLoginName().equals(loginName));
+			}
+		});
+		
+		if (results.size() == 1)
+			return results.get(0);
+		else if (results.size() == 0)
+			return null;
+		else
+			return null; // Throw an exception because two users have the same login name.
+	}
+	
+	@Override
+	public IUser getUserByID(final String id) {
+		List<IUser> results = db.query(new Predicate<IUser>() {
+			public boolean match(IUser e) {
+				return (e.getId().equals(id));
+			}
+		});
+		
+		if (results.size() == 1)
+			return results.get(0);
+		else if (results.size() == 0)
+			return null;
+		else
+			return null; // Throw an exception because two users have the same login name.
+	}
 
 	@Override
-	/**
-	 * get a unique id from the database
-	 *  @return a unique id (Long)
-	 */
 	public Long generateEntryId() throws NoIdAvailableException {
 		//try to generate random number first
 		for(long i=0;i<maxID;i++) {
