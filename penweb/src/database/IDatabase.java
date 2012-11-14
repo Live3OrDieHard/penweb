@@ -57,13 +57,53 @@ public interface IDatabase {
 	 */
 	List<ICategory> getAllCategory();
 
+	/**
+	 * get a unique id from the database
+	 *  @return a unique id (Long)
+	 */
 	Long getNewId();
 
+	/**
+	 * search for an entry by its id (examples or categories)
+	 * @return IEntry containing that id if there is only one result.
+	 * Null if there is no IEntry with that ID.
+	 * @throw non-unique exception if there is more than one result
+	 */
 	IEntry getByID(Long id);
-
+	
+	/**
+	 * search for an entry by its id (examples or categories)
+	 * @return IEntry containing that id if there is only one result.
+	 * Null if there is no IEntry with that ID.
+	 * @throw non-unique exception if there is more than one result
+	 */
 	IEntry getCategoryByID(Long id);
 
+	/**
+	 * search for an entry by its id (examples or categories)
+	 * @return IEntry containing that id if there is only one result.
+	 * Null if there is no IEntry with that ID.
+	 * @throw non-unique exception if there is more than one result
+	 */
 	IEntry getExampleByID(Long id);
 
+	/**
+	 * get a unique id from the database
+	 *  @return a unique id (Long)
+	 */
 	Long generateEntryId() throws NoIdAvailableException;
+	
+	/**
+	 * Returns the user with the given login name
+	 * @param loginName The name to look for
+	 * @return The IUser with the loginName if a match is found. Null otherwise.
+	 */
+	IUser getUserByLoginName(final String loginName);
+	
+	/**
+	 * Returns the user with the associated ID
+	 * @param id The id of the user to find
+	 * @return An IUser object if a match is found. Null, otherwise. 
+	 */
+	IUser getUserByID(final String id);
 }
