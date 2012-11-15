@@ -121,7 +121,7 @@
 			
 			<%	if (!isNewExample) {%>
 				<form class="barForm">
-				<input type="submit" class="button black-wide" value="duplicate"/>
+				<input type="submit" class="button black-wide" value="Duplicate"/>
 				</form>
 			<%}%>
 			
