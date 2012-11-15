@@ -118,6 +118,13 @@
 			<%}	else {%>
 				<%=ex.getTitle()%>
 			<%}%></h1>
+			
+			<%	if (!isNewExample) {%>
+				<form class="barForm">
+				<input type="submit" class="button black-wide" value="Duplicate"/>
+				</form>
+			<%}%>
+			
 	</div>
 </div>
 <div class="content">
