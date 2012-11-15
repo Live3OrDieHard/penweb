@@ -109,7 +109,7 @@
 </div>
 <div class="bar">
 	<div class="left">
-		<a href="create.jsp"><div class="button green">New Entry</div></a>
+		<a href="edit.jsp"><div class="button green">New Entry</div></a>
 	</div>
 	<div class="right">
 		<h1>
@@ -138,13 +138,18 @@
 			<% if (!isNewExample) { %>
 			<input type="hidden" name="eid" value="<%=id%>"/>
 			<%} %>
+			Title: *
 			<input type="text" name="title" <%if(!isNewExample) {%>value="<%=ex.getTitle()%>"<%}%> />
+			Author:
 			<input type="text" name="author" <%if(!isNewExample) {%>value="<%=ex.getAuthorsNames()%>"<%}%>/>
+			Language: 
 			<input type="text" name="language" <%if(!isNewExample) {%>value="<%=ex.getLanguage()%>"<%}%>/>
+			Code: *
 			<textarea name="content"><%if(!isNewExample) {%><%=ex.getCode()%><%}%></textarea>
+			<font size="1"><p>* Required Fields</p></font>
 			<p>Categories</p>
 			<% for (ICategory c : cats) { %>
-				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" /> <%=c.getTitle() %></p>
+				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
 			<%} %>
 			<input type="submit" class="button black" value="Save Entry" />
 		</form>
