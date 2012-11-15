@@ -73,6 +73,7 @@ a {
 	right: 0;
 	bottom: 0;
 	padding: 25px;
+	overflow: auto;
 }
 .modal input, .modal textarea {
 	margin-bottom: 25px;
@@ -99,11 +100,23 @@ a {
 	background: #222222;
 }
 
+.modal input[type=checkbox] {
+	display: inline;
+	margin: 0;
+}
+
+.modal .input {
+	margin-bottom: 25px;	
+}
+
+.modal .sheet .modalContent p {
+	margin-bottom: 25px;	
+}
+
 .modal .error {
 	font-weight: bold;
 	color: #FF0000;
 	display: none;
-	padding-bottom: 25px;
 }
 
 /* Header */

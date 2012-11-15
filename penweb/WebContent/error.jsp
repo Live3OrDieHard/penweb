@@ -21,38 +21,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script src="js/jquery.watermark.min.js"></script>
-	<script>
-		$(document).ready(function(){
-			// Watermarks for login
-			$("input[name=username]").watermark("Username");
-			$("input[name=password]").watermark("Password");
-
-			// Watermarks for new categories
-			$("#createCategory input[name=name]").watermark("Category Name");
-			$("#createCategory textarea[name=desc]").watermark("Enter description...");			
-		});
-
-		// Checks addCategory submission to make sure name isn't blank
-		function checkAddCategorySubmit() {
-			if ($("#createCategory input[name=name]").val() == "") {
-				$(".modal .error").html("Error: Please provide a category name.");
-				$(".modal .error").show();
-				return false;
-			}
-			return true;
-		}
-
-		function newCategory() {
-			$("#createCategory").show();
-			$(".modal").show();		
-		}
- 
-		function closeModal() {
-			$(".modal").hide();
-			$(".modal .sheet").hide();
-
-		}
-	</script>
+	<script src="js/penweb.js"></script>
 </head>
 <body>
 <div class="modal">
@@ -68,6 +37,40 @@
 			</form>
 		</div>
 	</div>
+	<div class="sheet" id="duplicateIntoCategories">
+		<a href="javascript: closeModal();"><div class="close"></div></a>
+		<h1>Duplicate Entry</h1>
+		<div class="modalContent">
+			<form action="duplicateCode" method="post">
+				<p>Select categories to duplicate this entry into:</p>
+				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
+				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
+				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
+				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
+				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
+				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
+				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
+				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
+				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
+				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
+				<input type="submit" value="Duplicate" />
+			</form>
+		</div>
+	</div>
+	<div class="sheet" id="signUp">
+		<a href="javascript: closeModal();"><div class="close"></div></a>
+		<h1>Sign Up</h1>
+		<div class="modalContent">
+			<p class="error"></p>
+			<form action="addUser" method="post" onsubmit="return checkSignUpSubmit();">
+			<div class="input"><input type="text" name="loginname" /></div>
+			<div class="input"><input type="text" name="displayname" /></div>
+			<div class="input"><input type="password" name="password" /></div>
+			<div class="input"><input type="password" name="confirm_password" /></div>
+			<input type="submit" value="Create Account" />
+			</form>
+		</div>
+	</div>
 </div>
 <div class="header">
 	<h1>PEN</h1>
@@ -76,7 +79,7 @@
 		<div class="input"><input type="text" name="username" /></div>
 		<div class="input"><input type="password" name="password" /></div>
 		<input type="submit" class="button blue" value="Log In" />
-		<input type="button" class="button black" value="Sign Up" />
+		<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
 	</form>
 </div>
 <div class="bar">
