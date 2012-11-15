@@ -194,6 +194,12 @@ a {
 	font-size: 20px;
 	font-weight: bold;
 	margin-left: 25px;
+	float: left;
+}
+
+.barForm {
+	float: right;
+	margin-top: 6px;
 }
 
 /* Main Content */
