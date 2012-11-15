@@ -60,4 +60,16 @@ public interface IUser extends IEntry
 	 * @return The list of categories a user owns
 	 */
 	List<ICategory> getOwnedCategoryList();
+	
+	/**
+	 * Adds an example to the list of examples a user has edited. This includes
+	 * examples that the author has created.
+	 * @param example Example to add
+	 */
+	void addEditedExample(IExample example);
+	
+	/**
+	 * @return The list of examples that a user has edited.
+	 */
+	List<IExample> getEditedExampleList();
 }

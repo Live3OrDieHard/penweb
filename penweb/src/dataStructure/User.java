@@ -18,6 +18,12 @@ public class User implements IUser {
 	private String password;
 	private ArrayList<IExample> ownedExamples;
 	private ArrayList<ICategory> ownedCategories;
+	
+	/**
+	 * A list of examples that the user has edited. This includes any examples
+	 * that the user is listed as an "author" for.
+	 */
+	private ArrayList<IExample> editedExamples;
 	private Long id;
 	
 	public User (String loginName, String password, String displayName) {		
@@ -27,6 +33,7 @@ public class User implements IUser {
 		
 		this.ownedExamples = new ArrayList<IExample>();
 		this.ownedCategories = new ArrayList<ICategory>();
+		this.editedExamples = new ArrayList<IExample>();
 		this.id = new Long(-1);
 	}
 
@@ -89,6 +96,16 @@ public class User implements IUser {
 	@Override
 	public List<ICategory> getOwnedCategoryList() {
 		return ownedCategories;
+	}
+
+	@Override
+	public void addEditedExample(IExample example) {
+		editedExamples.add(example);
+	}
+
+	@Override
+	public List<IExample> getEditedExampleList() {
+		return editedExamples;
 	}
 	
 	//XXX TODO For now these will do nothing

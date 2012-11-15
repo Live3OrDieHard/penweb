@@ -120,6 +120,19 @@ public class WebController {
 		return true;
 	}
 	
+	/**
+	 * Attempt to login given a loginName and password.
+	 * @param loginName Name a user should use to login. This is unique across users
+	 * @param password The password to check
+	 * @return True if the user exists and the password was correct. False if 
+	 * the user doesn't exist or the password was incorrect.
+	 */
+	public boolean tryLogin(String loginName, String password) {
+		IUser user = db.getUserByLoginName(loginName);
+		
+		return ((user != null) && (user.checkPassword(password)));
+	}
+	
 	
 	public String getText() {
 		return "Testing text";
