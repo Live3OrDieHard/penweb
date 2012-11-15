@@ -77,8 +77,8 @@
 <div class="header">
 	<h1>PEN</h1>
 	<h2>The Programmer's<br>Examples Notebook</h2>
-	<form name="login">
-		<div class="input"><input type="text" name="username" /></div>
+	<form name="login" action="login" method="post">
+		<div class="input"><input type="text" name="loginname" /></div>
 		<div class="input"><input type="password" name="password" /></div>
 		<input type="submit" class="button blue" value="Log In" />
 		<input type="button" class="button black" value="Sign Up" onclick="signUp();" />

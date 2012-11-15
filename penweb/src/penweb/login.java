@@ -41,7 +41,7 @@ public class login extends HttpServlet {
 			return;
 		}
 		else {
-			response.sendRedirect("error.jps?err=2");
+			response.sendRedirect("error.jsp?err=2");
 			webcon.close();
 			return;
 		}
