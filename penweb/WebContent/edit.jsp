@@ -121,10 +121,15 @@
 			
 			<%	if (!isNewExample) {%>
 				<form class="barForm">
+				Options:
 				<input type="submit" class="button black-wide" value="Duplicate"/>
+				<input type="button" class="button green" onClick="editForm.submit();" value="Save Entry" />
 				</form>
-			<%}%>
-			
+			<%} else {%>
+				<form class="barForm">
+				<input type="button" class="button green" onClick="editForm.submit();" value="Save Entry" />
+				</form>
+			<%} %>
 	</div>
 </div>
 <div class="content">
@@ -140,7 +145,7 @@
 		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
-		<form action="<%if (isNewExample) { %>addCode<%} else { %>modifyCode<%} %>" method="post" onsubmit="return checkAddCodeSubmit();">
+		<form action="<%if (isNewExample) { %>addCode<%} else { %>modifyCode<%} %>" method="post" name="editForm" onsubmit="return checkAddCodeSubmit();">
 			<p class="error"></p>
 			<% if (!isNewExample) { %>
 			<input type="hidden" name="eid" value="<%=id%>"/>
@@ -158,7 +163,7 @@
 			<% for (ICategory c : cats) { %>
 				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
 			<%} %>
-			<input type="submit" class="button black" value="Save Entry" />
+			
 		</form>
 	</div>
 </div>
