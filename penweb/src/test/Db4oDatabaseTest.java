@@ -156,7 +156,64 @@ public class Db4oDatabaseTest {
 		
 	}
 
+	@Test
+	public void getUserByIdTest() {
+		User Alice = new User("Alice1234","changeMe123","Alice");
+		testee.store(Alice);
+		long id = Alice.getId();
+		
+		IUser newAlice = testee.getUserByID(id);
+		assertEquals(newAlice.getLoginName(),"Alice1234");
+		assertEquals(newAlice.getDisplayName(),"Alice");
+	}
 	
+	@Test
+	public void getUserByIdTestnotFound() {
+		BasicExample example = new BasicExample();
+		testee.store(example);
+		long id = example.getId();
+		
+		IUser newAlice = testee.getUserByID(id);
+		assertEquals(newAlice,null);		
+	}
+	
+	@Test
+	public void getLoginNameByIdTest() {
+		User Alice = new User("Alice1234","changeMe123","Alice");
+		testee.store(Alice);
+		IUser newAlice = testee.getUserByLoginName("Alice1234");
+		assertEquals(newAlice.getLoginName(),"Alice1234");
+		assertEquals(newAlice.getDisplayName(),"Alice");
+	}
+	
+	@Test
+	public void isLoginNameTakenTest() {
+		User Alice1 = new User("Alice1234","changeMe123","Alice");
+		assertTrue(!testee.isLoginNameTaken("Alice1234"));
+		assertEquals(testee.getAllUsers().size(),0);
+		testee.store(Alice1);
+		assertTrue(testee.isLoginNameTaken("Alice1234"));
+		assertEquals(testee.getAllUsers().size(),1);
+		assertEquals(testee.getUserByLoginName("Alice1234").getDisplayName(),"Alice");
+	}
+
+	/**
+	 * The database still allows adding two User objects 
+	 * with the same loginName. 
+	 * Checking for taken names is done in WebController
+	 */
+	@Test
+	public void twoUsersWithSameLoginNameTest() {
+		User Alice1 = new User("Alice1234","changeMe123","Alice");
+		User Alice2 = new User("Alice1234","changeMe555","Bob");
+		assertTrue(!testee.isLoginNameTaken("Alice1234"));
+		assertEquals(testee.getAllUsers().size(),0);
+		testee.store(Alice1);
+		assertTrue(testee.isLoginNameTaken("Alice1234"));
+		testee.store(Alice2);
+		assertEquals(testee.getAllUsers().size(),1);
+		assertEquals(testee.getUserByLoginName("Alice1234").getDisplayName(),"Alice");
+	}
 	
 	@After
 	public void cleanup() throws IOException {

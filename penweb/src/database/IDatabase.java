@@ -105,5 +105,5 @@ public interface IDatabase {
 	 * @param id The id of the user to find
 	 * @return An IUser object if a match is found. Null, otherwise. 
 	 */
-	IUser getUserByID(final String id);
+	IUser getUserByID(Long id);
 }
