@@ -241,7 +241,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 	
 	@Override
-	public IUser getUserByID(final String id) {
+	public IUser getUserByID(final Long id) {
 		List<IUser> results = db.query(new Predicate<IUser>() {
 			public boolean match(IUser e) {
 				return (e.getId().equals(id));
