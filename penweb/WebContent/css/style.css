@@ -75,7 +75,8 @@ a {
 	padding: 25px;
 	overflow: auto;
 }
-.modal input, .modal textarea {
+
+.modal textarea {
 	margin-bottom: 25px;
 	display: block;
 	background: #333333;
@@ -92,21 +93,13 @@ a {
 	height: 100px;
 }
 
-.modal input[type=submit]:hover {
-	background: #444444;
-}
-
-.modal input[type=submit]:active {
-	background: #222222;
-}
-
 .modal input[type=checkbox] {
 	display: inline;
 	margin: 0;
 }
 
 .modal .input {
-	margin-bottom: 25px;	
+	margin-bottom: 25px;
 }
 
 .modal .sheet .modalContent p {

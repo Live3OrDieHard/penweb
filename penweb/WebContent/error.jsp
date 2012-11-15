@@ -31,29 +31,9 @@
 		<div class="modalContent">
 			<form action="addCategory" method="post" onsubmit="return checkAddCategorySubmit();">
 				<p class="error"></p>
-				<input type="text" name="name" />
+				<div class="input"><input type="text" name="name" /></div>
 				<textarea name="desc"></textarea>
 				<input type="submit" value="Create" />
-			</form>
-		</div>
-	</div>
-	<div class="sheet" id="duplicateIntoCategories">
-		<a href="javascript: closeModal();"><div class="close"></div></a>
-		<h1>Duplicate Entry</h1>
-		<div class="modalContent">
-			<form action="duplicateCode" method="post">
-				<p>Select categories to duplicate this entry into:</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<input type="submit" value="Duplicate" />
 			</form>
 		</div>
 	</div>
@@ -67,7 +47,7 @@
 			<div class="input"><input type="text" name="displayname" /></div>
 			<div class="input"><input type="password" name="password" /></div>
 			<div class="input"><input type="password" name="confirm_password" /></div>
-			<input type="submit" value="Create Account" />
+			<input type="submit" class="button green" value="Create Account" />
 			</form>
 		</div>
 	</div>
