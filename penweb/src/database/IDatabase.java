@@ -8,23 +8,58 @@ import exceptions.NoIdAvailableException;
 
 /**
  * @author Andy Creeth
+ * @author Justin Chines
+ * @author March
+ * 
+ * Database interface for storing and retrieving objects. This 
+ * contains many methods to retrieve objects from the database using 
+ * headers, ids, names, or more. More methods may be added laters.
  */
 public interface IDatabase {
+	/**
+	 * Stores the given entry in the database. If the object is already in the database, it will be updated.
+	 * @param e The entry to store.
+	 */
 	public void store(IEntry e);
 	
+	/**
+	 * @return All entries in the database
+	 */
 	public List<IEntry> getAll();
 	
 	//public List<IExample> getByHeader(IHeader head); // null is wildcard (this might be an issue, we can change later)
-	//public List<IExample> getByHeader(String title, List<IPerson> authors); // null is wildcard (this might be an issue, we can change later)
+	//public List<IExample> getByHeader(String title, List<IUser> authors); // null is wildcard (this might be an issue, we can change later)
 	
-	public List<IExample> getByHeader(String title, IUser owner); // null is wildcard (this might be an issue, we can change later)
+	/**
+	 * Searches through the database for examples with headers containing
+	 * information matching the given information. Null for either argument 
+	 * denotes a wild-card.
+	 * 
+	 * @param title The title of an example to look for.
+	 * @param owner The owner of an example to look for.
+	 * @return A list of examples matching the given information.
+	 */
+	public List<IExample> getByHeader(String title, IUser owner);
 	
- 	public List<IExample> getByKeyword(String key); // This could be a cool function to implement (match by keyword in body or title)
-	// More "getBy" functions to come based on metadata choices
+	/**
+	 * CURRENTLY UNIMPLEMENTED. Searches through database for keyword in
+	 * descriptions or titles
+	 * 
+	 * @param key The keyword to search for. 
+	 * @return List of matched examples
+	 */
+ 	public List<IExample> getByKeyword(String key);
 	
+ 	/**
+ 	 * Deletes the given entry from the database
+ 	 * @param e The object to delete
+ 	 */
  	public void delete(IEntry e);
 	
-	public void close(); // Close the connection
+ 	/**
+ 	 * Closes the database connection
+ 	 */
+	public void close();
 	
 	/**
 	 * @return A list of all code examples in the database
