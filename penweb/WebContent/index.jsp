@@ -11,6 +11,7 @@
 		if (request.getParameterMap().containsKey("cat")) {
 			cat = webcon.getCategoryById(Long.parseLong(request.getParameter("cat")));
 		}
+		String loginName = (String) session.getAttribute("name");
 	%>
 	<meta charset="UTF-8">
 	<title>PEN &middot; <%if (cat == null) { %>All Entries (<%= webcon.getNumEntries() %>)<%} else { %><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)<%} %></title>
@@ -53,12 +54,17 @@
 <div class="header">
 	<h1>PEN</h1>
 	<h2>The Programmer's<br>Examples Notebook</h2>
-	<form name="login" action="login" method="post">
-		<div class="input"><input type="text" name="loginname" /></div>
-		<div class="input"><input type="password" name="password" /></div>
-		<input type="submit" class="button blue" value="Log In" />
-		<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
-	</form>
+	<%if (loginName == null) {%>
+		<form name="login" action="login" method="post">
+				<div class="input"><input type="text" name="loginname" /></div>
+				<div class="input"><input type="password" name="password" /></div>
+				<input type="submit" class="button blue" value="Log In" />
+				<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
+		</form>
+	<%} else {%>
+		<p>Welcome, <%=loginName %></p>
+		<a href="/penweb/logout"><input type="button" class="button black" value="Log Out"></a>
+	<%} %>
 </div>
 <div class="bar">
 	<div class="left">
