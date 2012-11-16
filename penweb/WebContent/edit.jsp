@@ -15,10 +15,21 @@
 			id = null;
 		}
 		else {
-			System.out.println("here");
 			id = Long.parseLong(request.getParameter("id"));
 			ex = webcon.getExampleById(id);
 			isNewExample = false;
+		}
+		String loginName = (String) session.getAttribute("name");
+		IUser user = null;
+		if (loginName != null) {
+			user = webcon.getUserByLoginName(loginName);
+		}
+		if (isNewExample) {
+			if (user == null) {
+				response.sendRedirect("/penweb/error.jsp?err=3");
+				webcon.close();
+				return;
+			}
 		}
 	%>
 	<meta charset="UTF-8">
@@ -77,12 +88,19 @@
 <div class="header">
 	<h1>PEN</h1>
 	<h2>The Programmer's<br>Examples Notebook</h2>
-	<form name="login" action="login" method="post">
-		<div class="input"><input type="text" name="loginname" /></div>
-		<div class="input"><input type="password" name="password" /></div>
-		<input type="submit" class="button blue" value="Log In" />
-		<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
-	</form>
+	<%if (loginName == null) {%>
+		<form name="login" action="login" method="post">
+				<div class="input"><input type="text" name="loginname" /></div>
+				<div class="input"><input type="password" name="password" /></div>
+				<input type="submit" class="button blue" value="Log In" />
+				<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
+		</form>
+	<%} else {%>
+		<div class="right">
+			<p>Welcome, <%=user.getDisplayName() %></p>
+			<a href="/penweb/logout"><input type="button" class="button black" value="Log Out"></a>
+		</div>
+	<%} %>
 </div>
 <div class="bar">
 	<div class="left">
@@ -129,7 +147,12 @@
 			Title: *
 			<input type="text" name="title" <%if(!isNewExample) {%>value="<%=ex.getTitle()%>"<%}%> />
 			Author:
-			<input type="text" name="author" <%if(!isNewExample) {%>value="<%=ex.getAuthorsNames()%>"<%}%>/>
+			<%if (!isNewExample) {%>
+				<p><%=ex.getAuthorsNames() %></p>
+			<%} else {%>
+				<p><%=user.getDisplayName() %></p>
+			<%} %>
+			<input type="hidden" name="loginname" <%if(!isNewExample) {%>value="<%=ex.getAuthors().get(0).getLoginName()%>"<%} else {%>value="<%=user.getLoginName()%>"<%}%>/>
 			Language: 
 			<input type="text" name="language" <%if(!isNewExample) {%>value="<%=ex.getLanguage()%>"<%}%>/>
 			Code: *
