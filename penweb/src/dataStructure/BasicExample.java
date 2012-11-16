@@ -49,18 +49,6 @@ public class BasicExample implements IExample {
 	/**
 	 * @author Peng Ren, Dennis Koufos
 	 * Add dependencies to the given examples
-	 * @param examples
-	 */
-	public void addDependecy(ArrayList<IExample> examples){
-		int i;
-		for(i=0; i < examples.size(); i++){
-			dependency.add(examples.get(i));
-		}
-	}
-
-	/**
-	 * @author Peng Ren, Dennis Koufos
-	 * Add dependencies to the given examples
 	 * @return
 	 */
 	public ArrayList<IExample> getDependency(){
@@ -365,6 +353,15 @@ public class BasicExample implements IExample {
 		for (ICategory category : categoryList)
 			ids.add(category.getId());
 		return ids;
+	}
+
+	/**
+	 * @author Peng Ren, Dennis Koufos
+	 * Add dependencies to the given examples
+	 * @param examples
+	 */
+	public void addDependency(IExample example) {
+		dependency.add(example);
 	}
 
 }
