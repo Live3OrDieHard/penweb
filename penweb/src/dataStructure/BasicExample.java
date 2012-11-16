@@ -39,12 +39,12 @@ public class BasicExample implements IExample {
 	private ArrayList<String> tags = new ArrayList<String>();
 	
 	/**
-	 * Title of the code example
+	 * Title of the example
 	 */
 	private String title;
 	
 	/**
-	 * Comment to be stored with an example
+	 * A comment to describe an example or a change in an example
 	 */
 	private String comment;
 
@@ -53,18 +53,6 @@ public class BasicExample implements IExample {
 		authors = new ArrayList<IUser>();
 		owner = null;
 		this.id = -1L;
-	}
-
-	/**
-	 * @author Peng Ren, Dennis Koufos
-	 * Add dependencies to the given examples
-	 * @param examples
-	 */
-	public void addDependecy(ArrayList<IExample> examples){
-		int i;
-		for(i=0; i < examples.size(); i++){
-			dependency.add(examples.get(i));
-		}
 	}
 
 	/**
@@ -341,7 +329,6 @@ public class BasicExample implements IExample {
 		this.source = e.getSource();
 		this.language = e.getLanguage();
 		this.title = e.getTitle();
-		this.comment = e.getComment();
 		return this;
 	}
 
@@ -375,6 +362,15 @@ public class BasicExample implements IExample {
 		for (ICategory category : categoryList)
 			ids.add(category.getId());
 		return ids;
+	}
+
+	/**
+	 * @author Peng Ren, Dennis Koufos
+	 * Add dependencies to the given examples
+	 * @param examples
+	 */
+	public void addDependency(IExample example) {
+		dependency.add(example);
 	}
 
 	@Override

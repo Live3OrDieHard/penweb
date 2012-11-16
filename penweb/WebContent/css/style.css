@@ -156,6 +156,12 @@ a {
 	margin-right: 25px;
 }
 
+.header div.right {
+	margin-top: 50px;
+	margin-right: 25px;
+	float: right;
+}
+
 /* Columns */
 
 .left {

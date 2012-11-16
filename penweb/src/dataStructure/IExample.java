@@ -98,4 +98,8 @@ public interface IExample extends IEntry
 	String getComment();
 	
 	void setComment(String comment);
+	
+	void addDependency(IExample example);
+	
+	ArrayList<IExample> getDependency();
 }
