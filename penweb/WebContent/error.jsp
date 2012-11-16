@@ -76,7 +76,7 @@
 </div>
 <div class="bar">
 	<div class="left">
-		<a href="edit.jsp"><div class="button green">New Entry</div></a>
+		<a href="edit.jsp"><div class="button green">New Example</div></a>
 	</div>
 	<div class="right">
 		<h1>Error</h1>
