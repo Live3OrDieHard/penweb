@@ -162,6 +162,29 @@ a {
 	margin-right: 25px;
 }
 
+#commentBlock {
+	display: none;
+	height: 110px;
+	width: 210px;
+	position: absolute;
+	top: 130px;
+	right: 25px;
+	z-index: 3;
+	background: #333333;
+}
+
+#commentBlock:hover {
+	display: block;
+}
+
+#comment {
+	margin: 10px;
+	height: 80px;
+	width: 180px;
+	background: #222222;
+	color: #FFFFFF;
+}
+
 /* Columns */
 
 .left {

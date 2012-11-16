@@ -18,6 +18,8 @@ $(document).ready(function(){
 	$("input[name=author]").watermark("Author");
 	$("input[name=language]").watermark("Language");
 	$("textarea[name=content]").watermark("Enter code here...");
+	$("textarea#comment").watermark("Change comment?");
+
 });
 
 // Checks addCode submission to make sure title and content aren't blank
@@ -87,4 +89,17 @@ function closeModal() {
 	$(".modal").hide();
 	$(".modal .sheet").hide();
 	$(".modal .error").html("");
+}
+
+function saveExample() {
+	$("form[name=editForm] input[name=comment]").val($("textarea#comment").val());
+	editForm.submit();
+}
+
+function showCommentBlock() {
+	$("#commentBlock").show();
+}
+
+function hideCommentBlock() {
+	$("#commentBlock").hide();
 }

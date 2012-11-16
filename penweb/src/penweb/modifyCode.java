@@ -33,13 +33,15 @@ public class modifyCode extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String language = request.getParameter("language");
-		Long id = Long.parseLong(request.getParameter("eid"));;
+		Long id = Long.parseLong(request.getParameter("eid"));
+		String comment = request.getParameter("comment");
 		String[] cids = request.getParameterValues("cids");
 		
 		IExample ex = webcon.getExampleById(id);
 		ex.setTitle(title);
 		ex.setCode(content);
 		ex.setLanguage(language);
+		ex.setComment(comment);
 		// Note: Not going to implement modifying author, our field will soon
 		// be replaced by the new login system
 		if (cids != null) {

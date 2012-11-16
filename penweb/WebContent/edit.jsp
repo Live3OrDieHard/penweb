@@ -119,15 +119,18 @@
 				Options:
 				<input type="button" class="button black-wide" onClick="location.href=('dependency.jsp?eid=<%= id %>')" value="Dependencies"/>
 				<input type="button" class="button black-wide" onClick="javascript: duplicateIntoCategories();" value="Duplicate"/>
-				<input type="button" class="button green" onClick="editForm.submit();" value="Save Example" />
+				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" onmouseover="showCommentBlock();" />
 				</form>
 			<%} else {%>
 				<form class="barForm">
-				<input type="button" class="button green" onClick="editForm.submit();" value="Save Example" />
+				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" onmouseover="showCommentBlock();" />
 				</form>
 			<%} %>
 	</div>
 </div>
+	<div id="commentBlock">
+		<textarea id="comment" onmouseout="hideCommentBlock();"></textarea>
+	</div>
 <div class="content">
 	<div class="left">
 		<h1>My Examples</h1>
@@ -141,6 +144,7 @@
 	</div>
 	<div class="right">
 		<form action="<%if (isNewExample) { %>addCode<%} else { %>modifyCode<%} %>" method="post" name="editForm" onsubmit="return checkAddCodeSubmit();">
+			<input type="hidden" name="comment" />
 			<p class="error"></p>
 			<% if (!isNewExample) { %>
 			<input type="hidden" name="eid" value="<%=id%>"/>
@@ -163,7 +167,7 @@
 			<% for (ICategory c : cats) { %>
 				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
 			<%} %>
-			
+			<% if (!isNewExample && !(ex.getComment().equals(null))) { %><p>Last change: <%= ex.getComment() %></p> <%} %>
 		</form>
 	</div>
 </div>
