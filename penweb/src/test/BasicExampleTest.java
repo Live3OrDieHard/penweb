@@ -2,12 +2,15 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import dataStructure.BasicExample;
 import dataStructure.BufferEntry;
 import dataStructure.Category;
+import dataStructure.IUser;
 import dataStructure.NonUser;
 import dataStructure.User;
 import exceptions.DuplicateException;
@@ -66,8 +69,17 @@ public class BasicExampleTest {
 		returncode = example.assignOwner(Bob);
 		assertEquals(example.getOwner(),Alice);
 		assertEquals(returncode,1);
-
-
+	}
+	
+	@Test
+	public void testGetAuthorsNames() {
+		BasicExample example = new BasicExample();
+		ArrayList<IUser> authors = new ArrayList<IUser>();
+		authors.add(new User(null, null, "Alice"));
+		authors.add(new User(null, null, "Bob"  ));
+		
+		example.setAuthors(authors);
+		assertEquals("Alice, Bob", example.getAuthorsNames());
 	}
 
 }
