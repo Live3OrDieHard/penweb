@@ -33,7 +33,12 @@ public class addDependency extends HttpServlet {
 		IExample ex = webcon.getExampleById(Long.parseLong(eid));
 		String did = request.getParameter("did");
 		IExample dx = webcon.getExampleById(Long.parseLong(did));
+		if (dx.equals(null)) {
+			response.sendRedirect("/penweb");
+			return;
+		}
 		ex.addDependency(dx);
+		webcon.store(ex);
 		webcon.close();
 		response.sendRedirect("edit.jsp?id="+eid);
 	}
