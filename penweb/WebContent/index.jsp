@@ -12,6 +12,7 @@
 			cat = webcon.getCategoryById(Long.parseLong(request.getParameter("cat")));
 		}
 		String loginName = (String) session.getAttribute("name");
+		IUser user = webcon.getUserByLoginName(loginName);
 	%>
 	<meta charset="UTF-8">
 	<title>PEN &middot; <%if (cat == null) { %>All Entries (<%= webcon.getNumEntries() %>)<%} else { %><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)<%} %></title>
@@ -63,7 +64,7 @@
 		</form>
 	<%} else {%>
 		<div class="right">
-			<p>Welcome, <%=loginName %></p>
+			<p>Welcome, <%=user.getDisplayName() %></p>
 			<a href="/penweb/logout"><input type="button" class="button black" value="Log Out"></a>
 		</div>
 	<%} %>
