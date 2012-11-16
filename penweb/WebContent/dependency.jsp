@@ -7,15 +7,19 @@
 		// Instantiate the webcon
 		WebController webcon = new WebController();
 		// Check if we are showing all or category
-		int error = 0;
-		if (request.getParameterMap().containsKey("err")) {
-			error = Integer.parseInt(request.getParameter("err"));
+		ICategory cat = null;
+		Long eid = null;
+		if (request.getParameterMap().containsKey("cat")) {
+			cat = webcon.getCategoryById(Long.parseLong(request.getParameter("cat")));
 		}
-		
-		
+		if (request.getParameterMap().containsKey("eid")) {
+			eid = Long.parseLong(request.getParameter("eid"));
+		} else {
+			response.sendRedirect("/penweb");
+		}
 	%>
 	<meta charset="UTF-8">
-	<title>PEN &middot; Error</title>
+	<title>PEN &middot; <%if (cat == null) { %>All Entries (<%= webcon.getNumEntries() %>)<%} else { %><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)<%} %></title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -55,8 +59,8 @@
 <div class="header">
 	<h1>PEN</h1>
 	<h2>The Programmer's<br>Examples Notebook</h2>
-	<form name="login" action="login" method="post">
-		<div class="input"><input type="text" name="loginname" /></div>
+	<form name="login">
+		<div class="input"><input type="text" name="username" /></div>
 		<div class="input"><input type="password" name="password" /></div>
 		<input type="submit" class="button blue" value="Log In" />
 		<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
@@ -67,38 +71,50 @@
 		<a href="edit.jsp"><div class="button green">New Entry</div></a>
 	</div>
 	<div class="right">
-		<h1>Error</h1>
+			<h1>Select new dependency</h1>
+			<a href="edit.jsp?id=<%= eid %>"><div class="button black barForm">Cancel</div></a>
 	</div>
 </div>
 <div class="content">
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<%List<ICategory> cats = webcon.getCategories(); %>
-			<a href="index.jsp"><li>All Entries (<%=webcon.getNumEntries() %>)</li></a>
-			<% for (ICategory c : cats) { %>
-				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=c.getExampleList().size() %>)</li></a>
-			<%} %>
+			<a href="dependency.jsp?eid=<%= eid %>"><li <% if (cat == null) {%>class="selected"<%} %>>All Entries (<%= webcon.getNumEntries() %>)</li></a>
+			<%
+				List<ICategory> cats = webcon.getCategories();
+				for (ICategory c : cats) {
+			%>
+			<a href="dependency.jsp?cat=<%=c.getId() %>&eid=<%= eid %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= c.getTitle() %> (<%= c.getExampleList().size() %>)</li></a>
+			<% } %> 
 		</ul>
 		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
-		<%
-			switch (error) {
-			case 1:%>
-				<p>The user name you chose is unavailable</p>
-			<%
-				break;
-			case 2:%>
-				<p>Invalid username and password.</p>
-			<%
-				break;
-			default:%>
-				<p>Invalid error message.</p>
-			<%
-				break;
-			}
-		%>
+		<ul class="entrylist">
+			<% if (cat == null) {
+				List<IExample> ex = webcon.getExamples();
+					for (IExample e : ex) { %>
+					<a href="addDependency?eid=<%= eid %>&did=<%=e.getId()%>">
+						<li>
+							<h1><%= e.getTitle() %></h1>
+							<div class="fade"></div>
+							<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
+						</li>
+					</a>
+				<%}%>
+			<%} else {
+				List<IExample> ex = cat.getExampleList();
+				for (IExample e : ex) {%>
+					<a href="addDependency?eid=<%= eid %>&did=<%=e.getId()%>">
+					<li>
+						<h1><%= e.getTitle() %></h1>
+						<div class="fade"></div>
+						<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
+					</li>
+				</a>
+				<%}
+			} %>
+		</ul>
 	</div>
 </div>
 <%
