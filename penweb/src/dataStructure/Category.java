@@ -132,4 +132,21 @@ public class Category implements ICategory {
 			ids.add(example.getId());
 		return ids;
 	}
+
+	@Override
+	public void removeExample(IExample example) {
+		for(int i=this.exampleList.size()-1;i>=0;i--) {
+			IExample ex = this.exampleList.get(i);
+			if(ex.getId().equals(example.getId()))
+				this.exampleList.remove(example);
+		}
+	}
+	
+	@Override
+	public void removeAllExamples() {
+		for(IExample ex: this.exampleList) {
+			ex.removeFromCategory(this);
+		}
+		this.exampleList = new ArrayList<IExample>();
+	}
 }

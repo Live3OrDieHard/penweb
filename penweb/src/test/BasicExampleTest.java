@@ -104,9 +104,5 @@ public class BasicExampleTest {
 		assertEquals(child.getDependency().size(),1);
 		assertEquals(child.getDependency().get(0).getTitle(),"parent");
 
-		child.addDependency(parent);
-		
-		assertEquals(child.getDependency().size(),1);
-		assertEquals(child.getDependency().get(0).getTitle(),"parent");
 	}
 }
