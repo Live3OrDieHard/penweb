@@ -34,7 +34,8 @@ public class duplicateCode extends HttpServlet {
 		String[] cids = request.getParameterValues("cids");
 		String eid = request.getParameter("eid");
 		IExample ex = webcon.getExampleById(Long.parseLong(eid));
-		Long nid = webcon.addCode(ex.getTitle(), ex.getCode(), ex.getLanguage(), ex.getAuthorsNames());
+		//XXX Passes in original author as the author of this code example. Change to person who duplicates later.
+		Long nid = webcon.addCode(ex.getTitle(), ex.getCode(), ex.getLanguage(), ex.getAuthors().get(0).getLoginName());
 		IExample nex = webcon.getExampleById(nid);
 		if (cids != null) {
 			for (String s : cids) {
