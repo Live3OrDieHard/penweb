@@ -70,6 +70,17 @@ public class BasicExampleTest {
 		assertEquals(example.getOwner(),Alice);
 		assertEquals(returncode,1);
 	}
+	
+	@Test
+	public void testGetAuthorsNames() {
+		BasicExample example = new BasicExample();
+		ArrayList<IUser> authors = new ArrayList<IUser>();
+		authors.add(new User(null, null, "Alice"));
+		authors.add(new User(null, null, "Bob"  ));
+		
+		example.setAuthors(authors);
+		assertEquals("Alice, Bob", example.getAuthorsNames());
+	}
 
 	@Test
 	public void getAuthorNamesTest() {
