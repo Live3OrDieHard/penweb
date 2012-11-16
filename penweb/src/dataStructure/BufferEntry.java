@@ -16,6 +16,8 @@ public class BufferEntry
 	private String categoryName;
 	
 	private ArrayList<String> categoryNameList;
+	
+	private String comment;
 
 	public String getCategoryName() {
 		return categoryName;
@@ -124,5 +126,11 @@ public class BufferEntry
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 }

@@ -37,7 +37,16 @@ public class BasicExample implements IExample {
 	 * all the tags include in the example
 	 */
 	private ArrayList<String> tags = new ArrayList<String>();
+	
+	/**
+	 * Title of the example
+	 */
 	private String title;
+	
+	/**
+	 * A comment to describe an example or a change in an example
+	 */
+	private String comment;
 
 
 	public BasicExample() {
@@ -362,6 +371,16 @@ public class BasicExample implements IExample {
 	 */
 	public void addDependency(IExample example) {
 		dependency.add(example);
+	}
+
+	@Override
+	public String getComment() {
+		return comment;
+	}
+
+	@Override
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }
