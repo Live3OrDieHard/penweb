@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	// Watermarks for login
-	$("input[name=username]").watermark("Username");
+	$("input[name=loginname]").watermark("Username");
 	$("input[name=password]").watermark("Password");
 
 	// Watermarks for sign up
