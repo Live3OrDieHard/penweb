@@ -358,6 +358,19 @@ a {
 	background: #222222;
 }
 
+ul.dependencyList {
+	margin-bottom: 25px;
+}
+
+ul.dependencyList li {
+	margin-left: 25px;
+	margin-top: 15px;
+}
+
+ul.dependencyList a {
+	text-decoration: underline;
+}
+
 /* Entry List */
 
 ul.entrylist {

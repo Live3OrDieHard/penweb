@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="database.*,penweb.*,dataStructure.*,java.util.List"%>
+    pageEncoding="ISO-8859-1" import="database.*,penweb.*,dataStructure.*,java.util.List,java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -167,7 +167,20 @@
 			<% for (ICategory c : cats) { %>
 				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
 			<%} %>
-			<% if (!isNewExample && (ex.getComment() != null)) { %><p>Last change: <%= ex.getComment() %></p> <%} %>
+			<%
+				ArrayList<IExample> dependencies = ex.getDependency();
+				if (dependencies.size() != 0) {
+			%>
+			<p>Dependencies</p>
+			<ul class="dependencyList">
+				<%
+					for (IExample e : dependencies) {
+				%>
+				<li><a href="edit.jsp?id=<%= e.getId() %>"><%= e.getTitle() %></a></li>
+				<%} %>
+			</ul>
+			<%} %>
+			<% if (!isNewExample && (ex.getComment() != null && ex.getComment() != "")) { %><p>Last change: <%= ex.getComment() %></p> <%} %>
 		</form>
 	</div>
 </div>
