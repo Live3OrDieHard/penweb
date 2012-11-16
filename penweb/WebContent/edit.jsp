@@ -49,17 +49,12 @@
 		<h1>Duplicate Entry</h1>
 		<div class="modalContent">
 			<form action="duplicateCode" method="post">
+				<input type="hidden" name="eid" value="<%=id%>"/>
 				<p>Select categories to duplicate this entry into:</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
-				<p><input type="checkbox" name="cids" value="cid_here" /> Category title</p>
+				<%List<ICategory> cats = webcon.getCategories(); %>
+				<% for (ICategory c : cats) { %>
+					<p><input type="checkbox" name="cids" value="<%=c.getId() %>"/> <%=c.getTitle() %></p>
+				<%} %>
 				<input type="submit" class="button green" value="Duplicate" />
 			</form>
 		</div>
@@ -82,8 +77,8 @@
 <div class="header">
 	<h1>PEN</h1>
 	<h2>The Programmer's<br>Examples Notebook</h2>
-	<form name="login">
-		<div class="input"><input type="text" name="username" /></div>
+	<form name="login" action="login" method="post">
+		<div class="input"><input type="text" name="loginname" /></div>
 		<div class="input"><input type="password" name="password" /></div>
 		<input type="submit" class="button blue" value="Log In" />
 		<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
@@ -118,7 +113,6 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<%List<ICategory> cats = webcon.getCategories(); %>
 			<a href="index.jsp"><li>All Entries (<%=webcon.getNumEntries() %>)</li></a>
 			<% for (ICategory c : cats) { %>
 				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=c.getExampleList().size() %>)</li></a>
