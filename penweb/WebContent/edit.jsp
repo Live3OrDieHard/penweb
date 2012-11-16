@@ -168,6 +168,7 @@
 				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
 			<%} %>
 			<%
+			if (!isNewExample) {
 				ArrayList<IExample> dependencies = ex.getDependency();
 				if (dependencies.size() != 0) {
 			%>
@@ -179,7 +180,7 @@
 				<li><a href="edit.jsp?id=<%= e.getId() %>"><%= e.getTitle() %></a></li>
 				<%} %>
 			</ul>
-			<%} %>
+			<%} }%>
 			<% if (!isNewExample && (ex.getComment() != null && ex.getComment() != "")) { %><p>Last change: <%= ex.getComment() %></p> <%} %>
 		</form>
 	</div>
