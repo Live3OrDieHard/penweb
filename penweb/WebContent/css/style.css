@@ -354,18 +354,34 @@ ul.entrylist li {
 	background: #333333 url('../images/entry-arrow.png') center right no-repeat;
 }
 
-ul.entrylist li.selected {
-
-}
-
 ul.entrylist li:hover {
 	background-color: #444444;
+}
+
+ul.entrylist li div.fade {
+	background: url('../images/fade.png');
+	z-index: 2;	
 }
 
 ul.entrylist li:hover div.fade {
 	background-image: url('../images/fade-hover.png');
 }
 
+ul.entrylist li.selected {
+	background-color: #336633;
+}
+
+ul.entrylist li.selected:hover {
+	background-color: #447744;
+}
+
+ul.entrylist li.selected div.fade {
+	background-image: url('../images/fade-green.png');
+}
+
+ul.entrylist li.selected:hover div.fade {
+	background-image: url('../images/fade-green-hover.png');
+}
 
 ul.entrylist li h1 {
 	height: 100%;
@@ -388,11 +404,6 @@ ul.entrylist li div {
 ul.entrylist li div.code {
 	overflow: hidden;
 	font-family: Courier;
-}
-
-ul.entrylist li div.fade {
-	background: url('../images/fade.png');
-	z-index: 2;	
 }
 
 
