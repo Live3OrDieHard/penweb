@@ -94,4 +94,6 @@ public interface IExample extends IEntry
 	ArrayList<String> getTags();
 
 	String getAuthorsNames();
+	
+	void addDependency(IExample example);
 }
