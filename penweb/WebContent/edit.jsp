@@ -167,7 +167,7 @@
 			<% for (ICategory c : cats) { %>
 				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
 			<%} %>
-			<% if (!isNewExample && !(ex.getComment().equals(null))) { %><p>Last change: <%= ex.getComment() %></p> <%} %>
+			<% if (!isNewExample && (ex.getComment() != null)) { %><p>Last change: <%= ex.getComment() %></p> <%} %>
 		</form>
 	</div>
 </div>
