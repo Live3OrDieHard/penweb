@@ -62,8 +62,10 @@
 				<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
 		</form>
 	<%} else {%>
-		<p>Welcome, <%=loginName %></p>
-		<a href="/penweb/logout"><input type="button" class="button black" value="Log Out"></a>
+		<div class="right">
+			<p>Welcome, <%=loginName %></p>
+			<a href="/penweb/logout"><input type="button" class="button black" value="Log Out"></a>
+		</div>
 	<%} %>
 </div>
 <div class="bar">
