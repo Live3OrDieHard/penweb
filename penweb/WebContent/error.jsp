@@ -6,13 +6,18 @@
 	<%
 		// Instantiate the webcon
 		WebController webcon = new WebController();
+	
 		// Check if we are showing all or category
 		int error = 0;
 		if (request.getParameterMap().containsKey("err")) {
 			error = Integer.parseInt(request.getParameter("err"));
 		}
 		
-		
+		String loginName = (String) session.getAttribute("name");
+		IUser user = null;
+		if (loginName != null) {
+			user = webcon.getUserByLoginName(loginName);
+		}
 	%>
 	<meta charset="UTF-8">
 	<title>PEN &middot; Error</title>
@@ -55,12 +60,19 @@
 <div class="header">
 	<h1>PEN</h1>
 	<h2>The Programmer's<br>Examples Notebook</h2>
-	<form name="login" action="login" method="post">
-		<div class="input"><input type="text" name="loginname" /></div>
-		<div class="input"><input type="password" name="password" /></div>
-		<input type="submit" class="button blue" value="Log In" />
-		<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
-	</form>
+	<%if (loginName == null) {%>
+		<form name="login" action="login" method="post">
+				<div class="input"><input type="text" name="loginname" /></div>
+				<div class="input"><input type="password" name="password" /></div>
+				<input type="submit" class="button blue" value="Log In" />
+				<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
+		</form>
+	<%} else {%>
+		<div class="right">
+			<p>Welcome, <%=user.getDisplayName() %></p>
+			<a href="/penweb/logout"><input type="button" class="button black" value="Log Out"></a>
+		</div>
+	<%} %>
 </div>
 <div class="bar">
 	<div class="left">
@@ -86,11 +98,15 @@
 		<%
 			switch (error) {
 			case 1:%>
-				<p>The user name you chose is unavailable</p>
+				<p>The user name you chose is unavailable.</p>
 			<%
 				break;
 			case 2:%>
 				<p>Invalid username and password.</p>
+			<% 
+				break;
+			case 3:	%>
+				<p>You must be logged in to create a new example.</p>
 			<%
 				break;
 			default:%>
