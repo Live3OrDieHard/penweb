@@ -42,15 +42,19 @@ public class modifyCode extends HttpServlet {
 		ex.setLanguage(language);
 		// Note: Not going to implement modifying author, our field will soon
 		// be replaced by the new login system
-		for (String s : cids) {
-			ICategory cat = webcon.getCategoryById(Long.parseLong(s));
-			try {
-				cat.addCodeExample(ex);
+		if (cids != null) {
+			for (String s : cids) {
+				if (s != null) {
+					ICategory cat = webcon.getCategoryById(Long.parseLong(s));
+					try {
+						cat.addCodeExample(ex);
+					}
+					catch (DuplicateException e){
+						// Do nothing for now
+					}
+					webcon.store(cat);
+				}
 			}
-			catch (DuplicateException e){
-				// Do nothing for now
-			}
-			webcon.store(cat);
 		}
 		webcon.store(ex);
 		response.sendRedirect("/penweb");
