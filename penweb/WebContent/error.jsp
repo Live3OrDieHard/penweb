@@ -109,6 +109,10 @@
 				<p>You must be logged in to create a new example.</p>
 			<%
 				break;
+			case 4: %>
+				<p>The category name you chose is unavailable.</p>
+			<%
+				break;
 			default:%>
 				<p>Invalid error message.</p>
 			<%

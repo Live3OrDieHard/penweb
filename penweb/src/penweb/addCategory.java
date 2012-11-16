@@ -29,9 +29,14 @@ public class addCategory extends HttpServlet {
 		WebController webcon = new WebController();
 		String name = request.getParameter("name");
 		String desc = request.getParameter("desc");
-		webcon.addCategory(name, desc);
+		if (!webcon.isCategoryTitleTaken(name)) {
+			webcon.addCategory(name, desc);
+			response.sendRedirect("/penweb");
+		}
+		else {
+			response.sendRedirect("error.jsp?err=4");
+		}
 		webcon.close();
-		response.sendRedirect("/penweb");
 	}
 
 }
