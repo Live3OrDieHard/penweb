@@ -51,7 +51,7 @@
 				<p class="error"></p>
 				<div class="input"><input type="text" name="name" /></div>
 				<textarea name="desc"></textarea>
-				<input type="submit" value="Create" />
+				<input type="submit" class="button black" value="Create" />
 			</form>
 		</div>
 	</div>
@@ -104,12 +104,12 @@
 </div>
 <div class="bar">
 	<div class="left">
-		<a href="edit.jsp"><div class="button green">New Entry</div></a>
+		<a href="edit.jsp"><div class="button green">New Example</div></a>
 	</div>
 	<div class="right">
 		<h1>
 		<%	if (isNewExample) {%>
-				New Entry
+				New Example
 			<%}	else {%>
 				<%=ex.getTitle()%>
 			<%}%></h1>
@@ -117,12 +117,13 @@
 			<%	if (!isNewExample) {%>
 				<form class="barForm">
 				Options:
+				<input type="button" class="button black-wide" value="Dependencies"/>
 				<input type="button" class="button black-wide" onClick="javascript: duplicateIntoCategories();" value="Duplicate"/>
-				<input type="button" class="button green" onClick="editForm.submit();" value="Save Entry" />
+				<input type="button" class="button green" onClick="editForm.submit();" value="Save Example" />
 				</form>
 			<%} else {%>
 				<form class="barForm">
-				<input type="button" class="button green" onClick="editForm.submit();" value="Save Entry" />
+				<input type="button" class="button green" onClick="editForm.submit();" value="Save Example" />
 				</form>
 			<%} %>
 	</div>
@@ -131,7 +132,7 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<a href="index.jsp"><li>All Entries (<%=webcon.getNumEntries() %>)</li></a>
+			<a href="index.jsp"><li>All Examples (<%=webcon.getNumEntries() %>)</li></a>
 			<% for (ICategory c : cats) { %>
 				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=c.getExampleList().size() %>)</li></a>
 			<%} %>

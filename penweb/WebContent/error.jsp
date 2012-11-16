@@ -38,7 +38,7 @@
 				<p class="error"></p>
 				<div class="input"><input type="text" name="name" /></div>
 				<textarea name="desc"></textarea>
-				<input type="submit" value="Create" />
+				<input type="submit" class="button black" value="Create" />
 			</form>
 		</div>
 	</div>

@@ -18,7 +18,7 @@
 		}
 	%>
 	<meta charset="UTF-8">
-	<title>PEN &middot; <%if (cat == null) { %>All Entries (<%= webcon.getNumEntries() %>)<%} else { %><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)<%} %></title>
+	<title>PEN &middot; <%if (cat == null) { %>All Examples (<%= webcon.getNumEntries() %>)<%} else { %><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)<%} %></title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -36,7 +36,7 @@
 				<p class="error"></p>
 				<div class="input"><input type="text" name="name" /></div>
 				<textarea name="desc"></textarea>
-				<input type="submit" value="Create" />
+				<input type="submit" class="button black" value="Create" />
 			</form>
 		</div>
 	</div>
@@ -78,7 +78,7 @@
 	</div>
 	<div class="right">
 		<%if (cat == null) {%>
-			<h1>All Entries (<%= webcon.getNumEntries() %>)</h1>
+			<h1>All Examples (<%= webcon.getNumEntries() %>)</h1>
 		<%} else {%>
 			<h1><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)</h1>
 		<%} %>
@@ -88,7 +88,7 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<a href="index.jsp"><li <% if (cat == null) {%>class="selected"<%} %>>All Entries (<%= webcon.getNumEntries() %>)</li></a>
+			<a href="index.jsp"><li <% if (cat == null) {%>class="selected"<%} %>>All Examples (<%= webcon.getNumEntries() %>)</li></a>
 			<%
 				List<ICategory> cats = webcon.getCategories();
 				for (ICategory c : cats) {
