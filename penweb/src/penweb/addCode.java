@@ -32,11 +32,11 @@ public class addCode extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String language = request.getParameter("language");
-		String author = request.getParameter("author");
+		String loginname = request.getParameter("loginname");
 		String[] cids = request.getParameterValues("cids");
 		
 		WebController webcon = new WebController();
-		long exid = webcon.addCode(title, content, language, author);
+		long exid = webcon.addCode(title, content, language, loginname);
 		IExample ex = webcon.getExampleById(exid);
 		if (cids != null) {
 			for (String s : cids) {
