@@ -146,9 +146,10 @@ a {
 	left: 20px;
 }
 
-.header form {
+.header form, .header div.right {
 	margin-top: 50px;
 	float: right;
+	text-align: right;
 }
 
 .header form div, .header form input {
@@ -156,10 +157,9 @@ a {
 	margin-right: 25px;
 }
 
-.header div.right {
-	margin-top: 50px;
+.header div.right p, .header div.right a {
+	display: inline;
 	margin-right: 25px;
-	float: right;
 }
 
 /* Columns */
@@ -352,6 +352,10 @@ ul.entrylist li {
 	border-top: 1px solid #666666;
 	border-bottom: 1px solid #000000;
 	background: #333333 url('../images/entry-arrow.png') center right no-repeat;
+}
+
+ul.entrylist li.selected {
+
 }
 
 ul.entrylist li:hover {
