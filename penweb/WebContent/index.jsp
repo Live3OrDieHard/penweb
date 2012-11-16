@@ -12,7 +12,10 @@
 			cat = webcon.getCategoryById(Long.parseLong(request.getParameter("cat")));
 		}
 		String loginName = (String) session.getAttribute("name");
-		IUser user = webcon.getUserByLoginName(loginName);
+		IUser user = null;
+		if (loginName != null) {
+			user = webcon.getUserByLoginName(loginName);
+		}
 	%>
 	<meta charset="UTF-8">
 	<title>PEN &middot; <%if (cat == null) { %>All Entries (<%= webcon.getNumEntries() %>)<%} else { %><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)<%} %></title>
