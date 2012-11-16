@@ -272,4 +272,13 @@ public class Db4oDatabase implements IDatabase {
 		throw(new NoIdAvailableException(maxID,"MaxID reached"));
 	}
 
+	@Override
+	public boolean isCategoryTitleTaken(String name) {
+		List<ICategory> catlist = this.getAllCategory();
+		for(ICategory cat: catlist) {
+			if(name.equals(cat.getTitle()))
+				return true;
+		}
+		return false;
+	}
 }

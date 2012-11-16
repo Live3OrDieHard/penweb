@@ -141,4 +141,6 @@ public interface IDatabase {
 	 * @return An IUser object if a match is found. Null, otherwise. 
 	 */
 	IUser getUserByID(Long id);
+
+	boolean isCategoryTitleTaken(String name);
 }
