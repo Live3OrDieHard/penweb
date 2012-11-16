@@ -65,7 +65,7 @@
 				<input type="submit" class="button blue" value="Log In" />
 				<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
 		</form>
-	<%} else {%>
+	<%} else if (loginName != null) {%>
 		<div class="right">
 			<p>Welcome, <%=user.getDisplayName() %></p>
 			<a href="/penweb/logout"><input type="button" class="button black" value="Log Out"></a>
