@@ -67,12 +67,19 @@
 <div class="header">
 	<h1>PEN</h1>
 	<h2>The Programmer's<br>Examples Notebook</h2>
-	<form name="login">
-		<div class="input"><input type="text" name="loginname" /></div>
-		<div class="input"><input type="password" name="password" /></div>
-		<input type="submit" class="button blue" value="Log In" />
-		<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
-	</form>
+	<%if (loginName == null) {%>
+		<form name="login" action="login" method="post">
+				<div class="input"><input type="text" name="loginname" /></div>
+				<div class="input"><input type="password" name="password" /></div>
+				<input type="submit" class="button blue" value="Log In" />
+				<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
+		</form>
+	<%} else if (loginName != null) {%>
+		<div class="right">
+			<p>Welcome, <%=user.getDisplayName() %></p>
+			<a href="/penweb/logout"><input type="button" class="button black" value="Log Out"></a>
+		</div>
+	<%} %>
 </div>
 <div class="bar">
 	<div class="left">
@@ -109,13 +116,8 @@
 							if (dependencies != null && !(dependencies.isEmpty())) {
 								if (dependencies.contains(e)) { %>
 									class="selected"
-								<%} else {%>
-									class=""
 								<%}
 							}
-							else {%>
-								class="empty"
-								<%}
 						%>
 						>
 							<h1><%= e.getTitle() %></h1>
@@ -128,7 +130,16 @@
 				List<IExample> ex = cat.getExampleList();
 				for (IExample e : ex) {%>
 					<a href="addDependency?eid=<%= eid %>&did=<%=e.getId()%>">
-					<li>
+					<li
+						<%
+							ArrayList<IExample> dependencies = tex.getDependency();
+							if (dependencies != null && !(dependencies.isEmpty())) {
+								if (dependencies.contains(e)) { %>
+									class="selected"
+								<%}
+							}
+						%>
+					>
 						<h1><%= e.getTitle() %></h1>
 						<div class="fade"></div>
 						<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
