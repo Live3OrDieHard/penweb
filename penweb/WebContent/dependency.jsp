@@ -19,9 +19,15 @@
 		} else {
 			response.sendRedirect("/penweb");
 		}
+		
+		String loginName = (String) session.getAttribute("name");
+		IUser user = null;
+		if (loginName != null) {
+			user = webcon.getUserByLoginName(loginName);
+		}
 	%>
 	<meta charset="UTF-8">
-	<title>PEN &middot; <%if (cat == null) { %>All Entries (<%= webcon.getNumEntries() %>)<%} else { %><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)<%} %></title>
+	<title>PEN &middot; <%if (cat == null) { %>All Examples (<%= webcon.getNumEntries() %>)<%} else { %><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)<%} %></title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -39,7 +45,7 @@
 				<p class="error"></p>
 				<div class="input"><input type="text" name="name" /></div>
 				<textarea name="desc"></textarea>
-				<input type="submit" value="Create" />
+				<input type="submit" class="button black" value="Create" />
 			</form>
 		</div>
 	</div>
@@ -62,7 +68,7 @@
 	<h1>PEN</h1>
 	<h2>The Programmer's<br>Examples Notebook</h2>
 	<form name="login">
-		<div class="input"><input type="text" name="username" /></div>
+		<div class="input"><input type="text" name="loginname" /></div>
 		<div class="input"><input type="password" name="password" /></div>
 		<input type="submit" class="button blue" value="Log In" />
 		<input type="button" class="button black" value="Sign Up" onclick="signUp();" />
@@ -70,7 +76,7 @@
 </div>
 <div class="bar">
 	<div class="left">
-		<a href="edit.jsp"><div class="button green">New Entry</div></a>
+		<a href="edit.jsp"><div class="button green">New Example</div></a>
 	</div>
 	<div class="right">
 			<h1>Select new dependency</h1>
@@ -81,7 +87,7 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<a href="dependency.jsp?eid=<%= eid %>"><li <% if (cat == null) {%>class="selected"<%} %>>All Entries (<%= webcon.getNumEntries() %>)</li></a>
+			<a href="dependency.jsp?eid=<%= eid %>"><li <% if (cat == null) {%>class="selected"<%} %>>All Examples (<%= webcon.getNumEntries() %>)</li></a>
 			<%
 				List<ICategory> cats = webcon.getCategories();
 				for (ICategory c : cats) {
