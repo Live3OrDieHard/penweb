@@ -185,4 +185,13 @@ public class WebController {
 	public void close() {
 		db.close();
 	}
+	
+	/**
+	 * wrapper of isCategoryTitleTaken()
+	 * @param name
+	 * @return
+	 */
+	public boolean isCategoryTitleTaken(String name) {
+		return db.isCategoryTitleTaken(name);
+	}
 }

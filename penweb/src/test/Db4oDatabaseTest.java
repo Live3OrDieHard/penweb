@@ -215,11 +215,6 @@ public class Db4oDatabaseTest {
 		assertEquals(testee.getUserByLoginName("Alice1234").getDisplayName(),"Alice");
 	}
 
-	/**
-	 * The database still allows adding two User objects 
-	 * with the same loginName. 
-	 * Checking for taken names is done in WebController
-	 */
 	@Test
 	public void isCategoryNameTaken() {
 		Category cat = new Category("Live",null);
