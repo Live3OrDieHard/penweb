@@ -75,7 +75,7 @@ public class User implements IUser {
 
 	@Override
 	public Boolean checkPassword(String passwordAttempt) {
-		return (passwordAttempt == this.password);
+		return (passwordAttempt.equals(this.password));
 	}
 
 	@Override
