@@ -36,15 +36,17 @@ public class duplicateCode extends HttpServlet {
 		IExample ex = webcon.getExampleById(Long.parseLong(eid));
 		Long nid = webcon.addCode(ex.getTitle(), ex.getCode(), ex.getLanguage(), ex.getAuthorsNames());
 		IExample nex = webcon.getExampleById(nid);
-		for (String s : cids) {
-			ICategory cat = webcon.getCategoryById(Long.parseLong(s));
-			try {
-				cat.addCodeExample(nex);
+		if (cids != null) {
+			for (String s : cids) {
+				ICategory cat = webcon.getCategoryById(Long.parseLong(s));
+				try {
+					cat.addCodeExample(nex);
+				}
+				catch (DuplicateException e){
+					// Do nothing for now
+				}
+				webcon.store(cat);
 			}
-			catch (DuplicateException e){
-				// Do nothing for now
-			}
-			webcon.store(cat);
 		}
 		webcon.store(nex);
 		webcon.close();

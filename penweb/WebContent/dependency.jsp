@@ -10,12 +10,14 @@
 		ICategory cat = null;
 		Long eid = null;
 		IExample tex = null;
+		ArrayList<IExample> dependencies = null;
 		if (request.getParameterMap().containsKey("cat")) {
 			cat = webcon.getCategoryById(Long.parseLong(request.getParameter("cat")));
 		}
 		if (request.getParameterMap().containsKey("eid")) {
 			eid = Long.parseLong(request.getParameter("eid"));
 			tex = webcon.getExampleById(eid);
+			dependencies = tex.getDependency();
 		} else {
 			response.sendRedirect("/penweb");
 		}
@@ -94,7 +96,7 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<a href="dependency.jsp?eid=<%= eid %>"><li <% if (cat == null) {%>class="selected"<%} %>>All Examples (<%= webcon.getNumEntries() %>)</li></a>
+			<a href="dependency.jsp?eid=<%= eid %>"><li <% if (cat == null) {%>class="selected"<%} %>>All Examples (<%= webcon.getNumEntries() - 1 %>)</li></a>
 			<%
 				List<ICategory> cats = webcon.getCategories();
 				for (ICategory c : cats) {
@@ -108,16 +110,20 @@
 		<ul class="entrylist">
 			<% if (cat == null) {
 				List<IExample> ex = webcon.getExamples();
-					for (IExample e : ex) { %>
+					for (IExample e : ex) { 
+						boolean depender = false;
+						if (dependencies != null && !(dependencies.isEmpty())) {
+							depender =dependencies.contains(e);
+						}
+						if (!e.getId().equals(eid)) {
+							if (!depender) {%>
 					<a href="addDependency?eid=<%= eid %>&did=<%=e.getId()%>">
+					<%} %>
 						<li
 						<%
-							ArrayList<IExample> dependencies = tex.getDependency();
-							if (dependencies != null && !(dependencies.isEmpty())) {
-								if (dependencies.contains(e)) { %>
-									class="selected"
-								<%}
-							}
+							if (depender) { %>
+								class="selected"
+							<%	}
 						%>
 						>
 							<h1><%= e.getTitle() %></h1>
@@ -125,19 +131,22 @@
 							<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
 						</li>
 					</a>
-				<%}%>
+				<%		}
+					}%>
 			<%} else {
 				List<IExample> ex = cat.getExampleList();
-				for (IExample e : ex) {%>
+				for (IExample e : ex) { 
+					boolean depender = false;
+					if (dependencies != null && !(dependencies.isEmpty())) {
+						depender =dependencies.contains(e);
+					}
+					if (!e.getId().equals(eid)) {%>
 					<a href="addDependency?eid=<%= eid %>&did=<%=e.getId()%>">
 					<li
 						<%
-							ArrayList<IExample> dependencies = tex.getDependency();
-							if (dependencies != null && !(dependencies.isEmpty())) {
-								if (dependencies.contains(e)) { %>
+								if (!depender) { %>
 									class="selected"
 								<%}
-							}
 						%>
 					>
 						<h1><%= e.getTitle() %></h1>
@@ -145,7 +154,8 @@
 						<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
 					</li>
 				</a>
-				<%}
+				<%	}
+				}
 			} %>
 		</ul>
 	</div>
