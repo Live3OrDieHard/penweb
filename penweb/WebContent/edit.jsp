@@ -117,7 +117,7 @@
 			<%	if (!isNewExample) {%>
 				<form class="barForm">
 				Options:
-				<input type="button" class="button black-wide" value="Dependencies"/>
+				<input type="button" class="button black-wide" onClick="location.href=('dependency.jsp?eid=<%= id %>')" value="Dependencies"/>
 				<input type="button" class="button black-wide" onClick="javascript: duplicateIntoCategories();" value="Duplicate"/>
 				<input type="button" class="button green" onClick="editForm.submit();" value="Save Example" />
 				</form>
