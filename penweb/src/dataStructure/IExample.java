@@ -95,5 +95,11 @@ public interface IExample extends IEntry
 
 	String getAuthorsNames();
 	
+	String getComment();
+	
+	void setComment(String comment);
+	
 	void addDependency(IExample example);
+	
+	ArrayList<IExample> getDependency();
 }
