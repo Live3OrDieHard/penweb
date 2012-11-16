@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +18,6 @@ import penweb.WebController;
 
 import dataStructure.ICategory;
 import dataStructure.IExample;
-import dataStructure.User;
 import database.Db4oDatabase;
 
 public class WebControllerTest {

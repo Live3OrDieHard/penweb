@@ -46,4 +46,8 @@ public interface ICategory extends IEntry{
 	List<IExample> getExampleList();
 	
 	List<Long> getExampleIds();
+
+	void removeExample(IExample example);
+
+	void removeAllExamples();
 }

@@ -48,7 +48,7 @@ public class UserTest {
 	}
 	
 	@Test
-	public void changePassword() {
+	public void changePasswordTest() {
 		/*
 		 * ///// not yet implemented /////
 		 * try to change password

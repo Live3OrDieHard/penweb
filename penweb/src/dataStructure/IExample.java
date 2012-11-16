@@ -102,4 +102,8 @@ public interface IExample extends IEntry
 	void addDependency(IExample example);
 	
 	ArrayList<IExample> getDependency();
+
+	void removeFromAllCategories();
+
+	void removeFromCategory(ICategory category);
 }

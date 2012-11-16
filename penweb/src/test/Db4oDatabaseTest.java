@@ -210,9 +210,6 @@ public class Db4oDatabaseTest {
 		assertEquals(testee.getAllUsers().size(),0);
 		testee.store(Alice1);
 		assertTrue(testee.isLoginNameTaken("Alice1234"));
-		testee.store(Alice2);
-		assertEquals(testee.getAllUsers().size(),1);
-		assertEquals(testee.getUserByLoginName("Alice1234").getDisplayName(),"Alice");
 	}
 
 	@Test

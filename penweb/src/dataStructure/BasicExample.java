@@ -382,5 +382,22 @@ public class BasicExample implements IExample {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	
+	@Override
+	public void removeFromCategory(ICategory category) {
+		for(int i=this.categoryList.size()-1;i>=0;i--) {
+			ICategory cat = this.categoryList.get(i);
+			if(cat.getId().equals(category.getId()))
+				this.categoryList.remove(cat);
+		}
+	}
+	
+	@Override
+	public void removeFromAllCategories() {
+		for(ICategory cat: this.categoryList) {
+			cat.removeExample(this);
+		}
+		this.categoryList = new ArrayList<ICategory>();
+	}
 
 }
