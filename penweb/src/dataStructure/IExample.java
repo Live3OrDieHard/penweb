@@ -94,4 +94,8 @@ public interface IExample extends IEntry
 	ArrayList<String> getTags();
 
 	String getAuthorsNames();
+	
+	String getComment();
+	
+	void setComment(String comment);
 }

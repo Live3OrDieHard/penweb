@@ -37,7 +37,16 @@ public class BasicExample implements IExample {
 	 * all the tags include in the example
 	 */
 	private ArrayList<String> tags = new ArrayList<String>();
+	
+	/**
+	 * Title of the code example
+	 */
 	private String title;
+	
+	/**
+	 * Comment to be stored with an example
+	 */
+	private String comment;
 
 
 	public BasicExample() {
@@ -332,6 +341,7 @@ public class BasicExample implements IExample {
 		this.source = e.getSource();
 		this.language = e.getLanguage();
 		this.title = e.getTitle();
+		this.comment = e.getComment();
 		return this;
 	}
 
@@ -365,6 +375,16 @@ public class BasicExample implements IExample {
 		for (ICategory category : categoryList)
 			ids.add(category.getId());
 		return ids;
+	}
+
+	@Override
+	public String getComment() {
+		return comment;
+	}
+
+	@Override
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }
