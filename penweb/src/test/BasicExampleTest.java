@@ -2,12 +2,15 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import dataStructure.BasicExample;
 import dataStructure.BufferEntry;
 import dataStructure.Category;
+import dataStructure.IUser;
 import dataStructure.NonUser;
 import dataStructure.User;
 import exceptions.DuplicateException;
@@ -66,8 +69,33 @@ public class BasicExampleTest {
 		returncode = example.assignOwner(Bob);
 		assertEquals(example.getOwner(),Alice);
 		assertEquals(returncode,1);
-
-
 	}
 
+	@Test
+	public void getAuthorNamesTest() {
+		BasicExample example = new BasicExample();
+		User Alice = new User("Alice", null, "Alice");
+		User Bob = new User("Bob", null, "Bob");
+		ArrayList<IUser> users = new ArrayList<IUser>();
+		users.add(Alice);
+		users.add(Bob);
+		example.setAuthors(users);
+		assertEquals(example.getAuthorsNames(),"Alice, Bob");
+	}
+	
+	@Test
+	public void dependencyTest() {
+		BasicExample child = new BasicExample();
+		BasicExample parent = new BasicExample();
+		parent.setTitle("parent");
+		child.addDependency(parent);
+		
+		assertEquals(child.getDependency().size(),1);
+		assertEquals(child.getDependency().get(0).getTitle(),"parent");
+
+		child.addDependency(parent);
+		
+		assertEquals(child.getDependency().size(),1);
+		assertEquals(child.getDependency().get(0).getTitle(),"parent");
+	}
 }
