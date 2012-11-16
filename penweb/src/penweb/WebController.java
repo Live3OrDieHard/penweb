@@ -88,14 +88,14 @@ public class WebController {
 	 * Each code example has a unique ID to help with writing methods in the database and 
 	 * with sorting functions. 
 	 */
-	public long addCode(String title, String content, String language, String author) {
+	public long addCode(String title, String content, String language, String loginName) {
 		//XXX TODO Pass in a username or userId instead of an "author" string.
 		IExample ex = new BasicExample();
 		ex.setTitle(title);
 		ex.setCode(content);
 		ex.setLanguage(language);
 		//XXX Change the arguments to the login name, password, and displayName
-		IUser auth = new User(null, null, null);
+		IUser auth = db.getUserByLoginName(loginName);
 		ArrayList<IUser> authors = new ArrayList<IUser>();
 		authors.add(auth);
 		ex.setAuthors(authors);
