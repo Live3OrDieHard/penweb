@@ -167,6 +167,10 @@ public class WebController {
 		return this.db.getAllExample();
 	}
 	
+	public IUser getUserByLoginName(String loginName) {
+		return db.getUserByLoginName(loginName);
+	}
+	
 	/**
 	 * Takes in an entry and adds it to the database. 
 	 * @param e
