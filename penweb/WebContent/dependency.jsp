@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="database.*,penweb.*,dataStructure.*,java.util.List"%>
+    pageEncoding="ISO-8859-1" import="database.*,penweb.*,dataStructure.*,java.util.List,java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +9,13 @@
 		// Check if we are showing all or category
 		ICategory cat = null;
 		Long eid = null;
+		IExample tex = null;
 		if (request.getParameterMap().containsKey("cat")) {
 			cat = webcon.getCategoryById(Long.parseLong(request.getParameter("cat")));
 		}
 		if (request.getParameterMap().containsKey("eid")) {
 			eid = Long.parseLong(request.getParameter("eid"));
+			tex = webcon.getExampleById(eid);
 		} else {
 			response.sendRedirect("/penweb");
 		}
@@ -95,7 +97,21 @@
 				List<IExample> ex = webcon.getExamples();
 					for (IExample e : ex) { %>
 					<a href="addDependency?eid=<%= eid %>&did=<%=e.getId()%>">
-						<li>
+						<li
+						<%
+							ArrayList<IExample> dependencies = tex.getDependency();
+							if (dependencies != null && !(dependencies.isEmpty())) {
+								if (dependencies.contains(e)) { %>
+									class="selected"
+								<%} else {%>
+									class=""
+								<%}
+							}
+							else {%>
+								class="empty"
+								<%}
+						%>
+						>
 							<h1><%= e.getTitle() %></h1>
 							<div class="fade"></div>
 							<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
