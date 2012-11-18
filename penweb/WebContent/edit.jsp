@@ -33,7 +33,7 @@
 		}
 	%>
 	<meta charset="UTF-8">
-	<title>PEN &middot; Create Entry</title>
+	<title>PEN &middot; Edit Example</title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -57,11 +57,11 @@
 	</div>
 	<div class="sheet" id="duplicateIntoCategories">
 		<a href="javascript: closeModal();"><div class="close"></div></a>
-		<h1>Duplicate Entry</h1>
+		<h1>Duplicate Example</h1>
 		<div class="modalContent">
 			<form action="duplicateCode" method="post">
 				<input type="hidden" name="eid" value="<%=id%>"/>
-				<p>Select categories to duplicate this entry into:</p>
+				<p>Select categories to duplicate this example into:</p>
 				<%List<ICategory> cats = webcon.getCategories(); %>
 				<% for (ICategory c : cats) { %>
 					<p><input type="checkbox" name="cids" value="<%=c.getId() %>"/> <%=c.getTitle() %></p>
@@ -149,14 +149,15 @@
 			<% if (!isNewExample) { %>
 			<input type="hidden" name="eid" value="<%=id%>"/>
 			<%} %>
-			Title: *
-			<input type="text" name="title" <%if(!isNewExample) {%>value="<%=ex.getTitle()%>"<%}%> />
 			Author:
 			<%if (!isNewExample) {%>
 				<p><%=ex.getAuthorsNames() %></p>
 			<%} else {%>
 				<p><%=user.getDisplayName() %></p>
 			<%} %>
+			Title: *
+			<input type="text" name="title" <%if(!isNewExample) {%>value="<%=ex.getTitle()%>"<%}%> />
+			
 			<input type="hidden" name="loginname" <%if(!isNewExample) {%>value="<%=ex.getAuthors().get(0).getLoginName()%>"<%} else {%>value="<%=user.getLoginName()%>"<%}%>/>
 			Language: 
 			<input type="text" name="language" <%if(!isNewExample) {%>value="<%=ex.getLanguage()%>"<%}%>/>
