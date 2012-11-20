@@ -105,7 +105,7 @@
 				if (cat!=null) {%>
 					<%=cat.getId()%>
 				<%}%>"/>
-			<input type="submit" class="button black" value="Delete" />
+			<input type="<%if (cat.getExampleList().size()==0) {%>submit<%} else {%>button<%}%>" class="button black" value="Delete" onclick="deleteCategory();"/>
 			<%}%>
 			<input type="button" class="button green" value="Search" />
 			</form>
