@@ -86,9 +86,15 @@
 		<%} %>
 		
 		
-			<form class="barForm">
+			<form class="barForm" method="post" action="deleteCategory">
+			<% if (cat!=null) { %>
 			Options:
-			<input type="button" class="button black" value="Delete"/>
+			<input type="hidden" name="cid" value="<%
+				if (cat!=null) {%>
+					<%=cat.getId()%>
+				<%}%>"/>
+			<input type="submit" class="button black" value="Delete"/>
+			<%}%>
 			<input type="button" class="button green" value="Search" />
 			</form>
 		</form>
