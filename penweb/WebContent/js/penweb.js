@@ -103,3 +103,8 @@ function showCommentBlock() {
 function hideCommentBlock() {
 	$("#commentBlock").hide();
 }
+
+function deleteCategory() {
+	$("#deleteCategory").show();
+	$(".modal").show();	
+}

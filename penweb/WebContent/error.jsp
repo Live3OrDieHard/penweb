@@ -87,7 +87,7 @@
 		<h1>My Examples</h1>
 		<ul>
 			<%List<ICategory> cats = webcon.getCategories(); %>
-			<a href="index.jsp"><li>All Entries (<%=webcon.getNumEntries() %>)</li></a>
+			<a href="index.jsp"><li>All Examples (<%=webcon.getNumEntries() %>)</li></a>
 			<% for (ICategory c : cats) { %>
 				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=c.getExampleList().size() %>)</li></a>
 			<%} %>

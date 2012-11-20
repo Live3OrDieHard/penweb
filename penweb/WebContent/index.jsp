@@ -54,6 +54,17 @@
 			</form>
 		</div>
 	</div>
+	<div class="sheet" id="deleteCategory">
+		<a href="javascript: closeModal();"><div class="close"></div></a>
+		<h1>Delete Category</h1>
+		<div class="modalContent">
+			<form method="post" action="deleteCategory">
+				There are examples in this category. Do you still want to delete the category?
+				<input type="submit" class="button green" value="Delete" />
+				<input type="button" class="button black" value="Cancel" onClick="closeModal();" />
+			</form>
+		</div>
+	</div>
 </div>
 <div class="header">
 	<h1>PEN</h1>
