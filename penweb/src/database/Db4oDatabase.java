@@ -2,8 +2,14 @@ package database;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import penweb.Initializer;
+
 import com.db4o.*;
+import com.db4o.config.ClientServerConfiguration;
 import com.db4o.config.EmbeddedConfiguration;
+import com.db4o.cs.Db4oClientServer;
+import com.db4o.cs.config.ClientConfiguration;
 import com.db4o.query.*;
 
 import dataStructure.ICategory;
@@ -26,17 +32,15 @@ import dataStructure.IPerson;
 
 /**
  * @author Andy Creeth
+ * @author Justin Chines
  */
 public class Db4oDatabase implements IDatabase {
 	final private long maxID = 100000000000L;
 	private ObjectContainer db;
+	private ObjectServer server;
 
-	public Db4oDatabase(String path) {
-		EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
-		configuration.common().updateDepth(10);
-		configuration.common().activationDepth(10);
-		
-		db = Db4oEmbedded.openFile(configuration, path);
+	public Db4oDatabase(String path) {		
+		db = Initializer.db4oServer.openClient();
 	}
 
 	@Override

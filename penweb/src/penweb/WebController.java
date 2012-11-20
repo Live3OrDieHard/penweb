@@ -21,7 +21,7 @@ public class WebController {
 	private IDatabase db;
 	
 	public WebController() {
-		this.db = new Db4oDatabase("webDb5.yap");
+		this.db = new Db4oDatabase("UNUSED PARAMETER");
 	}
 	
 	/**
