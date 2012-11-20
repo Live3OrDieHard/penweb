@@ -20,7 +20,7 @@
 	<meta charset="UTF-8">
 	<title>PEN &middot; <%if (cat == null) { %>All Examples (<%= webcon.getNumEntries() %>)<%} else { %><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)<%} %></title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/style2.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script src="js/jquery.watermark.min.js"></script>
@@ -72,6 +72,8 @@
 		</div>
 	<%} %>
 </div>
+
+<!-- Anjali: This is the top bar with New Example and Category title -->
 <div class="bar">
 	<div class="left">
 		<a href="edit.jsp"><div class="button green">New Example</div></a>
@@ -82,7 +84,20 @@
 		<%} else {%>
 			<h1><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)</h1>
 		<%} %>
+		
+		
+				<form class="barForm">
+				Options:
+				<input type="button" class="button black-wide" value="Delete"/>
+				<input type="button" class="button green" value="Search" />
+				</form>
+		</form>
+		
 	</div>
+</div>
+
+<div class="theme">
+	Themes &rarr;
 </div>
 <div class="content">
 	<div class="left">
