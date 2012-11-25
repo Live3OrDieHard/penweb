@@ -106,4 +106,8 @@ public interface IExample extends IEntry
 	void removeFromAllCategories();
 
 	void removeFromCategory(ICategory category);
+	
+	boolean isPublic();
+	
+	void setPublic(boolean changePublic); 
 }

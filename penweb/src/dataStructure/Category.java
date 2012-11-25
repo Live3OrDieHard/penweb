@@ -16,6 +16,7 @@ public class Category implements ICategory {
 	private String title;
 	private List<IExample> exampleList;
 	private Long id;
+	private boolean isPublic;
 
 	public Category(String title, String description) {
 		this.description = description;
@@ -148,5 +149,15 @@ public class Category implements ICategory {
 			ex.removeFromCategory(this);
 		}
 		this.exampleList = new ArrayList<IExample>();
+	}
+
+	@Override
+	public boolean isPublic() {
+		return isPublic;
+	}
+
+	@Override
+	public void setPublic(boolean isPublic) {
+		this.isPublic = isPublic;
 	}
 }

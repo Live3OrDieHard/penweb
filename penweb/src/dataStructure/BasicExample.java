@@ -21,6 +21,7 @@ public class BasicExample implements IExample {
 	private String description;
 	private Long id;
 	private ArrayList<IExample> dependency = new ArrayList<IExample>();
+	private boolean publicEx;
 
 	/**
 	 * Language in which the example is written
@@ -400,4 +401,23 @@ public class BasicExample implements IExample {
 		this.categoryList = new ArrayList<ICategory>();
 	}
 
+	/**
+	 * @author awiovanna, tpatikorn
+	 * Getter method that returns whether or not a given code example is public or not
+	 * @return true if the code example is public. False otherwise. 
+	 */
+	public boolean isPublic()
+	{
+		return this.publicEx;
+	}
+	
+	
+	/**
+	 * @author awiovanna, tpatikorn
+	 * Sets the isPublic field to the given boolean.
+	 */
+	public void setPublic(boolean changePublic)
+	{
+		this.publicEx = changePublic;
+	}
 }

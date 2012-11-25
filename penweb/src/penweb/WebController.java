@@ -44,6 +44,21 @@ public class WebController {
 	}
 	
 	/**
+	 * @author awiovanna, tpatikorn
+	 * @param name of the category
+	 * @param desc description of the category
+	 * @param owner of the category
+	 * @param isPublic whether or not the category is public
+	 * Adds a category with the given specifications to the database 
+	 */
+	public void addCategory(String name, String desc, IUser owner, boolean isPublic) {
+		ICategory cat = new Category(name, desc);
+		cat.assignOwner(owner);
+		cat.setPublic(isPublic);
+		db.store(cat);
+	}
+	
+	/**
 	 * @return a list of all categories stored in the database 
 	 */
 	public List<ICategory> getCategories() {
@@ -99,6 +114,33 @@ public class WebController {
 		ArrayList<IUser> authors = new ArrayList<IUser>();
 		authors.add(auth);
 		ex.setAuthors(authors);
+		db.store(ex);
+		return ex.getId();
+	}
+	
+	/**
+	 * @author awiovanna, tpatikorn
+	 * @param title of the code example
+	 * @param content of the code example. The example itself
+	 * @param language that the code is written in
+	 * @param loginName to allow us to specify a user with the code example
+	 * @param isPublic whether or not the code example should appear as public or private
+	 * @return the id of the code example added to the database
+	 *         or error code(maybe) if it cannot be added
+	 */
+	public long addCode(String title, String content, String language, String loginName, boolean isPublic) {
+		//XXX TODO Pass in a username or userId instead of an "author" string.
+		IExample ex = new BasicExample();
+		ex.setTitle(title);
+		ex.setCode(content);
+		ex.setLanguage(language);
+		ex.setPublic(isPublic);
+		//XXX Change the arguments to the login name, password, and displayName
+		IUser auth = db.getUserByLoginName(loginName);
+		ArrayList<IUser> authors = new ArrayList<IUser>();
+		authors.add(auth);
+		ex.setAuthors(authors);
+		ex.assignOwner(auth);
 		db.store(ex);
 		return ex.getId();
 	}
@@ -193,5 +235,80 @@ public class WebController {
 	 */
 	public boolean isCategoryTitleTaken(String name) {
 		return db.isCategoryTitleTaken(name);
+	}
+	
+	/**
+	 * @author awiovanna, tpatikorn
+	 * This method returns a list of all private code examples written in the given language by the given user
+	 * @param user the identified user
+	 * @param language the identified language
+	 * @return List of all code examples written in language by user
+	 */
+	public List<IExample> getCodeByLanguageandUser(IUser user, String language)
+	{
+		List<IExample> ExamplesByLanguage = db.getByLanguage(language);
+		List<IExample> result = new ArrayList<IExample>();
+		//We may want to add a loop that adds every public example to the list before we add specific private ones for the user
+		for(IExample e : ExamplesByLanguage)
+		{
+			if(e.getOwnerId().equals(user.getId()))
+			{
+				result.add(e);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @author awiovanna, tpatikorn
+	 * @return All public examples in the database
+	 */
+	public List<IExample> getAllPublicExamples()
+	{
+		List<IExample> getAllExamples = db.getAllExample();
+		List<IExample> result = new ArrayList<IExample>();
+		for(IExample e : getAllExamples)
+		{
+			if(e.isPublic())
+			{
+				result.add(e);
+			}
+		}
+		return result; 
+	}
+	
+	/**
+	 * @author awiovanna, tpatikorn
+	 * @param user specified user
+	 * @return List of all languages that are used by the given user. 
+	 */
+	public List<String> getLangListByUser(IUser user)
+	{
+		List<IExample> getExampleByUser = db.getExampleByUser(user);
+		List<String> result = new ArrayList<String>();
+		for(IExample e : getExampleByUser)
+		{
+			if(!result.contains(e.getLanguage()))
+			{
+				result.add(e.getLanguage());
+			}
+		}
+		return result; 
+	}
+	
+	/**
+	 * @author awiovanna, tpatikorn
+	 * @param entry to be deleted
+	 * @param user the user that is trying to delete. We need to check whether he or she is allowed to delete the given entry. 
+	 * @return 1 if the user is not allowed to delete the given entry. 0 If the owner is allowed to delete the entry, in which case it does get deleted. 
+	 */
+	public int delete(IEntry entry, IUser user)
+	{
+		if(entry.getOwner().equals(user))
+		{
+			db.delete(entry);
+			return 0;
+		}
+		else return 1; //fail. not owner
 	}
 }

@@ -285,4 +285,52 @@ public class Db4oDatabase implements IDatabase {
 		}
 		return false;
 	}
+	
+	/**
+	 * @author awiovanna, tpatikorn
+	 * @return a list of all examples written by the given user
+	 */
+	public List<IExample> getExampleByUser(final IUser user)
+	{
+		List<IExample> list = db.query(new Predicate<IExample>() {
+			public boolean match(IExample e) {
+				IUser thisOwner = e.getOwner();
+				return (thisOwner.equals(user));
+			}
+		});
+		return list;
+	}
+	
+	/**
+	 * @author awiovanna, tpatikorn
+	 * Returns a list of all examples that are labeled as using the given language. 
+	 * This method currently does not differentiate as to the owner of the example. This functionality will be handled by web controller.
+	 * @return List of all code examples that use the given language
+	 */
+	public List<IExample> getByLanguage(final String lang)
+	{
+			List<IExample> list = db.query(new Predicate<IExample>() {
+				public boolean match(IExample e) {
+					String thisLanguage = e.getLanguage();
+					return (thisLanguage.equals(lang));
+				}
+			});
+			return list;
+	}
+	
+	/**
+	 * @author awiovanna, tpatikorn
+	 * @param user specified user
+	 * @return a list of all categories that the user has created. 
+	 */
+	public List<ICategory> getCategoryByUser(final IUser user)
+	{
+		List<ICategory> list = db.query(new Predicate<ICategory>() {
+			public boolean match(ICategory e) {
+				IUser thisOwner = e.getOwner();
+				return (thisOwner.equals(user));
+			}
+		});
+		return list;
+	}
 }

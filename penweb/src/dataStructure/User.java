@@ -125,4 +125,21 @@ public class User implements IUser {
 		return 0;
 	}
 	////////////////////////////////////////
+	
+	
+	/**
+	 * @author awiovanna, tpatikorn
+	 * overide the equals function of object class
+	 * @return true if user2 is an instance of IUser and
+	 *         this and user2 have the same id, false otherwise.
+	 */
+	@Override
+	public boolean equals(Object user2)
+	{
+		if(user2 instanceof IUser)
+		{
+			return this.getId().equals(((IUser) user2).getId());
+		}
+		else return false;
+	}
 }

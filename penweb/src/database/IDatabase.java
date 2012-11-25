@@ -146,4 +146,8 @@ public interface IDatabase {
 	 * check if category title is taken
 	 */
 	boolean isCategoryTitleTaken(String name);
+	
+	List<IExample> getByLanguage(String lang);
+	
+	List<IExample> getExampleByUser(IUser user);
 }

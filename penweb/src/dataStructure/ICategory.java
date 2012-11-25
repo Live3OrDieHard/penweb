@@ -50,4 +50,8 @@ public interface ICategory extends IEntry{
 	void removeExample(IExample example);
 
 	void removeAllExamples();
+	
+	public boolean isPublic();
+
+	public void setPublic(boolean isPublic);
 }
