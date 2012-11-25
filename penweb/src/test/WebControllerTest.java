@@ -20,47 +20,35 @@ import dataStructure.ICategory;
 import dataStructure.IExample;
 import database.Db4oDatabase;
 
+import penweb.Initializer;
+
 public class WebControllerTest {
 	private WebController testee;
 	private Db4oDatabase db;
+	private String databaseName = "webConTest.yap";
 
 	@Before
 	public void setup() throws IOException {
-		File f1 = new File("webDb4.yap");
-		File f2 = new File("webDb4copy.yap");
-
-		InputStream in = new FileInputStream(f1);
-		OutputStream out = new FileOutputStream(f2);
-
-		long length = f1.length();
-
-		byte[] buf = new byte[1024];
-		if (length != 0) {
-			for (long i = 0; i <= length / 1024; i++) {
-				int byteread = in.read(buf);
-				out.write(buf, 0, byteread);
-			}
-		}
-		f1.delete();
-
-		testee = new WebController();
+		testee = new WebController(databaseName);
 	}
 
 	@Test
 	public void TwoUsernamesTest() {
+		
 		boolean add1 = testee.addUser("AliceAndBob", "R4B8!t", "Alice");
 		boolean add2 = testee.addUser("AliceAndBob", "W0nD3R", "Bob");
 
-		assertTrue(add1 && !add2);
+		assertTrue(add1);
+		assertFalse(add2);
 
 		testee.close();
-		db = new Db4oDatabase("webDb4.yap");
+		db = new Db4oDatabase(databaseName,true);
 
 		assertEquals(db.getAllUsers().size(), 1);
 		assertEquals(db.getAllUsers().get(0).getDisplayName(), "Alice");
 
 		db.close();
-		testee = new WebController();
+		testee = new WebController(databaseName);
 	}
 
 	@Test
@@ -142,22 +130,10 @@ public class WebControllerTest {
 	@After
 	public void cleanup() throws IOException {
 		testee.close();
-
-		File f2 = new File("webDb4.yap");
-		File f1 = new File("webDb4copy.yap");
-
-		InputStream in = new FileInputStream(f1);
-		OutputStream out = new FileOutputStream(f2);
-
-		long length = f1.length();
-
-		byte[] buf = new byte[1024];
-		if (length != 0) {
-			for (long i = 0; i <= length / 1024; i++) {
-				int byteread = in.read(buf);
-				out.write(buf, 0, byteread);
-			}
-		}
+		
+		File f1 = new File(databaseName);
+		if(f1.exists())
+			f1.delete();
 
 	}
 

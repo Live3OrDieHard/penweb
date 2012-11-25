@@ -25,6 +25,15 @@ public class WebController {
 	}
 	
 	/**
+	 * the old embedded mode constructor
+	 * used for testing purpose
+	 * @param databaseName
+	 */
+	public WebController(String databaseName) {
+		this.db = new Db4oDatabase(databaseName,true);
+	}
+		
+	/**
 	 * loltest
 	 */
 	public void populate() {

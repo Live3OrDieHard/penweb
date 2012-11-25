@@ -20,7 +20,7 @@ public class UserTest {
 	
 	@Before
 	public void setup() {
-		db = new Db4oDatabase("UserTest.yap");
+		db = new Db4oDatabase("UserTest.yap",true);
 	}
 	
 	@Test

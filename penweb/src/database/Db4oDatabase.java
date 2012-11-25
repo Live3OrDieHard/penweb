@@ -39,8 +39,23 @@ public class Db4oDatabase implements IDatabase {
 	private ObjectContainer db;
 	private ObjectServer server;
 
-	public Db4oDatabase(String path) {		
+	public Db4oDatabase(String path) {
 		db = Initializer.db4oServer.openClient();
+	}
+
+	/**
+	 * for testing purpose only
+	 * @param path
+	 * @param forTest
+	 */
+	public Db4oDatabase(String path, boolean isEmbedded) {
+		if (isEmbedded) {
+			EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
+			configuration.common().updateDepth(10);
+			configuration.common().activationDepth(10);
+
+			db = Db4oEmbedded.openFile(configuration, path);
+		}
 	}
 
 	@Override
@@ -49,7 +64,7 @@ public class Db4oDatabase implements IDatabase {
 		e.assignId(this.getNewId());
 		db.store(e);
 	}
-	
+
 	/**
 	 * NO. Shouldn't be used. NO.
 	 */
@@ -82,7 +97,8 @@ public class Db4oDatabase implements IDatabase {
 			return db.query(new Predicate<IExample>() {
 				public boolean match(IExample e) {
 					if (e.getOwner() != null)
-						return e.getOwner().getLoginName().equals(owner.getLoginName());
+						return e.getOwner().getLoginName()
+								.equals(owner.getLoginName());
 					else
 						return (e.getOwner() == owner);
 				}
@@ -139,18 +155,18 @@ public class Db4oDatabase implements IDatabase {
 		}
 		return nameList;
 	}
-	
+
 	/**
 	 * @return A list of strings containing all user login names in the database
 	 */
 	public ArrayList<String> listUserLoginNames() {
 		List<IUser> userList = getAllUsers();
 		ArrayList<String> loginNameList = new ArrayList<String>();
-		
+
 		for (IUser user : userList) {
 			loginNameList.add(user.getLoginName());
 		}
-		
+
 		return loginNameList;
 	}
 
@@ -162,10 +178,11 @@ public class Db4oDatabase implements IDatabase {
 	public boolean isNameRepeat(String name) {
 		return listCategoryNames().contains(name);
 	}
-	
+
 	/**
 	 * @param loginName
-	 * @return True if a user has already been created with the given login name, false otherwise
+	 * @return True if a user has already been created with the given login
+	 *         name, false otherwise
 	 */
 	public boolean isLoginNameTaken(String loginName) {
 		return listUserLoginNames().contains(loginName);
@@ -185,15 +202,16 @@ public class Db4oDatabase implements IDatabase {
 			return null;
 		else
 			return null; // throw non-unique exception if there is more than one
-							// result
+		// result
 	}
 
 	@Override
 	public Long getNewId() {
-		return (long) (Math.random()*100000000); // should have a better way to do
+		return (long) (Math.random() * 100000000); // should have a better way
+													// to do
 		// this
 	}
-	
+
 	@Override
 	public ICategory getCategoryByID(final Long id) {
 		List<ICategory> list = db.query(new Predicate<ICategory>() {
@@ -208,7 +226,7 @@ public class Db4oDatabase implements IDatabase {
 			return null;
 		else
 			return null; // throw non-unique exception if there is more than one
-							// result
+		// result
 	}
 
 	@Override
@@ -225,9 +243,9 @@ public class Db4oDatabase implements IDatabase {
 			return null;
 		else
 			return null; // throw non-unique exception if there is more than one
-							// result
+		// result
 	}
-	
+
 	@Override
 	public IUser getUserByLoginName(final String loginName) {
 		List<IUser> results = db.query(new Predicate<IUser>() {
@@ -235,15 +253,16 @@ public class Db4oDatabase implements IDatabase {
 				return (e.getLoginName().equals(loginName));
 			}
 		});
-		
+
 		if (results.size() == 1)
 			return results.get(0);
 		else if (results.size() == 0)
 			return null;
 		else
-			return null; // Throw an exception because two users have the same login name.
+			return null; // Throw an exception because two users have the same
+							// login name.
 	}
-	
+
 	@Override
 	public IUser getUserByID(final Long id) {
 		List<IUser> results = db.query(new Predicate<IUser>() {
@@ -251,47 +270,48 @@ public class Db4oDatabase implements IDatabase {
 				return (e.getId().equals(id));
 			}
 		});
-		
+
 		if (results.size() == 1)
 			return results.get(0);
 		else if (results.size() == 0)
 			return null;
 		else
-			return null; // Throw an exception because two users have the same login name.
+			return null; // Throw an exception because two users have the same
+							// login name.
 	}
 
 	@Override
 	public Long generateEntryId() throws NoIdAvailableException {
-		//try to generate random number first
-		for(long i=0;i<maxID;i++) {
-			long newId = (long) (Math.random()*maxID);
-			if(this.getByID(newId)==null)
+		// try to generate random number first
+		for (long i = 0; i < maxID; i++) {
+			long newId = (long) (Math.random() * maxID);
+			if (this.getByID(newId) == null)
 				return newId;
 		}
-		//if no ID available after randomizing maxID times, loop through to check
-		for(long newId=0;newId<maxID;newId++) {
-			if(this.getByID(newId)==null)
+		// if no ID available after randomizing maxID times, loop through to
+		// check
+		for (long newId = 0; newId < maxID; newId++) {
+			if (this.getByID(newId) == null)
 				return newId;
 		}
-		throw(new NoIdAvailableException(maxID,"MaxID reached"));
+		throw (new NoIdAvailableException(maxID, "MaxID reached"));
 	}
 
 	@Override
 	public boolean isCategoryTitleTaken(String name) {
 		List<ICategory> catlist = this.getAllCategory();
-		for(ICategory cat: catlist) {
-			if(name.equals(cat.getTitle()))
+		for (ICategory cat : catlist) {
+			if (name.equals(cat.getTitle()))
 				return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * @author awiovanna, tpatikorn
 	 * @return a list of all examples written by the given user
 	 */
-	public List<IExample> getExampleByUser(final IUser user)
-	{
+	public List<IExample> getExampleByUser(final IUser user) {
 		List<IExample> list = db.query(new Predicate<IExample>() {
 			public boolean match(IExample e) {
 				IUser thisOwner = e.getOwner();
@@ -300,31 +320,31 @@ public class Db4oDatabase implements IDatabase {
 		});
 		return list;
 	}
-	
+
 	/**
-	 * @author awiovanna, tpatikorn
-	 * Returns a list of all examples that are labeled as using the given language. 
-	 * This method currently does not differentiate as to the owner of the example. This functionality will be handled by web controller.
+	 * @author awiovanna, tpatikorn Returns a list of all examples that are
+	 *         labeled as using the given language. This method currently does
+	 *         not differentiate as to the owner of the example. This
+	 *         functionality will be handled by web controller.
 	 * @return List of all code examples that use the given language
 	 */
-	public List<IExample> getByLanguage(final String lang)
-	{
-			List<IExample> list = db.query(new Predicate<IExample>() {
-				public boolean match(IExample e) {
-					String thisLanguage = e.getLanguage();
-					return (thisLanguage.equals(lang));
-				}
-			});
-			return list;
+	public List<IExample> getByLanguage(final String lang) {
+		List<IExample> list = db.query(new Predicate<IExample>() {
+			public boolean match(IExample e) {
+				String thisLanguage = e.getLanguage();
+				return (thisLanguage.equals(lang));
+			}
+		});
+		return list;
 	}
-	
+
 	/**
 	 * @author awiovanna, tpatikorn
-	 * @param user specified user
-	 * @return a list of all categories that the user has created. 
+	 * @param user
+	 *            specified user
+	 * @return a list of all categories that the user has created.
 	 */
-	public List<ICategory> getCategoryByUser(final IUser user)
-	{
+	public List<ICategory> getCategoryByUser(final IUser user) {
 		List<ICategory> list = db.query(new Predicate<ICategory>() {
 			public boolean match(ICategory e) {
 				IUser thisOwner = e.getOwner();

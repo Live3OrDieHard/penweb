@@ -32,7 +32,7 @@ public class ExampleAndCategoryTest {
 	@Before
 	public void setup() {
 		// Connect to test database
-		db = new Db4oDatabase(databaseName);
+		db = new Db4oDatabase(databaseName,true);
 	}
 
 	@Test
@@ -62,7 +62,7 @@ public class ExampleAndCategoryTest {
 
 		//close and reopen
 		db.close();
-		db = new Db4oDatabase(databaseName);
+		db = new Db4oDatabase(databaseName,true);
 
 		List<ICategory> categoryList = db.getExampleByID(example1.getId()).getCategories();
 		assertTrue((categoryList.get(0).getId().equals(category1.getId()) && categoryList.get(1).getId().equals(category2.getId()))
@@ -86,7 +86,7 @@ public class ExampleAndCategoryTest {
 
 		//close and reopen
 		db.close();
-		db = new Db4oDatabase(databaseName);
+		db = new Db4oDatabase(databaseName,true);
 
 		IExample example3 = db.getByHeader("Hello World", null).get(0);
 		IExample example4 = db.getByHeader("Bye World", null).get(0);
@@ -121,7 +121,7 @@ public class ExampleAndCategoryTest {
 
 		//close and reopen
 		db.close();
-		db = new Db4oDatabase(databaseName);
+		db = new Db4oDatabase(databaseName,true);
 
 		IExample newExample = db.getByHeader("Hello World", null).get(0);
 		List<ICategory> categoryList = newExample.getCategories();
