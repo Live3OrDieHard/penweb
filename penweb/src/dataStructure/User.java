@@ -10,27 +10,29 @@ import java.util.List;
  * @author kirkgrimsley
  * @author avenkatesh
  * 
- * A registered user who owns examples and categories.
+ *         A registered user who owns examples and categories.
  */
 public class User implements IUser {
-	private final String loginName; // Name used for logging in. This has to be unique.
-	private String displayName; // Name displayed to others on the site on examples, categories, etc
+	private final String loginName; // Name used for logging in. This has to be
+									// unique.
+	private String displayName; // Name displayed to others on the site on
+								// examples, categories, etc
 	private String password;
 	private ArrayList<IExample> ownedExamples;
 	private ArrayList<ICategory> ownedCategories;
-	
+
 	/**
 	 * A list of examples that the user has edited. This includes any examples
 	 * that the user is listed as an "author" for.
 	 */
 	private ArrayList<IExample> editedExamples;
 	private Long id;
-	
-	public User (String loginName, String password, String displayName) {		
+
+	public User(String loginName, String password, String displayName) {
 		this.loginName = loginName;
 		this.password = password;
 		this.displayName = displayName;
-		
+
 		this.ownedExamples = new ArrayList<IExample>();
 		this.ownedCategories = new ArrayList<ICategory>();
 		this.editedExamples = new ArrayList<IExample>();
@@ -41,7 +43,7 @@ public class User implements IUser {
 	public String getLoginName() {
 		return this.loginName;
 	}
-	
+
 	@Override
 	public String getDisplayName() {
 		return this.displayName;
@@ -51,15 +53,19 @@ public class User implements IUser {
 	public void changeDisplayName(String name) {
 		this.displayName = name;
 	}
-	
+
 	@Override
-	public void changePassword(String oldPassword, String newPassword, String reenterNew) {
-		if(oldPassword.equals(this.password) && newPassword.equals(reenterNew)){
-		this.password = newPassword;
+	public void changePassword(String oldPassword, String newPassword,
+			String reenterNew) {
+		if (oldPassword.equals(this.password) && newPassword.equals(reenterNew)) {
+			this.password = newPassword;
 		}
-		//needs else case to the effect of System.out.println("Passwords do not match! Password not reset.") or ("Correct password not entered! Password not reset.") case when we know how we're handling it on the front end
+		// needs else case to the effect of
+		// System.out.println("Passwords do not match! Password not reset.") or
+		// ("Correct password not entered! Password not reset.") case when we
+		// know how we're handling it on the front end
 	}
-	
+
 	public int assignId(Long id) {
 		if (this.id != -1)
 			return 1; // return 1 if already assigned
@@ -67,7 +73,7 @@ public class User implements IUser {
 			this.id = id;
 		return 0;
 	}
-	
+
 	@Override
 	public Long getId() {
 		return this.id;
@@ -107,9 +113,9 @@ public class User implements IUser {
 	public List<IExample> getEditedExampleList() {
 		return editedExamples;
 	}
-	
-	//XXX TODO For now these will do nothing
-	////////////////////////////////////////
+
+	// XXX TODO For now these will do nothing
+	// //////////////////////////////////////
 	@Override
 	public IUser getOwner() {
 		return null;
@@ -124,22 +130,19 @@ public class User implements IUser {
 	public int assignOwner(IUser owner) {
 		return 0;
 	}
-	////////////////////////////////////////
-	
-	
+
+	// //////////////////////////////////////
+
 	/**
-	 * @author awiovanna, tpatikorn
-	 * overide the equals function of object class
-	 * @return true if user2 is an instance of IUser and
-	 *         this and user2 have the same id, false otherwise.
+	 * @author awiovanna, tpatikorn override the equals function of object class
+	 * @return true if user2 is an instance of IUser and this and user2 have the
+	 *         same id, false otherwise.
 	 */
 	@Override
-	public boolean equals(Object user2)
-	{
-		if(user2 instanceof IUser)
-		{
-			return this.getId().equals(((IUser) user2).getId());
-		}
-		else return false;
+	public boolean equals(Object o) {
+		if (o instanceof IUser) {
+			return this.getId().equals(((IUser) o).getId());
+		} else
+			return false;
 	}
 }

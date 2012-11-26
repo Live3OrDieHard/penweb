@@ -7,8 +7,8 @@ import exceptions.DuplicateException;
 
 /**
  * @author awiovanna, tpatikorn
- *
- * A category into which code examples can be placed
+ * 
+ *         A category into which code examples can be placed
  */
 public class Category implements ICategory {
 	private IUser owner;
@@ -24,7 +24,6 @@ public class Category implements ICategory {
 		this.exampleList = new ArrayList<IExample>();
 		this.id = -1L;
 	}
-
 
 	/**
 	 * @see dataStructure.ICategory#getDescription()
@@ -54,13 +53,12 @@ public class Category implements ICategory {
 		this.title = title;
 	}
 
-
 	/**
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
-	public void addCodeExample(IExample example) throws DuplicateException{
-		try{
-			if(!this.hasExample(example)){
+	public void addCodeExample(IExample example) throws DuplicateException {
+		try {
+			if (!this.hasExample(example)) {
 				this.exampleList.add(example);
 				example.addCategory(this);
 			}
@@ -69,19 +67,21 @@ public class Category implements ICategory {
 		}
 	}
 
-
 	/**
 	 * helper function check if the category (this) is already has example
 	 * 
-	 * @param example the example wanted to be check
+	 * @param example
+	 *            the example wanted to be check
 	 * @return true if the category already has example. false otherwise
 	 */
-	private boolean hasExample(IExample example) throws DuplicateException{
-		ArrayList<IExample> examples = (ArrayList<IExample>)this.getExampleList();
+	private boolean hasExample(IExample example) throws DuplicateException {
+		ArrayList<IExample> examples = (ArrayList<IExample>) this
+				.getExampleList();
 		int i;
-		for(i=0; i < examples.size(); i++){
-			if(example.getId() == examples.get(i).getId()){
-				throw new DuplicateException("This example has already been in the category.");
+		for (i = 0; i < examples.size(); i++) {
+			if (example.getId() == examples.get(i).getId()) {
+				throw new DuplicateException(
+						"This example has already been in the category.");
 			}
 		}
 		return false;
@@ -125,7 +125,6 @@ public class Category implements ICategory {
 		return 0;
 	}
 
-
 	@Override
 	public List<Long> getExampleIds() {
 		List<Long> ids = new ArrayList<Long>();
@@ -136,16 +135,16 @@ public class Category implements ICategory {
 
 	@Override
 	public void removeExample(IExample example) {
-		for(int i=this.exampleList.size()-1;i>=0;i--) {
+		for (int i = this.exampleList.size() - 1; i >= 0; i--) {
 			IExample ex = this.exampleList.get(i);
-			if(ex.getId().equals(example.getId()))
+			if (ex.getId().equals(example.getId()))
 				this.exampleList.remove(example);
 		}
 	}
-	
+
 	@Override
 	public void removeAllExamples() {
-		for(IExample ex: this.exampleList) {
+		for (IExample ex : this.exampleList) {
 			ex.removeFromCategory(this);
 		}
 		this.exampleList = new ArrayList<IExample>();
@@ -159,5 +158,19 @@ public class Category implements ICategory {
 	@Override
 	public void setPublic(boolean isPublic) {
 		this.isPublic = isPublic;
+	}
+
+	@Override
+	/**
+	 * @author tpatikorn
+	 * override the equals function of object class
+	 * @return true if o is an instance of ICategory and
+	 *         this and o have the same id, false otherwise.
+	 */
+	public boolean equals(Object o) {
+		if (o instanceof ICategory) {
+			return this.getId().equals(((ICategory) o).getId());
+		} else
+			return false;
 	}
 }

@@ -6,8 +6,7 @@ import java.util.List;
 import exceptions.DuplicateException;
 
 /**
- * @author tpatikorn
- * Basic examples.
+ * @author tpatikorn Basic examples.
  */
 public class BasicExample implements IExample {
 
@@ -38,17 +37,16 @@ public class BasicExample implements IExample {
 	 * all the tags include in the example
 	 */
 	private ArrayList<String> tags = new ArrayList<String>();
-	
+
 	/**
 	 * Title of the example
 	 */
 	private String title;
-	
+
 	/**
 	 * A comment to describe an example or a change in an example
 	 */
 	private String comment;
-
 
 	public BasicExample() {
 		authors = new ArrayList<IUser>();
@@ -57,27 +55,26 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * @author Peng Ren, Dennis Koufos
-	 * Add dependencies to the given examples
+	 * @author Peng Ren, Dennis Koufos Add dependencies to the given examples
 	 * @return
 	 */
-	public ArrayList<IExample> getDependency(){
+	public ArrayList<IExample> getDependency() {
 		return dependency;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	//Modified by Peng Ren to check the duplication of the example and
-	//throw an exception
+	// Modified by Peng Ren to check the duplication of the example and
+	// throw an exception
 	@Override
-	public void addCategory(ICategory category) throws DuplicateException{
-		try{
-			if(!this.isInCategory(category)){
+	public void addCategory(ICategory category) throws DuplicateException {
+		try {
+			if (!this.isInCategory(category)) {
 				categoryList.add(category);
 				category.addCodeExample(this);
 			}
-		}catch(DuplicateException e){
+		} catch (DuplicateException e) {
 			throw e;
 		}
 	}
@@ -128,13 +125,13 @@ public class BasicExample implements IExample {
 	 */
 	public String getAuthorsNames() {
 		String nameList = "";
-		
+
 		for (int i = 0; i < authors.size(); ++i) {
 			nameList += authors.get(i).getDisplayName();
 			if (i < authors.size() - 1)
 				nameList += ", ";
 		}
-		
+
 		return nameList;
 	}
 
@@ -232,12 +229,14 @@ public class BasicExample implements IExample {
 	 *            the category wanted to be check
 	 * @return true if the example is in category. false otherwise
 	 */
-	private boolean isInCategory(ICategory category) throws DuplicateException{
-		ArrayList<IExample> examples = (ArrayList<IExample>) category.getExampleList();
+	private boolean isInCategory(ICategory category) throws DuplicateException {
+		ArrayList<IExample> examples = (ArrayList<IExample>) category
+				.getExampleList();
 		int i;
-		for(i=0; i < examples.size(); i++){
-			if(this.id == examples.get(i).getId()){
-				throw new DuplicateException("This example has already been in the category.");
+		for (i = 0; i < examples.size(); i++) {
+			if (this.id == examples.get(i).getId()) {
+				throw new DuplicateException(
+						"This example has already been in the category.");
 			}
 		}
 		return false;
@@ -352,7 +351,7 @@ public class BasicExample implements IExample {
 		clone.title = new String(this.title);
 		clone.language = new String(this.language);
 		clone.source = new String(this.source);
-		clone.tags = (ArrayList<String>) this.tags.clone(); 
+		clone.tags = (ArrayList<String>) this.tags.clone();
 
 		return clone;
 	}
@@ -366,8 +365,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * @author Peng Ren, Dennis Koufos
-	 * Add dependencies to the given examples
+	 * @author Peng Ren, Dennis Koufos Add dependencies to the given examples
 	 * @param examples
 	 */
 	public void addDependency(IExample example) {
@@ -383,41 +381,54 @@ public class BasicExample implements IExample {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	
+
 	@Override
 	public void removeFromCategory(ICategory category) {
-		for(int i=this.categoryList.size()-1;i>=0;i--) {
+		for (int i = this.categoryList.size() - 1; i >= 0; i--) {
 			ICategory cat = this.categoryList.get(i);
-			if(cat.getId().equals(category.getId()))
+			if (cat.getId().equals(category.getId()))
 				this.categoryList.remove(cat);
 		}
 	}
-	
+
 	@Override
 	public void removeFromAllCategories() {
-		for(ICategory cat: this.categoryList) {
+		for (ICategory cat : this.categoryList) {
 			cat.removeExample(this);
 		}
 		this.categoryList = new ArrayList<ICategory>();
 	}
 
+	@Override
 	/**
 	 * @author awiovanna, tpatikorn
 	 * Getter method that returns whether or not a given code example is public or not
 	 * @return true if the code example is public. False otherwise. 
 	 */
-	public boolean isPublic()
-	{
+	public boolean isPublic() {
 		return this.publicEx;
 	}
-	
-	
+
+	@Override
 	/**
 	 * @author awiovanna, tpatikorn
 	 * Sets the isPublic field to the given boolean.
 	 */
-	public void setPublic(boolean changePublic)
-	{
+	public void setPublic(boolean changePublic) {
 		this.publicEx = changePublic;
+	}
+
+	@Override
+	/**
+	 * @author tpatikorn
+	 * override the equals function of object class
+	 * @return true if o is an instance of IExample and
+	 *         this and o have the same id, false otherwise.
+	 */
+	public boolean equals(Object o) {
+		if (o instanceof IExample) {
+			return this.getId().equals(((IExample) o).getId());
+		} else
+			return false;
 	}
 }
