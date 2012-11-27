@@ -79,9 +79,9 @@ a {
 	height: 40px;
 	line-height: 40px;
 	background: url('../images/bg-bar.png') top center repeat-x;
-	font-size: 15px;
+	font-size: 17px;
 	font-weight: bold;
-	padding-left: 25px;
+	padding-left: 20px;
 }
 
 .modal .sheet .modalContent {
