@@ -119,11 +119,11 @@
 				Options:
 				<input type="button" class="button black-wide" onClick="location.href=('dependency.jsp?eid=<%= id %>')" value="Dependencies"/>
 				<input type="button" class="button black-wide" onClick="javascript: duplicateIntoCategories();" value="Duplicate"/>
-				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" onmouseover="showCommentBlock();" />
+				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" <%if (!isNewExample) {%>onmouseover="showCommentBlock();"<%}%> />
 				</form>
 			<%} else {%>
 				<form class="barForm">
-				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" onmouseover="showCommentBlock();" />
+				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" <%if (!isNewExample) {%>onmouseover="showCommentBlock();"<%}%> />
 				</form>
 			<%} %>
 	</div>
