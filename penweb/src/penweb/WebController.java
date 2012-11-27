@@ -59,7 +59,7 @@ public class WebController {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn
+	 * @author awiovanna, tpatikorn, iprangishvili, dmulcahy
 	 * @param name
 	 *            of the category
 	 * @param desc
@@ -69,13 +69,14 @@ public class WebController {
 	 * @param isPublic
 	 *            whether or not the category is public Adds a category with the
 	 *            given specifications to the database
+	 * @return the id of newly added category
 	 */
-	public void addCategory(String name, String desc, IUser owner,
+	public Long addCategory(String name, String desc, IUser owner,
 			boolean isPublic) {
 		ICategory cat = new Category(name, desc);
 		cat.assignOwner(owner);
 		cat.setPublic(isPublic);
-		db.store(cat);
+		return db.store(cat);
 	}
 
 	/**
@@ -165,7 +166,7 @@ public class WebController {
 	 * @return the id of the code example added to the database or error
 	 *         code(maybe) if it cannot be added
 	 */
-	public long addCode(String title, String content, String language,
+	public Long addCode(String title, String content, String language,
 			String loginName, boolean isPublic) {
 		// XXX TODO Pass in a username or userId instead of an "author" string.
 		IExample ex = new BasicExample();
@@ -179,8 +180,7 @@ public class WebController {
 		authors.add(auth);
 		ex.setAuthors(authors);
 		ex.assignOwner(auth);
-		db.store(ex);
-		return ex.getId();
+		return db.store(ex);
 	}
 
 	/**
