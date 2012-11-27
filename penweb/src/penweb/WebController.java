@@ -380,7 +380,8 @@ public class WebController {
 				}
 			}
 
-			//TODO: should we remove if the example is a dependency for another? I don't think so
+			//TODO: Should we remove if the example is a dependency for another?
+			//Check story "Delete a code example from a public notebook"
 			if(getDependerOf((IExample) entry).size()!=0)
 				return 2;
 		} 
