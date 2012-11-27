@@ -18,6 +18,7 @@ import penweb.WebController;
 
 import dataStructure.ICategory;
 import dataStructure.IExample;
+import dataStructure.IUser;
 import database.Db4oDatabase;
 
 import penweb.Initializer;
@@ -67,6 +68,36 @@ public class WebControllerTest {
 				|| categories.get(1).getDescription().equals("This is Alice's"));
 		assertTrue(categories.get(0).getDescription().equals("This is Bob's")
 				|| categories.get(1).getDescription().equals("This is Bob's"));
+	}
+
+	@Test
+	public void addCategoryTest2() {
+		testee.addUser("Alice", "Alice123", "I'm not Alice");
+		IUser Alice = testee.getUserByLoginName("Alice");
+		testee.addUser("Bob", "Bob123", "I'm Bob");
+		IUser Bob = testee.getUserByLoginName("Bob");
+		testee.addCategory("Alice's", "This is Alice's",Alice,true);
+		testee.addCategory("Bob's", "This is Bob's",Bob,false);
+		
+		List<ICategory> categories = testee.getCategories();
+
+		assertEquals(categories.size(), 2);
+		ICategory cat0 = null;
+		ICategory cat1 = null;
+		for(ICategory cat: categories)
+		{
+			if(cat.getTitle().equals("Alice's"))
+				cat0 = cat;
+			if(cat.getTitle().equals("Bob's"))
+				cat1 = cat;
+			Alice.getOwnedCategoryList();
+		}
+
+		assertTrue(cat0.isPublic());
+		assertEquals(cat0.getOwner(),Alice);
+			
+		assertFalse(cat1.isPublic());
+		assertEquals(cat1.getOwner(),Bob);
 	}
 
 	@Test
@@ -127,6 +158,19 @@ public class WebControllerTest {
 				|| e2.getLanguage().equals("Bob"));
 	}
 
+	@Test
+	public void getCateogoryByIdTest() {
+		testee.addUser("Alice", "Alice123", "I'm not Alice");
+		IUser Alice = testee.getUserByLoginName("Alice");
+		Long newId = testee.addCategory("Alice's", "This is Alice's",Alice,true);
+		
+		assertEquals(testee.getCategories().size(),1);
+		
+		assertEquals(testee.getCategoryById(newId),testee.getCategories().get(0));
+		assertEquals(testee.getCategoryById(newId).getOwner(),Alice);
+		
+	}
+	
 	@After
 	public void cleanup() throws IOException {
 		testee.close();
