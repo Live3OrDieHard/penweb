@@ -230,7 +230,7 @@ public class BasicExample implements IExample {
 	 * @param language
 	 */
 	public void setLanguage(String language) {
-		this.language = language;
+		this.language = language.toLowerCase();
 	}
 
 	@Override

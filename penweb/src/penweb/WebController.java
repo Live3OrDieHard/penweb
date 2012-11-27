@@ -279,7 +279,7 @@ public class WebController {
 	 *            the identified language
 	 * @return List of all code examples written in language by user
 	 */
-	public List<IExample> getCodeByLanguageandUser(IUser user, String language) {
+	public List<IExample> getCodeByLanguageAndUser(IUser user, String language) {
 		List<IExample> ExamplesByLanguage = db.getByLanguage(language);
 		List<IExample> result = new ArrayList<IExample>();
 		// We may want to add a loop that adds every public example to the list
@@ -311,16 +311,18 @@ public class WebController {
 	 * @author awiovanna, tpatikorn
 	 * @param user
 	 *            specified user
-	 * @return List of all languages that are used by the given user.
+	 * @return List of all languages that are used in public examples, 
+	 * as well as all languages that are used in private code for the given user.
 	 */
-	public List<String> getLangListByUser(IUser user) {
-		List<IExample> getExampleByUser = db.getExampleByUser(user);
+	public List<String> getLangList(IUser user) {
+		List<IExample> examples = db.getAllExample();
 		List<String> result = new ArrayList<String>();
-		for (IExample e : getExampleByUser) {
-			if (!result.contains(e.getLanguage())) {
+		for (IExample e : examples) {
+			if ((e.isPublic() || (user != null && e.getOwnerId().equals(user.getId()))) 
+					&& !result.contains(e.getLanguage()))
 				result.add(e.getLanguage());
-			}
 		}
+		
 		return result;
 	}
 
