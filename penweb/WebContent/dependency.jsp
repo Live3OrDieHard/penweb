@@ -10,6 +10,7 @@
 		ICategory cat = null;
 		Long eid = null;
 		IExample tex = null;
+		boolean isSet = false;
 		ArrayList<IExample> dependencies = null;
 		if (request.getParameterMap().containsKey("cat")) {
 			cat = webcon.getCategoryById(Long.parseLong(request.getParameter("cat")));
@@ -17,15 +18,21 @@
 		if (request.getParameterMap().containsKey("eid")) {
 			eid = Long.parseLong(request.getParameter("eid"));
 			tex = webcon.getExampleById(eid);
-			dependencies = tex.getDependency();
+			if (tex != null) {
+				dependencies = tex.getDependency();
+			}
+			else { response.sendRedirect("/penweb"); isSet = true; }
 		} else {
-			response.sendRedirect("/penweb");
+			if (!isSet) {response.sendRedirect("/penweb"); isSet = true; }
 		}
 		
 		String loginName = (String) session.getAttribute("name");
 		IUser user = null;
 		if (loginName != null) {
 			user = webcon.getUserByLoginName(loginName);
+		}
+		else { 
+			if (!isSet) { response.sendRedirect("/penweb"); isSet = true; }
 		}
 	%>
 	<meta charset="UTF-8">
@@ -104,7 +111,7 @@
 			<a href="dependency.jsp?cat=<%=c.getId() %>&eid=<%= eid %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= c.getTitle() %> (<%= c.getExampleList().size() %>)</li></a>
 			<% } %> 
 		</ul>
-		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
+		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
 		<ul class="entrylist">
