@@ -76,10 +76,11 @@
 		<div class="modalContent">
 			<form action="search" method="post">
 				Language: 
-				<% List<String> LangList = webcon.getLangListByUser(user); %>
-				<% if(LangList.size()==0) {%> NOTHING IN LANGLIST, BITCH!<% } else {String elt=LangList.get(1);%> Langlist element 1 is present! <% } %>
+				<% List<String> LangList = webcon.getLangList(user); %>
+				<% if(LangList.size()==0) {%> LangList is empty, good sir/ma'am!<% } else {String elt=LangList.get(1);%> Langlist element 1 is present! <% } %>
 				
 				<select <% if(LangList.size()==0) {%> disabled="disabled"<% } %>>
+					<option></option>
 					<% for (int i=0;i<LangList.size();i++) {%>
 					<option><% LangList.get(i); %></option>
 					<% } %>
