@@ -332,8 +332,7 @@ public class WebController {
 			if ((e.isPublic() || e.getOwnerId().equals(user.getId())) 
 					&& !result.contains(e.getLanguage()))
 				result.add(e.getLanguage());
-		}
-		
+		}		
 		return result;
 	}
 
