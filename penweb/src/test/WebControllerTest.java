@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import penweb.WebController;
 
+import dataStructure.BasicExample;
 import dataStructure.ICategory;
 import dataStructure.IExample;
 import dataStructure.IUser;
@@ -90,7 +91,6 @@ public class WebControllerTest {
 				cat0 = cat;
 			if(cat.getTitle().equals("Bob's"))
 				cat1 = cat;
-			Alice.getOwnedCategoryList();
 		}
 
 		assertTrue(cat0.isPublic());
@@ -132,6 +132,33 @@ public class WebControllerTest {
 		assertTrue(examples.get(0).getLanguage().equals("Alice")
 				|| examples.get(1).getLanguage().equals("Alice"));
 	}
+	
+	@Test
+	public void addCodeTest2() {
+		testee.addUser("Alice", "Alice123", "I'm not Alice");
+		IUser Alice = testee.getUserByLoginName("Alice");
+		testee.addUser("Bob", "Bob123", "I'm Bob");
+		IUser Bob = testee.getUserByLoginName("Bob");
+		
+		Long id1 = testee.addCode("AliceAndBob", "R4B8!t", "Java", "Alice",true);
+		Long id2 = testee.addCode("AliceAndBob", "W0nD3R", "C", "Bob",false);
+
+		List<IExample> examples = testee.getExamples();
+		IExample ex0 = null;
+		IExample ex1 = null;
+		for(IExample ex: examples)
+		{
+			if(ex.getOwner().equals(Alice))
+				ex0 = ex;
+			if(ex.getOwner().equals(Bob))
+				ex1 = ex;
+		}
+		assertTrue(ex0.isPublic());
+		assertFalse(ex1.isPublic());
+		assertEquals(ex0.getCode(),"R4B8!t");
+		assertEquals(ex1.getCode(),"W0nD3R");
+
+	}
 
 	@Test
 	public void getCodeByIdTest() {
@@ -169,6 +196,53 @@ public class WebControllerTest {
 		assertEquals(testee.getCategoryById(newId),testee.getCategories().get(0));
 		assertEquals(testee.getCategoryById(newId).getOwner(),Alice);
 		
+	}
+	
+	@Test
+	public void getTitlesTest() {
+		testee.addCode("AliceAndBob", "R4B8!t", "Alice", null);
+		testee.addCode("AliceAndBob", "W0nD3R", "Bob", null, true);
+		
+		assertEquals(testee.getTitles().get(0),"AliceAndBob");
+		assertEquals(testee.getTitles().get(1),"AliceAndBob");
+		assertEquals(testee.getTitles().size(),2);
+	}
+
+	@Test
+	public void getNumEntriesTest() {
+		testee.addCode("AliceAndBob", "R4B8!t", "Alice", null);
+		testee.addCode("AliceAndBob", "W0nD3R", "Bob", null, true);
+		testee.addCode("AliceAndBob", "R4B8!t", "Alice", null);
+		testee.addCode("AliceAndBob", "W0nD3R", "Bob", null, true);
+		testee.addCode("AliceAndBob", "R4B8!t", "Alice", null);
+		testee.addCode("AliceAndBob", "W0nD3R", "Bob", null, true);
+		testee.addCode("AliceAndBob", "R4B8!t", "Alice", null);
+		testee.addCode("AliceAndBob", "W0nD3R", "Bob", null, true);
+		testee.addCode("AliceAndBob", "R4B8!t", "Alice", null);
+		testee.addCode("AliceAndBob", "W0nD3R", "Bob", null, true);
+		testee.store(new BasicExample());
+		
+		assertEquals(testee.getNumEntries(),11);
+	}
+
+	
+	@Test
+	public void tryLoginTest() {
+		assertFalse(testee.tryLogin("name", "password"));
+		
+		testee.addUser("name", "password", "displayName");
+		
+		assertTrue(testee.tryLogin("name", "password"));
+
+		assertFalse(testee.tryLogin("name", "password2"));
+		
+	}
+	
+	@Test
+	public void isCateogoryTitleTakenTest() {
+		assertFalse(testee.isCategoryTitleTaken("title"));
+		testee.addCategory("title", "desc", null, true);
+		assertTrue(testee.isCategoryTitleTaken("title"));
 	}
 	
 	@After
