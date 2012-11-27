@@ -324,8 +324,10 @@ public class WebController {
 				result.add(e.getLanguage());
 			if (user != null)
 			{
-				if (e.getOwnerId().equals(user.getId()) && !result.contains(e.getLanguage()))
-					result.add(e.getLanguage());
+				if (e.getOwner() != null) {
+					if (e.getOwner().equals(user) && !result.contains(e.getLanguage()))
+						result.add(e.getLanguage());
+				}
 			}
 		}
 		
