@@ -338,6 +338,35 @@ public class WebControllerTest {
 		assertEquals(testee.getDependerOf(ex4).size(),0);
 	}
 	
+	@Test
+	public void getLangListTest() {
+		testee.addUser("4chaner", "12345", "4chaner");
+		testee.addUser("Iva", "password", "Iva");
+		Long id1 = testee.addCode("Sleep Sort", "I'm a genius", "C++", "4chaner",true);
+		Long id2 = testee.addCode("Sleep Sort", "System.out.printf();", "Java", "4chaner",false);
+		Long id3 = testee.addCode("Sleep Sort in Java", "I'm a genius", "Java", "4chaner",true);
+		Long id4 = testee.addCode("Merge Sort","This is Merge Sort", "Java", "Iva", true);
+		Long id5 = testee.addCode("simple loop", "while(1){}", "C", "Iva",  false);
+		Long id6 = testee.addCode("simple loop", "while(true){}", "Java", "Iva",  false);
+		
+		List<String> IvaLangList = testee.getLangList(testee.getUserByLoginName("Iva"));
+		List<String> ChanLangList = testee.getLangList(testee.getUserByLoginName("4chaner"));
+		List<String> JavaC = new ArrayList<String>();
+		List<String> JavaCpp = new ArrayList<String>();
+		
+		JavaC.add("Java");
+		JavaC.add("C");
+		JavaC.add("C++");
+
+		JavaCpp.add("Java");
+		JavaCpp.add("C++");
+		
+		assertTrue(IvaLangList.containsAll(JavaC));
+		assertTrue(JavaC.containsAll(IvaLangList));
+		assertTrue(ChanLangList.containsAll(JavaCpp));
+		assertTrue(JavaCpp.containsAll(ChanLangList));
+}
+	
 	@After
 	public void cleanup() throws IOException {
 		testee.close();
