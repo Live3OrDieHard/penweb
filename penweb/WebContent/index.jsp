@@ -77,12 +77,11 @@
 			<form action="search" method="post">
 				Language: 
 				<% List<String> LangList = webcon.getLangList(user); %>
-				<% if(LangList.size()==0) {%> LangList is empty, good sir/ma'am!<% } else {String elt=LangList.get(1);%> Langlist element 1 is present! <% } %>
-				
-				<select <% if(LangList.size()==0) {%> disabled="disabled"<% } %>>
-					<option></option>
+				<p><%= user.getDisplayName() %></p>
+				<select name="lang" >
+					<option value='' selected="selected"><%if(LangList.size()==0) {%>No languages...<%} else {%>Choose one...<%}%></option>
 					<% for (int i=0;i<LangList.size();i++) {%>
-					<option><% LangList.get(i); %></option>
+					<option><%=LangList.get(i)%></option>
 					<% } %>
 				</select>
 				<p></p>
