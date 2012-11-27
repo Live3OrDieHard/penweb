@@ -108,3 +108,8 @@ function deleteCategory() {
 	$("#deleteCategory").show();
 	$(".modal").show();	
 }
+
+function searchCategory() {
+	$("#searchCategory").show();
+	$(".modal").show();
+}

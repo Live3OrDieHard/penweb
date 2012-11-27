@@ -66,6 +66,23 @@
 			</form>
 		</div>
 	</div>
+	<div class="sheet" id="searchCategory">
+		<a href="javascript: closeModal();"><div class="close"></div></a>
+		<h1>Search Category</h1>
+		<div class="modalContent">
+			<form>
+				Language: 
+				<!-- These need to be filled -->
+				<select>
+					<option></option>
+					<option></option>
+				</select>
+				<p></p>
+				<input type="submit" class="button green" value="Search" />
+				<input type="button" class="button black" value="Cancel" onClick="closeModal();" />
+			</form>
+		</div>
+	</div>
 </div>
 <div class="header">
 	<h1>PEN</h1>
@@ -107,7 +124,7 @@
 				<%}%>"/>
 			<input type="<%if (cat.getExampleList().size()==0) {%>submit<%} else {%>button<%}%>" class="button black" value="Delete" onclick="deleteCategory();"/>
 			<%}%>
-			<input type="button" class="button green" value="Search" />
+			<input type="button" class="button green" value="Search" onclick="searchCategory();" />
 			</form>
 		</form>
 		
