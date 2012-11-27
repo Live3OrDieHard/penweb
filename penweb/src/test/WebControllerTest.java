@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -243,6 +244,98 @@ public class WebControllerTest {
 		assertFalse(testee.isCategoryTitleTaken("title"));
 		testee.addCategory("title", "desc", null, true);
 		assertTrue(testee.isCategoryTitleTaken("title"));
+	}
+	
+	@Test
+	public void getCodeByLanguageAndUserTest() {
+		testee.addUser("4chaner", "12345", "4chaner");
+		testee.addUser("Iva", "password", "Iva");
+		testee.addCode("Sleep Sort", "I'm a genius", "C++", "4chaner",true);
+		Long id1 = testee.addCode("Sleep Sort", "System.out.printf();", "Java", "4chaner",false);
+		Long id2 = testee.addCode("Sleep Sort in Java", "I'm a genius", "Java", "4chaner",true);
+		Long id3 = testee.addCode("Merge Sort","This is Merge Sort", "Java", "Iva", true);
+		testee.addCode("simple loop", "while(1){}", "C", "Iva",  false);
+		Long id4 = testee.addCode("simple loop", "while(true){}", "Java", "Iva",  false);
+		
+		BasicExample ex2 = new BasicExample();
+		ex2.assignId(id2);
+		BasicExample ex3 = new BasicExample();
+		ex3.assignId(id3);
+		BasicExample ex4 = new BasicExample();
+		ex4.assignId(id4);
+		
+		List<IExample> list = new ArrayList<IExample>();
+		list.add(ex2);
+		list.add(ex3);
+		list.add(ex4);
+		
+		List<IExample> listExamples = testee.getCodeByLanguageAndUser(
+				testee.getUserByLoginName("Iva"), "Java");
+		assertEquals(listExamples.size(),3);
+		assertEquals(listExamples.get(0).getLanguage(),"Java");
+		assertEquals(listExamples.get(1).getLanguage(),"Java");
+		assertEquals(listExamples.get(2).getLanguage(),"Java");
+		/* abuse .equals() for testing */
+		assertTrue(listExamples.containsAll(list));
+		assertTrue(list.containsAll(listExamples));
+	}
+	
+	@Test
+	public void getAllPublicExamplesTest() {
+		testee.addUser("4chaner", "12345", "4chaner");
+		testee.addUser("Iva", "password", "Iva");
+		Long id1 = testee.addCode("Sleep Sort", "I'm a genius", "C++", "4chaner",true);
+		Long id2 = testee.addCode("Sleep Sort", "System.out.printf();", "Java", "4chaner",false);
+		Long id3 = testee.addCode("Sleep Sort in Java", "I'm a genius", "Java", "4chaner",true);
+		Long id4 = testee.addCode("Merge Sort","This is Merge Sort", "Java", "Iva", true);
+		Long id5 = testee.addCode("simple loop", "while(1){}", "C", "Iva",  false);
+		Long id6 = testee.addCode("simple loop", "while(true){}", "Java", "Iva",  false);
+
+		BasicExample ex1 = new BasicExample();
+		ex1.assignId(id1);
+		BasicExample ex3 = new BasicExample();
+		ex3.assignId(id3);
+		BasicExample ex4 = new BasicExample();
+		ex4.assignId(id4);
+		
+		List<IExample> list = new ArrayList<IExample>();
+		list.add(ex1);
+		list.add(ex3);
+		list.add(ex4);
+		
+		List<IExample> listExamples = testee.getAllPublicExamples();
+		assertTrue(listExamples.containsAll(list));
+		assertTrue(list.containsAll(listExamples));
+	}
+	
+	@Test
+	public void getDependerOfTest() {
+		testee.addUser("4chaner", "12345", "4chaner");
+		testee.addUser("Iva", "password", "Iva");
+		Long id1 = testee.addCode("Sleep Sort", "I'm a genius", "C++", "4chaner",true);
+		Long id2 = testee.addCode("Sleep Sort", "System.out.printf();", "Java", "4chaner",false);
+		Long id3 = testee.addCode("Sleep Sort in Java", "I'm a genius", "Java", "4chaner",true);
+		Long id4 = testee.addCode("Merge Sort","This is Merge Sort", "Java", "Iva", true);
+		Long id5 = testee.addCode("simple loop", "while(1){}", "C", "Iva",  false);
+		Long id6 = testee.addCode("simple loop", "while(true){}", "Java", "Iva",  false);
+		IExample ex1 = testee.getExampleById(id1);
+		IExample ex2 = testee.getExampleById(id2);
+		IExample ex4 = testee.getExampleById(id4);
+		IExample ex6 = testee.getExampleById(id6);
+		
+		ex1.addDependency(ex2);
+		ex2.addDependency(ex6);
+		ex4.addDependency(ex6);
+		
+		testee.store(ex1);
+		testee.store(ex2);
+		testee.store(ex4);
+		testee.store(ex6);
+		
+		assertEquals(testee.getDependerOf(ex1).size(),0);
+		assertEquals(testee.getDependerOf(ex2).size(),1);
+		assertEquals(testee.getDependerOf(ex6).size(),3);
+		assertEquals(testee.getDependerOf(ex4).size(),0);
 	}
 	
 	@After

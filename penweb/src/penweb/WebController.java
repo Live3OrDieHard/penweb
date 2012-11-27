@@ -271,11 +271,13 @@ public class WebController {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn This method returns a list of all private
-	 *         code examples written in the given language by the given user
+	 * @author awiovanna, tpatikorn 
+	 * This method returns a list of all code examples accessible by user
+	 * and written in the given language 
+	 * accessible = written by user or is public
 	 * @param user
 	 *            the identified user
-	 * @param language
+	 * @param languageW
 	 *            the identified language
 	 * @return List of all code examples written in language by user
 	 */
@@ -392,14 +394,23 @@ public class WebController {
 	 * @author tpatikorn
 	 * get all examples in db that depend on example (aka dependers)
 	 * @param example the example we want to find what depends on it
-	 * @return list of all examples depends on example
+	 * @return list of all examples depends on example 
+	 * and dependers of dependers (and so on)
 	 */
 	public List<IExample> getDependerOf(IExample example) {
 		List<IExample> allExamples = db.getAllExample();
 		List<IExample> result = new ArrayList<IExample>();
 		for(IExample e : allExamples) {
-			if(e.getDependency().contains(example))
+			if(e.getDependency().contains(example)) {
 				result.add(e);
+				List<IExample> dependers  = this.getDependerOf(e);
+				for(IExample d: dependers) {
+					if(!result.contains(d)) {
+						result.add(d);
+					}
+				}
+				
+			}
 		}
 		return result;
 	}
