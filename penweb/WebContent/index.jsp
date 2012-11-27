@@ -80,6 +80,7 @@
 				<% if(LangList.size()==0) {%> LangList is empty, good sir/ma'am!<% } else {String elt=LangList.get(1);%> Langlist element 1 is present! <% } %>
 				
 				<select <% if(LangList.size()==0) {%> disabled="disabled"<% } %>>
+					<option></option>
 					<% for (int i=0;i<LangList.size();i++) {%>
 					<option><% LangList.get(i); %></option>
 					<% } %>
