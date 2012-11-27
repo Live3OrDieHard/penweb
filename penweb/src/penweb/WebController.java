@@ -329,7 +329,7 @@ public class WebController {
 		List<IExample> examples = db.getAllExample();
 		List<String> result = new ArrayList<String>();
 		for (IExample e : examples) {
-			if ((e.isPublic() || e.getOwnerId().equals(user.getId())) 
+			if ((e.isPublic() || (user != null && e.getOwnerId().equals(user.getId()))) 
 					&& !result.contains(e.getLanguage()))
 				result.add(e.getLanguage());
 		}
