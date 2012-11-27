@@ -296,7 +296,7 @@ public class WebController {
 		// We may want to add a loop that adds every public example to the list
 		// before we add specific private ones for the user
 		for (IExample e : ExamplesByLanguage) {
-			if (e.getOwnerId().equals(user.getId())) {
+			if (e.isPublic() || e.getOwnerId().equals(user.getId())) {
 				result.add(e);
 			}
 		}
@@ -358,23 +358,35 @@ public class WebController {
 		
 		//user is owner
 		if (entry instanceof ICategory) {
-			//TODO: remove examples instead
 			if(((ICategory) entry).getExampleList().size()!=0)
-				return 2;
-			//((ICategory) entry).removeAllExamples();
+			{
+				ICategory categoryEntry = (ICategory)entry;
+				List<IExample> examples = categoryEntry.getExampleList();
+				categoryEntry.removeAllExamples();
+				for (IExample example : examples) {
+					db.store(example);
+				}
+			}
 		}
 		else if (entry instanceof IExample) {
 			//TODO: remove categories instead
-			if(((IExample) entry).getCategories().size()!=0)
-				return 2;
-			//((IExample) entry).removeFromAllCategories();
+			IExample exampleEntry = (IExample) entry;
+			if(exampleEntry.getCategories().size()!=0)
+			{
+				List<ICategory> categories = exampleEntry.getCategories();
+				exampleEntry.removeFromAllCategories();
+				for (ICategory category : categories) {
+					db.store(category);
+				}
+			}
 
-			//TODO: should we remove? I don't think so
+			//TODO: Should we remove if the example is a dependency for another?
+			//Check story "Delete a code example from a public notebook"
 			if(getDependerOf((IExample) entry).size()!=0)
 				return 2;
 		} 
 		else if(entry instanceof IUser) {
-			// TODO
+			// TODO Allow deletion for users
 			System.out.println("You want to delete a user? Not yet implemented");
 		}
 		else {
