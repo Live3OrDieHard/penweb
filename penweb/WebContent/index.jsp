@@ -66,9 +66,9 @@
 			</form>
 		</div>
 	</div>
-	<div class="sheet" id="searchCategory">
+	<div class="sheet short" id="searchCategory">
 		<a href="javascript: closeModal();"><div class="close"></div></a>
-		<h1>Search Category</h1>
+		<h3>Search Category</h3>
 		<div class="modalContent">
 			<form>
 				Language: 
