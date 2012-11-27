@@ -37,15 +37,6 @@ public class WebController {
 	}
 
 	/**
-	 * loltest
-	 */
-	public void populate() {
-		// Add some stuff to the database
-		addCategory("Test Cat", "This is a test cat");
-		addCategory("Another Cat", "This is another cat");
-	}
-
-	/**
 	 * Adds a category to the database. A unique ID is assigned within the DB
 	 * 
 	 * @param name
@@ -217,10 +208,6 @@ public class WebController {
 		return ((user != null) && (user.checkPassword(password)));
 	}
 
-	public String getText() {
-		return "Testing text";
-	}
-
 	/**
 	 * 
 	 * @return a list of all of the code examples currently in existence
@@ -259,9 +246,11 @@ public class WebController {
 	 * Takes in an entry and adds it to the database.
 	 * 
 	 * @param e
+	 * 
+	 * @return newly added entry's id
 	 */
-	public void store(IEntry e) {
-		db.store(e);
+	public Long store(IEntry e) {
+		return db.store(e);
 	}
 
 	/**
