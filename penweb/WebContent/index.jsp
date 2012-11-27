@@ -61,6 +61,10 @@
 			<form method="post" action="deleteCategory">
 				There are examples in this category. Do you still want to delete the category?
 				<p></p>
+				<input type="hidden" name="cid" value="<%
+				if (cat!=null) {%>
+					<%=cat.getId()%>
+				<%}%>"/>
 				<input type="submit" class="button green" value="Delete" />
 				<input type="button" class="button black" value="Cancel" onClick="closeModal();" />
 			</form>
