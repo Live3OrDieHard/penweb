@@ -190,7 +190,10 @@ public class BasicExample implements IExample {
 	 * {@inheritDoc}
 	 */
 	public Long getOwnerId() {
-		return this.owner.getId();
+		//XXX This should never be false
+		if (this.owner != null)
+			return this.owner.getId();
+		return (long) 0;
 	}
 
 	@Override

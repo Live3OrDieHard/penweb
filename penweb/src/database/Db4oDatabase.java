@@ -59,10 +59,12 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	@Override
-	public void store(IEntry e) {
-		e.assignOwner(null);
-		e.assignId(this.getNewId());
+	public Long store(IEntry e) {
+		//e.assignOwner(null);
+		Long newId = this.getNewId();
+		e.assignId(newId);
 		db.store(e);
+		return newId;
 	}
 
 	/**
@@ -332,7 +334,7 @@ public class Db4oDatabase implements IDatabase {
 		List<IExample> list = db.query(new Predicate<IExample>() {
 			public boolean match(IExample e) {
 				String thisLanguage = e.getLanguage();
-				return (thisLanguage.equals(lang));
+				return (thisLanguage.toLowerCase().equals(lang.toLowerCase()));
 			}
 		});
 		return list;

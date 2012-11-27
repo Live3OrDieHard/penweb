@@ -74,12 +74,14 @@
 		<a href="javascript: closeModal();"><div class="close"></div></a>
 		<h3>Search Category</h3>
 		<div class="modalContent">
-			<form>
+			<form action="search" method="post">
 				Language: 
-				<!-- These need to be filled -->
-				<select>
-					<option></option>
-					<option></option>
+				<% List<String> LangList = webcon.getLangList(user); %>
+				<select name="lang" >
+					<option value='' selected="selected"><%if(LangList.size()==0) {%>No languages...<%} else {%>Choose one...<%}%></option>
+					<% for (int i=0;i<LangList.size();i++) {%>
+					<option><%=LangList.get(i)%></option>
+					<% } %>
 				</select>
 				<p></p>
 				<input type="submit" class="button green" value="Search" />

@@ -19,8 +19,9 @@ public interface IDatabase {
 	/**
 	 * Stores the given entry in the database. If the object is already in the database, it will be updated.
 	 * @param e The entry to store.
+	 * @return the id of the newly added entry
 	 */
-	public void store(IEntry e);
+	public Long store(IEntry e);
 	
 	/**
 	 * @return All entries in the database

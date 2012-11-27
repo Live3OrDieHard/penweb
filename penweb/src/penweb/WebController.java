@@ -37,15 +37,6 @@ public class WebController {
 	}
 
 	/**
-	 * loltest
-	 */
-	public void populate() {
-		// Add some stuff to the database
-		addCategory("Test Cat", "This is a test cat");
-		addCategory("Another Cat", "This is another cat");
-	}
-
-	/**
 	 * Adds a category to the database. A unique ID is assigned within the DB
 	 * 
 	 * @param name
@@ -59,7 +50,7 @@ public class WebController {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn
+	 * @author awiovanna, tpatikorn, iprangishvili, dmulcahy
 	 * @param name
 	 *            of the category
 	 * @param desc
@@ -69,13 +60,14 @@ public class WebController {
 	 * @param isPublic
 	 *            whether or not the category is public Adds a category with the
 	 *            given specifications to the database
+	 * @return the id of newly added category
 	 */
-	public void addCategory(String name, String desc, IUser owner,
+	public Long addCategory(String name, String desc, IUser owner,
 			boolean isPublic) {
 		ICategory cat = new Category(name, desc);
 		cat.assignOwner(owner);
 		cat.setPublic(isPublic);
-		db.store(cat);
+		return db.store(cat);
 	}
 
 	/**
@@ -165,7 +157,7 @@ public class WebController {
 	 * @return the id of the code example added to the database or error
 	 *         code(maybe) if it cannot be added
 	 */
-	public long addCode(String title, String content, String language,
+	public Long addCode(String title, String content, String language,
 			String loginName, boolean isPublic) {
 		// XXX TODO Pass in a username or userId instead of an "author" string.
 		IExample ex = new BasicExample();
@@ -179,8 +171,7 @@ public class WebController {
 		authors.add(auth);
 		ex.setAuthors(authors);
 		ex.assignOwner(auth);
-		db.store(ex);
-		return ex.getId();
+		return db.store(ex);
 	}
 
 	/**
@@ -215,10 +206,6 @@ public class WebController {
 		IUser user = db.getUserByLoginName(loginName);
 
 		return ((user != null) && (user.checkPassword(password)));
-	}
-
-	public String getText() {
-		return "Testing text";
 	}
 
 	/**
@@ -259,9 +246,11 @@ public class WebController {
 	 * Takes in an entry and adds it to the database.
 	 * 
 	 * @param e
+	 * 
+	 * @return newly added entry's id
 	 */
-	public void store(IEntry e) {
-		db.store(e);
+	public Long store(IEntry e) {
+		return db.store(e);
 	}
 
 	/**
@@ -282,21 +271,23 @@ public class WebController {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn This method returns a list of all private
-	 *         code examples written in the given language by the given user
+	 * @author awiovanna, tpatikorn 
+	 * This method returns a list of all code examples accessible by user
+	 * and written in the given language 
+	 * accessible = written by user or is public
 	 * @param user
 	 *            the identified user
-	 * @param language
+	 * @param languageW
 	 *            the identified language
 	 * @return List of all code examples written in language by user
 	 */
-	public List<IExample> getCodeByLanguageandUser(IUser user, String language) {
+	public List<IExample> getCodeByLanguageAndUser(IUser user, String language) {
 		List<IExample> ExamplesByLanguage = db.getByLanguage(language);
 		List<IExample> result = new ArrayList<IExample>();
 		// We may want to add a loop that adds every public example to the list
 		// before we add specific private ones for the user
 		for (IExample e : ExamplesByLanguage) {
-			if (e.getOwnerId().equals(user.getId())) {
+			if (e.isPublic() || e.getOwnerId().equals(user.getId())) {
 				result.add(e);
 			}
 		}
@@ -322,16 +313,24 @@ public class WebController {
 	 * @author awiovanna, tpatikorn
 	 * @param user
 	 *            specified user
-	 * @return List of all languages that are used by the given user.
+	 * @return List of all languages that are used in public examples, 
+	 * as well as all languages that are used in private code for the given user.
 	 */
-	public List<String> getLangListByUser(IUser user) {
-		List<IExample> getExampleByUser = db.getExampleByUser(user);
+	public List<String> getLangList(IUser user) {
+		List<IExample> examples = db.getAllExample();
 		List<String> result = new ArrayList<String>();
-		for (IExample e : getExampleByUser) {
-			if (!result.contains(e.getLanguage())) {
+		for (IExample e : examples) {
+			if (e.isPublic() && !result.contains(e.getLanguage()))
 				result.add(e.getLanguage());
+			if (user != null)
+			{
+				if (e.getOwner() != null) {
+					if (e.getOwner().equals(user) && !result.contains(e.getLanguage()))
+						result.add(e.getLanguage());
+				}
 			}
 		}
+		
 		return result;
 	}
 
@@ -401,14 +400,23 @@ public class WebController {
 	 * @author tpatikorn
 	 * get all examples in db that depend on example (aka dependers)
 	 * @param example the example we want to find what depends on it
-	 * @return list of all examples depends on example
+	 * @return list of all examples depends on example 
+	 * and dependers of dependers (and so on)
 	 */
 	public List<IExample> getDependerOf(IExample example) {
 		List<IExample> allExamples = db.getAllExample();
 		List<IExample> result = new ArrayList<IExample>();
 		for(IExample e : allExamples) {
-			if(e.getDependency().contains(example))
+			if(e.getDependency().contains(example)) {
 				result.add(e);
+				List<IExample> dependers  = this.getDependerOf(e);
+				for(IExample d: dependers) {
+					if(!result.contains(d)) {
+						result.add(d);
+					}
+				}
+				
+			}
 		}
 		return result;
 	}
