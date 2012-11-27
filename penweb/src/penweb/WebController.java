@@ -296,7 +296,7 @@ public class WebController {
 		// We may want to add a loop that adds every public example to the list
 		// before we add specific private ones for the user
 		for (IExample e : ExamplesByLanguage) {
-			if (e.getOwnerId().equals(user.getId())) {
+			if (e.isPublic() || e.getOwnerId().equals(user.getId())) {
 				result.add(e);
 			}
 		}

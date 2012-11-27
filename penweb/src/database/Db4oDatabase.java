@@ -332,7 +332,7 @@ public class Db4oDatabase implements IDatabase {
 		List<IExample> list = db.query(new Predicate<IExample>() {
 			public boolean match(IExample e) {
 				String thisLanguage = e.getLanguage();
-				return (thisLanguage.equals(lang));
+				return (thisLanguage.toLowerCase().equals(lang.toLowerCase()));
 			}
 		});
 		return list;
