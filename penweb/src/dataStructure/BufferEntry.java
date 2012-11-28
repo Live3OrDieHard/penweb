@@ -86,7 +86,7 @@ public class BufferEntry
 		return description;
 	}	
 	public String getLanguage() {
-		return language;
+		return language.toLowerCase();
 	}
 	public IUser getOwner() {
 		return owner;
@@ -113,7 +113,7 @@ public class BufferEntry
 		this.description = description;
 	}
 	public void setLanguage(String language) {
-		this.language = language;
+		this.language = language.toLowerCase();
 	}
 	public void setOwner(IUser owner) {
 		this.owner = owner;

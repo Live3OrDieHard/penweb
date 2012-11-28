@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 /**
- * Controller for the web interface
+ * WebController is a class that maintains the interaction between the database and the web view.
+ * The methods for creating categories, examples and Users are implemented here.
  * 
  * @author jfchines
  * @author awiovanna
@@ -23,6 +24,10 @@ public class WebController {
 
 	private IDatabase db;
 
+	/**
+	 * This is the constructor for the WebController class
+	 * @param databaseName
+	 */
 	public WebController() {
 		this.db = new Db4oDatabase("UNUSED PARAMETER");
 	}
