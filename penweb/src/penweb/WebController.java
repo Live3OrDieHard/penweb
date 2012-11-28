@@ -438,12 +438,7 @@ public class WebController {
 	/**
 	 * This method looks at all the example codes and collects all the examples
 	 * that correspond to a specific user. 
-	 * @param user
-<<<<<<< HEAD
-	 * @return a list of examples for a existing user
-	 * @param user passed in user
-=======
->>>>>>> refs/remotes/origin/master
+	 * 
 	 * @return a list of all code examples that should be visible to this user
 	 */
 	public List<IExample> getVisibleExamples(IUser user) {
@@ -457,6 +452,12 @@ public class WebController {
 		return results;
 	}
 	
+	/**
+	 * Get a list of examples that the given user owns
+	 * 
+	 * @param user The user to find examples for
+	 * @return A list of IExamples the user owns
+	 */
 	public List<IExample> getOwnedExamples(IUser user) {
 		List<IExample> results = new ArrayList<IExample>();
 		
