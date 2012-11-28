@@ -32,7 +32,7 @@ public class BasicExampleTest {
 	@Test
 	public void testTransferFromEntry() {
 		BufferEntry buf = new BufferEntry();
-		buf.setLanguage("Java");
+		buf.setLanguage("java");
 		buf.setTitle("something");
 		buf.setCode("Hello World");
 		buf.setSource("");
@@ -42,7 +42,7 @@ public class BasicExampleTest {
 
 		assertEquals(example.getCode(),"Hello World");
 		assertEquals(example.getTitle(),"something");
-		assertEquals(example.getLanguage(),"Java");
+		assertEquals(example.getLanguage(),"java");
 		assertEquals(example.getSource(),"");
 	}
 
