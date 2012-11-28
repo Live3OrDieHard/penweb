@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class login
+ * @author Andy C
  */
 @WebServlet("/login")
 public class login extends HttpServlet {

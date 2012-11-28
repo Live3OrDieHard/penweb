@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class search
+ * @author Mikey Boy
  */
 @WebServlet("/search")
 public class search extends HttpServlet {
