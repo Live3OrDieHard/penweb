@@ -13,6 +13,8 @@ import exceptions.DuplicateException;
 
 /**
  * Servlet implementation class duplicateCode
+ * @author Andy C
+ * @author Mikey Boy
  */
 @WebServlet("/duplicateCode")
 public class duplicateCode extends HttpServlet {

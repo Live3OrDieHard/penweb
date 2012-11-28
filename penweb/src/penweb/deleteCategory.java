@@ -12,6 +12,7 @@ import dataStructure.*;
 
 /**
  * Servlet implementation class deleteCategory
+ * @author Andy C
  */
 @WebServlet("/deleteCategory")
 public class deleteCategory extends HttpServlet {

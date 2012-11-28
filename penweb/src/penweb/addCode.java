@@ -12,6 +12,8 @@ import exceptions.*;
 
 /**
  * Servlet implementation class addCode
+ * @author Andy C
+ * @author Mikey Boy
  */
 @WebServlet("/addCode")
 public class addCode extends HttpServlet {
