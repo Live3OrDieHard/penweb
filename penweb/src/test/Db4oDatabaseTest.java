@@ -189,7 +189,7 @@ public class Db4oDatabaseTest {
 	@Test
 	public void isLoginNameTakenTest() {
 		User Alice1 = new User("Alice1234","changeMe123","Alice");
-		assertTrue(!testee.isLoginNameTaken("Alice1234"));
+		assertFalse(testee.isLoginNameTaken("Alice1234"));
 		assertEquals(testee.getAllUsers().size(),0);
 		testee.store(Alice1);
 		assertTrue(testee.isLoginNameTaken("Alice1234"));

@@ -173,15 +173,6 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * @param name
-	 * @return true if the name given is already taken by another category false
-	 *         otherwise
-	 */
-	public boolean isNameRepeat(String name) {
-		return listCategoryNames().contains(name);
-	}
-
-	/**
 	 * @param loginName
 	 * @return True if a user has already been created with the given login
 	 *         name, false otherwise
