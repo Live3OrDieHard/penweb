@@ -24,9 +24,9 @@ import java.util.List;
  */
 public class User implements IUser {
 	private final String loginName; // Name used for logging in. This has to be
-									// unique.
+	// unique.
 	private String displayName; // Name displayed to others on the site on
-								// examples, categories, etc
+	// examples, categories, etc
 	private String password;
 	private ArrayList<IExample> ownedExamples;
 	private ArrayList<ICategory> ownedCategories;
@@ -38,6 +38,9 @@ public class User implements IUser {
 	private ArrayList<IExample> editedExamples;
 	private Long id;
 
+	/**
+	 * This is the default constructor for the User class.
+	 */
 	public User(String loginName, String password, String displayName) {
 		this.loginName = loginName;
 		this.password = password;
@@ -49,21 +52,36 @@ public class User implements IUser {
 		this.id = new Long(-1);
 	}
 
+	/**
+	 * The getter function to the login name of the user.
+	 */
 	@Override
 	public String getLoginName() {
 		return this.loginName;
 	}
 
+	/**
+	 * The getter function to get the displayname of the user.
+	 */
 	@Override
 	public String getDisplayName() {
 		return this.displayName;
 	}
 
+	/**
+	 * The method is used to change the display name of the user.
+	 */
 	@Override
 	public void changeDisplayName(String name) {
 		this.displayName = name;
 	}
 
+	/**
+	 * The method is used to change the password for the user.
+	 * Before changing the password, the method is going to check
+	 * if the user put the old password correctly and enter the 
+	 * new password and reenter new password the same.
+	 */
 	@Override
 	public void changePassword(String oldPassword, String newPassword,
 			String reenterNew) {
@@ -76,6 +94,14 @@ public class User implements IUser {
 		// know how we're handling it on the front end
 	}
 
+	/**
+	 * THe method is used to assign an id for the user.
+	 * @param
+	 * 		 id the id intended to assign to the user
+	 * @return
+	 * 		  1 if the id has already been assigned
+	 * 		  0 if the id has been successfully assigned
+	 */
 	public int assignId(Long id) {
 		if (this.id != -1)
 			return 1; // return 1 if already assigned
@@ -84,46 +110,85 @@ public class User implements IUser {
 		return 0;
 	}
 
+	/**
+	 * The getter function to get the id of the user.
+	 */
 	@Override
 	public Long getId() {
 		return this.id;
 	}
 
+	/**
+	 * The method is used to check if the input password is
+	 * the correct password for the user.
+	 * 
+	 * @param
+	 * 		 passwordAttempt the password that is attempted
+	 */
 	@Override
 	public Boolean checkPassword(String passwordAttempt) {
 		return (passwordAttempt.equals(this.password));
 	}
 
+	/**
+	 * The method is used to add a new example to the ownership of the user.
+	 */
 	@Override
 	public void addOwnedExample(IExample example) {
 		ownedExamples.add(example);
 	}
 
+	/**
+	 * The getter function to get a list of example owned by the user.
+	 */
 	@Override
 	public List<IExample> getOwnedExampleList() {
 		return ownedExamples;
 	}
 
+	/**
+	 * The method is used to add the given category to the category list
+	 * owned by the user.
+	 * @param
+	 * 		 category the category intended to give the user
+	 */
 	@Override
 	public void addOwnedCategory(ICategory category) {
 		ownedCategories.add(category);
 	}
 
+	/**
+	 * The getter function to get the list of categories owned by the user.
+	 */
 	@Override
 	public List<ICategory> getOwnedCategoryList() {
 		return ownedCategories;
 	}
 
+	/**
+	 * The method is used add a new example to the list of examples
+	 * owned by the user.
+	 * @param
+	 * 		 example a new example intended to give the user
+	 */
 	@Override
 	public void addEditedExample(IExample example) {
 		editedExamples.add(example);
 	}
 
+	/**
+	 * The getter function to get the list of examples edited 
+	 * by the user.
+	 */
 	@Override
 	public List<IExample> getEditedExampleList() {
 		return editedExamples;
 	}
 
+	/**
+	 * (The method now is not functional)
+	 * The getter function to get the owner.
+	 */
 	// XXX TODO For now these will do nothing
 	// //////////////////////////////////////
 	@Override
@@ -131,11 +196,23 @@ public class User implements IUser {
 		return null;
 	}
 
+	/**
+	 * (The method now is not functional)
+	 * The getter function to get the id of the owner.
+	 */
 	@Override
 	public Long getOwnerId() {
 		return null;
 	}
 
+	/**
+	 * (The method now is not functional)
+	 * The method is used to assgin the ownership for 
+	 * a new owner.
+	 * 
+	 * @param
+	 * 		 owner a newer user is going to own the entry
+	 */
 	@Override
 	public int assignOwner(IUser owner) {
 		return 0;
