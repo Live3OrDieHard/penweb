@@ -435,6 +435,10 @@ public class WebController {
 		return result;
 	}
 	
+	/**
+	 * @param user passed in user
+	 * @return a list of all code examples that should be visible to this user
+	 */
 	public List<IExample> getVisibleExamples(IUser user) {
 		List<IExample> results = getAllPublicExamples();
 		
