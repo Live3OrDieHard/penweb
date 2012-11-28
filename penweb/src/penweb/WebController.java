@@ -23,8 +23,8 @@ import java.util.ListIterator;
  * WebController is a class that maintains the interaction between the database and the web view.
  * The methods for creating categories, examples and Users are implemented here.
  * 
- * @author jfchines
- * @author awiovanna
+ * @author Justin Chines
+ * @author Andy Iovanna
  * @author Neil Pomerleau
  * @author Andy C
  * @author Chrissy
@@ -439,8 +439,11 @@ public class WebController {
 	 * This method looks at all the example codes and collects all the examples
 	 * that correspond to a specific user. 
 	 * @param user
+<<<<<<< HEAD
 	 * @return a list of examples for a existing user
 	 * @param user passed in user
+=======
+>>>>>>> refs/remotes/origin/master
 	 * @return a list of all code examples that should be visible to this user
 	 */
 	public List<IExample> getVisibleExamples(IUser user) {
@@ -448,6 +451,17 @@ public class WebController {
 		
 		for (IExample example : db.getAllExample()) {
 			if (example.getOwnerId() == user.getId() && !results.contains(example))
+				results.add(example);
+		}
+		
+		return results;
+	}
+	
+	public List<IExample> getOwnedExamples(IUser user) {
+		List<IExample> results = new ArrayList<IExample>();
+		
+		for (IExample example : db.getAllExample()) {
+			if (example.getOwner() == user)
 				results.add(example);
 		}
 		
