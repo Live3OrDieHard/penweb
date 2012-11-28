@@ -114,7 +114,7 @@ public class WebController {
 	 * 
 	 * @param id
 	 *            the unique ID of the desired example.
-	 * @return the full example an example with the given id exists.
+	 * @return the example that corresponds to an existing id.
 	 */
 	public IExample getExampleById(Long id) {
 		List<IExample> ex = db.getAllExample();
@@ -435,6 +435,12 @@ public class WebController {
 		return result;
 	}
 	
+	/**
+	 * This method looks at all the example codes and collects all the examples
+	 * that correspond to a specific user. 
+	 * @param user
+	 * @return a list of examples for a existing user
+	 */
 	public List<IExample> getVisibleExamples(IUser user) {
 		List<IExample> results = getAllPublicExamples();
 		
