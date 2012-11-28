@@ -86,10 +86,25 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
+			<% 
+				int num;
+				if (user == null) {
+					num = webcon.getAllPublicExamples().size();
+				}
+				else {
+					num = webcon.getVisibleExamples(user).size();
+				}
+			%>
 			<%List<ICategory> cats = webcon.getCategories(); %>
-			<a href="index.jsp"><li>All Examples (<%=webcon.getNumEntries() %>)</li></a>
-			<% for (ICategory c : cats) { %>
-				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=c.getExampleList().size() %>)</li></a>
+			<a href="index.jsp"><li>All Examples (<%=num %>)</li></a>
+			<% for (ICategory c : cats) {
+				if (user == null) {
+					num = c.getPublicExamples().size();
+				}
+				else {
+					num = c.getVisibleExamples(user).size();
+				} %>
+				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=num %>)</li></a>
 			<%} %>
 		</ul>
 		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>

@@ -105,7 +105,16 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<a href="index.jsp"><li>All Examples (<%= webcon.getNumEntries() %>)</li></a>
+			<% 
+				int num;
+				if (user == null) {
+					num = webcon.getAllPublicExamples().size();
+				}
+				else {
+					num = webcon.getVisibleExamples(user).size();
+				}
+			%>
+			<a href="index.jsp"><li>All Examples (<%= num %>)</li></a>
 		</ul>
 		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>
 	</div>

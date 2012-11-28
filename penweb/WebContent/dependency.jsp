@@ -103,12 +103,27 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<a href="dependency.jsp?eid=<%= eid %>"><li <% if (cat == null) {%>class="selected"<%} %>>All Examples (<%= webcon.getNumEntries() - 1 %>)</li></a>
+			<% 
+				int num;
+				if (user == null) {
+					num = webcon.getAllPublicExamples().size();
+				}
+				else {
+					num = webcon.getVisibleExamples(user).size();
+				}
+			%>
+			<a href="dependency.jsp?eid=<%= eid %>"><li <% if (cat == null) {%>class="selected"<%} %>>All Examples (<%= num - 1 %>)</li></a>
 			<%
 				List<ICategory> cats = webcon.getCategories();
 				for (ICategory c : cats) {
+					if (user == null) {
+						num = c.getPublicExamples().size();
+					}
+					else {
+						num = c.getVisibleExamples(user).size();
+					}
 			%>
-			<a href="dependency.jsp?cat=<%=c.getId() %>&eid=<%= eid %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= c.getTitle() %> (<%= c.getExampleList().size() %>)</li></a>
+			<a href="dependency.jsp?cat=<%=c.getId() %>&eid=<%= eid %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= c.getTitle() %> (<%= num %>)</li></a>
 			<% } %> 
 		</ul>
 		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>
