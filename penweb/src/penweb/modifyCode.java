@@ -42,6 +42,7 @@ public class modifyCode extends HttpServlet {
 		ex.setCode(content);
 		ex.setLanguage(language);
 		ex.setComment(comment);
+		ex.setPublic(false);
 		// Note: Not going to implement modifying author, our field will soon
 		// be replaced by the new login system
 		if (cids != null) {
