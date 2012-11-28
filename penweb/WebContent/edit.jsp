@@ -7,6 +7,7 @@
 		// Instantiate the web controller and grab id paramter
 		WebController webcon = new WebController();
 		boolean isNewExample;
+		boolean isOwner = false;
 		Long id;
 		IExample ex;
 		if (!request.getParameterMap().containsKey("id")) {
@@ -29,6 +30,13 @@
 				response.sendRedirect("/penweb/error.jsp?err=3");
 				webcon.close();
 				return;
+			}
+		}
+		else {
+			if (user != null) {
+				if (ex.getOwner() == user) {
+					isOwner = true;
+				}
 			}
 		}
 	%>
@@ -61,6 +69,7 @@
 		<div class="modalContent">
 			<form action="duplicateCode" method="post">
 				<input type="hidden" name="eid" value="<%=id%>"/>
+				<input type="hidden" name="uid" value="<%if (user!=null) {%><%=user.getLoginName()%><%}%>"/>
 				<p>Select categories to duplicate this example into:</p>
 				<%List<ICategory> cats = webcon.getCategories(); %>
 				<% for (ICategory c : cats) { %>
@@ -117,9 +126,13 @@
 			<%	if (!isNewExample) {%>
 				<form class="barForm" <%if(user==null){%>style="display:none"<%}%>>
 				Options:
+				<%if (isOwner) {%>
 				<input type="button" class="button black-wide" onClick="location.href=('dependency.jsp?eid=<%= id %>')" value="Dependencies"/>
+				<%}%>
 				<input type="button" class="button black-wide" onClick="javascript: duplicateIntoCategories();" value="Duplicate"/>
+				<%if (isOwner) {%>
 				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" <%if (!isNewExample) {%>onmouseover="showCommentBlock();"<%}%> />
+				<%}%>
 				</form>
 			<%} else {%>
 				<form class="barForm" <%if(user==null){%>style="display:none"<%}%>>
@@ -171,19 +184,19 @@
 				<p><%=user.getDisplayName() %></p>
 			<%} %>
 			Title: *
-			<input type="text" name="title" <%if(user==null){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getTitle()%>"<%}%> />
+			<input type="text" name="title" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getTitle()%>"<%}%> />
 			
 			<input type="hidden" name="loginname" <%if(!isNewExample) {%>value="<%=ex.getAuthors().get(0).getLoginName()%>"<%} else {%>value="<%=user.getLoginName()%>"<%}%>/>
 			Language: 
-			<input type="text" name="language" <%if(user==null){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getLanguage()%>"<%}%>/>
+			<input type="text" name="language" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getLanguage()%>"<%}%>/>
 			Code: *
-			<textarea <%if(user==null){%>disabled="disabled"<%}%> name="content"><%if(!isNewExample) {%><%=ex.getCode()%><%}%></textarea>
+			<textarea <%if(user==null || !isOwner){%>disabled="disabled"<%}%> name="content"><%if(!isNewExample) {%><%=ex.getCode()%><%}%></textarea>
 			<font size="1"><p>* Required Fields</p></font>
 			
-				<p>Share with public? <input <%if(user==null){%>disabled="disabled"<%}%> <%if (!isNewExample) { if (ex.isPublic()) {%>checked<%}}%> type="checkbox" name="public"/></p>
+				<p>Share with public? <input <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if (!isNewExample) { if (ex.isPublic()) {%>checked<%}}%> type="checkbox" name="public"/></p>
 			<p>Categories:</p>
 			<% for (ICategory c : cats) { %>
-				<p><input <%if(user==null){%>disabled="disabled"<%}%> type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
+				<p><input <%if(user==null || !isOwner){%>disabled="disabled"<%}%> type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
 			<%} %>
 			<%
 			if (!isNewExample) {

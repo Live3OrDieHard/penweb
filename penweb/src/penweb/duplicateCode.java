@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dataStructure.ICategory;
 import dataStructure.IExample;
+import dataStructure.IUser;
 import exceptions.DuplicateException;
 
 /**
@@ -45,9 +46,10 @@ public class duplicateCode extends HttpServlet {
 		WebController webcon = new WebController();
 		String[] cids = request.getParameterValues("cids");
 		String eid = request.getParameter("eid");
+		String loginName = request.getParameter("uid");
 		IExample ex = webcon.getExampleById(Long.parseLong(eid));
-		//XXX Passes in original author as the author of this code example. Change to person who duplicates later.
-		Long nid = webcon.addCode(ex.getTitle(), ex.getCode(), ex.getLanguage(), ex.getAuthors().get(0).getLoginName(), ex.isPublic());
+		IUser user = webcon.getUserByLoginName(loginName);
+		Long nid = webcon.addCode(ex.getTitle(), ex.getCode(), ex.getLanguage(), user.getLoginName(), false);
 		IExample nex = webcon.getExampleById(nid);
 		if (cids != null) {
 			for (String s : cids) {
