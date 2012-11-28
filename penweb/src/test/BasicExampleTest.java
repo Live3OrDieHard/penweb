@@ -18,10 +18,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dataStructure.BasicExample;
-import dataStructure.BufferEntry;
 import dataStructure.Category;
 import dataStructure.IUser;
-import dataStructure.NonUser;
 import dataStructure.User;
 import exceptions.DuplicateException;
 import dataStructure.User;
@@ -38,24 +36,7 @@ public class BasicExampleTest {
 	@Before
 	public void setup() {
 	}
-
-	@Test
-	public void testTransferFromEntry() {
-		BufferEntry buf = new BufferEntry();
-		buf.setLanguage("java");
-		buf.setTitle("something");
-		buf.setCode("Hello World");
-		buf.setSource("");
-
-		BasicExample example = new BasicExample();
-		example.transferFromBuffer(buf);
-
-		assertEquals(example.getCode(),"Hello World");
-		assertEquals(example.getTitle(),"something");
-		assertEquals(example.getLanguage(),"java");
-		assertEquals(example.getSource(),"");
-	}
-
+	
 	@Test
 	public void testAssignId() {
 		BasicExample example = new BasicExample();

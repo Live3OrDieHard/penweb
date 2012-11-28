@@ -338,20 +338,6 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public BasicExample transferFromBuffer(BufferEntry e) {
-		this.authors = e.getAuthors();
-		this.code = e.getCode();
-		this.description = e.getDescription();
-		this.source = e.getSource();
-		this.language = e.getLanguage();
-		this.title = e.getTitle();
-		return this;
-	}
-
-	/**
 	 * The method used to add a new tag to the current tag list.
 	 * (Feature of checking existence of tag in tags should be
 	 * added later)

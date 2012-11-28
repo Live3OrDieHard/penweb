@@ -93,12 +93,6 @@ public interface IExample extends IEntry
 	 */
 	void setTitle(String t);
 
-	/**
-	 * @param e A BufferEntry containing information about an example
-	 * @return A BasicExample created using information in the BufferEntry
-	 */
-	BasicExample transferFromBuffer(BufferEntry e);
-
 	void setTags(ArrayList<String> tags);
 
 	ArrayList<String> getTags();
