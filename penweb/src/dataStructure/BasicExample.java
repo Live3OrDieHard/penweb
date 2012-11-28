@@ -16,7 +16,9 @@ import java.util.List;
 import exceptions.DuplicateException;
 
 /**
- * @author tpatikorn Basic examples.
+ * The Basic Examples class uses the parameters that describe a code example to create an example. 
+ * Also the dependencies, categories, users and other properties are added to the example.
+ * @author tpatikorn 
  */
 public class BasicExample implements IExample {
 
@@ -57,7 +59,11 @@ public class BasicExample implements IExample {
 	 * A comment to describe an example or a change in an example
 	 */
 	private String comment;
-
+	
+	
+	/**
+	 * BasicExample assigns the authors to a list of users. The owner by default is no one.
+	 */
 	public BasicExample() {
 		authors = new ArrayList<IUser>();
 		owner = null;
@@ -65,8 +71,9 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * @author Peng Ren, Dennis Koufos Add dependencies to the given examples
-	 * @return
+	 * Add dependencies to the given examples
+	 * @author Peng Ren, Dennis Koufos
+	 * @return dependency
 	 */
 	public ArrayList<IExample> getDependency() {
 		return dependency;
@@ -79,13 +86,13 @@ public class BasicExample implements IExample {
 	// throw an exception
 	@Override
 	public void addCategory(ICategory category) throws DuplicateException {
-		try {
-			if (!this.isInCategory(category)) {
-				categoryList.add(category);
+		if (!this.isInCategory(category)) {
+			categoryList.add(category);
+			if(!category.getExampleList().contains(this))
 				category.addCodeExample(this);
-			}
-		} catch (DuplicateException e) {
-			throw e;
+		}
+		else {
+			throw new DuplicateException("This example is already in category:"+category.getTitle());
 		}
 	}
 
@@ -242,14 +249,13 @@ public class BasicExample implements IExample {
 	 *            the category wanted to be check
 	 * @return true if the example is in category. false otherwise
 	 */
-	private boolean isInCategory(ICategory category) throws DuplicateException {
+	private boolean isInCategory(ICategory category) {
 		ArrayList<IExample> examples = (ArrayList<IExample>) category
 				.getExampleList();
 		int i;
 		for (i = 0; i < examples.size(); i++) {
 			if (this.id == examples.get(i).getId()) {
-				throw new DuplicateException(
-						"This example has already been in the category.");
+				return true;
 			}
 		}
 		return false;
@@ -399,7 +405,8 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * @author Peng Ren, Dennis Koufos Add dependencies to the given examples
+	 * Add dependencies to the given examples
+	 * @author Peng Ren, Dennis Koufos 
 	 * @param examples
 	 */
 	public void addDependency(IExample example) {
