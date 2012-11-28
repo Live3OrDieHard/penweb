@@ -15,10 +15,8 @@ import java.util.List;
 import exceptions.DuplicateException;
 
 /**
- * 
  * @author tpatikorn
- * an interface for a category, in case there are more category types.
- *
+ * An interface for a category, in case there are more category types.
  */
 import exceptions.DuplicateException;
 
