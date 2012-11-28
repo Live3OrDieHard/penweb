@@ -120,7 +120,7 @@
 		
 		
 			<form class="barForm" method="post" action="deleteCategory">
-			<% if (cat!=null) { %>
+			<% if (cat!=null && user!=null) { %>
 			Options:
 			<input type="hidden" name="cid" value="<%=cat.getId()%>"/>
 			<input type="<%if (cat.getExampleList().size()==0) {%>submit<%} else {%>button" onclick="deleteCategory();<%}%>" class="button black" value="Delete" />
