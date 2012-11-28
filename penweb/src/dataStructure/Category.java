@@ -69,10 +69,10 @@ public class Category implements ICategory {
 	 */
 	public void addCodeExample(IExample example) throws DuplicateException {
 		try {
-			if (!this.hasExample(example)) {
+			if (!this.hasExample(example))
 				this.exampleList.add(example);
+			if(!example.getCategories().contains(this))
 				example.addCategory(this);
-			}
 		} catch (DuplicateException e) {
 			throw e;
 		}
@@ -97,7 +97,7 @@ public class Category implements ICategory {
 			this.owner = owner;
 		return 0;
 	}
-	
+
 	/**
 	 * @see dataStructure.IEntry#getOwner()
 	 */
@@ -208,7 +208,7 @@ public class Category implements ICategory {
 			if (example.isPublic())
 				results.add(example);
 		}
-		
+
 		return results;
 	}
 
@@ -222,7 +222,7 @@ public class Category implements ICategory {
 			if (example.getOwnerId() == user.getId() && !results.contains(example))
 				results.add(example);
 		}
-		
+
 		return results;
 	}
 
@@ -232,13 +232,13 @@ public class Category implements ICategory {
 	@Override
 	public List<IExample> getOwnedExamples(IUser user) {
 		List<IExample> results = new ArrayList<IExample>();
-		
+
 		for (IExample example : exampleList) {
 			if (example.getOwner() == user) {
 				results.add(example);
 			}
 		}
-		
+
 		return results;
 	}
 
@@ -248,14 +248,13 @@ public class Category implements ICategory {
 	 * @param example The example wanted to be check
 	 * @return True if the category already has example. False otherwise.
 	 */
-	private boolean hasExample(IExample example) throws DuplicateException {
+	private boolean hasExample(IExample example) {
 		ArrayList<IExample> examples = (ArrayList<IExample>) this
 				.getExampleList();
 		int i;
 		for (i = 0; i < examples.size(); i++) {
 			if (example.getId() == examples.get(i).getId()) {
-				throw new DuplicateException(
-						"This example has already been in the category.");
+				return true;
 			}
 		}
 		return false;
