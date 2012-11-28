@@ -12,6 +12,7 @@
 		IExample ex;
 		if (!request.getParameterMap().containsKey("id")) {
 			isNewExample = true;
+			isOwner = true;
 			ex = null;
 			id = null;
 		}
