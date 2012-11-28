@@ -13,7 +13,7 @@
 		if (loginName != null) {
 			user = webcon.getUserByLoginName(loginName);
 		}
-		if (request.getParameterMap().containsKey("lang") && user != null) {
+		if (request.getParameterMap().containsKey("lang")) {
 			ex = webcon.getCodeByLanguageAndUser(user, request.getParameter("lang"));
 		}
 		
