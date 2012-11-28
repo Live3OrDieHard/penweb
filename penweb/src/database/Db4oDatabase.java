@@ -58,6 +58,10 @@ public class Db4oDatabase implements IDatabase {
 		}
 	}
 
+	/**
+	 * for storing purpose 
+	 * store an entry in db4odatabase
+	 */
 	@Override
 	public void store(IEntry e) {
 		e.assignOwner(null);
@@ -73,6 +77,24 @@ public class Db4oDatabase implements IDatabase {
 		return db.query(IEntry.class);
 	}
 
+	/**
+	 * This method is used to get an example from
+	 * the database by the given title and user name.
+	 * 
+	 * @param title
+	 * 				title string input
+	 * @param owner
+	 * 				owner of the example
+	 * 
+	 * @return all the examples with the title name and owned
+	 * by the given user if both the title and owner exist
+	 * all the examples with the title name if the title is given but
+	 * the user is not given
+	 * all the exmaples owned by the user if the title is not given but
+	 * the user is provided
+	 * all the examples if both title and user are not provided
+	 * 
+	 */
 	@Override
 	public List<IExample> getByHeader(final String title, final IUser owner) {
 
@@ -107,17 +129,28 @@ public class Db4oDatabase implements IDatabase {
 			return db.query(IExample.class);
 	}
 
+	/**
+	 * A cool function would be implemented later to get
+	 * examples by keyword.
+	 */
 	@Override
 	public List<IExample> getByKeyword(String key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Delete an entry from the dataabase
+	 * @param an entry
+	 */
 	@Override
 	public void delete(IEntry e) {
 		db.delete(e);
 	}
 
+	/**
+	 * close the da4odatabase
+	 */
 	@Override
 	public void close() {
 		db.close();
@@ -188,6 +221,16 @@ public class Db4oDatabase implements IDatabase {
 		return listUserLoginNames().contains(loginName);
 	}
 
+	/**
+	 * @param id
+	 * 			the id of the entry
+	 * @return
+	 * 			the entry with the given id if there is
+	 * the unique entry exists
+	 * 			null if there is no entry with the given id
+	 * 			null if there are more than one entries with
+	 * the given id(should throw an exception here later)
+	 */
 	@Override
 	public IEntry getByID(final Long id) {
 		List<IEntry> list = db.query(new Predicate<IEntry>() {
@@ -205,6 +248,11 @@ public class Db4oDatabase implements IDatabase {
 		// result
 	}
 
+	/**
+	 * The method is used to produce an id for an entries.
+	 * This method should be overwritten later in a better way.
+	 * @return a new id
+	 */
 	@Override
 	public Long getNewId() {
 		return (long) (Math.random() * 100000000); // should have a better way
@@ -212,6 +260,16 @@ public class Db4oDatabase implements IDatabase {
 		// this
 	}
 
+	/**
+	 * @param id
+	 * 			the id of the category
+	 * @return
+	 * 			the category with the given id if there is
+	 * the unique category exists
+	 * 			null if there is no category with the given id
+	 * 			null if there are more than one categories with
+	 * the given id(should throw an exception here later)
+	 */
 	@Override
 	public ICategory getCategoryByID(final Long id) {
 		List<ICategory> list = db.query(new Predicate<ICategory>() {
@@ -228,7 +286,17 @@ public class Db4oDatabase implements IDatabase {
 			return null; // throw non-unique exception if there is more than one
 		// result
 	}
-
+	
+	/**
+	 * @param id
+	 * 			the id of the example
+	 * @return
+	 * 			the example with the given id if there is
+	 * the unique example exists
+	 * 			null if there is no example with the given id
+	 * 			null if there are more than one examples with
+	 * the given id(should throw an exception here later)
+	 */
 	@Override
 	public IExample getExampleByID(final Long id) {
 		List<IExample> list = db.query(new Predicate<IExample>() {
@@ -246,6 +314,16 @@ public class Db4oDatabase implements IDatabase {
 		// result
 	}
 
+	/**
+	 * @param id
+	 * 			the login name of the user
+	 * @return
+	 * 			the user with the given login name if there is
+	 * the unique login name exists
+	 * 			null if there is no user with the given login name
+	 * 			null if there are more than one users with
+	 * the given login name(should throw an exception here later)
+	 */
 	@Override
 	public IUser getUserByLoginName(final String loginName) {
 		List<IUser> results = db.query(new Predicate<IUser>() {
@@ -263,6 +341,16 @@ public class Db4oDatabase implements IDatabase {
 							// login name.
 	}
 
+	/**
+	 * @param id
+	 * 			the id of the user
+	 * @return
+	 * 			the user with the given id if there is
+	 * the unique user exists
+	 * 			null if there is no user with the given id
+	 * 			null if there are more than one users with
+	 * the given id(should throw an exception here later)
+	 */
 	@Override
 	public IUser getUserByID(final Long id) {
 		List<IUser> results = db.query(new Predicate<IUser>() {
@@ -280,6 +368,20 @@ public class Db4oDatabase implements IDatabase {
 							// login name.
 	}
 
+
+	/**
+	 * The method is used to generate new id for a new entry
+	 * The method first tries to produce a random id for the
+	 * new entry and then check the availability for the new
+	 * id.
+	 * 
+	 * @return 
+	 * 			a new id if the id is available
+	 * 			thrown a NoIdAvailableException if the ids reach
+	 * the max number
+	 * 
+	 * @throws NoIdAvailableException
+	 */
 	@Override
 	public Long generateEntryId() throws NoIdAvailableException {
 		// try to generate random number first
@@ -297,6 +399,12 @@ public class Db4oDatabase implements IDatabase {
 		throw (new NoIdAvailableException(maxID, "MaxID reached"));
 	}
 
+	/**
+	 * The method checks if the title for the category is already existent.
+	 * 
+	 * @return	true if there is already the name for a category
+	 * 			false if the name is not used
+	 */
 	@Override
 	public boolean isCategoryTitleTaken(String name) {
 		List<ICategory> catlist = this.getAllCategory();
