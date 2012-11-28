@@ -173,4 +173,26 @@ public class Category implements ICategory {
 		} else
 			return false;
 	}
+
+	@Override
+	public List<IExample> getPublicExamples() {
+		ArrayList<IExample> results = new ArrayList<IExample>();
+		for (IExample example : this.exampleList) {
+			if (example.isPublic())
+				results.add(example);
+		}
+		
+		return results;
+	}
+
+	@Override
+	public List<IExample> getVisibleExamples(IUser user) {
+		List<IExample> results = getPublicExamples();
+		for (IExample example : this.exampleList) {
+			if (example.getOwnerId() == user.getId() && !results.contains(example))
+				results.add(example);
+		}
+		
+		return results;
+	}
 }
