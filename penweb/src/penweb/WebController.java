@@ -284,10 +284,9 @@ public class WebController {
 	public List<IExample> getCodeByLanguageAndUser(IUser user, String language) {
 		List<IExample> ExamplesByLanguage = db.getByLanguage(language);
 		List<IExample> result = new ArrayList<IExample>();
-		// We may want to add a loop that adds every public example to the list
-		// before we add specific private ones for the user
+		
 		for (IExample e : ExamplesByLanguage) {
-			if (e.isPublic() || e.getOwnerId().equals(user.getId())) {
+			if (e.isPublic() || (user != null && e.getOwnerId().equals(user.getId()))) {
 				result.add(e);
 			}
 		}
