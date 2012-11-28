@@ -68,4 +68,6 @@ public interface ICategory extends IEntry{
 	List<IExample> getPublicExamples();
 	
 	List<IExample> getVisibleExamples(IUser user);
+	
+	List<IExample> getOwnedExamples(IUser user);
 }

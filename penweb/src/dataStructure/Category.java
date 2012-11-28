@@ -279,4 +279,17 @@ public class Category implements ICategory {
 		
 		return results;
 	}
+
+	@Override
+	public List<IExample> getOwnedExamples(IUser user) {
+		List<IExample> results = new ArrayList<IExample>();
+		
+		for (IExample example : exampleList) {
+			if (example.getOwner() == user) {
+				results.add(example);
+			}
+		}
+		
+		return results;
+	}
 }
