@@ -30,7 +30,7 @@ public class ExampleProperties implements IProperties
 	@Override
 	public String getLanguage()
 	{
-		return this.language;
+		return this.language.toLowerCase();
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class ExampleProperties implements IProperties
 	@Override
 	public void setLanguage(String language)
 	{
-		this.language = language;
+		this.language = language.toLowerCase();
 	}
 
 	/**
