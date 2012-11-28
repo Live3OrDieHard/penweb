@@ -34,6 +34,23 @@
 		else { 
 			if (!isSet) { response.sendRedirect("/penweb"); isSet = true; }
 		}
+		List<IExample> ex;
+		if (cat == null) {
+			if (user == null) {
+				ex = webcon.getAllPublicExamples();
+			}
+			else {
+				ex = webcon.getVisibleExamples(user);
+			}
+		}
+		else {
+			if (user == null) {
+				ex = cat.getPublicExamples();
+			}
+			else {
+				ex = cat.getVisibleExamples(user);
+			}
+		}
 	%>
 	<meta charset="UTF-8">
 	<title>PEN &middot; <%if (cat == null) { %>All Examples (<%= webcon.getNumEntries() %>)<%} else { %><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)<%} %></title>
@@ -121,6 +138,9 @@
 					}
 					else {
 						num = c.getVisibleExamples(user).size();
+						if (c.getExampleIds().contains(eid)) {
+							num--;
+						}
 					}
 			%>
 			<a href="dependency.jsp?cat=<%=c.getId() %>&eid=<%= eid %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= c.getTitle() %> (<%= num %>)</li></a>
@@ -130,33 +150,7 @@
 	</div>
 	<div class="right">
 		<ul class="entrylist">
-			<% if (cat == null) {
-				List<IExample> ex = webcon.getExamples();
-					for (IExample e : ex) { 
-						boolean depender = false;
-						if (dependencies != null && !(dependencies.isEmpty())) {
-							depender =dependencies.contains(e);
-						}
-						if (!e.getId().equals(eid)) {
-							if (!depender) {%>
-					<a href="addDependency?eid=<%= eid %>&did=<%=e.getId()%>">
-					<%} %>
-						<li
-						<%
-							if (depender) { %>
-								class="selected"
-							<%	}
-						%>
-						>
-							<h1><%= e.getTitle() %></h1>
-							<div class="fade"></div>
-							<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
-						</li>
-					</a>
-				<%		}
-					}%>
-			<%} else {
-				List<IExample> ex = cat.getExampleList();
+			<% 
 				for (IExample e : ex) { 
 					boolean depender = false;
 					if (dependencies != null && !(dependencies.isEmpty())) {
@@ -166,7 +160,7 @@
 					<a href="addDependency?eid=<%= eid %>&did=<%=e.getId()%>">
 					<li
 						<%
-								if (!depender) { %>
+								if (depender) { %>
 									class="selected"
 								<%}
 						%>
@@ -177,8 +171,7 @@
 					</li>
 				</a>
 				<%	}
-				}
-			} %>
+				} %>
 		</ul>
 	</div>
 </div>
