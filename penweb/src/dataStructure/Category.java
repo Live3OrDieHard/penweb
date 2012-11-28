@@ -67,14 +67,13 @@ public class Category implements ICategory {
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
 	public void addCodeExample(IExample example) throws DuplicateException {
-		try {
-			if (!this.hasExample(example)) {
-				this.exampleList.add(example);
+		if (!this.hasExample(example)) {
+			this.exampleList.add(example);
+			if(!example.getCategories().contains(this))
 				example.addCategory(this);
-			}
-		} catch (DuplicateException e) {
-			throw e;
 		}
+		else
+			throw new DuplicateException("This example is already in category:"+this.title);
 	}
 
 	/**
@@ -84,14 +83,13 @@ public class Category implements ICategory {
 	 *            the example wanted to be check
 	 * @return true if the category already has example. false otherwise
 	 */
-	private boolean hasExample(IExample example) throws DuplicateException {
+	private boolean hasExample(IExample example) {
 		ArrayList<IExample> examples = (ArrayList<IExample>) this
 				.getExampleList();
 		int i;
 		for (i = 0; i < examples.size(); i++) {
 			if (example.getId() == examples.get(i).getId()) {
-				throw new DuplicateException(
-						"This example has already been in the category.");
+				return true;
 			}
 		}
 		return false;

@@ -44,7 +44,7 @@ public class ExampleAndCategoryTest {
 		// Connect to test database
 		db = new Db4oDatabase(databaseName,true);
 	}
-
+	
 	@Test
 	public void testAddExamplePreAssignedID() throws DuplicateException {
 		Category category1 = new Category("Cat", "Cats are nice");
@@ -55,16 +55,8 @@ public class ExampleAndCategoryTest {
 		BasicExample example2 = new BasicExample();
 		example2.setCode("printf(Bye World);");
 		example2.setTitle("Bye World");
-		try {
-			example1.addCategory(category1);
-		}
-		catch(DuplicateException e) {
-		}
-		try {
-			example1.addCategory(category2);
-		}
-		catch(DuplicateException e) {
-		}
+		example1.addCategory(category1);
+		example1.addCategory(category2);
 		db.store(category1);
 		db.store(category2);
 		db.store(example1);
@@ -75,8 +67,8 @@ public class ExampleAndCategoryTest {
 		db = new Db4oDatabase(databaseName,true);
 
 		List<ICategory> categoryList = db.getExampleByID(example1.getId()).getCategories();
-		assertTrue((categoryList.get(0).getId().equals(category1.getId()) && categoryList.get(1).getId().equals(category2.getId()))
-				|| (categoryList.get(0).getId().equals(category2.getId()) && categoryList.get(1).getId().equals(category1.getId())));
+		assertNotSame((categoryList.get(0).getId().equals(category1.getId()) && categoryList.get(1).getId().equals(category2.getId()))
+			    	, (categoryList.get(0).getId().equals(category2.getId()) && categoryList.get(1).getId().equals(category1.getId())));
 	}
 
 	@Test
@@ -103,27 +95,11 @@ public class ExampleAndCategoryTest {
 		ICategory category3 = db.getCategoryByID(category1.getId());
 		ICategory category4 = db.getCategoryByID(category2.getId());
 
-		try {
-			example3.addCategory(category3);
-		}
-		catch(DuplicateException e) {
-		}
-		try {
-			example3.addCategory(category4);
-		}
-		catch(DuplicateException e) {
-		}
-		try {
-			example4.addCategory(category3);
-		}
-		catch(DuplicateException e) {
-		}
-		try {
-			example4.addCategory(category4);
-		}
-		catch(DuplicateException e) {
-		}
-
+		example3.addCategory(category3);
+		example3.addCategory(category4);
+		example4.addCategory(category3);
+		example4.addCategory(category4);
+		
 		db.store(example3);
 		db.store(example4);
 		db.store(category3);
@@ -135,8 +111,8 @@ public class ExampleAndCategoryTest {
 
 		IExample newExample = db.getByHeader("Hello World", null).get(0);
 		List<ICategory> categoryList = newExample.getCategories();
-		assertTrue((categoryList.get(0).getId().equals(category1.getId()) && categoryList.get(1).getId().equals(category2.getId()))
-				|| (categoryList.get(0).getId().equals(category2.getId()) && categoryList.get(1).getId().equals(category1.getId())));
+		assertNotSame((categoryList.get(0).getId().equals(category1.getId()) && categoryList.get(1).getId().equals(category2.getId()))
+				, (categoryList.get(0).getId().equals(category2.getId()) && categoryList.get(1).getId().equals(category1.getId())));
 	}
 
 	@Test
@@ -147,20 +123,34 @@ public class ExampleAndCategoryTest {
 		example1.assignId(1L);
 		category1.assignId(2L);
 		category2.assignId(3L);
-		try {
-			example1.addCategory(category1);
-		}
-		catch(DuplicateException e) {
-		}
-		try {
-			example1.addCategory(category2);
-		}
-		catch(DuplicateException e) {
-		}
+		example1.addCategory(category1);
+		example1.addCategory(category2);
+		
 		example1.removeFromAllCategories();
 		assertEquals(category1.getExampleList().size(),0);
 		assertEquals(category2.getExampleList().size(),0);
 		assertEquals(example1.getCategories().size(),0);
+	}
+
+	@Test 
+	public void duplicateTest() throws DuplicateException {
+		Category category1 = new Category("Cat", "Cats are nice");
+		Category category2 = new Category("Dog", "Dogs are nice");
+		BasicExample example1 = new BasicExample();
+		BasicExample example2 = new BasicExample();
+		example1.assignId(11L);
+		example2.assignId(12L);
+		category1.assignId(21L);
+		category2.assignId(22L);
+		example1.addCategory(category1);
+		try {
+			example1.addCategory(category1);
+			fail("It should throw exception");
+		}
+		catch(DuplicateException e) {
+			//System.out.println(e.getMessage());
+			assertEquals(e.getMessage(),"This example is already in category:Cat");
+		}
 	}
 
 	@Test
@@ -173,33 +163,18 @@ public class ExampleAndCategoryTest {
 		example2.assignId(12L);
 		category1.assignId(21L);
 		category2.assignId(22L);
-		try {
-			example1.addCategory(category1);
-		}
-		catch(DuplicateException e) {
-		}
-		try {
-			example1.addCategory(category2);
-		}
-		catch(DuplicateException e) {
-		}
-		try {
-			example2.addCategory(category1);
-		}
-		catch(DuplicateException e) {
-		}
-		try {
-			example2.addCategory(category2);
-		}
-		catch(DuplicateException e) {
-		}
+		example1.addCategory(category1);
+		example1.addCategory(category2);
+		example2.addCategory(category1);
+		example2.addCategory(category2);
+		
 		category1.removeAllExamples();
 		assertEquals(category1.getExampleList().size(),0);
 		assertEquals(category2.getExampleList().size(),2);
 		assertEquals(example1.getCategories().size(),1);
 		assertEquals(example2.getCategories().size(),1);
-	}
-	
+	}	
+
 	@After
 	public void cleanup() {
 		db.close();
