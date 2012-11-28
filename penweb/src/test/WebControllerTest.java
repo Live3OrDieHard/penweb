@@ -22,6 +22,7 @@ import dataStructure.ICategory;
 import dataStructure.IExample;
 import dataStructure.IUser;
 import database.Db4oDatabase;
+import exceptions.DuplicateException;
 
 import penweb.Initializer;
 
@@ -366,6 +367,82 @@ public class WebControllerTest {
 		assertTrue(ChanLangList.containsAll(JavaCpp));
 		assertTrue(JavaCpp.containsAll(ChanLangList));
 }
+	@Test
+	public void deleteTest(){
+		testee.addUser("Iva", "password", "Iva");
+		testee.addUser("Alice", "Alice123", "I'm not Alice");
+		IUser Alice = testee.getUserByLoginName("Alice");
+		IUser Iva = testee.getUserByLoginName("Iva");
+		Long id1 = testee.addCode("Sleep Sort", "I'm a genius", "C++", "Alice",true);
+		Long id2 = testee.addCode("Sleep Sort", "System.out.printf();", "Java", "Alice",false);
+		Long id3 = testee.addCode("Sleep Sort in Java", "I'm a genius", "Java", "Alice",true);
+		Long id4 = testee.addCode("Merge Sort","This is Merge Sort", "Java", "Iva", true);
+		Long id5 = testee.addCode("simple loop", "while(1){}", "C", "Iva",  false);
+		Long id6 = testee.addCode("simple loop", "while(true){}", "Java", "Iva",  false);
+		Long id7 =  testee.addCategory("Alice's", "This is Alice's",Alice,true);
+		Long id8 =  testee.addCategory("Bob's", "This is Bob's",Iva,false);
+		IExample ex1 = testee.getExampleById(id1);
+		IExample ex2 = testee.getExampleById(id2);
+		IExample ex3 = testee.getExampleById(id3);
+		IExample ex4 = testee.getExampleById(id4);
+		IExample ex5 = testee.getExampleById(id5);
+		IExample ex6 = testee.getExampleById(id6);
+		ICategory cat1 = testee.getCategoryById(id7);
+		ICategory cat2 = testee.getCategoryById(id8);
+		try {
+			ex1.addCategory(cat1);
+		} catch (DuplicateException e) {
+			//fail();
+		}
+		try {
+			ex2.addCategory(cat1);
+		} catch (DuplicateException e) {
+			//fail();
+		}
+		try {
+			ex3.addCategory(cat1);
+		} catch (DuplicateException e) {
+			//fail();
+		}
+		try {
+			ex4.addCategory(cat2);
+		} catch (DuplicateException e) {
+			//fail();
+		}
+		ex2.addDependency(ex1);
+		List<IExample> exList = new ArrayList<IExample>();
+		exList.add(ex1);
+		exList.add(ex2);
+		exList.add(ex3);
+		exList.add(ex4);
+		exList.add(ex5);
+		exList.add(ex6);
+		List<ICategory> catList = new ArrayList<ICategory>();
+		catList.add(cat1);
+		catList.add(cat2);
+		
+		assertTrue(exList.contains(ex1));
+		assertEquals(testee.delete(ex1, Iva),1);
+		assertTrue(testee.getExamples().containsAll(exList));
+		assertEquals(testee.delete(ex1, Alice),2);
+		assertTrue(testee.getExamples().containsAll(exList));
+		assertEquals(testee.delete(ex2, Alice),0);
+		exList.remove(ex2);
+		assertTrue(testee.getExamples().containsAll(exList));
+
+
+		
+		assertTrue(testee.getCategories().containsAll(catList));
+		assertEquals(testee.delete(cat1, Iva), 1);
+		assertTrue(testee.getCategories().containsAll(catList));
+		assertEquals(testee.delete(cat1, Alice), 0);
+		catList.remove(cat1);
+		assertTrue(testee.getCategories().containsAll(catList));
+
+
+
+		
+	}
 	
 	@After
 	public void cleanup() throws IOException {
