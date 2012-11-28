@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dataStructure.IUser;
+import dataStructure.*;
 
 /**
- * Servlet implementation class addCategory
+ * Servlet implementation class deleteCategory
  */
-@WebServlet("/addCategory")
-public class addCategory extends HttpServlet {
+@WebServlet("/deleteCategory")
+public class deleteCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public addCategory() {
+    public deleteCategory() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +30,6 @@ public class addCategory extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		WebController webcon = new WebController();
-		String name = request.getParameter("name");
-		String desc = request.getParameter("desc");
 		HttpSession session = request.getSession(true);
 		String loginName = (String) session.getAttribute("name");
 		
@@ -50,15 +48,12 @@ public class addCategory extends HttpServlet {
 			return;
 		}
 		
-		
-		if (!webcon.isCategoryTitleTaken(name)) {
-			webcon.addCategory(name, desc, user, false);
-			response.sendRedirect("/penweb");
-		}
-		else {
-			response.sendRedirect("error.jsp?err=4");
-		}
+		String scid = request.getParameter("cid");
+		Long cid = Long.parseLong(scid);
+		ICategory cat = webcon.getCategoryById(cid);
+		webcon.delete(cat, user);
 		webcon.close();
+		response.sendRedirect("/penweb");
 	}
 
 }

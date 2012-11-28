@@ -62,9 +62,7 @@
 				There are examples in this category. Do you still want to delete the category?
 				<p></p>
 				<input type="hidden" name="cid" value="<%
-				if (cat!=null) {%>
-					<%=cat.getId()%>
-				<%}%>"/>
+				if (cat!=null) {%><%=cat.getId()%><%}%>"/>
 				<input type="submit" class="button green" value="Delete" />
 				<input type="button" class="button black" value="Cancel" onClick="closeModal();" />
 			</form>
@@ -124,10 +122,7 @@
 			<form class="barForm" method="post" action="deleteCategory">
 			<% if (cat!=null) { %>
 			Options:
-			<input type="hidden" name="cid" value="<%
-				if (cat!=null) {%>
-					<%=cat.getId()%>
-				<%}%>"/>
+			<input type="hidden" name="cid" value="<%=cat.getId()%>"/>
 			<input type="<%if (cat.getExampleList().size()==0) {%>submit<%} else {%>button<%}%>" class="button black" value="Delete" onclick="deleteCategory();"/>
 			<%}%>
 			<input type="button" class="button green" value="Search" onclick="searchCategory();" />
