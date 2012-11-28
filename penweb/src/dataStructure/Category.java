@@ -16,9 +16,10 @@ import java.util.ArrayList;
 import exceptions.DuplicateException;
 
 /**
- * @author awiovanna, tpatikorn
+ * @author awiovanna
+ * @author tpatikorn
  * 
- *         A category into which code examples can be placed
+ * A category into which code examples can be placed
  */
 public class Category implements ICategory {
 	private IUser owner;

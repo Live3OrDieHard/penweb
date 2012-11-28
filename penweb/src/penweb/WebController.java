@@ -39,7 +39,7 @@ public class WebController {
 	 * @param databaseName
 	 */
 	public WebController() {
-		this.db = new Db4oDatabase("UNUSED PARAMETER");
+		this.db = new Db4oDatabase();
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class WebController {
 	 * @param databaseName
 	 */
 	public WebController(String databaseName) {
-		this.db = new Db4oDatabase(databaseName, true);
+		this.db = new Db4oDatabase(databaseName);
 	}
 
 	/**

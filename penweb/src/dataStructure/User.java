@@ -20,7 +20,7 @@ import java.util.List;
  * @author kirkgrimsley
  * @author avenkatesh
  * 
- *         A registered user who owns examples and categories.
+ * A registered user who owns examples and categories.
  */
 public class User implements IUser {
 	private final String loginName; // Name used for logging in. This has to be

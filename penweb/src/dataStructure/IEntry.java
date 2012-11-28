@@ -14,7 +14,6 @@ package dataStructure;
  * @author tpatikorn
  * IEntry should be an entry
  * covering anything from examples/codes/tests to folders
- * 
  */
 public interface IEntry 
 {	

@@ -56,7 +56,7 @@ public class WebControllerTest {
 		assertFalse(add2);
 
 		testee.close();
-		db = new Db4oDatabase(databaseName, true);
+		db = new Db4oDatabase(databaseName);
 
 		assertEquals(db.getAllUsers().size(), 1);
 		assertEquals(db.getAllUsers().get(0).getDisplayName(), "Alice");

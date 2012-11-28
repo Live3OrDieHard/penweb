@@ -10,9 +10,6 @@
 
 package database;
 
-/**
- * 
- */
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +27,6 @@ import dataStructure.IEntry;
 import dataStructure.IExample;
 import exceptions.NoIdAvailableException;
 import dataStructure.IUser;
-import dataStructure.IPerson;
 
 /*
  * How to create a new instance of this database using IDatabase:
@@ -43,32 +39,33 @@ import dataStructure.IPerson;
  * If you have any questions about how to use this ask Andy C <andy@wpi.edu>
  */
 
-/**
+/** 
  * @author Andy Creeth
  * @author Justin Chines
+ * This class acts as an interface to a DB4O database. It
+ * connects to a server running locally upon creation. There are 
+ * methods to retrieve data from the database.
  */
 public class Db4oDatabase implements IDatabase {
 	final private long maxID = 100000000000L;
 	private ObjectContainer db;
 	private ObjectServer server;
 
-	public Db4oDatabase(String path) {
+	public Db4oDatabase() {
 		db = Initializer.db4oServer.openClient();
 	}
 
 	/**
-	 * for testing purpose only
+	 * For testing purpose only
 	 * @param path
 	 * @param forTest
 	 */
-	public Db4oDatabase(String path, boolean isEmbedded) {
-		if (isEmbedded) {
-			EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
-			configuration.common().updateDepth(10);
-			configuration.common().activationDepth(10);
+	public Db4oDatabase(String path) {
+		EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
+		configuration.common().updateDepth(10);
+		configuration.common().activationDepth(10);
 
-			db = Db4oEmbedded.openFile(configuration, path);
-		}
+		db = Db4oEmbedded.openFile(configuration, path);
 	}
 
 	/**
