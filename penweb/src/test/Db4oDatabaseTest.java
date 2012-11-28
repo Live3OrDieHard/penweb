@@ -38,7 +38,7 @@ public class Db4oDatabaseTest {
 	@Before
 	public void setup() {
 		// Connect to test database
-		testee = new Db4oDatabase(databaseName,true);
+		testee = new Db4oDatabase(databaseName);
 	}
 
 	@Test

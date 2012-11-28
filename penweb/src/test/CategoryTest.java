@@ -37,7 +37,7 @@ public class CategoryTest {
 	
 	@Before
 	public void setup() {
-		db = new Db4oDatabase("CategoryTest.yap",true);
+		db = new Db4oDatabase("CategoryTest.yap");
 	}
 	
 	@Test

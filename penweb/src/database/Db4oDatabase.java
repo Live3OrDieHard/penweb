@@ -51,23 +51,21 @@ public class Db4oDatabase implements IDatabase {
 	private ObjectContainer db;
 	private ObjectServer server;
 
-	public Db4oDatabase(String path) {
+	public Db4oDatabase() {
 		db = Initializer.db4oServer.openClient();
 	}
 
 	/**
-	 * for testing purpose only
+	 * For testing purpose only
 	 * @param path
 	 * @param forTest
 	 */
-	public Db4oDatabase(String path, boolean isEmbedded) {
-		if (isEmbedded) {
-			EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
-			configuration.common().updateDepth(10);
-			configuration.common().activationDepth(10);
+	public Db4oDatabase(String path) {
+		EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
+		configuration.common().updateDepth(10);
+		configuration.common().activationDepth(10);
 
-			db = Db4oEmbedded.openFile(configuration, path);
-		}
+		db = Db4oEmbedded.openFile(configuration, path);
 	}
 
 	/**
