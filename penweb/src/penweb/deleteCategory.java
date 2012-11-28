@@ -49,7 +49,6 @@ public class deleteCategory extends HttpServlet {
 		}
 		
 		String scid = request.getParameter("cid");
-		System.out.println(scid);
 		Long cid = Long.parseLong(scid);
 		ICategory cat = webcon.getCategoryById(cid);
 		webcon.delete(cat, user);

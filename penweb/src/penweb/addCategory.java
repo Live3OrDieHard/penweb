@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dataStructure.IUser;
 
 /**
  * Servlet implementation class addCategory
@@ -29,8 +32,27 @@ public class addCategory extends HttpServlet {
 		WebController webcon = new WebController();
 		String name = request.getParameter("name");
 		String desc = request.getParameter("desc");
+		HttpSession session = request.getSession(true);
+		String loginName = (String) session.getAttribute("name");
+		
+		// redirect back to index if no loginname was given
+		if (loginName == null) {
+			response.sendRedirect("/penweb");
+			webcon.close();
+			return;
+		}
+		
+		// redirect back to index if user does not exist
+		IUser user = webcon.getUserByLoginName(loginName);
+		if (user == null) {
+			response.sendRedirect("/penweb");
+			webcon.close();
+			return;
+		}
+		
+		
 		if (!webcon.isCategoryTitleTaken(name)) {
-			webcon.addCategory(name, desc);
+			webcon.addCategory(name, desc, user, false);
 			response.sendRedirect("/penweb");
 		}
 		else {
