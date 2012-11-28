@@ -164,7 +164,9 @@
 			Code: *
 			<textarea <%if(user==null){%>disabled="disabled"<%}%> name="content"><%if(!isNewExample) {%><%=ex.getCode()%><%}%></textarea>
 			<font size="1"><p>* Required Fields</p></font>
-			<p>Categories</p>
+			
+				<p><input <%if(user==null){%>disabled="disabled"<%}%> type="checkbox" name="public" value="public"/> Public</p>
+			<p>Categories:</p>
 			<% for (ICategory c : cats) { %>
 				<p><input <%if(user==null){%>disabled="disabled"<%}%> type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
 			<%} %>
