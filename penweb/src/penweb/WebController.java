@@ -424,4 +424,15 @@ public class WebController {
 		}
 		return result;
 	}
+	
+	public List<IExample> getVisibleExamples(IUser user) {
+		List<IExample> results = getAllPublicExamples();
+		
+		for (IExample example : db.getAllExample()) {
+			if (example.getOwnerId() == user.getId() && !results.contains(example))
+				results.add(example);
+		}
+		
+		return results;
+	}
 }

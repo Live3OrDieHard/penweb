@@ -54,4 +54,8 @@ public interface ICategory extends IEntry{
 	public boolean isPublic();
 
 	public void setPublic(boolean isPublic);
+	
+	List<IExample> getPublicExamples();
+	
+	List<IExample> getVisibleExamples(IUser user);
 }
