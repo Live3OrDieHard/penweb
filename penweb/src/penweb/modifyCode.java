@@ -12,6 +12,7 @@ import exceptions.DuplicateException;
 
 /**
  * Servlet implementation class modifyCode
+ * @author Andy C
  */
 @WebServlet("/modifyCode")
 public class modifyCode extends HttpServlet {
@@ -36,12 +37,14 @@ public class modifyCode extends HttpServlet {
 		Long id = Long.parseLong(request.getParameter("eid"));
 		String comment = request.getParameter("comment");
 		String[] cids = request.getParameterValues("cids");
+		boolean pub = request.getParameter("public") != null;
 		
 		IExample ex = webcon.getExampleById(id);
 		ex.setTitle(title);
 		ex.setCode(content);
 		ex.setLanguage(language);
 		ex.setComment(comment);
+		ex.setPublic(pub);
 		// Note: Not going to implement modifying author, our field will soon
 		// be replaced by the new login system
 		if (cids != null) {

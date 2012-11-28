@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 /**
- * Controller for the web interface
+ * WebController is a class that maintains the interaction between the database and the web view.
+ * The methods for creating categories, examples and Users are implemented here.
  * 
  * @author jfchines
  * @author awiovanna
@@ -23,6 +24,10 @@ public class WebController {
 
 	private IDatabase db;
 
+	/**
+	 * This is the constructor for the WebController class
+	 * @param databaseName
+	 */
 	public WebController() {
 		this.db = new Db4oDatabase("UNUSED PARAMETER");
 	}
@@ -34,15 +39,6 @@ public class WebController {
 	 */
 	public WebController(String databaseName) {
 		this.db = new Db4oDatabase(databaseName, true);
-	}
-
-	/**
-	 * loltest
-	 */
-	public void populate() {
-		// Add some stuff to the database
-		addCategory("Test Cat", "This is a test cat");
-		addCategory("Another Cat", "This is another cat");
 	}
 
 	/**
@@ -59,7 +55,7 @@ public class WebController {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn
+	 * @author awiovanna, tpatikorn, iprangishvili, dmulcahy
 	 * @param name
 	 *            of the category
 	 * @param desc
@@ -69,13 +65,14 @@ public class WebController {
 	 * @param isPublic
 	 *            whether or not the category is public Adds a category with the
 	 *            given specifications to the database
+	 * @return the id of newly added category
 	 */
-	public void addCategory(String name, String desc, IUser owner,
+	public Long addCategory(String name, String desc, IUser owner,
 			boolean isPublic) {
 		ICategory cat = new Category(name, desc);
 		cat.assignOwner(owner);
 		cat.setPublic(isPublic);
-		db.store(cat);
+		return db.store(cat);
 	}
 
 	/**
@@ -165,7 +162,7 @@ public class WebController {
 	 * @return the id of the code example added to the database or error
 	 *         code(maybe) if it cannot be added
 	 */
-	public long addCode(String title, String content, String language,
+	public Long addCode(String title, String content, String language,
 			String loginName, boolean isPublic) {
 		// XXX TODO Pass in a username or userId instead of an "author" string.
 		IExample ex = new BasicExample();
@@ -179,8 +176,7 @@ public class WebController {
 		authors.add(auth);
 		ex.setAuthors(authors);
 		ex.assignOwner(auth);
-		db.store(ex);
-		return ex.getId();
+		return db.store(ex);
 	}
 
 	/**
@@ -215,10 +211,6 @@ public class WebController {
 		IUser user = db.getUserByLoginName(loginName);
 
 		return ((user != null) && (user.checkPassword(password)));
-	}
-
-	public String getText() {
-		return "Testing text";
 	}
 
 	/**
@@ -259,9 +251,11 @@ public class WebController {
 	 * Takes in an entry and adds it to the database.
 	 * 
 	 * @param e
+	 * 
+	 * @return newly added entry's id
 	 */
-	public void store(IEntry e) {
-		db.store(e);
+	public Long store(IEntry e) {
+		return db.store(e);
 	}
 
 	/**
@@ -282,21 +276,22 @@ public class WebController {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn This method returns a list of all private
-	 *         code examples written in the given language by the given user
+	 * @author awiovanna, tpatikorn 
+	 * This method returns a list of all code examples accessible by user
+	 * and written in the given language 
+	 * accessible = written by user or is public
 	 * @param user
 	 *            the identified user
-	 * @param language
+	 * @param languageW
 	 *            the identified language
 	 * @return List of all code examples written in language by user
 	 */
-	public List<IExample> getCodeByLanguageandUser(IUser user, String language) {
+	public List<IExample> getCodeByLanguageAndUser(IUser user, String language) {
 		List<IExample> ExamplesByLanguage = db.getByLanguage(language);
 		List<IExample> result = new ArrayList<IExample>();
-		// We may want to add a loop that adds every public example to the list
-		// before we add specific private ones for the user
+		
 		for (IExample e : ExamplesByLanguage) {
-			if (e.getOwnerId().equals(user.getId())) {
+			if (e.isPublic() || (user != null && e.getOwnerId().equals(user.getId()))) {
 				result.add(e);
 			}
 		}
@@ -322,16 +317,24 @@ public class WebController {
 	 * @author awiovanna, tpatikorn
 	 * @param user
 	 *            specified user
-	 * @return List of all languages that are used by the given user.
+	 * @return List of all languages that are used in public examples, 
+	 * as well as all languages that are used in private code for the given user.
 	 */
-	public List<String> getLangListByUser(IUser user) {
-		List<IExample> getExampleByUser = db.getExampleByUser(user);
+	public List<String> getLangList(IUser user) {
+		List<IExample> examples = db.getAllExample();
 		List<String> result = new ArrayList<String>();
-		for (IExample e : getExampleByUser) {
-			if (!result.contains(e.getLanguage())) {
+		for (IExample e : examples) {
+			if (e.isPublic() && !result.contains(e.getLanguage()))
 				result.add(e.getLanguage());
+			if (user != null)
+			{
+				if (e.getOwner() != null) {
+					if (e.getOwner().equals(user) && !result.contains(e.getLanguage()))
+						result.add(e.getLanguage());
+				}
 			}
 		}
+		
 		return result;
 	}
 
@@ -358,23 +361,35 @@ public class WebController {
 		
 		//user is owner
 		if (entry instanceof ICategory) {
-			//TODO: remove examples instead
 			if(((ICategory) entry).getExampleList().size()!=0)
-				return 2;
-			//((ICategory) entry).removeAllExamples();
+			{
+				ICategory categoryEntry = (ICategory)entry;
+				List<IExample> examples = categoryEntry.getExampleList();
+				categoryEntry.removeAllExamples();
+				for (IExample example : examples) {
+					db.store(example);
+				}
+			}
 		}
 		else if (entry instanceof IExample) {
 			//TODO: remove categories instead
-			if(((IExample) entry).getCategories().size()!=0)
-				return 2;
-			//((IExample) entry).removeFromAllCategories();
+			IExample exampleEntry = (IExample) entry;
+			if(exampleEntry.getCategories().size()!=0)
+			{
+				List<ICategory> categories = exampleEntry.getCategories();
+				exampleEntry.removeFromAllCategories();
+				for (ICategory category : categories) {
+					db.store(category);
+				}
+			}
 
-			//TODO: should we remove? I don't think so
+			//TODO: Should we remove if the example is a dependency for another?
+			//Check story "Delete a code example from a public notebook"
 			if(getDependerOf((IExample) entry).size()!=0)
 				return 2;
 		} 
 		else if(entry instanceof IUser) {
-			// TODO
+			// TODO Allow deletion for users
 			System.out.println("You want to delete a user? Not yet implemented");
 		}
 		else {
@@ -389,15 +404,35 @@ public class WebController {
 	 * @author tpatikorn
 	 * get all examples in db that depend on example (aka dependers)
 	 * @param example the example we want to find what depends on it
-	 * @return list of all examples depends on example
+	 * @return list of all examples depends on example 
+	 * and dependers of dependers (and so on)
 	 */
 	public List<IExample> getDependerOf(IExample example) {
 		List<IExample> allExamples = db.getAllExample();
 		List<IExample> result = new ArrayList<IExample>();
 		for(IExample e : allExamples) {
-			if(e.getDependency().contains(example))
+			if(e.getDependency().contains(example)) {
 				result.add(e);
+				List<IExample> dependers  = this.getDependerOf(e);
+				for(IExample d: dependers) {
+					if(!result.contains(d)) {
+						result.add(d);
+					}
+				}
+				
+			}
 		}
 		return result;
+	}
+	
+	public List<IExample> getVisibleExamples(IUser user) {
+		List<IExample> results = getAllPublicExamples();
+		
+		for (IExample example : db.getAllExample()) {
+			if (example.getOwnerId() == user.getId() && !results.contains(example))
+				results.add(example);
+		}
+		
+		return results;
 	}
 }

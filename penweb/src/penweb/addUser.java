@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class addUser
+ * @author Andy C
+ * @author Mikey Boy
  */
 @WebServlet("/addUser")
 public class addUser extends HttpServlet {

@@ -115,15 +115,15 @@
 			<%}%></h1>
 			
 			<%	if (!isNewExample) {%>
-				<form class="barForm">
+				<form class="barForm" <%if(user==null){%>style="display:none"<%}%>>
 				Options:
 				<input type="button" class="button black-wide" onClick="location.href=('dependency.jsp?eid=<%= id %>')" value="Dependencies"/>
 				<input type="button" class="button black-wide" onClick="javascript: duplicateIntoCategories();" value="Duplicate"/>
-				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" onmouseover="showCommentBlock();" />
+				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" <%if (!isNewExample) {%>onmouseover="showCommentBlock();"<%}%> />
 				</form>
 			<%} else {%>
-				<form class="barForm">
-				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" onmouseover="showCommentBlock();" />
+				<form class="barForm" <%if(user==null){%>style="display:none"<%}%>>
+				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" <%if (!isNewExample) {%>onmouseover="showCommentBlock();"<%}%> />
 				</form>
 			<%} %>
 	</div>
@@ -135,12 +135,27 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<a href="index.jsp"><li>All Examples (<%=webcon.getNumEntries() %>)</li></a>
-			<% for (ICategory c : cats) { %>
-				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=c.getExampleList().size() %>)</li></a>
+			<% 
+				int num;
+				if (user == null) {
+					num = webcon.getAllPublicExamples().size();
+				}
+				else {
+					num = webcon.getVisibleExamples(user).size();
+				}
+			%>
+			<a href="index.jsp"><li>All Examples (<%=num %>)</li></a>
+			<% for (ICategory c : cats) {
+				if (user == null) {
+					num = c.getPublicExamples().size();
+				}
+				else {
+					num = c.getVisibleExamples(user).size();
+				} %>
+				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=num %>)</li></a>
 			<%} %>
 		</ul>
-		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
+		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
 		<form action="<%if (isNewExample) { %>addCode<%} else { %>modifyCode<%} %>" method="post" name="editForm" onsubmit="return checkAddCodeSubmit();">
@@ -156,17 +171,19 @@
 				<p><%=user.getDisplayName() %></p>
 			<%} %>
 			Title: *
-			<input type="text" name="title" <%if(!isNewExample) {%>value="<%=ex.getTitle()%>"<%}%> />
+			<input type="text" name="title" <%if(user==null){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getTitle()%>"<%}%> />
 			
 			<input type="hidden" name="loginname" <%if(!isNewExample) {%>value="<%=ex.getAuthors().get(0).getLoginName()%>"<%} else {%>value="<%=user.getLoginName()%>"<%}%>/>
 			Language: 
-			<input type="text" name="language" <%if(!isNewExample) {%>value="<%=ex.getLanguage()%>"<%}%>/>
+			<input type="text" name="language" <%if(user==null){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getLanguage()%>"<%}%>/>
 			Code: *
-			<textarea name="content"><%if(!isNewExample) {%><%=ex.getCode()%><%}%></textarea>
+			<textarea <%if(user==null){%>disabled="disabled"<%}%> name="content"><%if(!isNewExample) {%><%=ex.getCode()%><%}%></textarea>
 			<font size="1"><p>* Required Fields</p></font>
-			<p>Categories</p>
+			
+				<p>Share with public? <input <%if(user==null){%>disabled="disabled"<%}%> <%if (!isNewExample) { if (ex.isPublic()) {%>checked<%}}%> type="checkbox" name="public"/></p>
+			<p>Categories:</p>
 			<% for (ICategory c : cats) { %>
-				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
+				<p><input <%if(user==null){%>disabled="disabled"<%}%> type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
 			<%} %>
 			<%
 			if (!isNewExample) {

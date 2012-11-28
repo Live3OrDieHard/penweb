@@ -13,6 +13,8 @@ import exceptions.DuplicateException;
 
 /**
  * Servlet implementation class duplicateCode
+ * @author Andy C
+ * @author Mikey Boy
  */
 @WebServlet("/duplicateCode")
 public class duplicateCode extends HttpServlet {
@@ -35,7 +37,7 @@ public class duplicateCode extends HttpServlet {
 		String eid = request.getParameter("eid");
 		IExample ex = webcon.getExampleById(Long.parseLong(eid));
 		//XXX Passes in original author as the author of this code example. Change to person who duplicates later.
-		Long nid = webcon.addCode(ex.getTitle(), ex.getCode(), ex.getLanguage(), ex.getAuthors().get(0).getLoginName());
+		Long nid = webcon.addCode(ex.getTitle(), ex.getCode(), ex.getLanguage(), ex.getAuthors().get(0).getLoginName(), ex.isPublic());
 		IExample nex = webcon.getExampleById(nid);
 		if (cids != null) {
 			for (String s : cids) {
@@ -53,5 +55,4 @@ public class duplicateCode extends HttpServlet {
 		webcon.close();
 		response.sendRedirect("/penweb");
 	}
-
 }

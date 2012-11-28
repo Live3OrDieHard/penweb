@@ -41,6 +41,11 @@ a {
 	display: none;
 }
 
+.modal .sheet.short {
+	height: 350px;
+	width: 285px;
+}
+
 .modal .sheet .close {
 	position: absolute;
 	top: 0;
@@ -64,6 +69,19 @@ a {
 	font-size: 20px;
 	font-weight: bold;
 	padding-left: 25px;
+}
+
+.modal .sheet h3 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 40px;
+	line-height: 40px;
+	background: url('../images/bg-bar.png') top center repeat-x;
+	font-size: 17px;
+	font-weight: bold;
+	padding-left: 20px;
 }
 
 .modal .sheet .modalContent {

@@ -19,8 +19,9 @@ public interface IDatabase {
 	/**
 	 * Stores the given entry in the database. If the object is already in the database, it will be updated.
 	 * @param e The entry to store.
+	 * @return the id of the newly added entry
 	 */
-	public void store(IEntry e);
+	public Long store(IEntry e);
 	
 	/**
 	 * @return All entries in the database
@@ -66,13 +67,6 @@ public interface IDatabase {
 	 */
 	public List<IExample> getAllExample();
 	
-	/**
-	 * Checks to see if a category name has already been used in the database
-	 * @param name
-	 * @return true if the name given is already taken by another category
-	 * false otherwise 
-	 */
-	public boolean isNameRepeat (String name);
 	
 	/**
 	 * Checks to see if a user in the database already has the given loginName

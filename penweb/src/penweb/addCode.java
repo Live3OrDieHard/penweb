@@ -12,6 +12,8 @@ import exceptions.*;
 
 /**
  * Servlet implementation class addCode
+ * @author Andy C
+ * @author Mikey Boy
  */
 @WebServlet("/addCode")
 public class addCode extends HttpServlet {
@@ -34,9 +36,10 @@ public class addCode extends HttpServlet {
 		String language = request.getParameter("language");
 		String loginname = request.getParameter("loginname");
 		String[] cids = request.getParameterValues("cids");
+		boolean pub = request.getParameter("public") != null;
 		
 		WebController webcon = new WebController();
-		long exid = webcon.addCode(title, content, language, loginname);
+		long exid = webcon.addCode(title, content, language, loginname, pub);
 		IExample ex = webcon.getExampleById(exid);
 		if (cids != null) {
 			for (String s : cids) {

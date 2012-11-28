@@ -109,7 +109,7 @@
 		</p>
 		<form action="addToCategory" method="post">
 			<input type="hidden" name="eid" value="<%=ex.getId() %>" />
-			<p>Categories</p>
+			<p>Categories:</p>
 			<% for (ICategory c : cats) { %>
 				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" /> <%=c.getTitle() %></p>
 			<%} %>
