@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2012 Team 3: Live Three or Die Hard
+ * 
+ * All rights reserved. This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors: Team 3
+ *******************************************************************************/
+
 package dataStructure;
 
 import java.util.ArrayList;
@@ -335,6 +345,11 @@ public class BasicExample implements IExample {
 		return this;
 	}
 
+	/**
+	 * The method used to add a new tag to the current tag list.
+	 * (Feature of checking existence of tag in tags should be
+	 * added later)
+	 */
 	@Override
 	public void addTags(String tag) {
 		// @TODO check existence of tag in tags
@@ -342,6 +357,15 @@ public class BasicExample implements IExample {
 
 	}
 
+	/**
+	 * The method is used to clone an existent example.
+	 * The exampled cloned will have all the features the same
+	 * as the original one except the id.
+	 * 
+	 * @return
+	 * 		  a new example with same features as the original one
+	 * 		  except the id
+	 */
 	@Override
 	public BasicExample clone() {
 		BasicExample clone = new BasicExample();
@@ -359,6 +383,13 @@ public class BasicExample implements IExample {
 		return clone;
 	}
 
+	/**
+	 * The method is used to a list of all category ids from 
+	 * the category list.
+	 * 
+	 * @return
+	 * 		  a list of ids of category in the categorylist
+	 */
 	@Override
 	public List<Long> getCategoryIds() {
 		List<Long> ids = new ArrayList<Long>();
@@ -375,16 +406,32 @@ public class BasicExample implements IExample {
 		dependency.add(example);
 	}
 
+	/**
+	 * The getter function to get comment of the example
+	 * @return
+	 * 		  the comment of the example
+	 */
 	@Override
 	public String getComment() {
 		return comment;
 	}
 
+	/**
+	 * The setter function to set the comment for the example
+	 */
 	@Override
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
 
+	/**
+	 * The method is used to remove the given category from the
+	 * current categorylist
+	 * 
+	 * @param
+	 * 		 category the category inteneded to remove from the
+	 * 		 categorylist
+	 */
 	@Override
 	public void removeFromCategory(ICategory category) {
 		for (int i = this.categoryList.size() - 1; i >= 0; i--) {
@@ -393,7 +440,11 @@ public class BasicExample implements IExample {
 				this.categoryList.remove(cat);
 		}
 	}
-
+	
+	/**
+	 * The method is used to remove all the categories from
+	 * the category list.
+	 */
 	@Override
 	public void removeFromAllCategories() {
 		for (ICategory cat : this.categoryList) {
