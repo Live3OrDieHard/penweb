@@ -172,6 +172,7 @@ public class Db4oDatabase implements IDatabase {
 		return loginNameList;
 	}
 
+
 	/**
 	 * @param loginName
 	 * @return True if a user has already been created with the given login

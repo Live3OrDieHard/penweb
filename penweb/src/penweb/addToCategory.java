@@ -14,6 +14,7 @@ import exceptions.*;
 
 /**
  * Servlet implementation class addToCategory
+ * @author Andy C
  */
 @WebServlet("/addToCategory")
 public class addToCategory extends HttpServlet {

@@ -131,8 +131,8 @@ public class WebControllerTest {
 		assertEquals(examples.size(), 2);
 		assertTrue(examples.get(0).getCode().equals("R4B8!t")
 				|| examples.get(1).getCode().equals("R4B8!t"));
-		assertTrue(examples.get(0).getLanguage().equals("Alice")
-				|| examples.get(1).getLanguage().equals("Alice"));
+		assertTrue(examples.get(0).getLanguage().equals("alice")
+				|| examples.get(1).getLanguage().equals("alice"));
 	}
 	
 	@Test
@@ -181,10 +181,10 @@ public class WebControllerTest {
 				|| e2.getCode().equals("R4B8!t"));
 		assertTrue(e1.getCode().equals("W0nD3R")
 				|| e2.getCode().equals("W0nD3R"));
-		assertTrue(e1.getLanguage().equals("Alice")
-				|| e2.getLanguage().equals("Alice"));
-		assertTrue(e1.getLanguage().equals("Bob")
-				|| e2.getLanguage().equals("Bob"));
+		assertTrue(e1.getLanguage().equals("alice")
+				|| e2.getLanguage().equals("alice"));
+		assertTrue(e1.getLanguage().equals("bob")
+				|| e2.getLanguage().equals("bob"));
 	}
 
 	@Test
@@ -273,9 +273,9 @@ public class WebControllerTest {
 		List<IExample> listExamples = testee.getCodeByLanguageAndUser(
 				testee.getUserByLoginName("Iva"), "Java");
 		assertEquals(listExamples.size(),3);
-		assertEquals(listExamples.get(0).getLanguage(),"Java");
-		assertEquals(listExamples.get(1).getLanguage(),"Java");
-		assertEquals(listExamples.get(2).getLanguage(),"Java");
+		assertEquals(listExamples.get(0).getLanguage(),"java");
+		assertEquals(listExamples.get(1).getLanguage(),"java");
+		assertEquals(listExamples.get(2).getLanguage(),"java");
 		/* abuse .equals() for testing */
 		assertTrue(listExamples.containsAll(list));
 		assertTrue(list.containsAll(listExamples));
@@ -355,12 +355,12 @@ public class WebControllerTest {
 		List<String> JavaC = new ArrayList<String>();
 		List<String> JavaCpp = new ArrayList<String>();
 		
-		JavaC.add("Java");
-		JavaC.add("C");
-		JavaC.add("C++");
+		JavaC.add("java");
+		JavaC.add("c");
+		JavaC.add("c++");
 
-		JavaCpp.add("Java");
-		JavaCpp.add("C++");
+		JavaCpp.add("java");
+		JavaCpp.add("c++");
 		
 		assertTrue(IvaLangList.containsAll(JavaC));
 		assertTrue(JavaC.containsAll(IvaLangList));

@@ -12,6 +12,7 @@ import dataStructure.IUser;
 
 /**
  * Servlet implementation class addCategory
+ * @author Andy C
  */
 @WebServlet("/addCategory")
 public class addCategory extends HttpServlet {
