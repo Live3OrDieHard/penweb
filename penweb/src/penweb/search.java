@@ -31,10 +31,10 @@ public class search extends HttpServlet {
 		String lang = request.getParameter("lang");
 		if (!lang.isEmpty()) {
 			if (params == "/penweb/results.jsp") {
-				params += "?lang=" + lang;
+				params += "?lang=" + java.net.URLEncoder.encode(lang, "UTF-8");
 			}
 			else {
-				params += "&lang=" + lang;
+				params += "&lang=" + java.net.URLEncoder.encode(lang, "UTF-8");
 			}
 		}
 		response.sendRedirect(params);

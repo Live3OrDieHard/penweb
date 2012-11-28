@@ -16,9 +16,26 @@
 		if (loginName != null) {
 			user = webcon.getUserByLoginName(loginName);
 		}
+		List<IExample> ex;
+		if (cat == null) {
+			if (user == null) {
+				ex = webcon.getAllPublicExamples();
+			}
+			else {
+				ex = webcon.getVisibleExamples(user);
+			}
+		}
+		else {
+			if (user == null) {
+				ex = cat.getPublicExamples();
+			}
+			else {
+				ex = cat.getVisibleExamples(user);
+			}
+		}
 	%>
 	<meta charset="UTF-8">
-	<title>PEN &middot; <%if (cat == null) { %>All Examples (<%= webcon.getNumEntries() %>)<%} else { %><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)<%} %></title>
+	<title>PEN &middot; <%if (cat == null) { %>All Examples (<%= ex.size() %>)<%} else { %><%=cat.getTitle() %> (<%=ex.size() %>)<%} %></title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -113,9 +130,9 @@
 	</div>
 	<div class="right">
 		<%if (cat == null) {%>
-			<h1>All Examples (<%= webcon.getNumEntries() %>)</h1>
+			<h1>All Examples (<%= ex.size() %>)</h1>
 		<%} else {%>
-			<h1><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)</h1>
+			<h1><%=cat.getTitle() %> (<%=ex.size() %>)</h1>
 		<%} %>
 		
 		
@@ -136,41 +153,42 @@
 	<div class="left">
 		<h1>My Examples</h1>
 		<ul>
-			<a href="index.jsp"><li <% if (cat == null) {%>class="selected"<%} %>>All Examples (<%= webcon.getNumEntries() %>)</li></a>
+			<% 
+				int num;
+				if (user == null) {
+					num = webcon.getAllPublicExamples().size();
+				}
+				else {
+					num = webcon.getVisibleExamples(user).size();
+				}
+			%>
+			<a href="index.jsp"><li <% if (cat == null) {%>class="selected"<%} %>>All Examples (<%= num %>)</li></a>
 			<%
 				List<ICategory> cats = webcon.getCategories();
 				for (ICategory c : cats) {
+					if (user == null) {
+						num = c.getPublicExamples().size();
+					}
+					else {
+						num = c.getVisibleExamples(user).size();
+					}
 			%>
-			<a href="index.jsp?cat=<%=c.getId() %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= c.getTitle() %> (<%= c.getExampleList().size() %>)</li></a>
+			<a href="index.jsp?cat=<%=c.getId() %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= c.getTitle() %> (<%= num %>)</li></a>
 			<% } %> 
 		</ul>
 		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
 		<ul class="entrylist">
-			<% if (cat == null) {
-				List<IExample> ex = webcon.getExamples();
-					for (IExample e : ex) { %>
-					<a href="edit.jsp?id=<%=e.getId()%>">
-						<li>
-							<h1><%= e.getTitle() %></h1>
-							<div class="fade"></div>
-							<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
-						</li>
-					</a>
-				<%}%>
-			<%} else {
-				List<IExample> ex = cat.getExampleList();
-				for (IExample e : ex) {%>
-					<a href="edit.jsp?id=<%=e.getId()%>">
-					<li>
-						<h1><%= e.getTitle() %></h1>
-						<div class="fade"></div>
-						<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
-					</li>
-				</a>
-				<%}
-			} %>
+			<%	for (IExample e : ex) { %>
+						<a href="edit.jsp?id=<%=e.getId()%>">
+							<li>
+								<h1><%= e.getTitle() %></h1>
+								<div class="fade"></div>
+								<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
+							</li>
+						</a>
+			<%}%>
 		</ul>
 	</div>
 </div>
