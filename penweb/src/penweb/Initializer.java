@@ -13,7 +13,7 @@ import com.db4o.cs.config.ServerConfiguration;
  */
 public class Initializer implements javax.servlet.ServletContextListener {
 	public static ObjectServer db4oServer;
-	private static String databaseName = "penweb2.yap";
+	private static String databaseName = "penweb3.yap";
 	
 	/**
 	 * Runs when the Tomcat server starts. Starts the db4o server
