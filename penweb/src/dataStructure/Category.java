@@ -67,38 +67,18 @@ public class Category implements ICategory {
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
 	public void addCodeExample(IExample example) throws DuplicateException {
-		if (!this.hasExample(example)) {
-			this.exampleList.add(example);
-			if(!example.getCategories().contains(this))
+		try {
+			if (!this.hasExample(example)) {
+				this.exampleList.add(example);
 				example.addCategory(this);
-		}
-		else
-			throw new DuplicateException("This example is already in category:"+this.title);
-	}
-
-	/**
-	 * helper function check if the category (this) is already has example
-	 * 
-	 * @param example
-	 *            the example wanted to be check
-	 * @return true if the category already has example. false otherwise
-	 */
-	private boolean hasExample(IExample example) {
-		ArrayList<IExample> examples = (ArrayList<IExample>) this
-				.getExampleList();
-		int i;
-		for (i = 0; i < examples.size(); i++) {
-			if (example.getId() == examples.get(i).getId()) {
-				return true;
 			}
+		} catch (DuplicateException e) {
+			throw e;
 		}
-		return false;
 	}
 
 	/**
-	 * The getter function to get the example list.
-	 * @return
-	 * 		  the examplelist
+	 * @see dataStructure.ICategory#getExampleList()
 	 */
 	@Override
 	public List<IExample> getExampleList() {
@@ -106,15 +86,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * The method is used to assign owner to 
-	 * then category.
-	 * 
-	 * @param
-	 * 		 owner the user will be assigned
-	 * @return
-	 * 		  1 if the category already has a owner
-	 * 		  0 if the given user has been successfully
-	 * 		  assigned to the category
+	 * @see dataStructure.IEntry#assignOwner(IUser)
 	 */
 	@Override
 	public int assignOwner(IUser owner) {
@@ -126,7 +98,7 @@ public class Category implements ICategory {
 	}
 	
 	/**
-	 * The getter function to get the owner of the category.
+	 * @see dataStructure.IEntry#getOwner()
 	 */
 	@Override
 	public IUser getOwner() {
@@ -134,7 +106,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * The getter function to get the id of the category.
+	 * @see dataStructure.IEntry#getId()
 	 */
 	@Override
 	public Long getId() {
@@ -142,7 +114,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * The method is used to get the id of the owner of this category.
+	 * @see dataStructure.IEntry#getOwnerId()
 	 */
 	@Override
 	public Long getOwnerId() {
@@ -150,10 +122,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * The method is used to assign an id to the category.
-	 * @return
-	 * 		  1 if the category already has an id
-	 *        0 the id is successfully assigned to the category
+	 * @see dataStructure.IEntry#assignId(Long)
 	 */
 	@Override
 	public int assignId(Long id) {
@@ -165,11 +134,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * The method is used to get a list of ids of the examples
-	 * of the category.
-	 * 
-	 * @return
-	 * 		  a list of ids of the examples of the category
+	 * @see dataStructure.ICategory#getExampleIds()
 	 */
 	@Override
 	public List<Long> getExampleIds() {
@@ -180,10 +145,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * The method is used to remove the example from the category.
-	 * 
-	 * @param
-	 * 		 example the example will be removed from the category
+	 * @see dataStructure.ICategory#removeExample(IExample)
 	 */
 	@Override
 	public void removeExample(IExample example) {
@@ -195,7 +157,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * The method is used to remove all the examples from the category.
+	 * @see dataStructure.ICategory#removeAllExamples()
 	 */
 	@Override
 	public void removeAllExamples() {
@@ -206,10 +168,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * THe method is used to show if the category is public.
-	 * 
-	 * @return
-	 * 		  true is the category is public
+	 * @see dataStructure.ICategory#isPublic()
 	 */
 	@Override
 	public boolean isPublic() {
@@ -217,12 +176,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * The method is used to set the public feature of the category.
-	 * 
-	 * @param
-	 * 		 isPublic the boolean value is going to set for isPublic
-	 * @return
-	 * 		  the boolean valuse setted for isPublic
+	 * @see dataStructure.ICategory#setPublic(boolean)
 	 */
 	@Override
 	public void setPublic(boolean isPublic) {
@@ -244,10 +198,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * The method is used to get all the public examples in the category.
-	 * 
-	 * @return
-	 * 		  the list of exmaples in the category that are public
+	 * @see dataStructure.ICategory#getPublicExamples()
 	 */
 	@Override
 	public List<IExample> getPublicExamples() {
@@ -261,13 +212,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * The method is used to get a list of examples that the user is 
-	 * legally to see.
-	 * 
-	 * @param
-	 * 		 user the current user using the method
-	 * @return
-	 * 		  a list of unique examples that the user has the right to get
+	 * @see dataStructure.ICategory#getVisibleExamples(IUser)
 	 */
 	@Override
 	public List<IExample> getVisibleExamples(IUser user) {
@@ -280,6 +225,9 @@ public class Category implements ICategory {
 		return results;
 	}
 
+	/**
+	 * @see dataStructure.ICategory#getOwnedExamples(IUser)
+	 */
 	@Override
 	public List<IExample> getOwnedExamples(IUser user) {
 		List<IExample> results = new ArrayList<IExample>();
@@ -291,5 +239,24 @@ public class Category implements ICategory {
 		}
 		
 		return results;
+	}
+
+	/**
+	 * Helper function check if the category (this) is already has example
+	 * 
+	 * @param example The example wanted to be check
+	 * @return True if the category already has example. False otherwise.
+	 */
+	private boolean hasExample(IExample example) throws DuplicateException {
+		ArrayList<IExample> examples = (ArrayList<IExample>) this
+				.getExampleList();
+		int i;
+		for (i = 0; i < examples.size(); i++) {
+			if (example.getId() == examples.get(i).getId()) {
+				throw new DuplicateException(
+						"This example has already been in the category.");
+			}
+		}
+		return false;
 	}
 }
