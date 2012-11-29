@@ -71,14 +71,20 @@ public class Db4oDatabase implements IDatabase {
 	/**
 	 * for storing purpose 
 	 * store an entry in db4odatabase
+	 * return null if the entry cannot be stored (no id available)
 	 */
 	@Override
 	public Long store(IEntry e) {
 		//e.assignOwner(null);
-		Long newId = this.getNewId();
-		e.assignId(newId);
-		db.store(e);
-		return newId;
+		try {
+			Long newId;
+			newId = this.generateEntryId();
+			e.assignId(newId);
+			db.store(e);
+			return newId;
+		} catch (NoIdAvailableException e1) {
+			return null;
+		}
 	}
 
 	/**
