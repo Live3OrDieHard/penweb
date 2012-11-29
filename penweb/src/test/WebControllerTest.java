@@ -487,7 +487,84 @@ public class WebControllerTest {
 	
 	@Test
 	public void getVisibleExamplesTest() {
+		assertEquals(testee.getVisibleExamples(null).size(),0);
+		testee.addUser("user1", null, null);
+		testee.addUser("user2", null, null);
+		testee.addUser("user3", null, null);
+		Long exid11 = testee.addCode(null, null, null, "user1", true);
+		Long exid12 = testee.addCode(null, null, null, "user1", false);
+		Long exid21 = testee.addCode(null, null, null, "user2", true);
+		Long exid22 = testee.addCode(null, null, null, "user2", false);
+		IExample emt = new BasicExample();
+		emt.assignId(exid11);
+		IExample emf = new BasicExample();
+		emf.assignId(exid12);
+		IExample ent = new BasicExample();
+		ent.assignId(exid21);
+		IExample enf = new BasicExample();
+		enf.assignId(exid22);
+		List<IExample> listTrue = new ArrayList<IExample>();
+		List<IExample> listMan = new ArrayList<IExample>();
+		List<IExample> listNam = new ArrayList<IExample>();
+		listTrue.add(emt);
+		listTrue.add(ent);
+		listMan.add(emt);
+		listMan.add(emf);
+		listNam.add(ent);
+		listNam.add(enf);
 		
+		IUser user1 = testee.getUserByLoginName("user1");
+		IUser user2 = testee.getUserByLoginName("user2");
+		IUser user3 = testee.getUserByLoginName("user3");
+		
+		assertEquals(testee.getOwnedExamples(user1).size(),2);
+		assertEquals(testee.getOwnedExamples(user2).size(),2);
+		assertEquals(testee.getOwnedExamples(user3).size(),0);
+		assertTrue(testee.getOwnedExamples(user1).containsAll(listMan));
+		assertTrue(testee.getOwnedExamples(user2).containsAll(listNam));
+		
+	}
+
+	@Test
+	public void getOwnedExamplesTest() {
+		assertEquals(testee.getOwnedExamples(null).size(),0);
+		testee.addUser("user1", null, null);
+		testee.addUser("user2", null, null);
+		testee.addUser("user3", null, null);
+		Long idManT = testee.addCode(null, null, null, "user1", true);
+		Long idManF = testee.addCode(null, null, null, "user1", false);
+		Long idNamT = testee.addCode(null, null, null, "user2", true);
+		Long idNamF = testee.addCode(null, null, null, "user2", false);
+		IExample emt = new BasicExample();
+		emt.assignId(idManT);
+		IExample emf = new BasicExample();
+		emf.assignId(idManF);
+		IExample ent = new BasicExample();
+		ent.assignId(idNamT);
+		IExample enf = new BasicExample();
+		enf.assignId(idNamF);
+		List<IExample> listTrue = new ArrayList<IExample>();
+		List<IExample> listMan = new ArrayList<IExample>();
+		List<IExample> listNam = new ArrayList<IExample>();
+		listTrue.add(emt);
+		listTrue.add(ent);
+		listMan.add(emt);
+		listMan.add(emf);
+		listNam.add(ent);
+		listNam.add(enf);
+		
+		IUser user1 = testee.getUserByLoginName("user1");
+		IUser user2 = testee.getUserByLoginName("user2");
+		IUser user3 = testee.getUserByLoginName("user3");
+		
+		assertEquals(testee.getVisibleExamples(user1).size(),3);
+		assertEquals(testee.getVisibleExamples(user2).size(),3);
+		assertEquals(testee.getVisibleExamples(user3).size(),2);
+		assertTrue(testee.getVisibleExamples(user1).containsAll(listMan));
+		assertTrue(testee.getVisibleExamples(user1).containsAll(listTrue));
+		assertTrue(testee.getVisibleExamples(user2).containsAll(listNam));
+		assertTrue(testee.getVisibleExamples(user2).containsAll(listTrue));
+		assertTrue(testee.getVisibleExamples(user3).containsAll(listTrue));		
 	}
 	
 	@After
