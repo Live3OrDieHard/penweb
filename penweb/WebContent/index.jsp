@@ -151,7 +151,7 @@
 
 <div class="content">
 	<div class="left">
-		<h1>My Examples</h1>
+		<h1><%if (user != null) { %>Examples<%} else { %>Public Examples<%} %></h1>
 		<ul>
 			<% 
 				int num;

@@ -197,8 +197,11 @@
 				<p>Share with public? <input <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if (!isNewExample) { if (ex.isPublic()) {%>checked<%}}%> type="checkbox" name="public"/></p>
 			<p>Categories:</p>
 			<% for (ICategory c : cats) { %>
-				<p><input <%if(user==null || !isOwner){%>disabled="disabled"<%}%> type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
-			<%} %>
+			<p><%if(user==null){%>
+			<%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%><input disabled="disabled" type="checkbox" name="cids"value="<%=c.getId() %>"checked/> <%=c.getTitle() %><%}}%></p>
+			<%} else {%>
+			<input type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
+			<%} }%>
 			<%
 			if (!isNewExample) {
 				ArrayList<IExample> dependencies = ex.getDependency();
