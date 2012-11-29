@@ -52,6 +52,7 @@ public class WebController {
 	}
 
 	/**
+	 * Modified by Peng Ren to check if the category name is already taken
 	 * Adds a category to the database. A unique ID is assigned within the DB
 	 * 
 	 * @param name
@@ -60,8 +61,13 @@ public class WebController {
 	 *            Description of the desired category
 	 */
 	public void addCategory(String name, String desc) {
-		ICategory cat = new Category(name, desc);
-		db.store(cat);
+		if(!db.isCategoryTitleTaken(name)){
+			ICategory cat = new Category(name, desc);
+			db.store(cat);
+		}
+		else{
+			//TODO: throw an exception to tell the user the title of the category already exists
+		}
 	}
 
 	/**
