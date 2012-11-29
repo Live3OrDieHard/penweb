@@ -67,8 +67,11 @@ public class WebControllerTest {
 
 	@Test
 	public void addCategoryTest() {
-		testee.addCategory("Alice's", "This is Alice's");
-		testee.addCategory("Bob's", "This is Bob's");
+		try{
+			testee.addCategory("Alice's", "This is Alice's");
+			testee.addCategory("Bob's", "This is Bob's");
+		}catch(DuplicateException e){
+		}
 
 		List<ICategory> categories = testee.getCategories();
 
@@ -117,8 +120,11 @@ public class WebControllerTest {
 
 	@Test
 	public void getCategoryByIdTest() {
-		testee.addCategory("Alice's", "This is Alice's");
-		testee.addCategory("Bob's", "This is Bob's");
+		try{
+			testee.addCategory("Alice's", "This is Alice's");
+			testee.addCategory("Bob's", "This is Bob's");
+		}catch(DuplicateException e){
+		}
 
 		List<ICategory> categories = testee.getCategories();
 		ICategory c1 = categories.get(0);
