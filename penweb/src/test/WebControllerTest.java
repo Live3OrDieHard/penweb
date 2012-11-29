@@ -484,7 +484,12 @@ public class WebControllerTest {
 		assertTrue(testee.getCategories().containsAll(catList));
 
 	}
-
+	
+	@Test
+	public void getVisibleExamplesTest() {
+		
+	}
+	
 	@After
 	public void cleanup() throws IOException {
 		testee.close();

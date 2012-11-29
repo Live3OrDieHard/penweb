@@ -60,7 +60,6 @@ public class BasicExample implements IExample {
 	 */
 	private String comment;
 	
-	
 	/**
 	 * BasicExample assigns the authors to a list of users. The owner by default is no one.
 	 */
@@ -86,11 +85,10 @@ public class BasicExample implements IExample {
 	// throw an exception
 	@Override
 	public void addCategory(ICategory category) throws DuplicateException {
-		if (!this.isInCategory(category)) {
+		if (!this.isInCategory(category)) 
 			categoryList.add(category);
-			if(!category.getExampleList().contains(this))
-				category.addCodeExample(this);
-		}
+		if(!category.getExampleList().contains(this))
+			category.addCodeExample(this);
 		else {
 			throw new DuplicateException("This example is already in category:"+category.getTitle());
 		}

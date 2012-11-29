@@ -55,6 +55,10 @@ public class ExampleAndCategoryTest {
 		BasicExample example2 = new BasicExample();
 		example2.setCode("printf(Bye World);");
 		example2.setTitle("Bye World");
+		db.store(category1);
+		db.store(category2);
+		db.store(example1);
+		db.store(example2);
 		example1.addCategory(category1);
 		example1.addCategory(category2);
 		db.store(category1);
