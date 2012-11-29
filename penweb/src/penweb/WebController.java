@@ -12,6 +12,7 @@ package penweb;
 
 import database.*;
 import dataStructure.*;
+import exceptions.DuplicateException;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -60,13 +61,13 @@ public class WebController {
 	 * @param desc
 	 *            Description of the desired category
 	 */
-	public void addCategory(String name, String desc) {
+	public void addCategory(String name, String desc) throws DuplicateException{
 		if(!db.isCategoryTitleTaken(name)){
 			ICategory cat = new Category(name, desc);
 			db.store(cat);
 		}
 		else{
-			//TODO: throw an exception to tell the user the title of the category already exists
+			throw new DuplicateException("The title of category already exists.");
 		}
 	}
 
