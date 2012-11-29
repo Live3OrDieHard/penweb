@@ -20,6 +20,9 @@ import exceptions.DuplicateException;
  */
 import exceptions.DuplicateException;
 
+/**
+ * The ICategory interface is used to connect the web view with the database for categories.
+ */
 public interface ICategory extends IEntry{
 	
 	/**
