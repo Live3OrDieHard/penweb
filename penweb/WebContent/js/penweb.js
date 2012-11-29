@@ -93,7 +93,9 @@ function closeModal() {
 
 function saveExample() {
 	$("form[name=editForm] input[name=comment]").val($("textarea#comment").val());
-	editForm.submit();
+	if(document.editForm.onsubmit()) {
+		document.editForm.submit();
+	}
 }
 
 function showCommentBlock() {
