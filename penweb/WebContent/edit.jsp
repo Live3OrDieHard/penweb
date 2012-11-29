@@ -188,7 +188,7 @@
 			<input type="text" name="title" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getTitle()%>"<%}%> />
 			
 			<input type="hidden" name="loginname" <%if(!isNewExample) {%>value="<%=ex.getAuthors().get(0).getLoginName()%>"<%} else {%>value="<%=user.getLoginName()%>"<%}%>/>
-			Language: 
+			Language: *
 			<input type="text" name="language" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getLanguage()%>"<%}%>/>
 			Code: *
 			<textarea <%if(user==null || !isOwner){%>disabled="disabled"<%}%> name="content"><%if(!isNewExample) {%><%=ex.getCode()%><%}%></textarea>
