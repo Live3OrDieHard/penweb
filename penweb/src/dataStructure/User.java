@@ -21,6 +21,8 @@ import java.util.List;
  * @author avenkatesh
  * 
  * A registered user who owns examples and categories.
+ * Contains methods to create a user and modify all of it's fields...
+ * for example add a code example, change password, etc.
  */
 public class User implements IUser {
 	private final String loginName; // Name used for logging in. This has to be
@@ -62,6 +64,7 @@ public class User implements IUser {
 
 	/**
 	 * The getter function to get the displayname of the user.
+	 * @return the displayname of the user. 
 	 */
 	@Override
 	public String getDisplayName() {
@@ -69,7 +72,7 @@ public class User implements IUser {
 	}
 
 	/**
-	 * The method is used to change the display name of the user.
+	 * This method is used to change the display name of the user.
 	 */
 	@Override
 	public void changeDisplayName(String name) {
@@ -96,11 +99,9 @@ public class User implements IUser {
 
 	/**
 	 * THe method is used to assign an id for the user.
-	 * @param
-	 * 		 id the id intended to assign to the user
-	 * @return
-	 * 		  1 if the id has already been assigned
-	 * 		  0 if the id has been successfully assigned
+	 * @param id the id intended to assign to the user
+	 * @return 1 if the id has already been assigned
+	 * 		   0 if the id has been successfully assigned
 	 */
 	public int assignId(Long id) {
 		if (this.id != -1)
@@ -112,6 +113,7 @@ public class User implements IUser {
 
 	/**
 	 * The getter function to get the id of the user.
+	 * @return ID of the user
 	 */
 	@Override
 	public Long getId() {
@@ -121,9 +123,8 @@ public class User implements IUser {
 	/**
 	 * The method is used to check if the input password is
 	 * the correct password for the user.
-	 * 
-	 * @param
-	 * 		 passwordAttempt the password that is attempted
+	 * @param passwordAttempt the password that is attempted
+	 * @return true if the given password is the user's password.
 	 */
 	@Override
 	public Boolean checkPassword(String passwordAttempt) {
@@ -140,6 +141,7 @@ public class User implements IUser {
 
 	/**
 	 * The getter function to get a list of example owned by the user.
+	 * @return list of all code examples owned by the user
 	 */
 	@Override
 	public List<IExample> getOwnedExampleList() {
@@ -149,8 +151,7 @@ public class User implements IUser {
 	/**
 	 * The method is used to add the given category to the category list
 	 * owned by the user.
-	 * @param
-	 * 		 category the category intended to give the user
+	 * @param category the category intended to give the user
 	 */
 	@Override
 	public void addOwnedCategory(ICategory category) {
@@ -159,6 +160,7 @@ public class User implements IUser {
 
 	/**
 	 * The getter function to get the list of categories owned by the user.
+	 * @return a list of all categories created by the user. 
 	 */
 	@Override
 	public List<ICategory> getOwnedCategoryList() {
@@ -168,8 +170,7 @@ public class User implements IUser {
 	/**
 	 * The method is used add a new example to the list of examples
 	 * owned by the user.
-	 * @param
-	 * 		 example a new example intended to give the user
+	 * @param example a new example intended to give the user
 	 */
 	@Override
 	public void addEditedExample(IExample example) {
@@ -179,6 +180,7 @@ public class User implements IUser {
 	/**
 	 * The getter function to get the list of examples edited 
 	 * by the user.
+	 * @return a list of all code examples edited by user
 	 */
 	@Override
 	public List<IExample> getEditedExampleList() {

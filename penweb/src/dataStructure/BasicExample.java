@@ -348,13 +348,12 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * The method is used to clone an existent example.
-	 * The exampled cloned will have all the features the same
+	 * The method is used to clone an already created example.
+	 * The cloned example  will have all the features the same
 	 * as the original one except the id.
 	 * 
-	 * @return
-	 * 		  a new example with same features as the original one
-	 * 		  except the id
+	 * @return a new example with same features as the original one
+	 * except the id
 	 */
 	@Override
 	public BasicExample clone() {
@@ -374,11 +373,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * The method is used to a list of all category ids from 
-	 * the category list.
-	 * 
-	 * @return
-	 * 		  a list of ids of category in the categorylist
+	 * @return a list of ids of category in the categorylist
 	 */
 	@Override
 	public List<Long> getCategoryIds() {
@@ -419,9 +414,8 @@ public class BasicExample implements IExample {
 	 * The method is used to remove the given category from the
 	 * current categorylist
 	 * 
-	 * @param
-	 * 		 category the category inteneded to remove from the
-	 * 		 categorylist
+	 * @param category. The category that will be removed from
+	 * the current category list. 
 	 */
 	@Override
 	public void removeFromCategory(ICategory category) {

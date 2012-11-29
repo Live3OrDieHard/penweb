@@ -20,6 +20,8 @@ import exceptions.DuplicateException;
  * @author tpatikorn
  * 
  * A category into which code examples can be placed
+ * Contains methods to get/set the description, title,
+ * id, public of a category. Also can add/remove examples.
  */
 public class Category implements ICategory {
 	private IUser owner;

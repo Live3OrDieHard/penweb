@@ -12,8 +12,7 @@ package dataStructure;
 
 /**
  * @author tpatikorn
- * IEntry should be an entry
- * covering anything from examples/codes/tests to folders
+ * IEntry should be an entry (example, category)
  */
 public interface IEntry 
 {	
