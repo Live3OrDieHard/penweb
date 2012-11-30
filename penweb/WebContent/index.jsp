@@ -58,11 +58,10 @@
 		
 		
 			<form class="barForm" method="post" action="deleteCategory">
-			<% if (cat!=null && user!=null) { %>
+			<% if (cat!=null && user!=null && cat.getOwner()==user) { %>
 			Options:
 			<input type="hidden" name="cid" value="<%=cat.getId()%>"/>
-			<input type="<%if (cat.getExampleList().size()==0) {%>submit<%} else {%>button" onclick="deleteCategory();<%}%>" class="button black" value="Delete" />
-			<%}%>
+			<input type="<%if ((cat.getExampleList().size()==0)&&cat.getOwner() == user) {%>submit"<%} else if (cat.getOwner() != user) {%>hidden"<%} else {%>button" onclick="deleteCategory();<%}%>" class="button black" value="Delete" />			<%}%>
 			<input type="button" class="button green" value="Search" onclick="searchCategory();" />
 			</form>
 		</form>
