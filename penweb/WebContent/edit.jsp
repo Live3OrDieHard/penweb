@@ -139,7 +139,7 @@
 			<p><%if(user==null){%>
 			<%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%><input disabled="disabled" type="checkbox" name="cids"value="<%=c.getId() %>"checked/> <%=c.getTitle() %><%}}%></p>
 			<%} else {%>
-			<input type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
+			<input <%if(user==null || !isOwner){%>disabled="disabled"<%}%> type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
 			<%} }%>
 			<%
 			if (!isNewExample) {
