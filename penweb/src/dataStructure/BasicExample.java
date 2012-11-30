@@ -85,10 +85,11 @@ public class BasicExample implements IExample {
 	// throw an exception
 	@Override
 	public void addCategory(ICategory category) throws DuplicateException {
-		if (!this.isInCategory(category)) 
+		if (!this.isInCategory(category)) {
 			categoryList.add(category);
-		if(!category.getExampleList().contains(this))
-			category.addCodeExample(this);
+			if(!category.getExampleList().contains(this))
+				category.addCodeExample(this);
+		}
 		else {
 			throw new DuplicateException("This example is already in category:"+category.getTitle());
 		}
@@ -248,15 +249,7 @@ public class BasicExample implements IExample {
 	 * @return true if the example is in category. false otherwise
 	 */
 	private boolean isInCategory(ICategory category) {
-		ArrayList<IExample> examples = (ArrayList<IExample>) category
-				.getExampleList();
-		int i;
-		for (i = 0; i < examples.size(); i++) {
-			if (this.id == examples.get(i).getId()) {
-				return true;
-			}
-		}
-		return false;
+		return this.categoryList.contains(category);
 	}
 
 	/**

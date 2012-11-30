@@ -41,15 +41,12 @@ public class CategoryTest {
 	}
 	
 	@Test
-	public void testAddCodeExample() {
+	public void testAddCodeExample() throws DuplicateException{
 		Category category = new Category("Test","This is test");
 		BasicExample example = new BasicExample();
 		
 		// Attempt to add the same example twice
-		try {
-			category.addCodeExample(example);
-		} catch (DuplicateException e) {
-		}
+		category.addCodeExample(example);
 		try {
 			category.addCodeExample(example);
 			fail();
