@@ -105,7 +105,7 @@
 							<li>
 								<h1><%= e.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'","&#39;") %></h1>
 								<div class="fade"></div>
-								<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'","&#39;") %></div>
+								<div class="code"><%= e.getCode().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").replaceAll("\"", "&quot;").replaceAll("'","&#39;") %></div>
 							</li>
 						</a>
 			<%}%>
