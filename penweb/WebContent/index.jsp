@@ -58,11 +58,10 @@
 		
 		
 			<form class="barForm" method="post" action="deleteCategory">
-			<% if (cat!=null && user!=null) { %>
+			<% if (cat!=null && user!=null && cat.getOwner()==user) { %>
 			Options:
 			<input type="hidden" name="cid" value="<%=cat.getId()%>"/>
-			<input type="<%if (cat.getExampleList().size()==0) {%>submit<%} else {%>button" onclick="deleteCategory();<%}%>" class="button black" value="Delete" />
-			<%}%>
+			<input type="<%if ((cat.getExampleList().size()==0)&&cat.getOwner() == user) {%>submit"<%} else if (cat.getOwner() != user) {%>hidden"<%} else {%>button" onclick="deleteCategory();<%}%>" class="button black" value="Delete" />			<%}%>
 			<input type="button" class="button green" value="Search" onclick="searchCategory();" />
 			</form>
 		</form>
@@ -106,7 +105,7 @@
 							<li>
 								<h1><%= e.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'","&#39;") %></h1>
 								<div class="fade"></div>
-								<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'","&#39;") %></div>
+								<div class="code"><%= e.getCode().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").replaceAll("\"", "&quot;").replaceAll("'","&#39;") %></div>
 							</li>
 						</a>
 			<%}%>
