@@ -187,7 +187,7 @@ public class BasicExample implements IExample {
 	 * @return String
 	 */
 	public String getLanguage() {
-		return this.language.toLowerCase();
+		return this.language.toLowerCase().trim();
 	}
 
 	/**
