@@ -306,7 +306,7 @@ public class WebController {
 	public List<IExample> getCodeByLanguageAndUser(IUser user, String language) {
 		List<IExample> ExamplesByLanguage = db.getByLanguage(language);
 		List<IExample> result = new ArrayList<IExample>();
-		
+
 		for (IExample e : ExamplesByLanguage) {
 			if (e.isPublic() || (user != null && e.getOwnerId().equals(user.getId()))) {
 				result.add(e);
@@ -351,7 +351,7 @@ public class WebController {
 				}
 			}
 		}
-		
+
 		return result;
 	}
 
@@ -372,10 +372,10 @@ public class WebController {
 	 *         deleted. 
 	 */
 	public int delete(IEntry entry, IUser user) {
-		 //not owner
+		//not owner
 		if (!entry.getOwner().equals(user))
 			return 1;
-		
+
 		//user is owner
 		if (entry instanceof ICategory) {
 			if(((ICategory) entry).getExampleList().size()!=0)
@@ -402,8 +402,9 @@ public class WebController {
 
 			//TODO: Should we remove if the example is a dependency for another?
 			//Check story "Delete a code example from a public notebook"
-			if(getDependerOf((IExample) entry).size()!=0)
+			if(getDependerOf((IExample) entry).size()!=0){
 				return 2;
+			}
 		} 
 		else if(entry instanceof IUser) {
 			// TODO Allow deletion for users
@@ -436,12 +437,12 @@ public class WebController {
 						result.add(d);
 					}
 				}
-				
+
 			}
 		}
 		return result;
 	}
-	
+
 	/**
 	 * This method looks at all the example codes and collects all the examples
 	 * that correspond to a specific user. 
@@ -450,15 +451,15 @@ public class WebController {
 	 */
 	public List<IExample> getVisibleExamples(IUser user) {
 		List<IExample> results = getAllPublicExamples();
-		
+
 		for (IExample example : db.getAllExample()) {
 			if (example.getOwnerId() == user.getId() && !results.contains(example))
 				results.add(example);
 		}
-		
+
 		return results;
 	}
-	
+
 	/**
 	 * Get a list of examples that the given user owns
 	 * 
@@ -467,12 +468,28 @@ public class WebController {
 	 */
 	public List<IExample> getOwnedExamples(IUser user) {
 		List<IExample> results = new ArrayList<IExample>();
-		
+
 		for (IExample example : db.getAllExample()) {
 			if (example.getOwner() == user)
 				results.add(example);
 		}
-		
+
 		return results;
 	}
+
+	/**
+	 * @author Peng Ren
+	 * Remove the example from the dependency lists of all
+	 * the example it depends on
+	 * @param an example
+	 */
+	public void removeAllDependency(IExample example){
+		ArrayList<IExample> dependency = example.getDependency();
+		if(dependency.size() != 0){
+			for(int i = 0; i < dependency.size(); i++){
+				dependency.get(i).removeDependeny(example);
+			}
+		}
+	}
+
 }
