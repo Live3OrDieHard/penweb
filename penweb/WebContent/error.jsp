@@ -86,6 +86,10 @@
 				<p>You must be logged in to create a new category.</p>
 			<%
 				break;
+			case 6: %>
+				<p>Incorrect example id</p>
+			<%
+				break;
 			default:%>
 				<p>Invalid error message.</p>
 			<%

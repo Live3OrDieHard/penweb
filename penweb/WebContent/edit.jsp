@@ -19,6 +19,11 @@
 		else {
 			id = Long.parseLong(request.getParameter("id"));
 			ex = webcon.getExampleById(id);
+			if (ex == null) {
+				response.sendRedirect("/penweb/error.jsp?err=6");
+				webcon.close();
+				return;
+			}
 			isNewExample = false;
 		}
 		String loginName = (String) session.getAttribute("name");
@@ -38,6 +43,11 @@
 				if (ex.getOwner() == user) {
 					isOwner = true;
 				}
+			}
+			if (!isOwner && !ex.isPublic()) {
+				response.sendRedirect("/penweb/");
+				webcon.close();
+				return;
 			}
 		}
 	%>
