@@ -405,6 +405,7 @@ public class WebController {
 			if(getDependerOf((IExample) entry).size()!=0){
 				return 2;
 			}
+			removeAllDependency((IExample) entry);
 		} 
 		else if(entry instanceof IUser) {
 			// TODO Allow deletion for users
