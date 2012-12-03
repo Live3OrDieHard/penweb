@@ -112,5 +112,8 @@ public interface IExample extends IEntry
 	
 	boolean isPublic();
 	
-	void setPublic(boolean changePublic); 
+	void setPublic(boolean changePublic);
+
+	void removeDependeny(IExample example); 
+	
 }
