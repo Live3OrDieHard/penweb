@@ -62,7 +62,7 @@
 						<li>
 							<h1><%= e.getTitle() %></h1>
 							<div class="fade"></div>
-							<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
+							<div class="code"><%= webcon.escapeHtml(e.getCode()) %></div>
 						</li>
 					</a>
 				<%
