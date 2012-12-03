@@ -59,7 +59,7 @@ public class BasicExample implements IExample {
 	 * A comment to describe an example or a change in an example
 	 */
 	private String comment;
-	
+
 	/**
 	 * BasicExample assigns the authors to a list of users. The owner by default is no one.
 	 */
@@ -382,7 +382,15 @@ public class BasicExample implements IExample {
 	 * @param examples
 	 */
 	public void addDependency(IExample example) {
-		dependency.add(example);
+		if(dependency.size() != 0){
+			for(int i = 0; i < dependency.size(); i++){
+				if(example == dependency.get(i)){
+				}
+			}
+		}
+		else{
+			dependency.add(example);
+		}
 	}
 
 	/**
@@ -418,7 +426,7 @@ public class BasicExample implements IExample {
 				this.categoryList.remove(cat);
 		}
 	}
-	
+
 	/**
 	 * The method is used to remove all the categories from
 	 * the category list.
@@ -462,5 +470,23 @@ public class BasicExample implements IExample {
 			return this.getId().equals(((IExample) o).getId());
 		} else
 			return false;
+	}
+
+
+	@Override
+	/**
+	 * @author Peng Ren
+	 * remove the given example from the dependency list
+	 * @param 
+	 *       an example supposed to be removed from the dependency list
+	 */
+	public void removeDependeny(IExample example){
+		if(dependency.contains(example)){
+			for(int i = 0; i < dependency.size(); i++){
+				if(example == dependency.get(i)){
+					dependency.remove(i);
+				}
+			}
+		}
 	}
 }
