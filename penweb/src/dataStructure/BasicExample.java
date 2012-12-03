@@ -382,10 +382,15 @@ public class BasicExample implements IExample {
 	 * @param examples
 	 */
 	public void addDependency(IExample example) {
+		boolean contained = false;
 		if(dependency.size() != 0){
 			for(int i = 0; i < dependency.size(); i++){
 				if(example == dependency.get(i)){
+					contained = true;
 				}
+			}
+			if(!contained){
+				dependency.add(example);
 			}
 		}
 		else{
