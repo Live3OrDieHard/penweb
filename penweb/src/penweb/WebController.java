@@ -488,11 +488,7 @@ public class WebController {
 			}
 		}
 }
-<<<<<<< HEAD
 
-
-=======
-	
 	public String escapeHtml(String text) {
 		return text.replaceAll("&", "&amp;")
 				   .replaceAll("\n", "<br>")
@@ -502,11 +498,5 @@ public class WebController {
 				   .replaceAll(">", "&gt;")
 				   .replaceAll("\"", "&quot;")
 				   .replaceAll("'","&#39;");
->>>>>>> refs/remotes/origin/master
 	}
-<<<<<<< HEAD
-
-
-=======
->>>>>>> refs/remotes/origin/master
 }
