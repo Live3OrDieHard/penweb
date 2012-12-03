@@ -485,12 +485,12 @@ public class WebController {
 	 * @param an example
 	 */
 	public void removeAllDependency(IExample example){
-		ArrayList<IExample> dependency = example.getDependency();
-		if(dependency.size() != 0){
-			for(int i = 0; i < dependency.size(); i++){
-				dependency.get(i).removeDependeny(example);
+		for(IExample e : db.getAllExample()){
+			if(e.getDependency().contains(example)){
+				e.removeDependeny(example);
 			}
 		}
 	}
+
 
 }
