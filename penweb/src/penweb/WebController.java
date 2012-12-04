@@ -394,10 +394,10 @@ public class WebController {
 			if(exampleEntry.getCategories().size()!=0)
 			{
 				List<ICategory> categories = exampleEntry.getCategories();
-				exampleEntry.removeFromAllCategories();
 				for (ICategory category : categories) {
 					db.store(category);
 				}
+				exampleEntry.removeFromAllCategories();
 			}
 
 			//TODO: Should we remove if the example is a dependency for another?
