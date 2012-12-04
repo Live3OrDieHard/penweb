@@ -24,5 +24,7 @@
 	<classpathentry kind="lib" path="ApacheLib/tomcat-i18n-ja.jar"/>
 	<classpathentry kind="lib" path="ApacheLib/tomcat-jdbc.jar"/>
 	<classpathentry kind="lib" path="ApacheLib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="JUnitLib/junit.jar"/>
+	<classpathentry kind="lib" path="JUnitLib/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
