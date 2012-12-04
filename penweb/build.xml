@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="penweb">
+    <property environment="env"/>
+    <property name="junit.output.dir" value="junit"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="Apache Tomcat v7.0 [Apache Tomcat v7.0].libraryclasspath">
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/annotations-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/catalina-ant.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/catalina-ha.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/catalina-tribes.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/catalina.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/ecj-3.7.2.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/el-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/jasper-el.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/jasper.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/jsp-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/servlet-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/tomcat-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/tomcat-coyote.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/tomcat-dbcp.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/tomcat-i18n-es.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/tomcat-i18n-fr.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/tomcat-i18n-ja.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/tomcat-jdbc.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-7.0.32/lib/tomcat-util.jar"/>
+    </path>
+    <path id="Web App Libraries.libraryclasspath">
+        <pathelement location="WebContent/WEB-INF/lib/db4o-8.0.249.16098-all-java5.jar"/>
+    </path>
+    <path id="EAR Libraries.libraryclasspath"/>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_4.10.0.v4_10_0_v20120426-0900/junit.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+    </path>
+    <path id="penweb.classpath">
+        <pathelement location="build/classes"/>
+        <path refid="Apache Tomcat v7.0 [Apache Tomcat v7.0].libraryclasspath"/>
+        <path refid="Web App Libraries.libraryclasspath"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="build/classes"/>
+        <copy includeemptydirs="false" todir="build/classes">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="build/classes"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="penweb.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="test">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.BasicExampleTest" todir="${junit.output.dir}"/>
+            <test name="test.CategoryTest" todir="${junit.output.dir}"/>
+            <test name="test.Db4oDatabaseTest" todir="${junit.output.dir}"/>
+            <test name="test.ExampleAndCategoryTest" todir="${junit.output.dir}"/>
+            <test name="test.MiscellaneousTest" todir="${junit.output.dir}"/>
+            <test name="test.UserTest" todir="${junit.output.dir}"/>
+            <test name="test.WebControllerTest" todir="${junit.output.dir}"/>
+        	<test name="test.CategoryTest" todir="${junit.output.dir}"/>
+            <classpath refid="penweb.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
+</project>
