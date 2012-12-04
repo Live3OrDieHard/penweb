@@ -382,10 +382,10 @@ public class WebController {
 			{
 				ICategory categoryEntry = (ICategory)entry;
 				List<IExample> examples = categoryEntry.getExampleList();
+				categoryEntry.removeAllExamples();
 				for (IExample example : examples) {
 					db.store(example);
 				}
-				categoryEntry.removeAllExamples();
 			}
 		}
 		else if (entry instanceof IExample) {
@@ -394,15 +394,15 @@ public class WebController {
 			if(exampleEntry.getCategories().size()!=0)
 			{
 				List<ICategory> categories = exampleEntry.getCategories();
+				exampleEntry.removeFromAllCategories();
 				for (ICategory category : categories) {
 					db.store(category);
 				}
-				exampleEntry.removeFromAllCategories();
 			}
 
 			//TODO: Should we remove if the example is a dependency for another?
 			//Check story "Delete a code example from a public notebook"
-			if(getDependerOf((IExample) entry).size()!=0)
+			if(getDependerOf(exampleEntry).size()!=0)
 				removeAllDependency(exampleEntry);
 		} 
 		else if(entry instanceof IUser) {
