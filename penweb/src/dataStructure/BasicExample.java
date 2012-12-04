@@ -59,7 +59,7 @@ public class BasicExample implements IExample {
 	 * A comment to describe an example or a change in an example
 	 */
 	private String comment;
-	
+
 	/**
 	 * BasicExample assigns the authors to a list of users. The owner by default is no one.
 	 */
@@ -85,10 +85,11 @@ public class BasicExample implements IExample {
 	// throw an exception
 	@Override
 	public void addCategory(ICategory category) throws DuplicateException {
-		if (!this.isInCategory(category)) 
+		if (!this.isInCategory(category)) {
 			categoryList.add(category);
-		if(!category.getExampleList().contains(this))
-			category.addCodeExample(this);
+			if(!category.getExampleList().contains(this))
+				category.addCodeExample(this);
+		}
 		else {
 			throw new DuplicateException("This example is already in category:"+category.getTitle());
 		}
@@ -186,7 +187,7 @@ public class BasicExample implements IExample {
 	 * @return String
 	 */
 	public String getLanguage() {
-		return this.language.toLowerCase();
+		return this.language.toLowerCase().trim();
 	}
 
 	/**
@@ -248,15 +249,7 @@ public class BasicExample implements IExample {
 	 * @return true if the example is in category. false otherwise
 	 */
 	private boolean isInCategory(ICategory category) {
-		ArrayList<IExample> examples = (ArrayList<IExample>) category
-				.getExampleList();
-		int i;
-		for (i = 0; i < examples.size(); i++) {
-			if (this.id == examples.get(i).getId()) {
-				return true;
-			}
-		}
-		return false;
+		return this.categoryList.contains(category);
 	}
 
 	/**
@@ -348,13 +341,12 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * The method is used to clone an existent example.
-	 * The exampled cloned will have all the features the same
+	 * The method is used to clone an already created example.
+	 * The cloned example  will have all the features the same
 	 * as the original one except the id.
 	 * 
-	 * @return
-	 * 		  a new example with same features as the original one
-	 * 		  except the id
+	 * @return a new example with same features as the original one
+	 * except the id
 	 */
 	@Override
 	public BasicExample clone() {
@@ -374,11 +366,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * The method is used to a list of all category ids from 
-	 * the category list.
-	 * 
-	 * @return
-	 * 		  a list of ids of category in the categorylist
+	 * @return a list of ids of category in the categorylist
 	 */
 	@Override
 	public List<Long> getCategoryIds() {
@@ -394,7 +382,20 @@ public class BasicExample implements IExample {
 	 * @param examples
 	 */
 	public void addDependency(IExample example) {
-		dependency.add(example);
+		boolean contained = false;
+		if(dependency.size() != 0){
+			for(int i = 0; i < dependency.size(); i++){
+				if(example == dependency.get(i)){
+					contained = true;
+				}
+			}
+			if(!contained){
+				dependency.add(example);
+			}
+		}
+		else{
+			dependency.add(example);
+		}
 	}
 
 	/**
@@ -419,9 +420,8 @@ public class BasicExample implements IExample {
 	 * The method is used to remove the given category from the
 	 * current categorylist
 	 * 
-	 * @param
-	 * 		 category the category inteneded to remove from the
-	 * 		 categorylist
+	 * @param category. The category that will be removed from
+	 * the current category list. 
 	 */
 	@Override
 	public void removeFromCategory(ICategory category) {
@@ -431,7 +431,7 @@ public class BasicExample implements IExample {
 				this.categoryList.remove(cat);
 		}
 	}
-	
+
 	/**
 	 * The method is used to remove all the categories from
 	 * the category list.
@@ -475,5 +475,23 @@ public class BasicExample implements IExample {
 			return this.getId().equals(((IExample) o).getId());
 		} else
 			return false;
+	}
+
+
+	@Override
+	/**
+	 * @author Peng Ren
+	 * remove the given example from the dependency list
+	 * @param 
+	 *       an example supposed to be removed from the dependency list
+	 */
+	public void removeDependeny(IExample example){
+		if(dependency.contains(example)){
+			for(int i = 0; i < dependency.size(); i++){
+				if(example == dependency.get(i)){
+					dependency.remove(i);
+				}
+			}
+		}
 	}
 }

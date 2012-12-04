@@ -20,6 +20,8 @@ import exceptions.DuplicateException;
  * @author tpatikorn
  * 
  * A category into which code examples can be placed
+ * Contains methods to get/set the description, title,
+ * id, public of a category. Also can add/remove examples.
  */
 public class Category implements ICategory {
 	private IUser owner;
@@ -68,13 +70,13 @@ public class Category implements ICategory {
 	 * @see dataStructure.ICategory#addCodeExample()
 	 */
 	public void addCodeExample(IExample example) throws DuplicateException {
-		try {
-			if (!this.hasExample(example))
-				this.exampleList.add(example);
+		if (!this.hasExample(example)) {
+			this.exampleList.add(example);
 			if(!example.getCategories().contains(this))
 				example.addCategory(this);
-		} catch (DuplicateException e) {
-			throw e;
+		}
+		else {
+			throw new DuplicateException("This example is already in category:"+this.getTitle());
 		}
 	}
 

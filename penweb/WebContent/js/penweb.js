@@ -33,7 +33,12 @@ function checkAddCodeSubmit() {
 		$(".error").html("Error: Please enter code.");
 		$(".error").show();
 		return false;
-	}					
+	}
+	if ($("input[name=language]").val() == "") {
+		$(".error").html("Error: Please enter language.");
+		$(".error").show();
+		return false;
+	}
 	return true;
 }
 

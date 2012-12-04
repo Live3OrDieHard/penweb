@@ -19,11 +19,12 @@ import exceptions.NoIdAvailableException;
 /**
  * @author Andy Creeth
  * @author Justin Chines
- * @author March
+ * @author tpatikorn
+ * @author awiovanna
  * 
  * Database interface for storing and retrieving objects. This 
  * contains many methods to retrieve objects from the database using 
- * headers, ids, names, or more. More methods may be added laters.
+ * headers, ids, names, or more. More methods may be added later.
  */
 public interface IDatabase {
 	/**
@@ -151,7 +152,17 @@ public interface IDatabase {
 	 */
 	boolean isCategoryTitleTaken(String name);
 	
+	/**
+	 * @author tpatikorn, awiovanna
+	 * @param lang
+	 * @return list of examples written in the given language
+	 */
 	List<IExample> getByLanguage(String lang);
 	
+	/**
+	 * @author awiovanna, tpatikorn
+	 * @param user
+	 * @return list of all code examples owned by the given user
+	 */
 	List<IExample> getExampleByUser(IUser user);
 }

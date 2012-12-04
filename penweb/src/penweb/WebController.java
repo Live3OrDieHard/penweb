@@ -12,6 +12,7 @@ package penweb;
 
 import database.*;
 import dataStructure.*;
+import exceptions.DuplicateException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -58,6 +59,7 @@ public class WebController {
 	}
 
 	/**
+	 * Modified by Peng Ren to check if the category name is already taken
 	 * Adds a category to the database. A unique ID is assigned within the DB
 	 * 
 	 * @param name
@@ -65,9 +67,14 @@ public class WebController {
 	 * @param desc
 	 *            Description of the desired category
 	 */
-	public void addCategory(String name, String desc) {
-		ICategory cat = new Category(name, desc);
-		db.store(cat);
+	public void addCategory(String name, String desc) throws DuplicateException{
+		if(!db.isCategoryTitleTaken(name)){
+			ICategory cat = new Category(name, desc);
+			db.store(cat);
+		}
+		else{
+			throw new DuplicateException("The title of category already exists.");
+		}
 	}
 
 	/**
@@ -425,8 +432,8 @@ public class WebController {
 
 			//TODO: Should we remove if the example is a dependency for another?
 			//Check story "Delete a code example from a public notebook"
-			if(getDependerOf((IExample) entry).size()!=0)
-				return 2;
+			if(getDependerOf(exampleEntry).size()!=0)
+				removeAllDependency(exampleEntry);
 		} 
 		else if(entry instanceof IUser) {
 			// TODO Allow deletion for users
@@ -497,5 +504,30 @@ public class WebController {
 		}
 		
 		return results;
+	}
+	/**
+	 * @author Peng Ren
+	 * Remove the example from the dependency lists of all
+	 * the example it depends on
+	 * @param an example
+	 */
+	public void removeAllDependency(IExample example){
+		for(IExample e : db.getAllExample()){
+			if(e.getDependency().contains(example)){
+				e.removeDependeny(example);
+				db.store(e);
+			}
+		}
+}
+
+	public String escapeHtml(String text) {
+		return text.replaceAll("&", "&amp;")
+				   .replaceAll("\n", "<br>")
+				   .replaceAll(" ", "&nbsp;")
+				   .replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;")
+				   .replaceAll("<", "&lt;")
+				   .replaceAll(">", "&gt;")
+				   .replaceAll("\"", "&quot;")
+				   .replaceAll("'","&#39;");
 	}
 }

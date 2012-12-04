@@ -17,8 +17,7 @@ import exceptions.DuplicateException;
 
 /**
  * @author tpatikorn
- * IExample is basically the actual entry (code/test/etc)
- * Prof. Pollice prefers to call it an example.
+ * IExample is the code entry that a user is allowed to create on the website.
  */
 public interface IExample extends IEntry
 {
@@ -114,5 +113,8 @@ public interface IExample extends IEntry
 	
 	boolean isPublic();
 	
-	void setPublic(boolean changePublic); 
+	void setPublic(boolean changePublic);
+
+	void removeDependeny(IExample example); 
+	
 }

@@ -42,6 +42,8 @@ import dataStructure.IUser;
 /** 
  * @author Andy Creeth
  * @author Justin Chines
+ * @author tpatikorn
+ * @author awiovanna
  * This class acts as an interface to a DB4O database. It
  * connects to a server running locally upon creation. There are 
  * methods to retrieve data from the database.
@@ -69,7 +71,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * for storing purpose 
+	 * for storing purposes
 	 * store an entry in db4odatabase
 	 * return null if the entry cannot be stored (no id available)
 	 */
@@ -232,10 +234,8 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * @param id
-	 * 			the id of the entry
-	 * @return
-	 * 			the entry with the given id if there is
+	 * @param id the id of the entry
+	 * @return the entry with the given id if there is
 	 * the unique entry exists
 	 * 			null if there is no entry with the given id
 	 * 			null if there are more than one entries with
@@ -259,22 +259,17 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * The method is used to produce an id for an entries.
-	 * This method should be overwritten later in a better way.
+	 * The method is used to produce an id for an entry.
 	 * @return a new id
 	 */
 	@Override
 	public Long getNewId() {
-		return (long) (Math.random() * 100000000); // should have a better way
-													// to do
-		// this
+		return (long) (Math.random() * 100000000);
 	}
 
 	/**
-	 * @param id
-	 * 			the id of the category
-	 * @return
-	 * 			the category with the given id if there is
+	 * @param id the id of the category
+	 * @return the category with the given id if there is
 	 * the unique category exists
 	 * 			null if there is no category with the given id
 	 * 			null if there are more than one categories with
@@ -298,10 +293,8 @@ public class Db4oDatabase implements IDatabase {
 	}
 	
 	/**
-	 * @param id
-	 * 			the id of the example
-	 * @return
-	 * 			the example with the given id if there is
+	 * @param id the id of the example
+	 * @return the example with the given id if there is
 	 * the unique example exists
 	 * 			null if there is no example with the given id
 	 * 			null if there are more than one examples with
@@ -325,10 +318,8 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * @param id
-	 * 			the login name of the user
-	 * @return
-	 * 			the user with the given login name if there is
+	 * @param id the login name of the user
+	 * @return the user with the given login name if there is
 	 * the unique login name exists
 	 * 			null if there is no user with the given login name
 	 * 			null if there are more than one users with
@@ -352,10 +343,8 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * @param id
-	 * 			the id of the user
-	 * @return
-	 * 			the user with the given id if there is
+	 * @param id the id of the user
+	 * @return the user with the given id if there is
 	 * the unique user exists
 	 * 			null if there is no user with the given id
 	 * 			null if there are more than one users with
@@ -410,7 +399,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * The method checks if the title for the category is already existent.
+	 * The method checks if the title for the category already exists.
 	 * 
 	 * @return	true if there is already the name for a category
 	 * 			false if the name is not used
@@ -450,7 +439,8 @@ public class Db4oDatabase implements IDatabase {
 		List<IExample> list = db.query(new Predicate<IExample>() {
 			public boolean match(IExample e) {
 				String thisLanguage = e.getLanguage();
-				return (thisLanguage.toLowerCase().equals(lang.toLowerCase()));
+				return (thisLanguage.toLowerCase().equals(lang.toLowerCase())); 
+				//Allows front end to only display lower case, no matter what the user puts it. 
 			}
 		});
 		return list;
