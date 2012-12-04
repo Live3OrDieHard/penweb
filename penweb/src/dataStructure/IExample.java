@@ -32,6 +32,7 @@ public interface IExample extends IEntry
 	void addTags(String tag);
 
 	/**
+	 * getAuthors is a list of authors found from the users created.
 	 * @return List of authors
 	 */
 	List<IUser> getAuthors();
