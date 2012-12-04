@@ -78,7 +78,7 @@
 				Options:
 				<%if (isOwner) {%>
 				<input type="hidden" name="eid" value="<%= ex.getId()%>"/>
-				<input type="submit" class="button black-wide" value="Delete Example"/>
+				<!-- input type="submit" class="button black-wide" value="Delete Example"/-->
 				<input type="button" class="button black-wide" onClick="location.href=('dependency.jsp?eid=<%= id %>')" value="Dependencies"/>
 				<%}%>
 				<input type="button" class="button black-wide" onClick="javascript: duplicateIntoCategories();" value="Duplicate"/>
