@@ -382,10 +382,10 @@ public class WebController {
 			{
 				ICategory categoryEntry = (ICategory)entry;
 				List<IExample> examples = categoryEntry.getExampleList();
-				categoryEntry.removeAllExamples();
 				for (IExample example : examples) {
 					db.store(example);
 				}
+				categoryEntry.removeAllExamples();
 			}
 		}
 		else if (entry instanceof IExample) {
