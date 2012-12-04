@@ -485,6 +485,7 @@ public class WebController {
 		for(IExample e : db.getAllExample()){
 			if(e.getDependency().contains(example)){
 				e.removeDependeny(example);
+				db.store(e);
 			}
 		}
 }
