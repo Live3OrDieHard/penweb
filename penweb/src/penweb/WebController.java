@@ -14,6 +14,12 @@ import database.*;
 import dataStructure.*;
 import exceptions.DuplicateException;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -339,7 +345,14 @@ public class WebController {
 	 */
 	public List<String> getLangList(IUser user) {
 		List<IExample> examples = db.getAllExample();
-		List<String> result = new ArrayList<String>();
+		List<String> result;
+		try {
+			result = this.readLangListFromFile();
+			//System.out.println("get the list");
+		} catch (IOException e1) {
+			result = new ArrayList<String>();
+			//System.out.println("not get the list");
+		}
 		for (IExample e : examples) {
 			if (e.isPublic() && !result.contains(e.getLanguage()))
 				result.add(e.getLanguage());
@@ -353,6 +366,23 @@ public class WebController {
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * @author dkoufos, tpatikorn
+	 * read text file and return a list of string of languages from that file
+	 * @return
+	 * @throws IOException
+	 */
+	public List<String> readLangListFromFile() throws IOException {
+		List<String> LangList = new ArrayList<String>();
+		BufferedReader in = new BufferedReader(new FileReader("LangList"));
+		String lang = "";
+		while(lang != null) {
+			lang = in.readLine();
+			LangList.add(lang);
+		}
+		return LangList;
 	}
 
 	/**

@@ -407,9 +407,7 @@ public class WebControllerTest {
 		JavaCpp.add("c++");
 
 		assertTrue(IvaLangList.containsAll(JavaC));
-		assertTrue(JavaC.containsAll(IvaLangList));
 		assertTrue(ChanLangList.containsAll(JavaCpp));
-		assertTrue(JavaCpp.containsAll(ChanLangList));
 	}
 
 	@Test
@@ -574,14 +572,24 @@ public class WebControllerTest {
 		assertTrue(testee.getVisibleExamples(user3).containsAll(listTrue));		
 	}
 	
+	@Test
+	public void readLangListFromFileTest() throws IOException {
+		List<String> langList = testee.readLangListFromFile();
+		assertTrue(langList.contains("python"));
+		assertTrue(langList.contains("c"));
+		assertTrue(langList.contains("c++"));
+		assertTrue(langList.contains("java"));
+		
+	}
+	
 	@After
 	public void cleanup() throws IOException {
 		testee.close();
 
 		File f1 = new File(databaseName);
+		
 		if (f1.exists())
 			f1.delete();
-
 	}
 
 }
