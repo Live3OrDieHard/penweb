@@ -43,9 +43,9 @@ public class modifyCode extends HttpServlet {
 		WebController webcon = new WebController();
 		Long id = Long.parseLong(request.getParameter("eid"));
 		IExample ex = webcon.getExampleById(id);
-		String title = request.getParameter("title");
+		String title = request.getParameter("title");		
 		
-		if (ex.getTitle() != title) {
+		if (!ex.getTitle().equals(title)) {
 			if (webcon.isExampleNameTaken(title)) {
 				response.sendRedirect("/penweb/error.jsp?err=7");
 				return;
