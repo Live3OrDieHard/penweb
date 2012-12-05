@@ -17,6 +17,15 @@ a {
 	color: #FFFFFF;
 }
 
+
+select  {
+	width: 300px;
+	background-color: #333;
+	color: #FFF;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
 /* Modal Sheet */
 
 .modal {
