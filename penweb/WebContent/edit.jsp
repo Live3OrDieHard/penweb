@@ -150,7 +150,7 @@
 			<p>Categories: (Hold Ctrl to select multiple categories or remove categories)</p>
 			<select name="cids" multiple="multiple" <%if(!isOwner) {%>disabled="disabled"<%}%>>
 				<% for (ICategory c : cats) { %>
-					<option value="<%=c.getId() %>" <%if(c.getExampleIds().contains(ex.getId())) {%>selected<%}%>><%=c.getTitle() %></option>
+					<option value="<%=c.getId() %>" <%if(c.getExampleIds().contains(id)) {%>selected<%}%>><%=c.getTitle() %></option>
 				<%}%>
 			</select>
 			<%} %>
