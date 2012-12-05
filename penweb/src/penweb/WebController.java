@@ -338,21 +338,13 @@ public class WebController {
 
 	/**
 	 * @author awiovanna, tpatikorn
-	 * @param user
-	 *            specified user
+	 * @param user specified user
 	 * @return List of all languages that are used in public examples, 
 	 * as well as all languages that are used in private code for the given user.
 	 */
 	public List<String> getLangList(IUser user) {
 		List<IExample> examples = db.getAllExample();
-		List<String> result;
-		try {
-			result = this.readLangListFromFile();
-			//System.out.println("get the list");
-		} catch (IOException e1) {
-			result = new ArrayList<String>();
-			//System.out.println("not get the list");
-		}
+		List<String> result = new ArrayList<String>();
 		for (IExample e : examples) {
 			if (e.isPublic() && !result.contains(e.getLanguage()))
 				result.add(e.getLanguage());
@@ -369,18 +361,32 @@ public class WebController {
 	}
 	
 	/**
-	 * @author dkoufos, tpatikorn
-	 * read text file and return a list of string of languages from that file
-	 * @return
-	 * @throws IOException
+	 * @author dkoufos, tpatikorn, iprangishvili
+	 * read text file and return a list of strings of languages from that file
+	 * The file must be named "LangList.txt"
+	 * This file must be stored in the same directory as the database file (?).
+	 * This directory should be eclipse directory (run from eclipse) or Tomcat directory. 
+	 * @return a list of strings of languages read from LangList.txt
 	 */
-	public List<String> readLangListFromFile() throws IOException {
+	public List<String> readLangListFromFile() {
+		BufferedReader in;
 		List<String> LangList = new ArrayList<String>();
-		BufferedReader in = new BufferedReader(new FileReader("LangList"));
+		try {
+			in = new BufferedReader(new FileReader("LangList.txt"));
+		}
+		catch(IOException e) {
+			//System.out.println("file not found");
+			return LangList;
+		}
 		String lang = "";
 		while(lang != null) {
-			lang = in.readLine();
-			LangList.add(lang);
+			try {
+				lang = in.readLine();
+				if(lang!=null && lang.length()!=0)
+					LangList.add(lang);
+			} catch (IOException e) {
+				break;
+			}
 		}
 		return LangList;
 	}
