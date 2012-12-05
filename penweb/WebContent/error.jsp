@@ -90,7 +90,11 @@
 				<p>Incorrect example id</p>
 			<%
 				break;
-			default:%>
+			case 7: %>
+				<p>Example name already taken</p>
+			<%
+				break;
+			default: %>
 				<p>Invalid error message.</p>
 			<%
 				break;

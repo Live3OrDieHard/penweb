@@ -42,6 +42,12 @@ public class modifyCode extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		WebController webcon = new WebController();
 		String title = request.getParameter("title");
+		
+		if (webcon.isExampleNameTaken(title)) {
+			response.sendRedirect("/penweb/error.jsp?err=7");
+			return;
+		}
+		
 		String content = request.getParameter("content");
 		String language = request.getParameter("language");
 		Long id = Long.parseLong(request.getParameter("eid"));

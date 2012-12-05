@@ -49,6 +49,12 @@ public class addCode extends HttpServlet {
 		boolean pub = request.getParameter("public") != null;
 		
 		WebController webcon = new WebController();
+		
+		if (webcon.isExampleNameTaken(title)) {
+			response.sendRedirect("/penweb/error.jsp?err=7");
+			return;
+		}
+		
 		long exid = webcon.addCode(title, content, language, loginname, pub);
 		IExample ex = webcon.getExampleById(exid);
 		if (cids != null) {

@@ -49,7 +49,18 @@ public class duplicateCode extends HttpServlet {
 		String loginName = request.getParameter("uid");
 		IExample ex = webcon.getExampleById(Long.parseLong(eid));
 		IUser user = webcon.getUserByLoginName(loginName);
-		Long nid = webcon.addCode(ex.getTitle(), ex.getCode(), ex.getLanguage(), user.getLoginName(), false);
+		String title = ex.getTitle();
+		String end = "";
+		boolean isTaken = true;
+		int i = 1;
+		while (isTaken) {
+			end = " (" + String.valueOf(i) + ")";
+			String s = title + end;
+			isTaken = webcon.isExampleNameTaken(s);
+			i++;
+		}
+		title += end;
+		Long nid = webcon.addCode(title, ex.getCode(), ex.getLanguage(), user.getLoginName(), false);
 		IExample nex = webcon.getExampleById(nid);
 		if (cids != null) {
 			for (String s : cids) {
