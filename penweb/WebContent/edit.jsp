@@ -146,13 +146,14 @@
 			<font size="1"><p>* Required Fields</p></font>
 			
 				<p>Share with public? <input <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if (!isNewExample) { if (ex.isPublic()) {%>checked<%}}%> type="checkbox" name="public"/></p>
-			<p>Categories:</p>
-			<% for (ICategory c : cats) { %>
-			<p><%if(user==null){%>
-			<%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%><input disabled="disabled" type="checkbox" name="cids"value="<%=c.getId() %>"checked/> <%=c.getTitle() %><%}}%></p>
-			<%} else {%>
-			<input <%if(user==null || !isOwner){%>disabled="disabled"<%}%> type="checkbox" name="cids" value="<%=c.getId() %>" <%if (!isNewExample){if (c.getExampleIds().contains(ex.getId())) {%>checked<%}}%>/> <%=c.getTitle() %></p>
-			<%} }%>
+			<%if (!cats.isEmpty()) {%>
+			<p>Categories: (Hold Ctrl to select multiple categories or remove categories)</p>
+			<select name="cids" multiple="multiple" <%if(!isOwner) {%>disabled="disabled"<%}%>>
+				<% for (ICategory c : cats) { %>
+					<option value="<%=c.getId() %>" <%if(c.getExampleIds().contains(id)) {%>selected<%}%>><%=c.getTitle() %></option>
+				<%}%>
+			</select>
+			<%} %>
 			<%
 			if (!isNewExample) {
 				ArrayList<IExample> dependencies = ex.getDependency();
