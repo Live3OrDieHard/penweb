@@ -524,7 +524,20 @@ public class WebController {
 				db.store(e);
 			}
 		}
-}
+	}
+	
+	/**
+	 * Checks if an example with the given name already exists
+	 * @param name The name of the example
+	 * @return True if the name is already being used, false otherwise.
+	 */
+	public boolean isExampleNameTaken(String name) {
+		for (IExample e : db.getAllExample()) {
+			if (name.equals(e.getTitle())) return true;
+		}
+		
+		return false;
+	}
 
 	public String escapeHtml(String text) {
 		return text.replaceAll("&", "&amp;")
