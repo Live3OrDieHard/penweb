@@ -364,8 +364,9 @@ public class WebController {
 	 * @author dkoufos, tpatikorn, iprangishvili
 	 * read text file and return a list of strings of languages from that file
 	 * The file must be named "LangList.txt"
-	 * This file must be stored in the same directory as the database file (?).
-	 * This directory should be eclipse directory (run from eclipse) or Tomcat directory. 
+	 * This file must be stored in the same directory as the database file.
+	 * This directory should be eclipse directory (run from eclipse) where eclipse.exe is
+	 * or in the Tomcat bin directory [TOMCAT HOME]/bin/ 
 	 * @return a list of strings of languages read from LangList.txt
 	 */
 	public List<String> readLangListFromFile() {
@@ -375,7 +376,7 @@ public class WebController {
 			in = new BufferedReader(new FileReader("LangList.txt"));
 		}
 		catch(IOException e) {
-			//System.out.println("file not found");
+			//System.out.println("file not found");0
 			return LangList;
 		}
 		String lang = "";
