@@ -542,11 +542,11 @@ public class WebController {
 
 	public String escapeHtml(String text) {
 		return text.replaceAll("&", "&amp;")
+				   .replaceAll("<", "&lt;")
+				   .replaceAll(">", "&gt;")
 				   .replaceAll("\n", "<br>")
 				   .replaceAll(" ", "&nbsp;")
 				   .replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;")
-				   .replaceAll("<", "&lt;")
-				   .replaceAll(">", "&gt;")
 				   .replaceAll("\"", "&quot;")
 				   .replaceAll("'","&#39;");
 	}

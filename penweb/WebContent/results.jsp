@@ -60,9 +60,9 @@
 					for (IExample e : ex) { %>
 					<a href="edit.jsp?id=<%=e.getId()%>">
 						<li>
-							<h1><%= e.getTitle() %></h1>
+							<h1><%= webcon.escapeHtml(e.getTitle()) %></h1>
 							<div class="fade"></div>
-							<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
+							<div class="code"><%= webcon.escapeHtml(e.getCode()) %></div>
 						</li>
 					</a>
 				<%

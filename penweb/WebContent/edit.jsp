@@ -85,7 +85,7 @@
 		<%	if (isNewExample) {%>
 				New Example
 			<%}	else {%>
-				<%=ex.getTitle()%>
+				<%=webcon.escapeHtml(ex.getTitle())%>
 			<%}%></h1>
 			
 			<%	if (!isNewExample) {%>
@@ -132,7 +132,7 @@
 				else {
 					num = c.getVisibleExamples(user).size();
 				} %>
-				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=num %>)</li></a>
+				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=webcon.escapeHtml(c.getTitle())%> (<%=num %>)</li></a>
 			<%} %>
 		</ul>
 		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>
@@ -146,12 +146,12 @@
 			<%} %>
 			Author:
 			<%if (!isNewExample) {%>
-				<p><%=ex.getAuthorsNames() %></p>
+				<p><%=webcon.escapeHtml(ex.getAuthorsNames()) %></p>
 			<%} else {%>
-				<p><%=user.getDisplayName() %></p>
+				<p><%=webcon.escapeHtml(user.getDisplayName()) %></p>
 			<%} %>
 			Title: *
-			<input type="text" name="title" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getTitle()%>"<%}%> />
+			<input type="text" name="title" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=webcon.escapeHtml(ex.getTitle())%>"<%}%> />
 			
 			<input type="hidden" name="loginname" <%if(!isNewExample) {%>value="<%=ex.getAuthors().get(0).getLoginName()%>"<%} else {%>value="<%=user.getLoginName()%>"<%}%>/>
 			Language: * <br>
@@ -171,9 +171,9 @@
 			</select> <br><br>
 			<div id="otherlang" <%if(langs.size()!=0 && !isOther) {%>style="display:none;"<%}%>>
 				Other Language:
-				<input type="text" name="" id="other" <%if (isOther) {%>value="<%=ex.getLanguage()%>"<%}%>>
+				<input type="text" name="" id="other" <%if (isOther) {%>value="<%=webcon.escapeHtml(ex.getLanguage())%>"<%}%>>
 			</div>
-			<!--input type="text" name="language" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getLanguage()%>"<%}%>/-->
+			<!--input type="text" name="language" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=webcon.escapeHtml(ex.getLanguage())%>"<%}%>/-->
 			Code: *
 			<textarea <%if(user==null || !isOwner){%>disabled="disabled"<%}%> name="content"><%if(!isNewExample) {%><%=ex.getCode()%><%}%></textarea>
 			<font size="1"><p>* Required Fields</p></font>
@@ -183,7 +183,7 @@
 			<p>Categories: (Hold Ctrl to select multiple categories or remove categories)</p>
 			<select name="cids" multiple="multiple" <%if(!isOwner) {%>disabled="disabled"<%}%>>
 				<% for (ICategory c : cats) { %>
-					<option value="<%=c.getId() %>" <%if(c.getExampleIds().contains(id)) {%>selected<%}%>><%=c.getTitle() %></option>
+					<option value="<%=c.getId() %>" <%if(c.getExampleIds().contains(id)) {%>selected<%}%>><%=webcon.escapeHtml(c.getTitle()) %></option>
 				<%}%>
 			</select>
 			<%} %>
@@ -197,11 +197,11 @@
 				<%
 					for (IExample e : dependencies) {
 				%>
-				<li><a href="edit.jsp?id=<%= e.getId() %>"><%= e.getTitle() %></a></li>
+				<li><a href="edit.jsp?id=<%= e.getId() %>"><%= webcon.escapeHtml(e.getTitle()) %></a></li>
 				<%} %>
 			</ul>
 			<%} }%>
-			<% if (!isNewExample && (ex.getComment() != null && ex.getComment() != "")) { %><p>Last change: <%= ex.getComment() %></p> <%} %>
+			<% if (!isNewExample && (ex.getComment() != null && ex.getComment() != "")) { %><p>Last change: <%= webcon.escapeHtml(ex.getComment()) %></p> <%} %>
 		</form>
 	</div>
 </div>

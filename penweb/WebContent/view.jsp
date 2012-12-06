@@ -96,22 +96,22 @@
 				List<ICategory> cats = webcon.getCategories();
 				for (ICategory c : cats) {
 			%>
-			<a href="index.jsp?cat=<%=c.getId() %>"><li> <%= c.getTitle() %> (<%= c.getExampleList().size() %>)</li></a>
+			<a href="index.jsp?cat=<%=c.getId() %>"><li> <%= webcon.escapeHtml(c.getTitle()) %> (<%= c.getExampleList().size() %>)</li></a>
 			<% } %> 
 		</ul>
 		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
 	</div>
 	<div class="right">
-		<p>Author: <b><%=ex.getAuthors().get(0).getDisplayName() %></b></p>
-		<p>Language: <%=ex.getLanguage() %><b></b></p>
+		<p>Author: <b><%=webcon.escapeHtml(ex.getAuthors().get(0).getDisplayName()) %></b></p>
+		<p>Language: <%=webcon.escapeHtml(ex.getLanguage()) %><b></b></p>
 		<p class="code">
-			<%= ex.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %>
+			<%= webcon.escapeHtml(ex.getCode()) %>
 		</p>
 		<form action="addToCategory" method="post">
 			<input type="hidden" name="eid" value="<%=ex.getId() %>" />
 			<p>Categories:</p>
 			<% for (ICategory c : cats) { %>
-				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" /> <%=c.getTitle() %></p>
+				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" /> <%=webcon.escapeHtml(c.getTitle()) %></p>
 			<%} %>
 			<input type="submit" class="button black" value="Add" />
 		</form>
