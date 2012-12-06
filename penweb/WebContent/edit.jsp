@@ -3,6 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+	function checkSelected() {
+		var selected = document.getElementById("language");
+		if (selected.value == "other") {
+			document.getElementById("otherlang").style.display = "block";
+			document.getElementById("other").name = "language";
+			selected.name = "";
+		}
+		else {
+			document.getElementById("otherlang").style.display = "none";
+			document.getElementById("other").name = "";
+			selected.name = "language";
+		}
+	}
+</script>
 	<%
 		// Instantiate the web controller and grab id paramter
 		WebController webcon = new WebController();
@@ -139,8 +154,26 @@
 			<input type="text" name="title" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getTitle()%>"<%}%> />
 			
 			<input type="hidden" name="loginname" <%if(!isNewExample) {%>value="<%=ex.getAuthors().get(0).getLoginName()%>"<%} else {%>value="<%=user.getLoginName()%>"<%}%>/>
-			Language: *
-			<input type="text" name="language" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getLanguage()%>"<%}%>/>
+			Language: * <br>
+			<select name="language" id="language" onchange="checkSelected()">
+				<%
+				List<String> langs = webcon.readLangListFromFile();
+				boolean isOther = false;
+				if (!isNewExample) {
+					if (!langs.contains(ex.getLanguage())) {
+						isOther = true;
+					}
+				}
+				for (String s : langs) { %>
+					<option <%if (!isNewExample) { if(ex.getLanguage() == s) {%>selected="selected"<%}}%>value="<%=s%>"><%=s%></option>
+				<%}%>
+				<option <%if (isOther) {%>selected="selected"<%}%> value="other">Other...</option>
+			</select> <br><br>
+			<div id="otherlang" <%if(langs.size()!=0 && !isOther) {%>style="display:none;"<%}%>>
+				Other Language:
+				<input type="text" name="" id="other" <%if (isOther) {%>value="<%=ex.getLanguage()%>"<%}%>>
+			</div>
+			<!--input type="text" name="language" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getLanguage()%>"<%}%>/-->
 			Code: *
 			<textarea <%if(user==null || !isOwner){%>disabled="disabled"<%}%> name="content"><%if(!isNewExample) {%><%=ex.getCode()%><%}%></textarea>
 			<font size="1"><p>* Required Fields</p></font>
