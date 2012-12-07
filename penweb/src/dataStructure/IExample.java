@@ -45,11 +45,6 @@ public interface IExample extends IEntry
 	 * @return The code in the example as a String
 	 */
 	String getCode();
-	
-	/**
-	 * @return The description of an example
-	 */
-	String getDescription();
 
 	String getLanguage();
 
@@ -78,11 +73,6 @@ public interface IExample extends IEntry
 	 * @param code The code content to be associated with an example
 	 */
 	void setCode(String code);
-
-	/**
-	 * @param d String: A new description
-	 */
-	void setDescription(String d);
 
 	void setLanguage(String language);
 

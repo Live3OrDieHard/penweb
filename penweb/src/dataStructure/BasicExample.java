@@ -21,17 +21,34 @@ import exceptions.DuplicateException;
  * @author tpatikorn 
  */
 public class BasicExample implements IExample {
-
+	/**
+	 * A list of authors of an example
+	 */
 	private ArrayList<IUser> authors;
 
 	/**
 	 * Categories the example belongs to
 	 */
 	private ArrayList<ICategory> categoryList = new ArrayList<ICategory>();
+	
+	/**
+	 * The code for the example
+	 */
 	private String code;
-	private String description;
+	
+	/**
+	 * An ID for the example in the database
+	 */
 	private Long id;
+	
+	/**
+	 * List of examples this example depends on
+	 */
 	private ArrayList<IExample> dependency = new ArrayList<IExample>();
+	
+	/**
+	 * Boolean that shows whether an example is public
+	 */
 	private boolean publicEx;
 
 	/**
@@ -168,14 +185,6 @@ public class BasicExample implements IExample {
 		return code;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getDescription() {
-		return description;
-	}
-
 	@Override
 	public Long getId() {
 		return this.id;
@@ -202,9 +211,6 @@ public class BasicExample implements IExample {
 	 * {@inheritDoc}
 	 */
 	@Override
-	/**
-	 * {@inheritDoc}
-	 */
 	public Long getOwnerId() {
 		//XXX This should never be false
 		if (this.owner != null)
@@ -279,14 +285,6 @@ public class BasicExample implements IExample {
 		this.code = code;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	@Override
 	/**
 	 * A setter function to set the language property of the example
@@ -355,7 +353,6 @@ public class BasicExample implements IExample {
 		clone.authors = (ArrayList<IUser>) this.authors.clone();
 		clone.categoryList = (ArrayList<ICategory>) this.categoryList.clone();
 		clone.code = new String(this.code);
-		clone.description = new String(this.description);
 		clone.dependency = (ArrayList<IExample>) this.dependency.clone();
 		clone.title = new String(this.title);
 		clone.language = new String(this.language);
