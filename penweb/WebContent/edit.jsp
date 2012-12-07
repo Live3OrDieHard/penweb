@@ -165,7 +165,7 @@
 					}
 				}
 				for (String s : langs) { %>
-					<option <%if (!isNewExample) { if(ex.getLanguage() == s) {%>selected="selected"<%}}%>value="<%=s%>"><%=s%></option>
+					<option <%if (!isNewExample) { if(ex.getLanguage().equalsIgnoreCase(s)) {%>selected="selected" <%}}%>value="<%=s%>"><%=s%></option>
 				<%}%>
 				<option <%if (isOther) {%>selected="selected"<%}%> value="other">Other...</option>
 			</select> <br><br>
