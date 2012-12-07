@@ -61,7 +61,6 @@
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-    		<test name="test.CategoryTest" todir="${junit.output.dir}"/>
             <test name="test.BasicExampleTest" todir="${junit.output.dir}"/>
             <test name="test.CategoryTest" todir="${junit.output.dir}"/>
             <test name="test.Db4oDatabaseTest" todir="${junit.output.dir}"/>
