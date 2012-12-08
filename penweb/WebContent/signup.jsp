@@ -48,13 +48,9 @@
 	<div class="right">
 		<p class="error"></p>
 		<form action="addUser" method="post" id="signUp" name="signUpForm" onsubmit="return checkSignUpSubmit();">
-			Username:
 			<input type="text" name="loginname" />
-			Display Name:
 			<input type="text" name="displayname" />
-			Password:
 			<input type="password" name="password" />
-			Confirm Password:
 			<input type="password" name="confirm_password" />
 		</form>
 	</div>
