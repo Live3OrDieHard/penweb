@@ -26,6 +26,9 @@ select  {
 	overflow: hidden;
 }
 
+select[multiple][disabled] option {
+	color: white;
+}
 /* Modal Sheet */
 
 .modal {
@@ -210,6 +213,10 @@ select  {
 	width: 180px;
 	background: #222222;
 	color: #FFFFFF;
+}
+
+#language {
+	width: 162px;
 }
 
 /* Columns */

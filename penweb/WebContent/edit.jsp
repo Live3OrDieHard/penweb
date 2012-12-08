@@ -155,15 +155,17 @@
 			
 			<input type="hidden" name="loginname" <%if(!isNewExample) {%>value="<%=ex.getAuthors().get(0).getLoginName()%>"<%} else {%>value="<%=user.getLoginName()%>"<%}%>/>
 			Language: * <br>
-			<select name="language" id="language" onchange="checkSelected()">
-				<%
-				List<String> langs = webcon.readLangListFromFile();
-				boolean isOther = false;
-				if (!isNewExample) {
-					if (!langs.contains(ex.getLanguage())) {
-						isOther = true;
-					}
+			<%
+			List<String> langs = webcon.readLangListFromFile();
+			boolean isOther = false;
+			if (!isNewExample) {
+				if (!langs.contains(ex.getLanguage())) {
+					isOther = true;
 				}
+			}
+			%>
+			<select <%if(!isOther) {%>name="language"<%}%> id="language" onchange="checkSelected()" <%if (user==null || !isOwner) { %>disabled=disabled<%}%>>
+				<%
 				for (String s : langs) { %>
 					<option <%if (!isNewExample) { if(ex.getLanguage().equalsIgnoreCase(s)) {%>selected="selected" <%}}%>value="<%=s%>"><%=s%></option>
 				<%}%>
@@ -171,16 +173,15 @@
 			</select> <br><br>
 			<div id="otherlang" <%if(langs.size()!=0 && !isOther) {%>style="display:none;"<%}%>>
 				Other Language:
-				<input type="text" name="" id="other" <%if (isOther) {%>value="<%=webcon.escapeHtml(ex.getLanguage())%>"<%}%>>
+				<input type="text" <% if (isOther) {%>name="language"<%}%> id="other" <%if (isOther) {%>value="<%=webcon.escapeHtml(ex.getLanguage())%>"<%}%> <%if (user==null || !isOwner) {%>disabled="disabled"<%}%>>
 			</div>
-			<!--input type="text" name="language" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=webcon.escapeHtml(ex.getLanguage())%>"<%}%>/-->
 			Code: *
 			<textarea <%if(user==null || !isOwner){%>disabled="disabled"<%}%> name="content"><%if(!isNewExample) {%><%=ex.getCode()%><%}%></textarea>
 			<font size="1"><p>* Required Fields</p></font>
 			
 				<p>Share with public? <input <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if (!isNewExample) { if (ex.isPublic()) {%>checked<%}}%> type="checkbox" name="public"/></p>
 			<%if (!cats.isEmpty()) {%>
-			<p>Categories: (Hold Ctrl to select multiple categories or remove categories)</p>
+			<p>Categories: <%if (user!=null || isOwner) {%>(Hold Ctrl to select multiple categories)<%}%></p>
 			<select name="cids" multiple="multiple" <%if(!isOwner) {%>disabled="disabled"<%}%>>
 				<% for (ICategory c : cats) { %>
 					<option value="<%=c.getId() %>" <%if(c.getExampleIds().contains(id)) {%>selected<%}%>><%=webcon.escapeHtml(c.getTitle()) %></option>
