@@ -165,7 +165,7 @@
 			}
 			%>
 			<select <%if(!isOther) {%>name="language"<%}%> id="language" onchange="checkSelected()" <%if (user==null || !isOwner) { %>disabled=disabled<%}%>>
-				<%
+				<% 
 				for (String s : langs) { %>
 					<option <%if (!isNewExample) { if(ex.getLanguage().equalsIgnoreCase(s)) {%>selected="selected" <%}}%>value="<%=s%>"><%=s%></option>
 				<%}%>
