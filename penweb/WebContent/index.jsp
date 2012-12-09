@@ -34,7 +34,7 @@
 			}
 		}
 	%>
-	<title>PEN &middot; <%if (cat == null) { %>All Examples (<%= ex.size() %>)<%} else { %><%=cat.getTitle() %> (<%=ex.size() %>)<%} %></title>
+	<title>PEN &middot; <%if (cat == null) { %>All Examples (<%= ex.size() %>)<%} else { %><%=webcon.escapeHtml(cat.getTitle()) %> (<%=ex.size() %>)<%} %></title>
 <%@include file="includes/head/tags" %>
 </head>
 <body>
@@ -53,7 +53,7 @@
 		<%if (cat == null) {%>
 			<h1>All Examples (<%= ex.size() %>)</h1>
 		<%} else {%>
-			<h1><%=cat.getTitle() %> (<%=ex.size() %>)</h1>
+			<h1><%=webcon.escapeHtml(cat.getTitle()) %> (<%=ex.size() %>)</h1>
 		<%} %>
 		
 		
@@ -93,7 +93,7 @@
 						num = c.getVisibleExamples(user).size();
 					}
 			%>
-			<a href="index.jsp?cat=<%=c.getId() %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= c.getTitle() %> (<%= num %>)</li></a>
+			<a href="index.jsp?cat=<%=c.getId() %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= webcon.escapeHtml(c.getTitle()) %> (<%= num %>)</li></a>
 			<% } %> 
 		</ul>
 		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>
@@ -103,9 +103,9 @@
 			<%	for (IExample e : ex) { %>
 						<a href="edit.jsp?id=<%=e.getId()%>">
 							<li>
-								<h1><%= e.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'","&#39;") %></h1>
+								<h1><%= webcon.escapeHtml(e.getTitle()) %></h1>
 								<div class="fade"></div>
-								<div class="code"><%= e.getCode().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").replaceAll("\"", "&quot;").replaceAll("'","&#39;") %></div>
+								<div class="code"><%= webcon.escapeHtml(e.getCode()) %></div>
 							</li>
 						</a>
 			<%}%>

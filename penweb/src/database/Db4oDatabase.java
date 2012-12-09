@@ -438,8 +438,7 @@ public class Db4oDatabase implements IDatabase {
 		List<IExample> list = db.query(new Predicate<IExample>() {
 			public boolean match(IExample e) {
 				String thisLanguage = e.getLanguage();
-				return (thisLanguage.toLowerCase().equals(lang.toLowerCase())); 
-				//Allows front end to only display lower case, no matter what the user puts it. 
+				return (thisLanguage.equalsIgnoreCase(lang)); 
 			}
 		});
 		return list;

@@ -108,7 +108,7 @@
 			<%List<ICategory> cats = webcon.getCategories(); %>
 			<a href="index.jsp"><li>All Entries (<%=webcon.getNumEntries() %>)</li></a>
 			<% for (ICategory c : cats) { %>
-				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=c.getExampleList().size() %>)</li></a>
+				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=webcon.escapeHtml(c.getTitle())%> (<%=c.getExampleList().size() %>)</li></a>
 			<%} %>
 		</ul>
 		<a href="javascript:newCategory();"><div class="button black-wide">New Category</div></a>
@@ -122,7 +122,7 @@
 			<textarea name="content"></textarea>
 			<p>Categories</p>
 			<% for (ICategory c : cats) { %>
-				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" /> <%=c.getTitle() %></p>
+				<p><input type="checkbox" name="cids" value="<%=c.getId() %>" /> <%=webcon.escapeHtml(c.getTitle()) %></p>
 			<%} %>
 			<input type="submit" class="button black" value="Save Entry" />
 		</form>

@@ -52,7 +52,7 @@
 			}
 		}
 	%>
-	<title>PEN &middot; <%if (cat == null) { %>All Examples (<%= webcon.getNumEntries() %>)<%} else { %><%=cat.getTitle() %> (<%=cat.getExampleList().size() %>)<%} %></title>
+	<title>PEN &middot; <%if (cat == null) { %>All Examples (<%= webcon.getNumEntries() %>)<%} else { %><%=webcon.escapeHtml(cat.getTitle()) %> (<%=cat.getExampleList().size() %>)<%} %></title>
 <%@include file="includes/head/tags" %>
 </head>
 <body>
@@ -97,7 +97,7 @@
 						}
 					}
 			%>
-			<a href="dependency.jsp?cat=<%=c.getId() %>&eid=<%= eid %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= c.getTitle() %> (<%= num %>)</li></a>
+			<a href="dependency.jsp?cat=<%=c.getId() %>&eid=<%= eid %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= webcon.escapeHtml(c.getTitle()) %> (<%= num %>)</li></a>
 			<% } %> 
 		</ul>
 		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>
@@ -119,9 +119,9 @@
 								<%}
 						%>
 					>
-						<h1><%= e.getTitle() %></h1>
+						<h1><%= webcon.escapeHtml(e.getTitle()) %></h1>
 						<div class="fade"></div>
-						<div class="code"><%= e.getCode().replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;").replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;") %></div>
+						<div class="code"><%= webcon.escapeHtml(e.getCode()) %></div>
 					</li>
 				</a>
 				<%	}

@@ -3,6 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+	function checkSelected() {
+		var selected = document.getElementById("language");
+		if (selected.value == "other") {
+			document.getElementById("otherlang").style.display = "block";
+			document.getElementById("other").name = "language";
+			selected.name = "";
+		}
+		else {
+			document.getElementById("otherlang").style.display = "none";
+			document.getElementById("other").name = "";
+			selected.name = "language";
+		}
+	}
+</script>
 	<%
 		// Instantiate the web controller and grab id paramter
 		WebController webcon = new WebController();
@@ -70,7 +85,7 @@
 		<%	if (isNewExample) {%>
 				New Example
 			<%}	else {%>
-				<%=ex.getTitle()%>
+				<%=webcon.escapeHtml(ex.getTitle())%>
 			<%}%></h1>
 			
 			<%	if (!isNewExample) {%>
@@ -117,7 +132,7 @@
 				else {
 					num = c.getVisibleExamples(user).size();
 				} %>
-				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=c.getTitle()%> (<%=num %>)</li></a>
+				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=webcon.escapeHtml(c.getTitle())%> (<%=num %>)</li></a>
 			<%} %>
 		</ul>
 		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>
@@ -131,26 +146,45 @@
 			<%} %>
 			Author:
 			<%if (!isNewExample) {%>
-				<p><%=ex.getAuthorsNames() %></p>
+				<p><%=webcon.escapeHtml(ex.getAuthorsNames()) %></p>
 			<%} else {%>
-				<p><%=user.getDisplayName() %></p>
+				<p><%=webcon.escapeHtml(user.getDisplayName()) %></p>
 			<%} %>
 			Title: *
-			<input type="text" name="title" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getTitle()%>"<%}%> />
+			<input type="text" name="title" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=webcon.escapeHtml(ex.getTitle())%>"<%}%> />
 			
 			<input type="hidden" name="loginname" <%if(!isNewExample) {%>value="<%=ex.getAuthors().get(0).getLoginName()%>"<%} else {%>value="<%=user.getLoginName()%>"<%}%>/>
-			Language: *
-			<input type="text" name="language" <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if(!isNewExample) {%>value="<%=ex.getLanguage()%>"<%}%>/>
+			Language: * <br>
+			<%
+			List<String> langs = webcon.readLangListFromFile();
+			boolean isOther = false;
+			if (!isNewExample) {
+				if (!langs.contains(ex.getLanguage())) {
+					isOther = true;
+				}
+			}
+			%>
+			<select <%if(!isOther) {%>name="language"<%}%> id="language" onchange="checkSelected()" <%if (user==null || !isOwner) { %>disabled=disabled<%}%>>
+				<% 
+				for (String s : langs) { %>
+					<option <%if (!isNewExample) { if(ex.getLanguage().equalsIgnoreCase(s)) {%>selected="selected" <%}}%>value="<%=s%>"><%=s%></option>
+				<%}%>
+				<option <%if (isOther) {%>selected="selected"<%}%> value="other">Other...</option>
+			</select> <br><br>
+			<div id="otherlang" <%if(langs.size()!=0 && !isOther) {%>style="display:none;"<%}%>>
+				Other Language:
+				<input type="text" <% if (isOther) {%>name="language"<%}%> id="other" <%if (isOther) {%>value="<%=webcon.escapeHtml(ex.getLanguage())%>"<%}%> <%if (user==null || !isOwner) {%>disabled="disabled"<%}%>>
+			</div>
 			Code: *
 			<textarea <%if(user==null || !isOwner){%>disabled="disabled"<%}%> name="content"><%if(!isNewExample) {%><%=ex.getCode()%><%}%></textarea>
 			<font size="1"><p>* Required Fields</p></font>
 			
 				<p>Share with public? <input <%if(user==null || !isOwner){%>disabled="disabled"<%}%> <%if (!isNewExample) { if (ex.isPublic()) {%>checked<%}}%> type="checkbox" name="public"/></p>
 			<%if (!cats.isEmpty()) {%>
-			<p>Categories: (Hold Ctrl to select multiple categories or remove categories)</p>
+			<p>Categories: <%if (user!=null || isOwner) {%>(Hold Ctrl to select multiple categories)<%}%></p>
 			<select name="cids" multiple="multiple" <%if(!isOwner) {%>disabled="disabled"<%}%>>
 				<% for (ICategory c : cats) { %>
-					<option value="<%=c.getId() %>" <%if(c.getExampleIds().contains(id)) {%>selected<%}%>><%=c.getTitle() %></option>
+					<option value="<%=c.getId() %>" <%if(c.getExampleIds().contains(id)) {%>selected<%}%>><%=webcon.escapeHtml(c.getTitle()) %></option>
 				<%}%>
 			</select>
 			<%} %>
@@ -164,11 +198,11 @@
 				<%
 					for (IExample e : dependencies) {
 				%>
-				<li><a href="edit.jsp?id=<%= e.getId() %>"><%= e.getTitle() %></a></li>
+				<li><a href="edit.jsp?id=<%= e.getId() %>"><%= webcon.escapeHtml(e.getTitle()) %></a></li>
 				<%} %>
 			</ul>
 			<%} }%>
-			<% if (!isNewExample && (ex.getComment() != null && ex.getComment() != "")) { %><p>Last change: <%= ex.getComment() %></p> <%} %>
+			<% if (!isNewExample && (ex.getComment() != null && ex.getComment() != "")) { %><p>Last change: <%= webcon.escapeHtml(ex.getComment()) %></p> <%} %>
 		</form>
 	</div>
 </div>

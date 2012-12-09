@@ -62,10 +62,8 @@ public class WebController {
 	 * Modified by Peng Ren to check if the category name is already taken
 	 * Adds a category to the database. A unique ID is assigned within the DB
 	 * 
-	 * @param name
-	 *            of the desired category
-	 * @param desc
-	 *            Description of the desired category
+	 * @param name of the desired category
+	 * @param desc Description of the desired category
 	 */
 	public void addCategory(String name, String desc) throws DuplicateException{
 		if(!db.isCategoryTitleTaken(name)){
@@ -542,11 +540,11 @@ public class WebController {
 
 	public String escapeHtml(String text) {
 		return text.replaceAll("&", "&amp;")
+				   .replaceAll("<", "&lt;")
+				   .replaceAll(">", "&gt;")
 				   .replaceAll("\n", "<br>")
 				   .replaceAll(" ", "&nbsp;")
 				   .replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;")
-				   .replaceAll("<", "&lt;")
-				   .replaceAll(">", "&gt;")
 				   .replaceAll("\"", "&quot;")
 				   .replaceAll("'","&#39;");
 	}

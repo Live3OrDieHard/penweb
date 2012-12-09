@@ -19,13 +19,16 @@ a {
 
 
 select  {
-	width: 300px;
+	width: 162px;
 	background-color: #333;
 	color: #FFF;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
 
+select[multiple][disabled] option {
+	color: white;
+}
 /* Modal Sheet */
 
 .modal {
@@ -210,6 +213,10 @@ select  {
 	width: 180px;
 	background: #222222;
 	color: #FFFFFF;
+}
+
+#language {
+	width: 162px;
 }
 
 /* Columns */

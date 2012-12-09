@@ -56,23 +56,29 @@ function checkAddCategorySubmit() {
 
 function checkSignUpSubmit() {
 	if ($("#signUp input[name=loginname]").val() == "") {
-		$(".modal .error").html("Error: Please provide a username.");
-		$(".modal .error").show();
+		$(".error").html("Error: Please provide a username.");
+		$(".error").show();
 		return false;
 	} else if ($("#signUp input[name=displayname]").val() == "") {
-		$(".modal .error").html("Error: Please provide a display name.");
-		$(".modal .error").show();
+		$(".error").html("Error: Please provide a display name.");
+		$(".error").show();
 		return false;
 	} else if ($("#signUp input[name=password]").val() == "") {
-		$(".modal .error").html("Error: Please provide a password.");
-		$(".modal .error").show();
+		$(".error").html("Error: Please provide a password.");
+		$(".error").show();
 		return false;
 	} else if ($("#signUp input[name=password]").val() != $("#signUp input[name=confirm_password]").val()) {
-		$(".modal .error").html("Error: The passwords do not match.");
-		$(".modal .error").show();
+		$(".error").html("Error: The passwords do not match.");
+		$(".error").show();
 		return false;
 	}
 	return true;
+}
+
+function signUp() {
+	if(document.signUpForm.onsubmit()) {
+		document.signUpForm.submit();
+	}
 }
 
 function newCategory() {
@@ -83,11 +89,6 @@ function newCategory() {
 function duplicateIntoCategories() {
 	$("#duplicateIntoCategories").show();
 	$(".modal").show();		
-}
-
-function signUp() {
-	$("#signUp").show();
-	$(".modal").show();
 }
 
 function closeModal() {
