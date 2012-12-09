@@ -30,22 +30,22 @@ public class BasicExample implements IExample {
 	 * Categories the example belongs to
 	 */
 	private ArrayList<ICategory> categoryList = new ArrayList<ICategory>();
-	
+
 	/**
 	 * The code for the example
 	 */
 	private String code;
-	
+
 	/**
 	 * An ID for the example in the database
 	 */
 	private Long id;
-	
+
 	/**
 	 * List of examples this example depends on
 	 */
 	private ArrayList<IExample> dependency = new ArrayList<IExample>();
-	
+
 	/**
 	 * Boolean that shows whether an example is public
 	 */
@@ -87,8 +87,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * Add dependencies to the given examples
-	 * @return dependency
+	 * {@inheritDoc}
 	 */
 	public ArrayList<IExample> getDependency() {
 		return dependency;
@@ -112,9 +111,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * add the given tag to the example
-	 * 
-	 * @param tag
+	 * {@inheritDoc}
 	 */
 	public void addTag(String tag) {
 		this.tags.add(tag);
@@ -151,9 +148,7 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
-	 * Perhaps this should be moved into the controller. 
-	 * I don't know how I feel about functions with a lot of logic
-	 * like this in the dataStructure classes
+	 * {@inheritDoc}
 	 */
 	public String getAuthorsNames() {
 		String nameList = "";
@@ -191,8 +186,7 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
-	 * Gets the language the example was written in
-	 * @return String
+	 * {@inheritDoc}
 	 */
 	public String getLanguage() {
 		return this.language.trim();
@@ -227,9 +221,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * a getter function to get the tags of the example
-	 * 
-	 * @return LinkedList<String>
+	 * {@inheritDoc}
 	 */
 	@Override
 	public ArrayList<String> getTags() {
@@ -267,10 +259,7 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
-	 * A setter function to set the tag property of the example 
-	 * to the given categories.
-	 * 
-	 * @param tags
+	 * {@inheritDoc}
 	 */
 	public void setCategories(ArrayList<ICategory> categories) {
 		this.categoryList = categories;
@@ -286,10 +275,7 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
-	 * A setter function to set the language property of the example
-	 * to the given language
-	 * 
-	 * @param language
+	 * {@inheritDoc}
 	 */
 	public void setLanguage(String language) {
 		this.language = language;
@@ -297,20 +283,14 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
-	 * A setter fucntion to set the source property of the example
-	 * to the given source
-	 * 
-	 * @param source
+	 * {@inheritDoc}
 	 */
 	public void setSource(String source) {
 		this.source = source;
 	}
 
 	/**
-	 * a setter function to set the tag property of the example to the given
-	 * tags
-	 * 
-	 * @param tags
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setTags(ArrayList<String> tags) {
@@ -362,7 +342,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * @return a list of ids of category in the categorylist
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<Long> getCategoryIds() {
@@ -373,8 +353,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * Add dependencies to the given examples
-	 * @param examples
+	 * {@inheritDoc}
 	 */
 	public void addDependency(IExample example) {
 		boolean contained = false;
@@ -394,9 +373,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * The getter function to get comment of the example
-	 * @return
-	 * 		  the comment of the example
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String getComment() {
@@ -404,7 +381,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * The setter function to set the comment for the example
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setComment(String comment) {
@@ -412,11 +389,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * The method is used to remove the given category from the
-	 * current categorylist
-	 * 
-	 * @param category. The category that will be removed from
-	 * the current category list. 
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void removeFromCategory(ICategory category) {
@@ -428,8 +401,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * The method is used to remove all the categories from
-	 * the category list.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void removeFromAllCategories() {
@@ -441,8 +413,7 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
-	 * Getter method that returns whether or not a given code example is public or not
-	 * @return true if the code example is public. False otherwise. 
+	 * {@inheritDoc}
 	 */
 	public boolean isPublic() {
 		return this.publicEx;
@@ -450,7 +421,7 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
-	 * Sets the isPublic field to the given boolean.
+	 * {@inheritDoc}
 	 */
 	public void setPublic(boolean changePublic) {
 		this.publicEx = changePublic;
@@ -472,9 +443,7 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
-	 * remove the given example from the dependency list
-	 * @param 
-	 *       an example supposed to be removed from the dependency list
+	 * {@inheritDoc}
 	 */
 	public void removeDependeny(IExample example){
 		if(dependency.contains(example)){

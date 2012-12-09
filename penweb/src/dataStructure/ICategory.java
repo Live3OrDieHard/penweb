@@ -18,7 +18,6 @@ import exceptions.DuplicateException;
  * @author tpatikorn
  * An interface for a category, in case there are more category types.
  */
-import exceptions.DuplicateException;
 
 /**
  * The ICategory interface is used to connect the web view with the database for categories.
