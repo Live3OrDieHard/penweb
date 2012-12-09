@@ -223,7 +223,7 @@ public class User implements IUser {
 	// //////////////////////////////////////
 
 	/**
-	 * @author awiovanna, tpatikorn override the equals function of object class
+	 * override the equals function of object class
 	 * @return true if user2 is an instance of IUser and this and user2 have the
 	 *         same id, false otherwise.
 	 */

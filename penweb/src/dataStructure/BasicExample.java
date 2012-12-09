@@ -71,7 +71,6 @@ public class BasicExample implements IExample {
 
 	/**
 	 * Add dependencies to the given examples
-	 * @author Peng Ren, Dennis Koufos
 	 * @return dependency
 	 */
 	public ArrayList<IExample> getDependency() {
@@ -378,7 +377,6 @@ public class BasicExample implements IExample {
 
 	/**
 	 * Add dependencies to the given examples
-	 * @author Peng Ren, Dennis Koufos 
 	 * @param examples
 	 */
 	public void addDependency(IExample example) {
@@ -446,7 +444,6 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
-	 * @author awiovanna, tpatikorn
 	 * Getter method that returns whether or not a given code example is public or not
 	 * @return true if the code example is public. False otherwise. 
 	 */
@@ -456,7 +453,6 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
-	 * @author awiovanna, tpatikorn
 	 * Sets the isPublic field to the given boolean.
 	 */
 	public void setPublic(boolean changePublic) {
@@ -465,7 +461,6 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
-	 * @author tpatikorn
 	 * override the equals function of object class
 	 * @return true if o is an instance of IExample and
 	 *         this and o have the same id, false otherwise.
@@ -480,7 +475,6 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
-	 * @author Peng Ren
 	 * remove the given example from the dependency list
 	 * @param 
 	 *       an example supposed to be removed from the dependency list

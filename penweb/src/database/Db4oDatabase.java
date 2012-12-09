@@ -415,7 +415,6 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn
 	 * @return a list of all examples written by the given user
 	 */
 	public List<IExample> getExampleByUser(final IUser user) {
@@ -429,7 +428,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn Returns a list of all examples that are
+	 * 		   Returns a list of all examples that are
 	 *         labeled as using the given language. This method currently does
 	 *         not differentiate as to the owner of the example. This
 	 *         functionality will be handled by web controller.
@@ -447,7 +446,6 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn
 	 * @param user
 	 *            specified user
 	 * @return a list of all categories that the user has created.

@@ -78,7 +78,7 @@ public class WebController {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn, iprangishvili, dmulcahy
+	 * 
 	 * @param name
 	 *            of the category
 	 * @param desc
@@ -170,7 +170,7 @@ public class WebController {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn
+	 *
 	 * @param title
 	 *            of the code example
 	 * @param content
@@ -299,7 +299,7 @@ public class WebController {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn 
+	 * 
 	 * This method returns a list of all code examples accessible by user
 	 * and written in the given language 
 	 * accessible = written by user or is public
@@ -322,7 +322,7 @@ public class WebController {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn
+	 * 
 	 * @return All public examples in the database
 	 */
 	public List<IExample> getAllPublicExamples() {
@@ -337,7 +337,7 @@ public class WebController {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn
+	 * 
 	 * @param user specified user
 	 * @return List of all languages that are used in public examples, 
 	 * as well as all languages that are used in private code for the given user.
@@ -361,7 +361,7 @@ public class WebController {
 	}
 	
 	/**
-	 * @author dkoufos, tpatikorn, iprangishvili
+	 *
 	 * read text file and return a list of strings of languages from that file
 	 * The file must be named "LangList.txt"
 	 * This file must be stored in the same directory as the database file.
@@ -393,7 +393,7 @@ public class WebController {
 	}
 
 	/**
-	 * @author awiovanna, tpatikorn 
+	 * 
 	 * delete an example or a category only if user is the owner of entry and 
 	 * - (ICategory) entry has no example 
 	 * - (IExample) entry is in no category and no other examples depend on it 
@@ -455,7 +455,7 @@ public class WebController {
 	}
 
 	/**
-	 * @author tpatikorn
+	 * 
 	 * get all examples in db that depend on example (aka dependers)
 	 * @param example the example we want to find what depends on it
 	 * @return list of all examples depends on example 
@@ -513,7 +513,7 @@ public class WebController {
 		return results;
 	}
 	/**
-	 * @author Peng Ren
+	 * 
 	 * Remove the example from the dependency lists of all
 	 * the example it depends on
 	 * @param an example
