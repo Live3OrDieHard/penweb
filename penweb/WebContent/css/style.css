@@ -29,6 +29,10 @@ select  {
 select[multiple][disabled] option {
 	color: white;
 }
+
+select[multiple] {
+	width:300px;
+}
 /* Modal Sheet */
 
 .modal {

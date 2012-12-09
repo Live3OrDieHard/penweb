@@ -53,7 +53,6 @@ function checkAddCategorySubmit() {
 }
 
 // Check signUp submission to make sure fields aren't blank and passwords math
-
 function checkSignUpSubmit() {
 	if ($("#signUp input[name=loginname]").val() == "") {
 		$(".error").html("Error: Please provide a username.");
@@ -75,28 +74,33 @@ function checkSignUpSubmit() {
 	return true;
 }
 
+//Create account
 function signUp() {
 	if(document.signUpForm.onsubmit()) {
 		document.signUpForm.submit();
 	}
 }
 
+//Category modal
 function newCategory() {
 	$("#createCategory").show();
 	$(".modal").show();		
 }
 
+//Duplicate modal
 function duplicateIntoCategories() {
 	$("#duplicateIntoCategories").show();
 	$(".modal").show();		
 }
 
+// Hides modal sheet
 function closeModal() {
 	$(".modal").hide();
 	$(".modal .sheet").hide();
 	$(".modal .error").html("");
 }
 
+//Save example
 function saveExample() {
 	$("form[name=editForm] input[name=comment]").val($("textarea#comment").val());
 	if(document.editForm.onsubmit()) {
@@ -104,19 +108,23 @@ function saveExample() {
 	}
 }
 
+//Comment block on hover over Save Example
 function showCommentBlock() {
 	$("#commentBlock").show();
 }
 
+//Hide comment block
 function hideCommentBlock() {
 	$("#commentBlock").hide();
 }
 
+//Delete category modal
 function deleteCategory() {
 	$("#deleteCategory").show();
 	$(".modal").show();	
 }
 
+//Search category modal
 function searchCategory() {
 	$("#searchCategory").show();
 	$(".modal").show();
