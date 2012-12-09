@@ -46,7 +46,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#setDescription()
+	 * @see dataStructure.ICategory#setDescription(String)
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -60,14 +60,14 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#setTitle()
+	 * @see dataStructure.ICategory#setTitle(String)
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
 	/**
-	 * @see dataStructure.ICategory#addCodeExample()
+	 * @see dataStructure.ICategory#addCodeExample(IExample)
 	 */
 	public void addCodeExample(IExample example) throws DuplicateException {
 		if (!this.hasExample(example)) {

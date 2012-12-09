@@ -109,14 +109,7 @@ public class BasicExample implements IExample {
 			throw new DuplicateException("This example is already in category:"+category.getTitle());
 		}
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void addTag(String tag) {
-		this.tags.add(tag);
-	}
-
+	
 	@Override
 	public int assignId(Long id) {
 		if (this.id != -1)

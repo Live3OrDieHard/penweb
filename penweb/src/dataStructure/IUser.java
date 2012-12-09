@@ -33,7 +33,7 @@ public interface IUser extends IEntry
 	String getDisplayName();
 	
 	/**
-	 * @param name The new name for a person. Fails if the person already has a name.
+	 * @param displayName The new name for a person. Fails if the person already has a name.
 	 */
 	void changeDisplayName(String displayName);
 	

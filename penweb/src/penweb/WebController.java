@@ -32,7 +32,7 @@ import java.util.ListIterator;
  * 
  * @author Justin Chines
  * @author Andy Iovanna
- * @author Neil Pomerleau
+ * @author Neil Pomerleau 
  * @author Andy C
  * @author Chrissy
  * @author Mikey
@@ -43,7 +43,6 @@ public class WebController {
 
 	/**
 	 * This is the constructor for the WebController class
-	 * @param databaseName
 	 */
 	public WebController() {
 		this.db = new Db4oDatabase();
@@ -145,14 +144,13 @@ public class WebController {
 	 *            of the code example. The code itself.
 	 * @param language
 	 *            So that the user can sort examples by language.
-	 * @param author
-	 *            So that each example is associated with an author
+	 * @param loginName
+	 *            So that each example is associated with an author with specific loginName
 	 * @return the Id of the code example. Each code example has a unique ID to
 	 *         help with writing methods in the database and with sorting
 	 *         functions.
 	 */
-	public long addCode(String title, String content, String language,
-			String loginName) {
+	public long addCode(String title, String content, String language, String loginName) {
 		// XXX TODO Pass in a username or userId instead of an "author" string.
 		IExample ex = new BasicExample();
 		ex.setTitle(title);
@@ -290,7 +288,7 @@ public class WebController {
 	 * wrapper of isCategoryTitleTaken()
 	 * 
 	 * @param name
-	 * @return
+	 * @return true if the category title is taken, false otherwise.
 	 */
 	public boolean isCategoryTitleTaken(String name) {
 		return db.isCategoryTitleTaken(name);
@@ -303,14 +301,14 @@ public class WebController {
 	 * accessible = written by user or is public
 	 * @param user
 	 *            the identified user
-	 * @param languageW
+	 * @param language
 	 *            the identified language
 	 * @return List of all code examples written in language by user
 	 */
 	public List<IExample> getCodeByLanguageAndUser(IUser user, String language) {
 		List<IExample> ExamplesByLanguage = db.getByLanguage(language);
 		List<IExample> result = new ArrayList<IExample>();
-		
+
 		for (IExample e : ExamplesByLanguage) {
 			if (e.isPublic() || (user != null && e.getOwnerId().equals(user.getId()))) {
 				result.add(e);
@@ -354,10 +352,10 @@ public class WebController {
 				}
 			}
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 *
 	 * read text file and return a list of strings of languages from that file
@@ -407,10 +405,10 @@ public class WebController {
 	 *         deleted. 
 	 */
 	public int delete(IEntry entry, IUser user) {
-		 //not owner
+		//not owner
 		if (!entry.getOwner().equals(user))
 			return 1;
-		
+
 		//user is owner
 		if (entry instanceof ICategory) {
 			if(((ICategory) entry).getExampleList().size()!=0)
@@ -457,26 +455,19 @@ public class WebController {
 	 * get all examples in db that depend on example (aka dependers)
 	 * @param example the example we want to find what depends on it
 	 * @return list of all examples depends on example 
-	 * and dependers of dependers (and so on)
 	 */
 	public List<IExample> getDependerOf(IExample example) {
 		List<IExample> allExamples = db.getAllExample();
 		List<IExample> result = new ArrayList<IExample>();
 		for(IExample e : allExamples) {
 			if(e.getDependency().contains(example)) {
-				result.add(e);
-				List<IExample> dependers  = this.getDependerOf(e);
-				for(IExample d: dependers) {
-					if(!result.contains(d)) {
-						result.add(d);
-					}
-				}
-				
+				if(!result.contains(e))
+					result.add(e);
 			}
 		}
 		return result;
 	}
-	
+
 	/**
 	 * This method looks at all the example codes and collects all the examples
 	 * that correspond to a specific user. 
@@ -485,15 +476,15 @@ public class WebController {
 	 */
 	public List<IExample> getVisibleExamples(IUser user) {
 		List<IExample> results = getAllPublicExamples();
-		
+
 		for (IExample example : db.getAllExample()) {
 			if (example.getOwnerId() == user.getId() && !results.contains(example))
 				results.add(example);
 		}
-		
+
 		return results;
 	}
-	
+
 	/**
 	 * Get a list of examples that the given user owns
 	 * 
@@ -502,19 +493,19 @@ public class WebController {
 	 */
 	public List<IExample> getOwnedExamples(IUser user) {
 		List<IExample> results = new ArrayList<IExample>();
-		
+
 		for (IExample example : db.getAllExample()) {
 			if (example.getOwner() == user)
 				results.add(example);
 		}
-		
+
 		return results;
 	}
 	/**
 	 * 
 	 * Remove the example from the dependency lists of all
 	 * the example it depends on
-	 * @param an example
+	 * @param example an example
 	 */
 	public void removeAllDependency(IExample example){
 		for(IExample e : db.getAllExample()){
@@ -524,7 +515,7 @@ public class WebController {
 			}
 		}
 	}
-	
+
 	/**
 	 * Checks if an example with the given name already exists
 	 * @param name The name of the example
@@ -534,18 +525,18 @@ public class WebController {
 		for (IExample e : db.getAllExample()) {
 			if (name.equals(e.getTitle())) return true;
 		}
-		
+
 		return false;
 	}
 
 	public String escapeHtml(String text) {
 		return text.replaceAll("&", "&amp;")
-				   .replaceAll("<", "&lt;")
-				   .replaceAll(">", "&gt;")
-				   .replaceAll("\n", "<br>")
-				   .replaceAll(" ", "&nbsp;")
-				   .replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;")
-				   .replaceAll("\"", "&quot;")
-				   .replaceAll("'","&#39;");
+				.replaceAll("<", "&lt;")
+				.replaceAll(">", "&gt;")
+				.replaceAll("\n", "<br>")
+				.replaceAll(" ", "&nbsp;")
+				.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;")
+				.replaceAll("\"", "&quot;")
+				.replaceAll("'","&#39;");
 	}
 }

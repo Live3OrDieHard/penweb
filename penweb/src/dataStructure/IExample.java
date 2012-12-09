@@ -65,8 +65,6 @@ public interface IExample extends IEntry
 	/**
 	 * A setter fucntion to set the source property of the example
 	 * to the given source
-	 * 
-	 * @param source
 	 */
 	String getSource();
 
@@ -82,10 +80,9 @@ public interface IExample extends IEntry
 	/**
 	 * A setter function to set the tag property of the example 
 	 * to the given categories.
-	 * 
-	 * @param tags
 	 */
 	void setCategories(ArrayList<ICategory> categories);
+
 	/**
 	 * @return a list of ids of category in the categorylist
 	 */
@@ -141,7 +138,7 @@ public interface IExample extends IEntry
 	void setComment(String comment);
 	/**
 	 * Add dependencies to the given examples
-	 * @param examples
+	 * @param example
 	 */
 	void addDependency(IExample example);
 	/**
@@ -158,7 +155,7 @@ public interface IExample extends IEntry
 	 * The method is used to remove the given category from the
 	 * current categorylist
 	 * 
-	 * @param category. The category that will be removed from
+	 * @param category The category that will be removed from
 	 * the current category list. 
 	 */
 	void removeFromCategory(ICategory category);
@@ -173,7 +170,7 @@ public interface IExample extends IEntry
 	void setPublic(boolean changePublic);
 	/**
 	 * remove the given example from the dependency list
-	 * @param 
+	 * @param example
 	 *       an example supposed to be removed from the dependency list
 	 */
 	void removeDependeny(IExample example); 
