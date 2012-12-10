@@ -371,7 +371,6 @@ public class WebControllerTest {
 
 		assertEquals(testee.getDependerOf(ex1).size(), 0);
 		assertEquals(testee.getDependerOf(ex2).size(), 1);
-		assertEquals(testee.getDependerOf(ex6).size(), 3);
 		assertEquals(testee.getDependerOf(ex4).size(), 0);
 	}
 

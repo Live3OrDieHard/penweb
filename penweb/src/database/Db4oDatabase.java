@@ -60,7 +60,6 @@ public class Db4oDatabase implements IDatabase {
 	/**
 	 * For testing purpose only
 	 * @param path
-	 * @param forTest
 	 */
 	public Db4oDatabase(String path) {
 		EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
@@ -161,7 +160,7 @@ public class Db4oDatabase implements IDatabase {
 
 	/**
 	 * Delete an entry from the dataabase
-	 * @param an entry
+	 * @param e an entry to be deleted
 	 */
 	@Override
 	public void delete(IEntry e) {
@@ -318,7 +317,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * @param id the login name of the user
+	 * @param loginName the login name of the user
 	 * @return the user with the given login name if there is
 	 * the unique login name exists
 	 * 			null if there is no user with the given login name
