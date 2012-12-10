@@ -38,12 +38,9 @@
 <%@include file="includes/head/tags" %>
 </head>
 <body>
-<div class="modal">
-<%@include file="includes/modal/createCategory" %>
-<%@include file="includes/modal/signUp" %>
-<%@include file="includes/modal/deleteCategory" %>
-<%@include file="includes/modal/searchCategory" %>
-</div>
+<%@include file="includes/popover/createCategory" %>
+<%@include file="includes/popover/deleteCategory" %>
+<%@include file="includes/popover/searchCategory" %>
 <%@include file="includes/header" %>
 <div class="bar">
 	<div class="left">
@@ -57,12 +54,12 @@
 		<%} %>
 		
 		
-			<form class="barForm" method="post" action="deleteCategory">
+			<form class="barForm" method="post" action="deleteCategory" id="deleteCategoryForm">
 			<% if (cat!=null && user!=null && cat.getOwner()==user) { %>
-			Options:
 			<input type="hidden" name="cid" value="<%=cat.getId()%>"/>
-			<input type="<%if ((cat.getExampleList().size()==0)&&cat.getOwner() == user) {%>submit"<%} else if (cat.getOwner() != user) {%>hidden"<%} else {%>button" onclick="deleteCategory();<%}%>" class="button black" value="Delete" />			<%}%>
-			<input type="button" class="button green" value="Search" onclick="searchCategory();" />
+			<a href="javascript:<%if ((cat.getExampleList().size()==0)) {%>deleteCategory();<%} else {%>deleteCategoryCheck();<%}%>"><input type="button" class="button black" id="deleteCategoryButton" value="Delete" /></a>
+			<%}%>
+			<a href="javascript:searchCategory();"><input type="button" class="button green" value="Search" id="searchCategoryButton" /></a>
 			</form>
 		</form>
 		
@@ -96,7 +93,7 @@
 			<a href="index.jsp?cat=<%=c.getId() %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= webcon.escapeHtml(c.getTitle()) %> (<%= num %>)</li></a>
 			<% } %> 
 		</ul>
-		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>
+		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide" id="createCategoryButton">New Category</div></a>
 	</div>
 	<div class="right">
 		<ul class="entrylist">

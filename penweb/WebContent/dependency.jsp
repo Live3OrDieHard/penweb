@@ -56,10 +56,7 @@
 <%@include file="includes/head/tags" %>
 </head>
 <body>
-<div class="modal">
-<%@include file="includes/modal/createCategory" %>
-<%@include file="includes/modal/signUp" %>
-</div>
+<%@include file="includes/popover/createCategory" %>
 <%@include file="includes/header" %>
 <div class="bar">
 	<div class="left">
@@ -72,7 +69,7 @@
 </div>
 <div class="content">
 	<div class="left">
-		<h1>My Examples</h1>
+		<h1><%if (user != null) { %>Examples<%} else { %>Public Examples<%} %></h1>
 		<ul>
 			<% 
 				int num;
@@ -100,7 +97,7 @@
 			<a href="dependency.jsp?cat=<%=c.getId() %>&eid=<%= eid %>"><li <% if ((cat != null) && (c.equals(cat))) { %>class="selected"<%} %>> <%= webcon.escapeHtml(c.getTitle()) %> (<%= num %>)</li></a>
 			<% } %> 
 		</ul>
-		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>
+		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide" id="createCategoryButton">New Category</div></a>
 	</div>
 	<div class="right">
 		<ul class="entrylist">

@@ -33,48 +33,36 @@ select[multiple][disabled] option {
 select[multiple] {
 	width:300px;
 }
-/* Modal Sheet */
 
-.modal {
+/* Popover Window */
+
+.popover {
+	z-index: 4;
 	position: absolute;
-	z-index: 3;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background: rgb(0, 0, 0);
-	background: rgba(0, 0, 0, 0.5);
-	display: none;
-}
-
-.modal .sheet {
-	position: relative;
-	margin: 200px auto 0 auto;
 	height: 400px;
 	width: 400px;
 	background: #222222;
 	border: 5px solid #666666;
 	display: none;
+	box-shadow: 10px 10px 20px #000000;
 }
 
-.modal .sheet.short {
-	height: 350px;
+.popover.short {
+	height: 300px;
 	width: 285px;
 }
 
-.modal .sheet .close {
-	position: absolute;
-	top: 0;
-	right: 0;
-	z-index: 3;
-	height: 40px;
-	width: 40px;
-	background: url('../images/icon-close.png') center center no-repeat;
-	background-color: rgb(0, 0, 0);
-	background-color: rgba(0, 0, 0, 0.5);
+.popover.tiny {
+	height: 125px;
+	width: 200px;
 }
 
-.modal .sheet h1 {
+.popover.tiny input {
+	display: block;
+	margin: 10px auto;
+}
+
+.popover h1 {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -87,7 +75,7 @@ select[multiple] {
 	padding-left: 25px;
 }
 
-.modal .sheet h3 {
+.popover h3 {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -100,7 +88,7 @@ select[multiple] {
 	padding-left: 20px;
 }
 
-.modal .sheet .modalContent {
+.popover .popoverContent {
 	position: absolute;
 	top: 40px;
 	left: 0;
@@ -110,7 +98,7 @@ select[multiple] {
 	overflow: auto;
 }
 
-.modal textarea {
+.popover textarea {
 	margin-bottom: 25px;
 	display: block;
 	background: #333333;
@@ -122,28 +110,47 @@ select[multiple] {
 	font-family: Verdana, Helvetica, Arial;
 }
 
-.modal textarea {
+.popover textarea {
 	width: 300px;
 	height: 100px;
 }
 
-.modal input[type=checkbox] {
+.popover input[type=checkbox] {
 	display: inline;
 	margin: 0;
 }
 
-.modal .input {
+.popover .input {
 	margin-bottom: 25px;
 }
 
-.modal .sheet .modalContent p {
+.popover .popoverContent p {
 	margin-bottom: 25px;	
 }
 
-.modal .error {
+.popover .error {
 	font-weight: bold;
 	color: #FF0000;
 	display: none;
+}
+
+.popover .leftArrow {
+	position: absolute;
+	height: 50px;
+	width: 25px;
+	left: -30px;
+	top: -5px;
+	background: url('../images/arrow-left.png');
+}
+
+.popover .topArrow {
+	position: absolute;
+	z-index: 200;
+	height: 25px;
+	left: -5px;
+	right: -5px;
+	top: -30px;
+	background: url('../images/arrow-top.png') right center no-repeat;
 }
 
 /* Header */
@@ -201,7 +208,7 @@ select[multiple] {
 	height: 110px;
 	width: 210px;
 	position: absolute;
-	top: 130px;
+	top: 140px;
 	right: 25px;
 	z-index: 3;
 	background: #333333;
@@ -242,7 +249,6 @@ select[multiple] {
 	bottom: 0;
 	left: 255px;
 	right: 0;
-	overflow-y: auto;
 }
 
 /* Sub-Header Bar */
@@ -261,13 +267,20 @@ select[multiple] {
 	margin: 7px auto;
 }
 
+.bar .right {
+	overflow: hidden;
+}
+
 .bar .right h1 {
 	height: 40px;
 	line-height: 40px;
 	font-size: 20px;
 	font-weight: bold;
-	margin-left: 25px;
-	float: left;
+	position: absolute;
+	left: 25px;
+	right: 275px;
+	top: 0;
+	overflow: hidden;
 }
 
 .barForm {
@@ -328,6 +341,7 @@ select[multiple] {
 }
 
 .content .right {
+	overflow-y: auto;
 }
 
 .content .right form {
@@ -512,7 +526,7 @@ ul.entrylist li div.code {
 
 /* Buttons */
 
-.button {
+.button, #createAccountButton {
 	height: 26px;
 	text-align: center;
 	line-height: 24px;
@@ -527,16 +541,16 @@ ul.entrylist li div.code {
 	background: none;
 }
 
-.button:hover {
+.button:hover, #createAccountButton:hover {
 	background-position: center;
 }
 
-.button:active {
+.button:active, #createAccountButton:active {
 	background-position: bottom;
 	color: #EEEEEE;
 }
 
-.button.green {
+.button.green, #createAccountButton {
 	width: 151px;
 	background-image: url('../images/button-green.png');
 }

@@ -26,14 +26,11 @@
 	</div>
 	<div class="right">
 		<h1>Sign Up</h1>
-		<form class="barForm">
-			<input type="button" class="button green" id="createAccount" onClick="signUp();" value="Create Account" />
-		</form>
 	</div>
 </div>
 <div class="content">
 	<div class="left">
-		<h1>Public Example</h1>
+		<h1>Public Examples</h1>
 		<ul>
 			<% int num = webcon.getAllPublicExamples().size(); %>
 			<a href="index.jsp"><li>All Examples (<%=num %>)</li></a>
@@ -52,7 +49,13 @@
 			<input type="text" name="displayname" />
 			<input type="password" name="password" />
 			<input type="password" name="confirm_password" />
+			<input type="submit" id="createAccountButton" value="Create Account" />
 		</form>
+
+		<form class="barForm">
+			
+		</form>
+
 	</div>
 </div>
 <%

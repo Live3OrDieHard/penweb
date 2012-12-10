@@ -20,6 +20,16 @@ $(document).ready(function(){
 	$("textarea[name=content]").watermark("Enter code here...");
 	$("textarea#comment").watermark("Change comment?");
 
+	// Click anywhere to hide a popover or comment block
+	$(document).on("click", function() {
+		$(".popover").fadeOut(250);
+		$("#commentBlock").fadeOut(250);
+	});
+
+	// Prevent clicks on popovers or comment blocks from hiding popovers or comment blocks
+	$("#commentBlock").click(function(event){ event.stopPropagation(); });
+	$(".popover").click(function(event){ event.stopPropagation(); });
+	
 });
 
 // Checks addCode submission to make sure title and content aren't blank
@@ -45,8 +55,8 @@ function checkAddCodeSubmit() {
 // Checks addCategory submission to make sure name isn't blank
 function checkAddCategorySubmit() {
 	if ($("#createCategory input[name=name]").val() == "") {
-		$(".modal .error").html("Error: Please provide a category name.");
-		$(".modal .error").show();
+		$(".popover .error").html("Error: Please provide a category name.");
+		$(".popover .error").show();
 		return false;
 	}
 	return true;
@@ -74,33 +84,57 @@ function checkSignUpSubmit() {
 	return true;
 }
 
-//Create account
-function signUp() {
-	if(document.signUpForm.onsubmit()) {
-		document.signUpForm.submit();
-	}
-}
-
-//Category modal
+// Category popover
 function newCategory() {
-	$("#createCategory").show();
-	$(".modal").show();		
+	var buttonPosition = $("#createCategoryButton").offset();
+	var popoverPositionTop = buttonPosition.top - 10;
+	var popoverPositionLeft = buttonPosition.left + $("#createCategoryButton").width() + 25;
+	$("#createCategory").css({"top": popoverPositionTop + "px", "left": popoverPositionLeft + "px"});
+	$("#createCategory").fadeIn(200);
 }
 
-//Duplicate modal
+// Entry options popover
+function entryOptions() {
+	var buttonPosition = $("#entryOptionsButton").offset();
+	var popoverPositionTop = buttonPosition.top + 55;
+	var popoverPositionLeft = buttonPosition.left - 150;
+	$("#entryOptions").css({"top": popoverPositionTop + "px", "left": popoverPositionLeft + "px"});
+	$("#entryOptions").fadeIn(200);
+}
+
+// Duplicate popover
 function duplicateIntoCategories() {
-	$("#duplicateIntoCategories").show();
-	$(".modal").show();		
+	var buttonPosition = $("#entryOptionsButton").offset();
+	var popoverPositionTop = buttonPosition.top + 55;
+	var popoverPositionLeft = buttonPosition.left - 235;
+	$("#duplicateIntoCategories").css({"top": popoverPositionTop + "px", "left": popoverPositionLeft + "px"});
+	$(".popover").fadeOut(125);
+	$("#duplicateIntoCategories").fadeIn(125);
 }
 
-// Hides modal sheet
-function closeModal() {
-	$(".modal").hide();
-	$(".modal .sheet").hide();
-	$(".modal .error").html("");
+// Delete category
+function deleteCategory () {
+	$("#deleteCategoryForm").submit();
 }
 
-//Save example
+// Delete category check popover
+function deleteCategoryCheck() {
+	var buttonPosition = $("#deleteCategoryButton").offset();
+	var popoverPositionTop = buttonPosition.top + 55;
+	var popoverPositionLeft = buttonPosition.left - 235;
+	$("#deleteCategory").css({"top": popoverPositionTop + "px", "left": popoverPositionLeft + "px"});
+	$("#deleteCategory").fadeIn(250);
+}
+
+function searchCategory() {
+	var buttonPosition = $("#searchCategoryButton").offset();
+	var popoverPositionTop = buttonPosition.top + 55;
+	var popoverPositionLeft = buttonPosition.left - 200;
+	$("#searchCategory").css({"top": popoverPositionTop + "px", "left": popoverPositionLeft + "px"});
+	$("#searchCategory").fadeIn(250);
+}
+
+// Save example
 function saveExample() {
 	$("form[name=editForm] input[name=comment]").val($("textarea#comment").val());
 	if(document.editForm.onsubmit()) {
@@ -108,24 +142,12 @@ function saveExample() {
 	}
 }
 
-//Comment block on hover over Save Example
+// Comment block on hover over Save Example
 function showCommentBlock() {
-	$("#commentBlock").show();
+	$("#commentBlock").fadeIn(250);
 }
 
-//Hide comment block
+// Hide comment block
 function hideCommentBlock() {
-	$("#commentBlock").hide();
-}
-
-//Delete category modal
-function deleteCategory() {
-	$("#deleteCategory").show();
-	$(".modal").show();	
-}
-
-//Search category modal
-function searchCategory() {
-	$("#searchCategory").show();
-	$(".modal").show();
+	$("#commentBlock").fadeOut(250);
 }

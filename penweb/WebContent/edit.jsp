@@ -65,16 +65,20 @@
 				return;
 			}
 		}
-	%>
+
+		List<ICategory> cats = webcon.getCategories();
+		
+		%>
+
 	<title>PEN &middot; Edit Example</title>
 <%@include file="includes/head/tags" %>
 </head>
 <body>
-<div class="modal">
-<%@include file="includes/modal/createCategory" %>
-<%@include file="includes/modal/duplicateIntoCategories" %>
-<%@include file="includes/modal/signUp" %>
-</div>
+<%if (!isNewExample) {%>
+<%@include file="includes/popover/duplicateIntoCategories" %>
+<%@include file="includes/popover/entryOptions" %>
+<% } %>
+<%@include file="includes/popover/createCategory" %>
 <%@include file="includes/header" %>
 <div class="bar">
 	<div class="left">
@@ -89,17 +93,9 @@
 			<%}%></h1>
 			
 			<%	if (!isNewExample) {%>
-				<form class="barForm" method="post" action="deleteExample"<%if(user==null){%>style="display:none"<%}%>>
-				Options:
-				<%if (isOwner) {%>
-				<input type="hidden" name="eid" value="<%= ex.getId()%>"/>
-				<input type="submit" class="button black-wide" value="Delete Example"/>
-				<input type="button" class="button black-wide" onClick="location.href=('dependency.jsp?eid=<%= id %>')" value="Dependencies"/>
-				<%}%>
-				<input type="button" class="button black-wide" onClick="javascript: duplicateIntoCategories();" value="Duplicate"/>
-				<%if (isOwner) {%>
+				<form class="barForm">
+				<a href="javascript:entryOptions();"><input type="button" class="button black" id="entryOptionsButton" value="Options" /></a>
 				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" <%if (!isNewExample) {%>onmouseover="showCommentBlock();"<%}%> />
-				<%}%>
 				</form>
 			<%} else {%>
 				<form class="barForm" <%if(user==null){%>style="display:none"<%}%>>
@@ -135,7 +131,7 @@
 				<a href="index.jsp?cat=<%=c.getId() %>"><li><%=webcon.escapeHtml(c.getTitle())%> (<%=num %>)</li></a>
 			<%} %>
 		</ul>
-		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide">New Category</div></a>
+		<a href="<% if (user != null) { %>javascript:newCategory();<%} else { %>/penweb/error.jsp?err=5<%}%>"><div class="button black-wide" id="createCategoryButton">New Category</div></a>
 	</div>
 	<div class="right">
 		<form action="<%if (isNewExample) { %>addCode<%} else { %>modifyCode<%} %>" method="post" name="editForm" onsubmit="return checkAddCodeSubmit();">
