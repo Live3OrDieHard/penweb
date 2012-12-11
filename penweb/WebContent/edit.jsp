@@ -94,7 +94,9 @@
 			
 			<%	if (!isNewExample) {%>
 				<form class="barForm">
+				<%if(user!=null){%>
 				<a href="javascript:entryOptions();"><input type="button" class="button black" id="entryOptionsButton" value="Options" /></a>
+				<%}%>
 				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" <%if (!isNewExample) {%>onmouseover="showCommentBlock();"<%}%> />
 				</form>
 			<%} else {%>

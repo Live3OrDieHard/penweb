@@ -1,6 +1,6 @@
 	<div class="popover tiny" id="entryOptions">
 		<div class="topArrow"></div>
-		<form class="barForm" method="post" action="deleteExample"<%if(user==null){%>style="display:none"<%}%>>
+		<form class="barForm" method="post" action="deleteExample" <%if(user==null){%>style="display:none"<%}%>>
 				<%if (isOwner) {%>
 			<input type="hidden" name="eid" value="<%=ex.getId()%>"/>
 			<input type="submit" class="button black-wide" value="Delete Example"/>
