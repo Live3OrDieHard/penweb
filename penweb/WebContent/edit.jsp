@@ -97,7 +97,9 @@
 				<%if(user!=null){%>
 				<a href="javascript:entryOptions();"><input type="button" class="button black" id="entryOptionsButton" value="Options" /></a>
 				<%}%>
+				<%if(isOwner){%>
 				<input type="button" class="button green" id="saveButton" onClick="saveExample();" value="Save Example" <%if (!isNewExample) {%>onmouseover="showCommentBlock();"<%}%> />
+				<%}%>
 				</form>
 			<%} else {%>
 				<form class="barForm" <%if(user==null){%>style="display:none"<%}%>>
