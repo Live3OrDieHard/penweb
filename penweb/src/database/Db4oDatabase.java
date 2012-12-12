@@ -89,7 +89,9 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * NO. Shouldn't be used. NO.
+	 * This method is used to get all the entries in the database
+	 * This method should not be used.
+	 * @return a list of all entries in database
 	 */
 	@Override
 	public List<IEntry> getAll() {
@@ -176,6 +178,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
+	 * Get all the examples in the database
 	 * @return A list of all examples in the database
 	 */
 	public List<IExample> getAllExample() {
@@ -183,6 +186,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
+	 * Get all the Categroies in the database
 	 * @return A list of all categories in the database
 	 */
 	public List<ICategory> getAllCategory() {
@@ -190,6 +194,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
+	 * Get all the users in the database
 	 * @return A list of all users in the database
 	 */
 	public List<IUser> getAllUsers() {
@@ -197,6 +202,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
+	 * Get the all the names of the all the categories in the database
 	 * @return A list of all category names.
 	 */
 	public ArrayList<String> listCategoryNames() {
@@ -209,6 +215,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
+	 * Get all the user names in the database
 	 * @return A list of strings containing all user login names in the database
 	 */
 	public ArrayList<String> listUserLoginNames() {
@@ -316,7 +323,8 @@ public class Db4oDatabase implements IDatabase {
 		// result
 	}
 
-	/**
+	/**This method is used to get the specific user by the 
+	 * given login name
 	 * @param loginName the login name of the user
 	 * @return the user with the given login name if there is
 	 * the unique login name exists
@@ -341,7 +349,8 @@ public class Db4oDatabase implements IDatabase {
 							// login name.
 	}
 
-	/**
+	/**This method is used to get the specific user by
+	 * the given id.
 	 * @param id the id of the user
 	 * @return the user with the given id if there is
 	 * the unique user exists
@@ -414,6 +423,8 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
+	 * The method is used to get all the examples owned by the given user
+	 * @param an user of PEN
 	 * @return a list of all examples written by the given user
 	 */
 	public List<IExample> getExampleByUser(final IUser user) {
@@ -443,7 +454,7 @@ public class Db4oDatabase implements IDatabase {
 		return list;
 	}
 
-	/**
+	/**This method is used to get all the examples owned by the given user
 	 * @param user
 	 *            specified user
 	 * @return a list of all categories that the user has created.

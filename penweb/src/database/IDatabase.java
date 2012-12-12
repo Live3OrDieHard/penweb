@@ -35,6 +35,7 @@ public interface IDatabase {
 	public Long store(IEntry e);
 	
 	/**
+	 * Get all the entries in the database
 	 * @return All entries in the database
 	 */
 	public List<IEntry> getAll();
@@ -74,6 +75,7 @@ public interface IDatabase {
 	public void close();
 	
 	/**
+	 * Get all the examples in the database
 	 * @return A list of all code examples in the database
 	 */
 	public List<IExample> getAllExample();
@@ -93,6 +95,7 @@ public interface IDatabase {
 	public ArrayList<String> listCategoryNames();
 	
 	/**
+	 * Get all the Categroies in the database
 	 * @return A list of all categories in the database
 	 */
 	List<ICategory> getAllCategory();
@@ -137,6 +140,7 @@ public interface IDatabase {
 	 * Returns the user with the given login name
 	 * @param loginName The name to look for
 	 * @return The IUser with the loginName if a match is found. Null otherwise.
+	 * @throws NoIdAvailableException
 	 */
 	IUser getUserByLoginName(final String loginName);
 	
