@@ -23,16 +23,19 @@ import java.util.List;
 public interface IUser extends IEntry
 {
 	/**
+	 * The method isused to get the login name for the user
 	 * @return The name the user will use to log in
 	 */
 	String getLoginName();
 	
 	/**
+	 * The method is used to get the displayed name for the user
 	 * @return The name of the person as a String.
 	 */
 	String getDisplayName();
 	
 	/**
+	 * The method is used to change the name displayed for the user
 	 * @param displayName The new name for a person. Fails if the person already has a name.
 	 */
 	void changeDisplayName(String displayName);
@@ -45,6 +48,7 @@ public interface IUser extends IEntry
 	Boolean checkPassword(String passwordAttempt);
 	
 	/**
+	 * The method is used to change the password for the user
 	 * @param newPassword The new password for the user.
 	 */
 	void changePassword(String oldPassword, String newPassword, String reenterNew);
@@ -56,6 +60,7 @@ public interface IUser extends IEntry
 	void addOwnedExample(IExample example);
 
 	/**
+	 * The method is used to get all the examples used by the user
 	 * @return The list of examples a user owns
 	 */
 	List<IExample> getOwnedExampleList();
@@ -67,6 +72,7 @@ public interface IUser extends IEntry
 	void addOwnedCategory(ICategory category);
 	
 	/**
+	 * The method is used to get all the categories owned by the user
 	 * @return The list of categories a user owns
 	 */
 	List<ICategory> getOwnedCategoryList();
@@ -79,6 +85,7 @@ public interface IUser extends IEntry
 	void addEditedExample(IExample example);
 	
 	/**
+	 * The method is used to get all the examples that the user ever edited
 	 * @return The list of examples that a user has edited.
 	 */
 	List<IExample> getEditedExampleList();

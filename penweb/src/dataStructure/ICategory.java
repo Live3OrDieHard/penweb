@@ -25,6 +25,7 @@ import exceptions.DuplicateException;
 public interface ICategory extends IEntry{
 	
 	/**
+	 * Get the tile of a category
 	 * @return Returns the title of the category. For example: "Web" or "Mobile".
 	 */
 	String getTitle();
@@ -36,6 +37,7 @@ public interface ICategory extends IEntry{
 	void setTitle(String title);
 	
 	/**
+	 * Get the description of the category
 	 * @return Returns the description of a category.
 	 */
 	String getDescription();

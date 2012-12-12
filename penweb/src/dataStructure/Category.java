@@ -188,6 +188,7 @@ public class Category implements ICategory {
 
 	@Override
 	/**
+	 * To see if the category is equal to the given entry
 	 * override the equals function of object class
 	 * @return true if o is an instance of ICategory and
 	 *         this and o have the same id, false otherwise.

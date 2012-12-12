@@ -21,8 +21,16 @@ public interface IEntry
 	 */
 	IUser getOwner();
 	
+	/**
+	 * Get the id of any entry
+	 * @return an entry's id of long
+	 */
 	Long getId();
 	
+	/**
+	 * Get the user's id
+	 * @return an user's id of long
+	 */
 	Long getOwnerId();
 	
 	/**

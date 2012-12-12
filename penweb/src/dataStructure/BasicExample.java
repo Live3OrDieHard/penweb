@@ -422,6 +422,7 @@ public class BasicExample implements IExample {
 
 	@Override
 	/**
+	 * The method is to check if the example is equal to the given one
 	 * override the equals function of object class
 	 * @return true if o is an instance of IExample and
 	 *         this and o have the same id, false otherwise.

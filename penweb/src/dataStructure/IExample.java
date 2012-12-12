@@ -42,11 +42,13 @@ public interface IExample extends IEntry
 	List<IUser> getAuthors();
 
 	/**
+	 * Get all the categories that the example belongs to 
 	 * @return The list of categories that an example belongs to
 	 */
 	List<ICategory> getCategories();
 
 	/**
+	 * Get the code content of the example
 	 * @return The code in the example as a String
 	 */
 	String getCode();
@@ -58,6 +60,7 @@ public interface IExample extends IEntry
 	String getLanguage();
 
 	/**
+	 * Get the user who owns the example
 	 * @return The person who 'owns' this example
 	 */
 	IUser getOwner();
@@ -65,30 +68,36 @@ public interface IExample extends IEntry
 	/**
 	 * A setter fucntion to set the source property of the example
 	 * to the given source
+	 * @return the source of the example
 	 */
 	String getSource();
 
 	/**
+	 * Get the tittle of the example
 	 * @return The title of an example
 	 */
 	String getTitle();
 
 	/**
+	 * Setter function to set authoes for the example
 	 * @param a ArrayList<IPerson>: A list of authors
 	 */
 	void setAuthors(ArrayList<IUser> a);
 	/**
 	 * A setter function to set the tag property of the example 
 	 * to the given categories.
+	 * @param a ArrayList<ICategory> a list of categories
 	 */
 	void setCategories(ArrayList<ICategory> categories);
 
 	/**
+	 * Get all the ids of categories that the example belongs to
 	 * @return a list of ids of category in the categorylist
 	 */
 	List<Long> getCategoryIds();
 
 	/**
+	 * Setter funtion to set code content for the example
 	 * @param code The code content to be associated with an example
 	 */
 	void setCode(String code);
@@ -100,9 +109,14 @@ public interface IExample extends IEntry
 	 */
 	void setLanguage(String language);
 
+	/**
+	 * A setter function to set the source for the example
+	 * @param source
+	 */
 	void setSource(String source);
 
 	/**
+	 * A setter function to set the title for the example
 	 * @param t String: a new title
 	 */
 	void setTitle(String t);
@@ -121,9 +135,9 @@ public interface IExample extends IEntry
 	 */
 	ArrayList<String> getTags();
 	/**
-	 * Perhaps this should be moved into the controller. 
-	 * I don't know how I feel about functions with a lot of logic
-	 * like this in the dataStructure classes
+	 * Get the authors's names for the example
+	 * @return
+	 * 		  the names of authors for example
 	 */
 	String getAuthorsNames();
 	/**
