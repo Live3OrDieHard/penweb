@@ -107,7 +107,7 @@ public interface IDatabase {
 	 * search for an entry by its id (examples or categories)
 	 * @return IEntry containing that id if there is only one result.
 	 * Null if there is no IEntry with that ID.
-	 * @throw non-unique exception if there is more than one result
+	 * @throws non-unique exception if there is more than one result
 	 */
 	IEntry getByID(Long id);
 	
@@ -115,7 +115,7 @@ public interface IDatabase {
 	 * search for an entry by its id (examples or categories)
 	 * @return IEntry containing that id if there is only one result.
 	 * Null if there is no IEntry with that ID.
-	 * @throw non-unique exception if there is more than one result
+	 * @throws non-unique exception if there is more than one result
 	 */
 	IEntry getCategoryByID(Long id);
 
@@ -123,7 +123,7 @@ public interface IDatabase {
 	 * search for an entry by its id (examples or categories)
 	 * @return IEntry containing that id if there is only one result.
 	 * Null if there is no IEntry with that ID.
-	 * @throw non-unique exception if there is more than one result
+	 * @throws non-unique exception if there is more than one result
 	 */
 	IEntry getExampleByID(Long id);
 
@@ -153,14 +153,12 @@ public interface IDatabase {
 	boolean isCategoryTitleTaken(String name);
 	
 	/**
-	 * @author tpatikorn, awiovanna
 	 * @param lang
 	 * @return list of examples written in the given language
 	 */
 	List<IExample> getByLanguage(String lang);
 	
 	/**
-	 * @author awiovanna, tpatikorn
 	 * @param user
 	 * @return list of all code examples owned by the given user
 	 */
