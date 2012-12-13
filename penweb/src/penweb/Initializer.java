@@ -82,6 +82,10 @@ public class Initializer implements javax.servlet.ServletContextListener {
 		db4oServer.close();		
 	}
 	
+	/**
+	 * get the name of the database file
+	 * @return the name of the database file
+	 */
 	public static String getDatabaseName() {
 		return databaseName;
 	}

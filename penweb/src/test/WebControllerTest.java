@@ -36,6 +36,12 @@ import exceptions.DuplicateException;
 
 import penweb.Initializer;
 
+/**
+ * Test function in WebController.java
+ * @author tpatikorn
+ * @author iprangishvili
+ * @author dmulcahy 
+ */
 public class WebControllerTest {
 	private WebController testee;
 	private Db4oDatabase db;

@@ -25,11 +25,11 @@ import exceptions.DuplicateException;
 import dataStructure.User;
 
 /**
+ * Test functions in BasicExample and BasicExample-related functions
+ * except those involve BasicExample-Category relationship
  * @author tpatikorn
  * @author iprangishvili
  * @author dmulcahy 
- * Test functions in BasicExample and BasicExample-related functions
- * except those involve BasicExample-Category relationship
  */
 public class BasicExampleTest {
 

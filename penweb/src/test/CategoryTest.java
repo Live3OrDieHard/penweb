@@ -25,11 +25,11 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 /**
+ * Test Category-related functions
+ * Except BasicExample-Category relationship
  * @author tpatikorn
  * @author iprangishvili
  * @author dmulcahy
- * Test Category-related functions
- * Except BasicExample-Category relationship
  * 
  */
 public class CategoryTest {

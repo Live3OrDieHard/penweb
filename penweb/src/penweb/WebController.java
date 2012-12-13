@@ -42,7 +42,7 @@ public class WebController {
 	}
 
 	/**
-	 * the old embedded mode constructor used for testing purpose
+	 * the old embedded mode constructor used for testing purpose only.
 	 * 
 	 * @param databaseName
 	 */
@@ -51,7 +51,8 @@ public class WebController {
 	}
 
 	/**
-	 * Modified by Peng Ren to check if the category name is already taken
+	 * @deprecated
+	 * Check if the category name is already taken
 	 * Adds a category to the database. A unique ID is assigned within the DB
 	 * 
 	 * @param name of the desired category
@@ -68,7 +69,7 @@ public class WebController {
 	}
 
 	/**
-	 * 
+	 * add a category to the database.
 	 * @param name
 	 *            of the category
 	 * @param desc
@@ -78,7 +79,7 @@ public class WebController {
 	 * @param isPublic
 	 *            whether or not the category is public Adds a category with the
 	 *            given specifications to the database
-	 * @return the id of newly added category
+	 * @return the id of newly added category on success, null otherwise.
 	 */
 	public Long addCategory(String name, String desc, IUser owner,
 			boolean isPublic) {
@@ -89,6 +90,7 @@ public class WebController {
 	}
 
 	/**
+	 * get the list of all categories.
 	 * @return a list of all categories stored in the database
 	 */
 	public List<ICategory> getCategories() {
@@ -96,11 +98,10 @@ public class WebController {
 	}
 
 	/**
-	 * As with an example, each category has a unique ID.
-	 * 
-	 * @param id
-	 *            . The hopefully unique ID of the category.
-	 * @return the desired category if a category exists with the given ID.
+	 * Get a category by specified id.
+	 * This function will return at most one category.
+	 * @param id the id if the category
+	 * @return the desired category with the given ID if it exists, null otherwise.
 	 */
 	public ICategory getCategoryById(Long id) {
 		List<ICategory> cats = db.getAllCategory();
@@ -112,12 +113,10 @@ public class WebController {
 	}
 
 	/**
-	 * All methods work by using the id of an example, because each example ID
-	 * is unique.
-	 * 
-	 * @param id
-	 *            the unique ID of the desired example.
-	 * @return the example that corresponds to an existing id.
+	 * Get a example by specified id.
+	 * This function will return at most one example.
+	 * @param id the id if the example
+	 * @return the desired example with the given ID if it exists, null otherwise.
 	 */
 	public IExample getExampleById(Long id) {
 		List<IExample> ex = db.getAllExample();
@@ -129,6 +128,7 @@ public class WebController {
 	}
 
 	/**
+	 * @deprecated
 	 * This is the all-important function to add a code example to the database.
 	 * 
 	 * @param title
@@ -159,7 +159,7 @@ public class WebController {
 	}
 
 	/**
-	 *
+	 * Add a code example to the database.
 	 * @param title
 	 *            of the code example
 	 * @param content
@@ -171,8 +171,7 @@ public class WebController {
 	 * @param isPublic
 	 *            whether or not the code example should appear as public or
 	 *            private
-	 * @return the id of the code example added to the database or error
-	 *         code(maybe) if it cannot be added
+	 * @return the id of the code example added to the database, null if it cannot be added.
 	 */
 	public Long addCode(String title, String content, String language,
 			String loginName, boolean isPublic) {
@@ -192,14 +191,12 @@ public class WebController {
 	}
 
 	/**
-	 * 
-	 * @param loginName
-	 * @param password
-	 * @param displayName
-	 * @return true if the user was created successfully. Returns false if not
-	 *         successful. The only condition that returns false is if the
-	 *         loginName is already taken. It is acceptable for the displayname
-	 *         to already be taken.
+	 * Add a user in the database.
+	 * This function will not add user if the login name is taken.
+	 * @param loginName login name of the user.
+	 * @param password password of the user.
+	 * @param displayName display name of the user.
+	 * @return true if the user was created successfully, false otherwise.
 	 */
 	public boolean addUser(String loginName, String password, String displayName) {
 		if (db.isLoginNameTaken(loginName))
@@ -216,8 +213,7 @@ public class WebController {
 	 *            Name a user should use to login. This is unique across users
 	 * @param password
 	 *            The password to check
-	 * @return True if the user exists and the password was correct. False if
-	 *         the user doesn't exist or the password was incorrect.
+	 * @return True if the user exists and the password was correct, false otherwise.
 	 */
 	public boolean tryLogin(String loginName, String password) {
 		IUser user = db.getUserByLoginName(loginName);
@@ -226,7 +222,7 @@ public class WebController {
 	}
 
 	/**
-	 * 
+	 * Get a list of titles of all code examples in the database.
 	 * @return a list of all of the code examples currently in existence
 	 */
 	public List<String> getTitles() {
@@ -239,6 +235,7 @@ public class WebController {
 	}
 
 	/**
+	 * Get the number of code examples stored in the datbase.
 	 * @return the number of entries in the database.
 	 */
 	public int getNumEntries() {
@@ -247,23 +244,27 @@ public class WebController {
 	}
 
 	/**
-	 * Getter function to get all of the examples
-	 * 
+	 * Get a list of all exmaples in the database.
 	 * @return a list of all of the examples in the database
 	 */
 	public List<IExample> getExamples() {
 		return this.db.getAllExample();
 	}
-
+	
+	/**
+	 * Get a User object by login name.
+	 * The User object will be returned if there is 
+	 * exactly one User object that matches, null otherwise.
+	 * @param loginName login name of the user.
+	 * @return a User object that matches the given login name.
+	 */
 	public IUser getUserByLoginName(String loginName) {
 		return db.getUserByLoginName(loginName);
 	}
 
 	/**
-	 * Takes in an entry and adds it to the database.
-	 * 
-	 * @param e
-	 * 
+	 * Takes in an entry--IExample, ICategory, User--and adds it to the database.
+	 * @param e the entry
 	 * @return newly added entry's id
 	 */
 	public Long store(IEntry e) {
@@ -278,9 +279,8 @@ public class WebController {
 	}
 
 	/**
-	 * wrapper of isCategoryTitleTaken()
-	 * 
-	 * @param name
+	 * The method checks if the title for the category already exists.
+	 * @param name the title of the category to be checked.
 	 * @return true if the category title is taken, false otherwise.
 	 */
 	public boolean isCategoryTitleTaken(String name) {
@@ -288,10 +288,9 @@ public class WebController {
 	}
 
 	/**
-	 * 
 	 * This method returns a list of all code examples accessible by user
 	 * and written in the given language 
-	 * accessible = written by user or is public
+	 * accessible means written by user or is public.
 	 * @param user
 	 *            the identified user
 	 * @param language
@@ -311,7 +310,7 @@ public class WebController {
 	}
 
 	/**
-	 * 
+	 * Get all the public examples in the database.
 	 * @return All public examples in the database
 	 */
 	public List<IExample> getAllPublicExamples() {
@@ -326,10 +325,10 @@ public class WebController {
 	}
 
 	/**
-	 * 
+	 * Get the list of languages of examples accessible by the given user.
+	 * accessible means written by user or is public.
 	 * @param user specified user
-	 * @return List of all languages that are used in public examples, 
-	 * as well as all languages that are used in private code for the given user.
+	 * @return List of all languages of examples accessible by the given user.
 	 */
 	public List<String> getLangList(IUser user) {
 		List<IExample> examples = db.getAllExample();
@@ -350,12 +349,12 @@ public class WebController {
 	}
 
 	/**
-	 *
 	 * read text file and return a list of strings of languages from that file
 	 * The file must be named "LangList.txt"
 	 * This file must be stored in the same directory as the database file.
 	 * This directory should be eclipse directory (run from eclipse) where eclipse.exe is
 	 * or in the Tomcat bin directory [TOMCAT HOME]/bin/ 
+	 * Note: For embedded version of WebController (for testing), LangList.txt must be in the project directory.
 	 * @return a list of strings of languages read from LangList.txt
 	 */
 	public List<String> readLangListFromFile() {
@@ -382,17 +381,12 @@ public class WebController {
 	}
 
 	/**
-	 * 
-	 * delete an example or a category only if user is the owner of entry and 
-	 * - (ICategory) entry has no example 
-	 * - (IExample) entry is in no category and no other examples depend on it 
-	 * If entry is IUser and user is owner of entry, 
-	 * it will print "You want to delete a user? Not yet implemented".
-	 * //TODO change to removing instead
-	 * NOTE: Return 2 if entry is associated with another entries (categories/examples/dependency)
+	 * Delete an example or a category. This function will also
+	 * - if entry is ICategory, remove all the code examples from the category.
+	 * - if entry is IExample, remove itself from any categories and dependencies list.
+	 * - if entry is User, do nothing.
 	 * @param entry to be deleted
-	 * @param user the user that is trying to delete. We need to check whether 
-	 *        he or she is allowed to delete the given entry.
+	 * @param user the user that is trying to delete. 
 	 * @return 1 if the user is not allowed to delete the given entry. 0 If the
 	 *         owner is allowed to delete the entry, in which case it does get
 	 *         deleted. 
@@ -415,7 +409,6 @@ public class WebController {
 			}
 		}
 		else if (entry instanceof IExample) {
-			//TODO: remove categories instead
 			IExample exampleEntry = (IExample) entry;
 			if(exampleEntry.getCategories().size()!=0)
 			{
@@ -426,26 +419,23 @@ public class WebController {
 				}
 			}
 
-			//TODO: Should we remove if the example is a dependency for another?
-			//Check story "Delete a code example from a public notebook"
 			if(getDependerOf(exampleEntry).size()!=0)
 				removeAllDependency(exampleEntry);
 		} 
 		else if(entry instanceof IUser) {
 			// TODO Allow deletion for users
-			System.out.println("You want to delete a user? Not yet implemented");
+			//System.out.println("You want to delete a user? Not yet implemented");
 		}
 		else {
 			// TODO ?
-			System.out.println("something else?");
+			//System.out.println("something else?");
 		}
 		db.delete(entry);
 		return 0;
 	}
 
 	/**
-	 * 
-	 * get all examples in db that depend on example (aka dependers)
+	 * Get all examples in database that depend on given example (aka dependers)
 	 * @param example the example we want to find what depends on it
 	 * @return list of all examples depends on example 
 	 */
@@ -462,9 +452,8 @@ public class WebController {
 	}
 
 	/**
-	 * This method looks at all the example codes and collects all the examples
-	 * that correspond to a specific user. 
-	 * 
+	 * Get all the code examples accessible by given user.
+	 * accessible means owned by user or us public.
 	 * @return a list of all code examples that should be visible to this user
 	 */
 	public List<IExample> getVisibleExamples(IUser user) {
@@ -480,7 +469,6 @@ public class WebController {
 
 	/**
 	 * Get a list of examples that the given user owns
-	 * 
 	 * @param user The user to find examples for
 	 * @return A list of IExamples the user owns
 	 */
@@ -495,9 +483,8 @@ public class WebController {
 		return results;
 	}
 	/**
-	 * 
-	 * Remove the example from the dependency lists of all
-	 * the example it depends on
+	 * For each example in the database, remove the given example from
+	 * the dependency list if it depends on the given example.
 	 * @param example an example
 	 */
 	public void removeAllDependency(IExample example){
@@ -522,6 +509,11 @@ public class WebController {
 		return false;
 	}
 
+	/**
+	 * Change text to the escaped form so that it is displayed correctly in web browser.
+	 * @param text to be escaped.
+	 * @return escaped text.
+	 */
 	public String escapeHtml(String text) {
 		return text.replaceAll("&", "&amp;")
 				.replaceAll("<", "&lt;")

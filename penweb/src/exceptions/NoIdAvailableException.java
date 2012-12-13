@@ -11,12 +11,15 @@
 package exceptions;
 
 /**
+ * This exception is thrown when there is no unique id, less than maxID, available for new object.
  * @author tpatikorn
- * This exception is thrown when there is no unique id (<maxID) available for new object
  */
 public class NoIdAvailableException extends PENException {
 
-	final long maxID;
+	/**
+	 * the maximum id of the current implementation.
+	 */
+	public final long maxID;
 	
 	/**
 	 * @param maxID is the max value of ID database will assign to object

@@ -20,10 +20,10 @@ import dataStructure.User;
 import database.Db4oDatabase;
 
 /**
+ * Test user-related functions
  * @author tpatikorn
  * @author iprangishvili
  * @author dmulcahy 
- * Test user-related functions
  */
 public class UserTest {
 	private Db4oDatabase db;

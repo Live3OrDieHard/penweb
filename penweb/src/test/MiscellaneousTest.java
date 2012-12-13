@@ -22,9 +22,9 @@ import java.util.UUID;
 import database.Db4oDatabase;
 
 /**
- * @author tpatikorn
  * Contain non-class specific tests
  * and/or tests that involved many classes
+ * @author tpatikorn
  */
 public class MiscellaneousTest 
 {

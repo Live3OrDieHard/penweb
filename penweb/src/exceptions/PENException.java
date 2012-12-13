@@ -11,9 +11,9 @@
 package exceptions;
 
 /**
- * @author tpatikorn
- * Superclass for all exception used in PEN project
+ * Superclass for all exception used in PEN project.
  * This class is abstract.
+ * @author tpatikorn
  */
 public abstract class PENException extends Exception{
 

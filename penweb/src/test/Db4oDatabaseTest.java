@@ -25,11 +25,10 @@ import dataStructure.*;
 import database.Db4oDatabase;
 
 /**
- * 
+ * Test functions in db4odatabase.java
  * @author tpatikorn
  * @author iprangishvili
  * @author dmulcahy
- * Test functions in db4odatabase.java
  */
 public class Db4oDatabaseTest {
 	private Db4oDatabase testee;
