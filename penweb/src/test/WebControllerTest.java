@@ -584,7 +584,7 @@ public class WebControllerTest {
 		assertTrue(langList.contains("c"));
 		assertTrue(langList.contains("c++"));
 		assertTrue(langList.contains("java"));
-		assertEquals(langList.size(),4);
+		assertEquals(langList.size(),6);
 		
 	}
 	
