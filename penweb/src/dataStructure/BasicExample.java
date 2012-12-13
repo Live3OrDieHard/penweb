@@ -139,10 +139,10 @@ public class BasicExample implements IExample {
 		return authors;
 	}
 
-	@Override
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String getAuthorsNames() {
 		String nameList = "";
 
@@ -155,11 +155,11 @@ public class BasicExample implements IExample {
 		return nameList;
 	}
 
-	@Override
 	/**
 	 * Gets the list of categories the example belongs to.
 	 * @return LinkedList<String>
 	 */
+	@Override
 	public List<ICategory> getCategories() {
 		return categoryList;
 	}
@@ -177,10 +177,10 @@ public class BasicExample implements IExample {
 		return this.id;
 	}
 
-	@Override
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String getLanguage() {
 		return this.language.trim();
 	}
@@ -203,12 +203,12 @@ public class BasicExample implements IExample {
 			return this.owner.getId();
 		return (long) 0;
 	}
-
-	@Override
+	
 	/**
 	 * Gets the source of an example
 	 * @return String
 	 */
+	@Override
 	public String getSource() {
 		return this.source;
 	}
@@ -230,10 +230,7 @@ public class BasicExample implements IExample {
 	}
 
 	/**
-	 * helper function check if the example (this) is already in category
-	 * 
-	 * modified by Peng Ren for only checking ID
-	 * 
+	 * helper function check if the example is already in category.
 	 * @param category
 	 *            the category wanted to be check
 	 * @return true if the example is in category. false otherwise
@@ -250,10 +247,10 @@ public class BasicExample implements IExample {
 		this.authors = authors;
 	}
 
-	@Override
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setCategories(ArrayList<ICategory> categories) {
 		this.categoryList = categories;
 	}
@@ -266,18 +263,18 @@ public class BasicExample implements IExample {
 		this.code = code;
 	}
 
-	@Override
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setLanguage(String language) {
 		this.language = language;
 	}
 
-	@Override
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setSource(String source) {
 		this.source = source;
 	}
@@ -404,29 +401,29 @@ public class BasicExample implements IExample {
 		this.categoryList = new ArrayList<ICategory>();
 	}
 
-	@Override
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean isPublic() {
 		return this.publicEx;
 	}
 
-	@Override
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void setPublic(boolean changePublic) {
 		this.publicEx = changePublic;
 	}
 
-	@Override
 	/**
-	 * The method is to check if the example is equal to the given one
-	 * override the equals function of object class
+	 * Two examples are "equal" if and only if they have the same id.
+	 * override the equals function of object class.
 	 * @return true if o is an instance of IExample and
 	 *         this and o have the same id, false otherwise.
 	 */
+	@Override
 	public boolean equals(Object o) {
 		if (o instanceof IExample) {
 			return this.getId().equals(((IExample) o).getId());
@@ -435,10 +432,10 @@ public class BasicExample implements IExample {
 	}
 
 
-	@Override
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void removeDependeny(IExample example){
 		if(dependency.contains(example)){
 			for(int i = 0; i < dependency.size(); i++){

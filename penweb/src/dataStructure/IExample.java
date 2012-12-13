@@ -16,8 +16,8 @@ import java.util.List;
 import exceptions.DuplicateException;
 
 /**
+ * IExample is the code entry that a user is allowed to create on the web site.
  * @author tpatikorn
- * IExample is the code entry that a user is allowed to create on the website.
  */
 public interface IExample extends IEntry
 {
@@ -31,7 +31,7 @@ public interface IExample extends IEntry
 	/**
 	 * add the given tag to the example
 	 * 
-	 * @param tag
+	 * @param tag a tag put in example
 	 */
 	void addTags(String tag);
 
@@ -55,38 +55,38 @@ public interface IExample extends IEntry
 
 	/**
 	 * Gets the language the example was written in
-	 * @return String
+	 * @return language that the example is written in
 	 */
 	String getLanguage();
 
 	/**
 	 * Get the user who owns the example
-	 * @return The person who 'owns' this example
+	 * @return The person who owns this example
 	 */
 	IUser getOwner();
 
 	/**
-	 * A setter fucntion to set the source property of the example
+	 * A setter function to set the source property of the example
 	 * to the given source
 	 * @return the source of the example
 	 */
 	String getSource();
 
 	/**
-	 * Get the tittle of the example
+	 * Get the title of the example
 	 * @return The title of an example
 	 */
 	String getTitle();
 
 	/**
-	 * Setter function to set authoes for the example
+	 * Setter function to set authors for the example
 	 * @param a ArrayList<IPerson>: A list of authors
 	 */
 	void setAuthors(ArrayList<IUser> a);
 	/**
 	 * A setter function to set the tag property of the example 
 	 * to the given categories.
-	 * @param a ArrayList<ICategory> a list of categories
+	 * @param categories a list of categories
 	 */
 	void setCategories(ArrayList<ICategory> categories);
 
@@ -105,13 +105,13 @@ public interface IExample extends IEntry
 	 * A setter function to set the language property of the example
 	 * to the given language
 	 * 
-	 * @param language
+	 * @param language language of the example
 	 */
 	void setLanguage(String language);
 
 	/**
 	 * A setter function to set the source for the example
-	 * @param source
+	 * @param source the source of the example
 	 */
 	void setSource(String source);
 
@@ -122,22 +122,22 @@ public interface IExample extends IEntry
 	void setTitle(String t);
 	
 	/**
-	 * a setter function to set the tag property of the example to the given
-	 * tags
+	 * a setter function to set the tag property of the example to the given tags
 	 * 
-	 * @param tags
+	 * @param tags a list of tags
 	 */
 	void setTags(ArrayList<String> tags);
+
 	/**
 	 * a getter function to get the tags of the example
 	 * 
-	 * @return LinkedList<String>
+	 * @return list of tags of example
 	 */
 	ArrayList<String> getTags();
+
 	/**
 	 * Get the authors's names for the example
-	 * @return
-	 * 		  the names of authors for example
+	 * @return the names of authors for example
 	 */
 	String getAuthorsNames();
 	/**
@@ -152,12 +152,12 @@ public interface IExample extends IEntry
 	void setComment(String comment);
 	/**
 	 * Add dependencies to the given examples
-	 * @param example
+	 * @param example the example that this depends on
 	 */
 	void addDependency(IExample example);
 	/**
 	 * Add dependencies to the given examples
-	 * @return dependency
+	 * @return list of examples this depends on
 	 */
 	ArrayList<IExample> getDependency();
 	/**
@@ -178,8 +178,10 @@ public interface IExample extends IEntry
 	 * @return true if the code example is public. False otherwise. 
 	 */
 	boolean isPublic();
+
 	/**
 	 * Sets the isPublic field to the given boolean.
+	 * @param changePublic true if the example is to be changed to be public, false otherwise.
 	 */
 	void setPublic(boolean changePublic);
 	/**

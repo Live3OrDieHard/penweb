@@ -11,12 +11,13 @@
 package dataStructure;
 
 /**
+ * IEntry should be an entry (example, category, user)
  * @author tpatikorn
- * IEntry should be an entry (example, category)
  */
 public interface IEntry 
 {	
 	/**
+	 * Get the owner of the entry.
 	 * @return The owner of an entry.
 	 */
 	IUser getOwner();

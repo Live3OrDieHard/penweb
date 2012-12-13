@@ -13,12 +13,11 @@ package dataStructure;
 import java.util.List;
 
 /**
+ * This should refer to a person
+ * IUser, IAdmin, INonUser
  * @author Thanaporn
  * @author jfchines
  * @author awiovanna
- * 
- * This should refer to a person
- * IUser, IAdmin, INonUser
  */
 public interface IUser extends IEntry
 {
@@ -67,7 +66,7 @@ public interface IUser extends IEntry
 	
 	/**
 	 * Adds a category to a user's list of owned category
-	 * @param category
+	 * @param category the category to be added
 	 */
 	void addOwnedCategory(ICategory category);
 	

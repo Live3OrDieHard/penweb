@@ -16,12 +16,11 @@ import java.util.ArrayList;
 import exceptions.DuplicateException;
 
 /**
- * @author awiovanna
- * @author tpatikorn
- * 
  * A category into which code examples can be placed
  * Contains methods to get/set the description, title,
  * id, public of a category. Also can add/remove examples.
+ * @author awiovanna
+ * @author tpatikorn
  */
 public class Category implements ICategory {
 	private IUser owner;
@@ -39,35 +38,35 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#getDescription()
+	 * {@inheritDoc}
 	 */
 	public String getDescription() {
 		return description;
 	}
 
 	/**
-	 * @see dataStructure.ICategory#setDescription(String)
+	 * {@inheritDoc}
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
-	 * @see dataStructure.ICategory#getTitle()
+	 * {@inheritDoc}
 	 */
 	public String getTitle() {
 		return title;
 	}
 
 	/**
-	 * @see dataStructure.ICategory#setTitle(String)
+	 * {@inheritDoc}
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
 	/**
-	 * @see dataStructure.ICategory#addCodeExample(IExample)
+	 * {@inheritDoc}
 	 */
 	public void addCodeExample(IExample example) throws DuplicateException {
 		if (!this.hasExample(example)) {
@@ -81,7 +80,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#getExampleList()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<IExample> getExampleList() {
@@ -89,7 +88,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.IEntry#assignOwner(IUser)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int assignOwner(IUser owner) {
@@ -101,7 +100,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.IEntry#getOwner()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public IUser getOwner() {
@@ -109,7 +108,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.IEntry#getId()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Long getId() {
@@ -117,7 +116,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.IEntry#getOwnerId()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Long getOwnerId() {
@@ -125,7 +124,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.IEntry#assignId(Long)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int assignId(Long id) {
@@ -137,7 +136,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#getExampleIds()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<Long> getExampleIds() {
@@ -148,7 +147,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#removeExample(IExample)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void removeExample(IExample example) {
@@ -160,7 +159,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#removeAllExamples()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void removeAllExamples() {
@@ -171,7 +170,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#isPublic()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isPublic() {
@@ -179,20 +178,20 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#setPublic(boolean)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setPublic(boolean isPublic) {
 		this.isPublic = isPublic;
 	}
 
-	@Override
 	/**
-	 * To see if the category is equal to the given entry
-	 * override the equals function of object class
+	 * Two categories are "equal" if and only if they have the same id.
+	 * override the equals function of object class.
 	 * @return true if o is an instance of ICategory and
 	 *         this and o have the same id, false otherwise.
 	 */
+	@Override
 	public boolean equals(Object o) {
 		if (o instanceof ICategory) {
 			return this.getId().equals(((ICategory) o).getId());
@@ -201,7 +200,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#getPublicExamples()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<IExample> getPublicExamples() {
@@ -215,7 +214,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#getVisibleExamples(IUser)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<IExample> getVisibleExamples(IUser user) {
@@ -229,7 +228,7 @@ public class Category implements ICategory {
 	}
 
 	/**
-	 * @see dataStructure.ICategory#getOwnedExamples(IUser)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<IExample> getOwnedExamples(IUser user) {

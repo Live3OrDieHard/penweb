@@ -40,19 +40,22 @@ import dataStructure.IUser;
  */
 
 /** 
+ * This class acts as an interface to a DB4O database. It
+ * connects to a server running locally upon creation. There are 
+ * methods to retrieve data from the database.
  * @author Andy Creeth
  * @author Justin Chines
  * @author tpatikorn
  * @author awiovanna
- * This class acts as an interface to a DB4O database. It
- * connects to a server running locally upon creation. There are 
- * methods to retrieve data from the database.
  */
 public class Db4oDatabase implements IDatabase {
 	final private long maxID = 100000000000L;
 	private ObjectContainer db;
 	private ObjectServer server;
 
+	/**
+	 * Default constructor. This constructor uses client-server model.	
+	 */
 	public Db4oDatabase() {
 		db = Initializer.db4oServer.openClient();
 	}
@@ -231,15 +234,14 @@ public class Db4oDatabase implements IDatabase {
 
 
 	/**
-	 * @param loginName
-	 * @return True if a user has already been created with the given login
-	 *         name, false otherwise
+	 * {@inheritDoc}
 	 */
 	public boolean isLoginNameTaken(String loginName) {
 		return listUserLoginNames().contains(loginName);
 	}
 
 	/**
+	 * search for an entry by its id
 	 * @param id the id of the entry
 	 * @return the entry with the given id if there is
 	 * the unique entry exists
@@ -274,6 +276,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
+	 * search for a category by its id
 	 * @param id the id of the category
 	 * @return the category with the given id if there is
 	 * the unique category exists
@@ -299,12 +302,12 @@ public class Db4oDatabase implements IDatabase {
 	}
 	
 	/**
+	 * Get the code example that has the given id.
+	 * This function will return IExample object with specified id 
+	 * if exactly one example has that id, null otherwise.
 	 * @param id the id of the example
-	 * @return the example with the given id if there is
-	 * the unique example exists
-	 * 			null if there is no example with the given id
-	 * 			null if there are more than one examples with
-	 * the given id(should throw an exception here later)
+	 * @return the example with the given id if exactly one example matches,
+	 *         null otherwise.
 	 */
 	@Override
 	public IExample getExampleByID(final Long id) {
@@ -348,15 +351,14 @@ public class Db4oDatabase implements IDatabase {
 			return null; // Throw an exception because two users have the same
 							// login name.
 	}
-
-	/**This method is used to get the specific user by
-	 * the given id.
+	
+	/**
+	 * Get the user that has the given id.
+	 * This function will return User object with specified id 
+	 * if exactly one user has that id, null otherwise.
 	 * @param id the id of the user
-	 * @return the user with the given id if there is
-	 * the unique user exists
-	 * 			null if there is no user with the given id
-	 * 			null if there are more than one users with
-	 * the given id(should throw an exception here later)
+	 * @return the user with the given id if exactly one user matches,
+	 *         null otherwise.
 	 */
 	@Override
 	public IUser getUserByID(final Long id) {
@@ -377,16 +379,12 @@ public class Db4oDatabase implements IDatabase {
 
 
 	/**
-	 * The method is used to generate new id for a new entry
-	 * The method first tries to produce a random id for the
-	 * new entry and then check the availability for the new
-	 * id.
+	 * The method generates new id for a new entry.
+	 * The method first tries to produce a random id for the new entry 
+	 * and then check the availability for the new id.
 	 * 
-	 * @return 
-	 * 			a new id if the id is available
-	 * 			thrown a NoIdAvailableException if the ids reach
-	 * the max number
-	 * 
+	 * @return a new id if the id is available
+	 * 			thrown a NoIdAvailableException if there is no id below maxID available
 	 * @throws NoIdAvailableException
 	 */
 	@Override
@@ -408,7 +406,6 @@ public class Db4oDatabase implements IDatabase {
 
 	/**
 	 * The method checks if the title for the category already exists.
-	 * 
 	 * @return	true if there is already the name for a category
 	 * 			false if the name is not used
 	 */
@@ -423,10 +420,9 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * The method is used to get all the examples owned by the given user
-	 * @param an user of PEN
-	 * @return a list of all examples written by the given user
+	 * {@inheritDoc}
 	 */
+	@Override
 	public List<IExample> getExampleByUser(final IUser user) {
 		List<IExample> list = db.query(new Predicate<IExample>() {
 			public boolean match(IExample e) {
@@ -438,12 +434,9 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**
-	 * 		   Returns a list of all examples that are
-	 *         labeled as using the given language. This method currently does
-	 *         not differentiate as to the owner of the example. This
-	 *         functionality will be handled by web controller.
-	 * @return List of all code examples that use the given language
+	 * {@inheritDoc}
 	 */
+	@Override
 	public List<IExample> getByLanguage(final String lang) {
 		List<IExample> list = db.query(new Predicate<IExample>() {
 			public boolean match(IExample e) {
@@ -455,8 +448,7 @@ public class Db4oDatabase implements IDatabase {
 	}
 
 	/**This method is used to get all the examples owned by the given user
-	 * @param user
-	 *            specified user
+	 * @param user specified user
 	 * @return a list of all categories that the user has created.
 	 */
 	public List<ICategory> getCategoryByUser(final IUser user) {

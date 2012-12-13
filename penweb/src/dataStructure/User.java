@@ -14,21 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * A registered user who owns examples and categories.
+ * Contains methods to create a user and modify all of it's fields...
+ * for example add a code example, change password, etc.
  * @author tpatikorn
  * @author jfchines
  * @author awiovanna
  * @author kirkgrimsley
  * @author avenkatesh
- * 
- * A registered user who owns examples and categories.
- * Contains methods to create a user and modify all of it's fields...
- * for example add a code example, change password, etc.
  */
 public class User implements IUser {
-	private final String loginName; // Name used for logging in. This has to be
-	// unique.
-	private String displayName; // Name displayed to others on the site on
-	// examples, categories, etc
+	private final String loginName; /* Name used for logging in. This has to be unique. */
+	private String displayName; /* Name displayed to others on the site on examples, categories, etc */
 	private String password;
 	private ArrayList<IExample> ownedExamples;
 	private ArrayList<ICategory> ownedCategories;
@@ -188,19 +185,19 @@ public class User implements IUser {
 	}
 
 	/**
-	 * (The method now is not functional)
-	 * The getter function to get the owner.
+	 * A user does not have an owner.
+	 * This function returns null.
+	 * Do not use.
 	 */
-	// XXX TODO For now these will do nothing
-	// //////////////////////////////////////
 	@Override
 	public IUser getOwner() {
 		return null;
 	}
 
 	/**
-	 * (The method now is not functional)
-	 * The getter function to get the id of the owner.
+	 * A user does not have an owner.
+	 * This function returns null.
+	 * Do not use.
 	 */
 	@Override
 	public Long getOwnerId() {
@@ -208,24 +205,21 @@ public class User implements IUser {
 	}
 
 	/**
-	 * (The method now is not functional)
-	 * The method is used to assgin the ownership for 
-	 * a new owner.
-	 * 
-	 * @param
-	 * 		 owner a newer user is going to own the entry
+	 * A user does not have an owner.
+	 * This function returns null.
+	 * Do not use.
+	 * @param owner do not use
 	 */
 	@Override
 	public int assignOwner(IUser owner) {
 		return 0;
 	}
 
-	// //////////////////////////////////////
-
 	/**
-	 * override the equals function of object class
-	 * @return true if user2 is an instance of IUser and this and user2 have the
-	 *         same id, false otherwise.
+	 * Two users are "equal" if and only if they have the same id.
+	 * override the equals function of object class.
+	 * @return true if o is an instance of User and
+	 *         this and o have the same id, false otherwise.
 	 */
 	@Override
 	public boolean equals(Object o) {

@@ -17,14 +17,13 @@ import dataStructure.*;
 import exceptions.NoIdAvailableException;
 
 /**
+ * Database interface for storing and retrieving objects. This 
+ * contains many methods to retrieve objects from the database using 
+ * headers, ids, names, or more. More methods may be added later.
  * @author Andy Creeth
  * @author Justin Chines
  * @author tpatikorn
  * @author awiovanna
- * 
- * Database interface for storing and retrieving objects. This 
- * contains many methods to retrieve objects from the database using 
- * headers, ids, names, or more. More methods may be added later.
  */
 public interface IDatabase {
 	/**
@@ -95,7 +94,7 @@ public interface IDatabase {
 	public ArrayList<String> listCategoryNames();
 	
 	/**
-	 * Get all the Categroies in the database
+	 * Get all the Categories in the database
 	 * @return A list of all categories in the database
 	 */
 	List<ICategory> getAllCategory();
@@ -110,23 +109,18 @@ public interface IDatabase {
 	 * search for an entry by its id (examples or categories)
 	 * @return IEntry containing that id if there is only one result.
 	 * Null if there is no IEntry with that ID.
-	 * @throws non-unique exception if there is more than one result
 	 */
 	IEntry getByID(Long id);
 	
 	/**
-	 * search for an entry by its id (examples or categories)
-	 * @return IEntry containing that id if there is only one result.
-	 * Null if there is no IEntry with that ID.
-	 * @throws non-unique exception if there is more than one result
+	 * search for a category by its id
+	 * @return ICategory containing that id if there is exactly one result, null otherwise.
 	 */
 	IEntry getCategoryByID(Long id);
 
 	/**
-	 * search for an entry by its id (examples or categories)
-	 * @return IEntry containing that id if there is only one result.
-	 * Null if there is no IEntry with that ID.
-	 * @throws non-unique exception if there is more than one result
+	 * search for an example by its id
+	 * @return IExample containing that id if there is exactly one result, null otherwise.
 	 */
 	IEntry getExampleByID(Long id);
 
@@ -140,7 +134,6 @@ public interface IDatabase {
 	 * Returns the user with the given login name
 	 * @param loginName The name to look for
 	 * @return The IUser with the loginName if a match is found. Null otherwise.
-	 * @throws NoIdAvailableException
 	 */
 	IUser getUserByLoginName(final String loginName);
 	
@@ -157,14 +150,16 @@ public interface IDatabase {
 	boolean isCategoryTitleTaken(String name);
 	
 	/**
-	 * @param lang
-	 * @return list of examples written in the given language
+	 * Get a list of all examples written in specified language. 
+	 * @param lang the language of the examples
+	 * @return List of all code examples that use the given language
 	 */
 	List<IExample> getByLanguage(String lang);
 	
 	/**
-	 * @param user
-	 * @return list of all code examples owned by the given user
+	 * The method is used to get all the examples owned by the given user
+	 * @param user a user object
+	 * @return a list of all examples written by the given user
 	 */
 	List<IExample> getExampleByUser(IUser user);
 }

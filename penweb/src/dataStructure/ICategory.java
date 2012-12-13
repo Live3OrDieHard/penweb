@@ -15,8 +15,8 @@ import java.util.List;
 import exceptions.DuplicateException;
 
 /**
- * @author tpatikorn
  * An interface for a category, in case there are more category types.
+ * @author tpatikorn
  */
 
 /**

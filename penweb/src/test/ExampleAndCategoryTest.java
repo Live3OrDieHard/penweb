@@ -30,10 +30,10 @@ import java.io.File;
 import java.util.List;
 
 /**
+ * Test BasicExample-Category relationship
  * @author tpatikorn
  * @author iprangishvili
  * @author dmulcahy
- * Test BasicExample-Category relationship
  */
 public class ExampleAndCategoryTest {
 	private Db4oDatabase db;
